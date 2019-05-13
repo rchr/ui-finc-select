@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
-import Application from './routes/application';
-import ExamplePage from './routes/example-page';
 import Settings from './settings';
+import Main from './Main';
 
 /*
   STRIPES-NEW-APP
@@ -13,39 +12,31 @@ import Settings from './settings';
 
 class FincSelect extends React.Component {
   static propTypes = {
+    stripes: PropTypes
+      .shape({ connect: PropTypes.func.isRequired })
+      .isRequired,
+    location: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
     showSettings: PropTypes.bool,
-  };
+  }
 
-  constructor(props) {
-    super(props);
-
-    this.connectedExamplePage = props.stripes.connect(ExamplePage);
+  /* set stripes.connect for manifest in MyDataClass (to get data from okapi) */
+  constructor(props, context) {
+    super(props, context);
+    this.connectedApp = props.stripes.connect(Main);
   }
 
   render() {
-    const {
-      showSettings,
-      match: {
-        path
-      }
-    } = this.props;
-
-    if (showSettings) {
+    if (this.props.showSettings) {
       return <Settings {...this.props} />;
     }
     return (
       <Switch>
         <Route
-          path={path}
-          exact
-          component={Application}
+          path={`${this.props.match.path}`}
+          render={() => <this.connectedApp {...this.props} />}
         />
-        <Route
-          path={`${path}/examples`}
-          exact
-          component={this.connectedExamplePage}
-        />
+        <Route component={() => { this.NoMatch(); }} />
       </Switch>
     );
   }

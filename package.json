@@ -36,20 +36,30 @@
     "sinon": "^6.3.4"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
-    "react-intl": "^2.4.0",
-    "react-router-dom": "^4.1.1"
+    "react-intl": "^2.5.0",
+    "react-router-dom": "^4.1.1",
+    "redux-form": "^7.0.3"
   },
   "peerDependencies": {
-    "@folio/stripes": "^2.0.0",
-    "react": "*"
+    "@folio/stripes": "^2.3.0",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*"
   },
   "stripes": {
     "type": "app",
     "displayName": "ui-finc-select.meta.title",
     "route": "/fincselect",
+    "home": "/fincselect",
     "hasSettings": true,
-    "okapiInterfaces": {},
+    "okapiInterfaces": {
+      "finc-select/metadata-sources": "0.1",
+      "finc-select/metadata-collections": "0.1",
+      "vendor-storage.vendors": "1.0"
+    },
     "permissionSets": [
       {
         "permissionName": "module.finc-select.enabled",
@@ -61,6 +71,16 @@
         "displayName": "Settings (finc-select): display list of settings pages",
         "subPermissions": [
           "settings.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-finc-select.view",
+        "displayName": "fincSelect: Can view metadatasources and metadatacollections",
+        "description": "Can view metadatasources and metadatacollections",
+        "subPermissions": [
+          "module.finc-select.enabled",
+          "fincSelect.view"
         ],
         "visible": true
       }
