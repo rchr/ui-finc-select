@@ -22,11 +22,6 @@ export default class FincSelectSettings extends React.Component {
       route: 'somefeature',
       label: <FormattedMessage id="ui-finc-select.settings.some-feature" />,
       component: SomeFeatureSettings,
-    },
-    {
-      route: 'isils',
-      label: 'Isils',
-      component: IsilManager,
     }
   ];
 
