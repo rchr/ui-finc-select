@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
 import GeneralSettings from './general-settings';
 import SomeFeatureSettings from './some-feature-settings';
-import IsilManager from './Isils/IsilManager';
 
 /*
   STRIPES-NEW-APP
