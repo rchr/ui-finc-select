@@ -1,12 +1,32 @@
 {
   "meta.title": "Finc Select",
-  "new-app.greeting": "Congratulations!",
-  "new-app.message": "Your Stripes app is running.",
-  "settings.general": "General",
-  "settings.general.message": "These are your general app settings.",
-  "settings.some-feature": "Some Feature",
-  "settings.some-feature.message": "These are your settings for some app feature.",
 
-  "example-page.sample-request": "Sample API request",
-  "example-page.health-summary": "{healthyInstances} instances healthy, {notHealthyInstances} instances not healthy"
+  "source.generalAccordion": "Metadata Source General",
+  "source.managementAccordion": "Management",
+  "source.technicalAccordion": "Technical",
+
+  "source.label": "Source Name",
+  "source.id": "Source ID",
+  "source.status": "Impl. Status",
+  "source.lastProcessed": "Last Processed",
+  
+  "source.description": "Description",
+
+
+
+
+  "collection.generalAccordion": "Metadata Collection General",
+  "collection.managementAccordion": "Management",
+  "collection.technicalAccordion": "Technical",
+
+  "collection.label": "Collection Name",
+  "collection.mdSource": "Source Name",
+  "collection.permitted": "Usage Permitted",
+  "collection.selected": "Selected",
+  "collection.filters": "Active Filters",
+  "collection.freeContent": "Free content",
+
+  "collection.lod.note": "Note"
+
+
 }

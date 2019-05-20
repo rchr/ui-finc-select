@@ -5,10 +5,12 @@ import {
   FormattedMessage,
 } from 'react-intl';
 import {
+  Headline,
   KeyValue,
+  List,
   Row
 } from '@folio/stripes/components';
-import Link from 'react-router-dom/Link';
+import BasicCss from '../BasicStyle.css';
 
 class CollectionInfoView extends React.Component {
   static propTypes = {
@@ -18,68 +20,57 @@ class CollectionInfoView extends React.Component {
       .shape({
         connect: PropTypes.func.isRequired,
       })
-      .isRequired,
-    parentResources: PropTypes.object
+      .isRequired
   };
-
-  getData(resourceName) {
-    const { parentResources } = this.props;
-    const records = (parentResources[`${resourceName}`] || {}).records || [];
-    if (!records || records.length === 0) return null;
-    return records;
-  }
-
-  getSourceElement = (id, data) => {
-    if (!data || data.length === 0 || !id) return null;
-    return data.find((element) => {
-      return element.id === id;
-    });
-  }
 
   render() {
     const { metadataCollection, id } = this.props;
-    // get all available sources
-    const sourceData = this.getData('source');
-    // get the source-ID, which is saved in the collection
-    const sourceId = metadataCollection.mdSource.id;
-    // get the one source and all its information (which has the source ID saved in the collection)
-    const sourceElement = this.getSourceElement(sourceId, sourceData);
-    // get the name of the source
-    const sourceName = _.get(sourceElement, 'label', '-');
-    // get the status of the source for setting filter in url
-    const sourceStatus = _.get(sourceElement, 'status', '-');
-    // set the complete source link with name and status
-    const sourceLink = (
-      <React.Fragment>
-        <Link to={{
-          pathname: `/fincselect/metadatasources/view/${sourceId}`,
-          search: `?filters=status.${sourceStatus}`
-        }}
-        >
-          {sourceName}
-        </Link>
-      </React.Fragment>
-    );
+    const isEmptyMessage = 'No items to show';
+    // set values for filters
+    const filterItems = metadataCollection.filters;
+    const filterFormatter = (filterItems) => (<li key={filterItems}>{filterItems}</li>);
 
     return (
       <React.Fragment>
         <div id={id}>
           <Row>
             <KeyValue
-              label={<FormattedMessage id="ui-finc-select.collectionInfo.label" />}
+              label={<FormattedMessage id="ui-finc-select.collection.label" />}
               value={_.get(metadataCollection, 'label', '-')}
             />
           </Row>
           <Row>
             <KeyValue
-              label={<FormattedMessage id="ui-finc-select.collectionInfo.description" />}
-              value={_.get(metadataCollection, 'description', '-')}
+              label={<FormattedMessage id="ui-finc-select.collection.mdSource" />}
+              value={_.get(metadataCollection, 'mdSource.id', '-')}
             />
           </Row>
           <Row>
             <KeyValue
-              label={<FormattedMessage id="ui-finc-select.collectionInfo.mdSource" />}
-              value={sourceLink}
+              label={<FormattedMessage id="ui-finc-select.collection.permitted" />}
+              value={_.get(metadataCollection, 'permitted', '-')}
+            />
+          </Row>
+          <Row>
+            <Headline size="medium" className={BasicCss.styleForHeadline}><FormattedMessage id="ui-finc-select.collection.filters" /></Headline>
+          </Row>
+          <Row>
+            <List
+              items={filterItems}
+              itemFormatter={filterFormatter}
+              isEmptyMessage={isEmptyMessage}
+            />
+          </Row>
+          <Row>
+            <KeyValue
+              label={<FormattedMessage id="ui-finc-select.collection.selected" />}
+              value={_.get(metadataCollection, 'selected', '-')}
+            />
+          </Row>
+          <Row>
+            <KeyValue
+              label={<FormattedMessage id="ui-finc-select.collection.lod.note" />}
+              value={_.get(metadataCollection, 'lod.note', '-')}
             />
           </Row>
         </div>

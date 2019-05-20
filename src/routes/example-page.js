@@ -111,7 +111,7 @@ export default class ExamplePage extends React.Component {
           These columns are created with Paneset and Pane components.
           <hr />
           <div data-test-example-page-home>
-            <Link to="/fincselect">home page</Link>
+            <Link to="/finc-select">home page</Link>
           </div>
         </Pane>
         <Pane defaultWidth="80%" paneTitle="Some Stripes Components">

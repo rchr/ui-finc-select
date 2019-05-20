@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -46,20 +47,20 @@ class MetadataCollections extends React.Component {
       recordsRequired: '%{resultCount}',
       perRequest: 30,
       path: 'finc-select/metadata-collections',
-      // GET: {
-      //   params: {
-      //     query: makeQueryFunction(
-      //       'cql.allRecords=1',
-      //       '(label="%{query.query}*")',
-      //       {
-      //         'Collection Name': 'label'
-      //       },
-      //       filterConfig,
-      //       2,
-      //     ),
-      //   },
-      //   staticFallback: { params: {} },
-      // },
+      GET: {
+        params: {
+          query: makeQueryFunction(
+            'cql.allRecords=1',
+            '(label="%{query.query}*")',
+            {
+              'Collection Name': 'label'
+            },
+            filterConfig,
+            2,
+          ),
+        },
+        staticFallback: { params: {} },
+      },
     },
     source: {
       type: 'okapi',
@@ -100,19 +101,17 @@ class MetadataCollections extends React.Component {
       });
   }
 
-  getArrayElementsCommaSeparated = (array) => {
-    let formatted = '';
-    if (array && array.length) {
-      for (let i = 0; i < array.length; i += 1) {
-        formatted += (i > 0 ? '; ' : '') + array[i];
-      }
+  getMetadataSource = (mdSource) => {
+    if (mdSource && mdSource.length) {
+      return mdSource.id;
+    } else {
+      return '-';
     }
-    return formatted;
   }
 
   render() {
     const packageInfoReWrite = () => {
-      const path = '/fincselect/metadatacollections';
+      const path = '/finc-select/metadata-collections';
       packageInfo.stripes.route = path;
       packageInfo.stripes.home = path;
       return packageInfo;
@@ -122,9 +121,10 @@ class MetadataCollections extends React.Component {
 
     const resultsFormatter = {
       label: collection => collection.label,
-      metadataAvailable: collection => collection.metadataAvailable,
-      usageRestricted: collection => collection.usageRestricted,
-      permittedFor: collection => this.getArrayElementsCommaSeparated(collection.permittedFor),
+      mdSource: collection => _.get(collection, 'mdSource.id', '-'),
+      permitted: collection => collection.permitted,
+      // TODO selected: collection => collection.selected,
+      filters: collection => collection.filters,
       freeContent: collection => collection.freeContent,
     };
 
@@ -141,7 +141,7 @@ class MetadataCollections extends React.Component {
           viewRecordComponent={MetadataCollectionView}
           // editRecordComponent={MetadataCollectionForm}
           newRecordInitialValues={{}}
-          visibleColumns={['label', 'metadataAvailable', 'usageRestricted', 'permittedFor', 'freeContent']}
+          visibleColumns={['label', 'mdSource', 'permitted', 'filters', 'freeContent']}
           resultsFormatter={resultsFormatter}
           onCreate={this.create}
           viewRecordPerms="metadatacollections.item.get"
@@ -150,9 +150,10 @@ class MetadataCollections extends React.Component {
           parentMutator={this.props.mutator}
           columnMapping={{
             label: intl.formatMessage({ id: 'ui-finc-select.collection.label' }),
-            metadataAvailable: intl.formatMessage({ id: 'ui-finc-select.collection.metadataAvailable' }),
-            usageRestricted: intl.formatMessage({ id: 'ui-finc-select.collection.usageRestricted' }),
-            permittedFor: intl.formatMessage({ id: 'ui-finc-select.collection.permittedFor' }),
+            mdSource: intl.formatMessage({ id: 'ui-finc-select.collection.mdSource' }),
+            permitted: intl.formatMessage({ id: 'ui-finc-select.collection.permitted' }),
+            // TODO: selected: intl.formatMessage({ id: 'ui-finc-select.collection.selected' }),
+            filters: intl.formatMessage({ id: 'ui-finc-select.collection.filters' }),
             freeContent: intl.formatMessage({ id: 'ui-finc-select.collection.freeContent' })
           }}
           stripes={stripes}

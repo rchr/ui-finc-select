@@ -37,8 +37,7 @@ class MetadataSourceView extends React.Component {
         connect: PropTypes.func.isRequired,
         logger: PropTypes
           .shape({ log: PropTypes.func.isRequired })
-          .isRequired,
-        intl: PropTypes.object.isRequired
+          .isRequired
       })
       .isRequired,
     paneWidth: PropTypes.string,
@@ -116,7 +115,7 @@ class MetadataSourceView extends React.Component {
     parentMutator.records.DELETE({ id: source.id })
       .then(() => {
         parentMutator.query.update({
-          _path: '/fincselect/metadatasources',
+          _path: '/finc-select/metadata-sources',
           layer: null
         });
       });

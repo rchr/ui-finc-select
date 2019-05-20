@@ -56,21 +56,21 @@ class MetadataSources extends React.Component {
       recordsRequired: '%{resultCount}',
       perRequest: 30,
       path: 'finc-select/metadata-sources',
-      // GET: {
-      //   params: {
-      //     query: makeQueryFunction(
-      //       'cql.allRecords=1',
-      //       '(label="%{query.query}*" or sourceId="%{query.query}*")',
-      //       {
-      //         'Source Name': 'label',
-      //         'Source ID': 'sourceId'
-      //       },
-      //       filterConfig,
-      //       2,
-      //     ),
-      //   },
-      //   staticFallback: { params: {} },
-      // },
+      GET: {
+        params: {
+          query: makeQueryFunction(
+            'cql.allRecords=1',
+            '(label="%{query.query}*" or sourceId="%{query.query}*")',
+            {
+              'Source Name': 'label',
+              'Source ID': 'sourceId'
+            },
+            filterConfig,
+            2,
+          ),
+        },
+        staticFallback: { params: {} },
+      },
     }
   });
 
@@ -113,7 +113,7 @@ class MetadataSources extends React.Component {
 
   render() {
     const packageInfoReWrite = () => {
-      const path = '/fincselect/metadatasources';
+      const path = '/finc-select/metadata-sources';
       packageInfo.stripes.route = path;
       packageInfo.stripes.home = path;
       return packageInfo;
@@ -134,17 +134,17 @@ class MetadataSources extends React.Component {
           viewRecordComponent={MetadataSourceView}
           // editRecordComponent={MetadataSourceForm}
           newRecordInitialValues={{}}
-          visibleColumns={['label', 'sourceId', 'status', 'solrShard', 'lastProcessed']}
+          visibleColumns={['label', 'sourceId', 'status', 'lastProcessed']}
           onCreate={this.create}
           viewRecordPerms="metadatasources.item.get"
           newRecordPerms="metadatasources.item.post"
           parentResources={this.props.resources}
           parentMutator={this.props.mutator}
           columnMapping={{
-            label: 'Source',
-            sourceId: 'ID',
+            label: intl.formatMessage({ id: 'ui-finc-select.source.label' }),
+            sourceId: intl.formatMessage({ id: 'ui-finc-select.source.id' }),
             status: intl.formatMessage({ id: 'ui-finc-select.source.status' }),
-            solrShard: intl.formatMessage({ id: 'ui-finc-select.source.solrShard' }),
+            // TODO: selectedCollections: intl.formatMessage({ id: 'ui-finc-select.source.selectedCollections' }),
             lastProcessed: intl.formatMessage({ id: 'ui-finc-select.source.lastProcessed' }),
           }}
           stripes={stripes}
