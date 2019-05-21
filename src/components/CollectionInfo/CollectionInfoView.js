@@ -69,8 +69,8 @@ class CollectionInfoView extends React.Component {
           </Row>
           <Row>
             <KeyValue
-              label={<FormattedMessage id="ui-finc-select.collection.lod.note" />}
-              value={_.get(metadataCollection, 'lod.note', '-')}
+              label={<FormattedMessage id="ui-finc-select.collection.licensingNote" />}
+              value={_.get(metadataCollection, 'licensingNote', '-')}
             />
           </Row>
         </div>

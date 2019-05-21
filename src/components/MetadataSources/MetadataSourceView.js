@@ -22,8 +22,8 @@ import {
 
 // import MetadataSourceForm from './MetadataSourceForm';
 import SourceInfoView from '../SourceInfo/SourceInfoView';
-// import SourceManagementView from '../SourceManagement/SourceManagementView';
-// import SourceTechnicalView from '../SourceTechnical/SourceTechnicalView';
+import SourceManagementView from '../SourceManagement/SourceManagementView';
+import SourceTechnicalView from '../SourceTechnical/SourceTechnicalView';
 
 class MetadataSourceView extends React.Component {
   static manifest = Object.freeze({
@@ -189,11 +189,11 @@ class MetadataSourceView extends React.Component {
             label={<FormattedMessage id="ui-finc-select.source.managementAccordion" />}
             id="managementAccordion"
           >
-            {/* <SourceManagementView
+            <SourceManagementView
               id="sourceManagement"
               metadataSource={initialValues}
               stripes={this.props.stripes}
-            /> */}
+            />
           </Accordion>
           <Accordion
             open={this.state.accordions.technicalAccordion}
@@ -201,11 +201,11 @@ class MetadataSourceView extends React.Component {
             label={<FormattedMessage id="ui-finc-select.source.technicalAccordion" />}
             id="technicalAccordion"
           >
-            {/* <SourceTechnicalView
+            <SourceTechnicalView
               id="sourceTechnical"
               metadataSource={initialValues}
               stripes={this.props.stripes}
-            /> */}
+            />
           </Accordion>
           <Layer
             isOpen={query.layer ? query.layer === 'edit' : false}

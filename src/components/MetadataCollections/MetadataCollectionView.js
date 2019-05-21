@@ -22,8 +22,8 @@ import {
 
 // import MetadataCollectionForm from './MetadataCollectionForm';
 import CollectionInfoView from '../CollectionInfo/CollectionInfoView';
-// import CollectionManagementView from '../CollectionManagement/CollectionManagementView';
-// import CollectionTechnicalView from '../CollectionTechnical/CollectionTechnicalView';
+import CollectionContentView from '../CollectionContent/CollectionContentView';
+import CollectionTechnicalView from '../CollectionTechnical/CollectionTechnicalView';
 
 class MetadataCollectionView extends React.Component {
   static manifest = Object.freeze({
@@ -186,16 +186,16 @@ class MetadataCollectionView extends React.Component {
             </Col>
           </Row>
           <Accordion
-            open={this.state.accordions.managementAccordion}
+            open={this.state.accordions.contentAccordion}
             onToggle={this.handleAccordionToggle}
-            label={<FormattedMessage id="ui-finc-select.collection.managementAccordion" />}
-            id="managementAccordion"
+            label={<FormattedMessage id="ui-finc-select.collection.contentAccordion" />}
+            id="contentAccordion"
           >
-            {/* <CollectionManagementView
+            <CollectionContentView
               id="collectionManagement"
               metadataCollection={initialValues}
               stripes={this.props.stripes}
-            /> */}
+            />
           </Accordion>
           <Accordion
             open={this.state.accordions.technicalAccordion}
@@ -203,11 +203,11 @@ class MetadataCollectionView extends React.Component {
             label={<FormattedMessage id="ui-finc-select.collection.technicalAccordion" />}
             id="technicalAccordion"
           >
-            {/* <CollectionTechnicalView
+            <CollectionTechnicalView
               id="collectionTechnical"
               metadataCollection={initialValues}
               stripes={this.props.stripes}
-            /> */}
+            />
           </Accordion>
           <Layer
             isOpen={query.layer ? query.layer === 'edit' : false}
