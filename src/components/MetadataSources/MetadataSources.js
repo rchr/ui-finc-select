@@ -12,7 +12,6 @@ import {
 import packageInfo from '../../../package';
 
 import MetadataSourceView from './MetadataSourceView';
-// import MetadataSourceForm from './MetadataSourceForm';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -124,20 +123,14 @@ class MetadataSources extends React.Component {
     return (
       <div data-test-source-instances>
         <SearchAndSort
-          // change packageInfo to prevent ERROR:Cannot read property 'cql' of undefined if switching tab
-          // packageInfo={packageInfo}
           packageInfo={packageInfoReWrite()}
           objectName="metadataSource"
           filterConfig={filterConfig}
           initialResultCount={INITIAL_RESULT_COUNT}
           resultCountIncrement={RESULT_COUNT_INCREMENT}
           viewRecordComponent={MetadataSourceView}
-          // editRecordComponent={MetadataSourceForm}
-          newRecordInitialValues={{}}
           visibleColumns={['label', 'sourceId', 'status', 'lastProcessed']}
-          onCreate={this.create}
           viewRecordPerms="metadatasources.item.get"
-          newRecordPerms="metadatasources.item.post"
           parentResources={this.props.resources}
           parentMutator={this.props.mutator}
           columnMapping={{

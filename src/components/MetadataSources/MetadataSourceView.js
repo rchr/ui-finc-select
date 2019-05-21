@@ -9,21 +9,16 @@ import {
   Col,
   ExpandAllButton,
   Icon,
-  IconButton,
-  Layer,
   Pane,
-  PaneMenu,
   Row
 } from '@folio/stripes/components';
 import {
-  IfPermission,
   TitleManager
 } from '@folio/stripes/core';
 
-// import MetadataSourceForm from './MetadataSourceForm';
-import SourceInfoView from '../SourceInfo/SourceInfoView';
-import SourceManagementView from '../SourceManagement/SourceManagementView';
-import SourceTechnicalView from '../SourceTechnical/SourceTechnicalView';
+import SourceInfoView from './SourceInfo/SourceInfoView';
+import SourceManagementView from './SourceManagement/SourceManagementView';
+import SourceTechnicalView from './SourceTechnical/SourceTechnicalView';
 
 class MetadataSourceView extends React.Component {
   static manifest = Object.freeze({
@@ -54,18 +49,13 @@ class MetadataSourceView extends React.Component {
       })
     }),
     parentResources: PropTypes.shape(),
-    parentMutator: PropTypes.shape().isRequired,
-    onClose: PropTypes.func,
-    onEdit: PropTypes.func,
-    editLink: PropTypes.string,
-    onCloseEdit: PropTypes.func,
+    onClose: PropTypes.func
   };
 
   constructor(props) {
     super(props);
     const logger = props.stripes.logger;
     this.log = logger.log.bind(logger);
-    // this.connectedMetadataSourceForm = this.props.stripes.connect(MetadataSourceForm);
 
     this.state = {
       accordions: {
@@ -99,65 +89,12 @@ class MetadataSourceView extends React.Component {
     });
   }
 
-  update = (source) => {
-    this.props.parentMutator.records.PUT(source).then(() => {
-      this.props.onCloseEdit();
-    });
-  }
-
-  getSourceFormData = (source) => {
-    const sourceFormData = source ? _.cloneDeep(source) : source;
-    return sourceFormData;
-  }
-
-  deleteSource = (source) => {
-    const { parentMutator } = this.props;
-    parentMutator.records.DELETE({ id: source.id })
-      .then(() => {
-        parentMutator.query.update({
-          _path: '/finc-select/metadata-sources',
-          layer: null
-        });
-      });
-  }
-
   render() {
-    const { resources, stripes } = this.props;
-    const query = resources.query;
     const initialValues = this.getData();
 
     if (_.isEmpty(initialValues)) {
       return <div style={{ paddingTop: '1rem' }}><Icon icon="spinner-ellipsis" width="100px" /></div>;
     } else {
-      const sourceFormData = this.getSourceFormData(initialValues);
-      const detailMenu = (
-        <PaneMenu>
-          <IfPermission perm="metadatasources.item.delete">
-            <IconButton
-              icon="trash"
-              id="clickable-delete-source"
-              style={{ visibility: !initialValues ? 'hidden' : 'visible' }}
-              onClick={() => this.deleteSource(initialValues)}
-              title="Delete Metadata Source"
-            />
-          </IfPermission>
-          <IfPermission perm="metadatasources.item.put">
-            <IconButton
-              icon="edit"
-              id="clickable-edit-source"
-              style={{
-                visibility: !initialValues
-                  ? 'hidden'
-                  : 'visible'
-              }}
-              onClick={this.props.onEdit}
-              href={this.props.editLink}
-              title="Edit Metadata Source"
-            />
-          </IfPermission>
-        </PaneMenu>
-      );
-
       const label = _.get(initialValues, 'label', '-');
 
       return (
@@ -165,7 +102,6 @@ class MetadataSourceView extends React.Component {
           defaultWidth={this.props.paneWidth}
           id="pane-sourcedetails"
           paneTitle={<span data-test-source-header-title>{label}</span>}
-          lastMenu={detailMenu}
           dismissible
           onClose={this.props.onClose}
         >
@@ -207,22 +143,6 @@ class MetadataSourceView extends React.Component {
               stripes={this.props.stripes}
             />
           </Accordion>
-          <Layer
-            isOpen={query.layer ? query.layer === 'edit' : false}
-            contentLabel="Edit Metadata Source Dialog"
-          >
-            {/* <this.connectedMetadataSourceForm
-              stripes={stripes}
-              initialValues={sourceFormData}
-              onSubmit={(record) => { this.update(record); }}
-              onCancel={this.props.onCloseEdit}
-              parentResources={{
-                ...this.props.resources,
-                ...this.props.parentResources,
-              }}
-              parentMutator={this.props.parentMutator}
-            /> */}
-          </Layer>
         </Pane>
       );
     }

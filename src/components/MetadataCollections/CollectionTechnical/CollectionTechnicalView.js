@@ -10,7 +10,7 @@ import {
   List,
   Row
 } from '@folio/stripes/components';
-import BasicCss from '../BasicStyle.css';
+import BasicCss from '../../BasicStyle.css';
 
 class CollectionTechnicalView extends React.Component {
   static propTypes = {

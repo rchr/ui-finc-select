@@ -12,7 +12,7 @@ import {
 import packageInfo from '../../../package';
 
 import MetadataCollectionView from './MetadataCollectionView';
-// import MetadataCollectionForm from './MetadataCollectionForm';
+import MetadataCollectionForm from './MetadataCollectionForm';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -67,7 +67,7 @@ class MetadataCollections extends React.Component {
       records: 'fincSelectMetadataSources',
       path: 'finc-select/metadata-sources',
       resourceShouldRefresh: true
-    }
+    },
   });
 
   static propTypes = {
@@ -109,6 +109,16 @@ class MetadataCollections extends React.Component {
     }
   }
 
+  getArrayElementsCommaSeparated = (array) => {
+    let formatted = '';
+    if (array && array.length) {
+      for (let i = 0; i < array.length; i += 1) {
+        formatted += (i > 0 ? '; ' : '') + array[i];
+      }
+    }
+    return formatted;
+  }
+
   render() {
     const packageInfoReWrite = () => {
       const path = '/finc-select/metadata-collections';
@@ -124,7 +134,7 @@ class MetadataCollections extends React.Component {
       mdSource: collection => _.get(collection, 'mdSource.id', '-'),
       permitted: collection => collection.permitted,
       // TODO selected: collection => collection.selected,
-      filters: collection => collection.filters,
+      filters: collection => this.getArrayElementsCommaSeparated(collection.filters),
       freeContent: collection => collection.freeContent,
     };
 
@@ -139,13 +149,13 @@ class MetadataCollections extends React.Component {
           initialResultCount={INITIAL_RESULT_COUNT}
           resultCountIncrement={RESULT_COUNT_INCREMENT}
           viewRecordComponent={MetadataCollectionView}
-          // editRecordComponent={MetadataCollectionForm}
-          newRecordInitialValues={{}}
+          editRecordComponent={MetadataCollectionForm}
+          // newRecordInitialValues={{}}
           visibleColumns={['label', 'mdSource', 'permitted', 'filters', 'freeContent']}
           resultsFormatter={resultsFormatter}
-          onCreate={this.create}
+          // onCreate={this.create}
           viewRecordPerms="metadatacollections.item.get"
-          newRecordPerms="metadatacollections.item.post"
+          // newRecordPerms="metadatacollections.item.post"
           parentResources={this.props.resources}
           parentMutator={this.props.mutator}
           columnMapping={{

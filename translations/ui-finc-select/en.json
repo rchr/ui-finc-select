@@ -28,7 +28,8 @@
   "collection.filters": "Active Filters",
   "collection.freeContent": "Free content",
   "collection.note": "Note",
-  "collection.description": "Description"
-
+  "collection.description": "Description",
+  
+  "collection.form.updateCollection": "Update Collection"
 
 }

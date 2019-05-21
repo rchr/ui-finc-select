@@ -2,7 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Field
+  Field,
+  FieldArray
 } from 'redux-form';
 import {
   FormattedMessage
@@ -10,13 +11,16 @@ import {
 import {
   Accordion,
   Col,
+  Headline,
   Row,
-  TextField,
   Select
 } from '@folio/stripes/components';
 import {
   Required
-} from '../DisplayUtils/Validate';
+} from '../../DisplayUtils/Validate';
+
+import RepeatableField from '../../DisplayUtils/RepeatableField';
+import BasicCss from '../../BasicStyle.css';
 
 class CollectionInfoForm extends React.Component {
   static propTypes = {
@@ -28,11 +32,6 @@ class CollectionInfoForm extends React.Component {
     const records = (parentResources[`${resourceName}`] || {}).records || [];
     if (!records || records.length === 0) return null;
     const newArr = [];
-
-    // add an empty object
-    // let preObj = {};
-    // preObj = { label: '-- Select a Source --', value: '' };
-    // newArr.push(preObj);
 
     // Loop through records
     Object.keys(records).map((key) => {
@@ -51,62 +50,52 @@ class CollectionInfoForm extends React.Component {
 
   render() {
     const { expanded, onToggle, accordionId } = this.props;
-    const sourceData = this.getData('source');
+    const dataOptionsSelected = [
+      { value: 'yes', label: 'Yes' },
+      { value: 'no', label: 'No' }
+    ];
 
     return (
       <Accordion
-        label={<FormattedMessage id="ui-finc-select.collection.generalAccordion" />}
+        label={<FormattedMessage id="ui-finc-config.collection.generalAccordion" />}
         open={expanded}
         id={accordionId}
         onToggle={onToggle}
       >
+        {/* FILTERS is repeatable */}
+        <Row>
+          <Headline size="medium" className={BasicCss.styleForHeadline}><FormattedMessage id="ui-finc-select.collection.filters" /></Headline>
+        </Row>
+        <Row>
+          <Col xs={6}>
+            <FieldArray
+              component={RepeatableField}
+              // add name to the array-field, which should be changed
+              name="filters"
+              label="Displayfilters"
+              id="display_filters"
+              {...this.props}
+            />
+          </Col>
+        </Row>
         <Row>
           <Col xs={4}>
             <Field
               label={
-                <FormattedMessage id="ui-finc-select.collectionInfo.label">
+                <FormattedMessage id="ui-finc-select.collection.selected">
                   {(msg) => msg + ' *'}
-                </FormattedMessage>}
-              placeholder="Enter a name to identify the metadata collection"
-              name="label"
-              id="addcollection_label"
-              component={TextField}
-              validate={[Required]}
-              fullWidth
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={4}>
-            <Field
-              label={
-                <FormattedMessage id="ui-finc-select.collectionInfo.description">
-                  {(msg) => msg}
-                </FormattedMessage>}
-              placeholder="Enter a description for the metadata collection"
-              name="description"
-              id="addcollection_description"
-              component={TextField}
-              fullWidth
-            />
-          </Col>
-        </Row>
-
-        <Row>
-          <Col xs={4}>
-            <Field
-              label="Source*"
-              placeholder="Select a source for the metadata collection"
-              name="mdSource.id"
-              id="addcollection_source"
+                </FormattedMessage>
+              }
+              name="selected"
+              id="addsource_selected"
+              placeholder="Select if collection is selected"
               component={Select}
-              fullWidth
+              dataOptions={dataOptionsSelected}
               validate={[Required]}
-              dataOptions={sourceData}
+              fullWidth
             />
           </Col>
         </Row>
-
       </Accordion>
     );
   }

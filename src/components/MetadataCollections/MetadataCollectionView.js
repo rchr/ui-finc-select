@@ -20,10 +20,10 @@ import {
   TitleManager
 } from '@folio/stripes/core';
 
-// import MetadataCollectionForm from './MetadataCollectionForm';
-import CollectionInfoView from '../CollectionInfo/CollectionInfoView';
-import CollectionContentView from '../CollectionContent/CollectionContentView';
-import CollectionTechnicalView from '../CollectionTechnical/CollectionTechnicalView';
+import MetadataCollectionForm from './MetadataCollectionForm';
+import CollectionInfoView from './CollectionInfo/CollectionInfoView';
+import CollectionContentView from './CollectionContent/CollectionContentView';
+import CollectionTechnicalView from './CollectionTechnical/CollectionTechnicalView';
 
 class MetadataCollectionView extends React.Component {
   static manifest = Object.freeze({
@@ -65,7 +65,7 @@ class MetadataCollectionView extends React.Component {
     super(props);
     const logger = props.stripes.logger;
     this.log = logger.log.bind(logger);
-    // this.connectedMetadataCollectionForm = this.props.stripes.connect(MetadataCollectionForm);
+    this.connectedMetadataCollectionForm = this.props.stripes.connect(MetadataCollectionForm);
 
     this.state = {
       accordions: {
@@ -110,17 +110,6 @@ class MetadataCollectionView extends React.Component {
     return collectionFormData;
   }
 
-  deleteCollection = (collection) => {
-    const { parentMutator } = this.props;
-    parentMutator.records.DELETE({ id: collection.id })
-      .then(() => {
-        parentMutator.query.update({
-          _path: '/finc-select/metadata-collections',
-          layer: null
-        });
-      });
-  }
-
   render() {
     const { resources, stripes } = this.props;
     const query = resources.query;
@@ -132,15 +121,6 @@ class MetadataCollectionView extends React.Component {
       const collectionFormData = this.getCollectionFormData(initialValues);
       const detailMenu = (
         <PaneMenu>
-          <IfPermission perm="metadatacollections.item.delete">
-            <IconButton
-              icon="trash"
-              id="clickable-delete-collection"
-              style={{ visibility: !initialValues ? 'hidden' : 'visible' }}
-              onClick={() => this.deleteCollection(initialValues)}
-              title="Delete Metadata Collection"
-            />
-          </IfPermission>
           <IfPermission perm="metadatacollections.item.put">
             <IconButton
               icon="edit"
@@ -213,7 +193,7 @@ class MetadataCollectionView extends React.Component {
             isOpen={query.layer ? query.layer === 'edit' : false}
             contentLabel="Edit Metadata Collection Dialog"
           >
-            {/* <this.connectedMetadataCollectionForm
+            <this.connectedMetadataCollectionForm
               stripes={stripes}
               initialValues={collectionFormData}
               onSubmit={(record) => { this.update(record); }}
@@ -223,7 +203,7 @@ class MetadataCollectionView extends React.Component {
                 ...this.props.parentResources,
               }}
               parentMutator={this.props.parentMutator}
-            /> */}
+            />
           </Layer>
         </Pane>
       );
