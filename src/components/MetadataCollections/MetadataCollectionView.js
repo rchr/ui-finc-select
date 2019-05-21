@@ -69,7 +69,7 @@ class MetadataCollectionView extends React.Component {
 
     this.state = {
       accordions: {
-        managementAccordion: false,
+        contentAccordion: false,
         technicalAccordion: false
       },
     };

@@ -106,9 +106,7 @@ class MetadataCollectionForm extends React.Component {
     const { sections } = this.state;
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-select.collection.form.createCollection" />;
-    const lastMenu = initialValues.id ?
-      this.getLastMenu('clickable-createnewcollection', <FormattedMessage id="ui-finc-select.collection.form.updateCollection" />) :
-      this.getLastMenu('clickable-createnewcollection', <FormattedMessage id="ui-finc-select.collection.form.createCollection" />);
+    const lastMenu = initialValues.id ? this.getLastMenu('clickable-createnewcollection', <FormattedMessage id="ui-finc-select.collection.form.updateCollection" />) : null;
 
     return (
       <form id="form-collection" onSubmit={handleSubmit}>
