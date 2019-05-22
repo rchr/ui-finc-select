@@ -91,19 +91,6 @@ class MetadataSources extends React.Component {
     intl: intlShape.isRequired
   };
 
-  closeNewInstance = (e) => {
-    if (e) e.preventDefault();
-    this.props.mutator.query.update({ layer: null });
-  }
-
-  create = (metadataSource) => {
-    const { mutator } = this.props;
-    mutator.records.POST(metadataSource)
-      .then(() => {
-        this.closeNewInstance();
-      });
-  }
-
   // add update if search-selectbox is changing
   onChangeIndex = (e) => {
     const qindex = e.target.value;

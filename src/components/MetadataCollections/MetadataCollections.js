@@ -88,27 +88,6 @@ class MetadataCollections extends React.Component {
     intl: intlShape.isRequired,
   };
 
-  closeNewInstance = (e) => {
-    if (e) e.preventDefault();
-    this.props.mutator.query.update({ layer: null });
-  }
-
-  create = (metadataCollection) => {
-    const { mutator } = this.props;
-    mutator.records.POST(metadataCollection)
-      .then(() => {
-        this.closeNewInstance();
-      });
-  }
-
-  getMetadataSource = (mdSource) => {
-    if (mdSource && mdSource.length) {
-      return mdSource.id;
-    } else {
-      return '-';
-    }
-  }
-
   getArrayElementsCommaSeparated = (array) => {
     let formatted = '';
     if (array && array.length) {
@@ -150,12 +129,9 @@ class MetadataCollections extends React.Component {
           resultCountIncrement={RESULT_COUNT_INCREMENT}
           viewRecordComponent={MetadataCollectionView}
           editRecordComponent={MetadataCollectionForm}
-          // newRecordInitialValues={{}}
           visibleColumns={['label', 'mdSource', 'permitted', 'filters', 'freeContent']}
           resultsFormatter={resultsFormatter}
-          // onCreate={this.create}
           viewRecordPerms="metadatacollections.item.get"
-          // newRecordPerms="metadatacollections.item.post"
           parentResources={this.props.resources}
           parentMutator={this.props.mutator}
           columnMapping={{
