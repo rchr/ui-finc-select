@@ -131,7 +131,7 @@ class MetadataCollections extends React.Component {
 
     const resultsFormatter = {
       label: collection => collection.label,
-      mdSource: collection => _.get(collection, 'mdSource.id', '-'),
+      mdSource: collection => _.get(collection, 'mdSource.name', '-'),
       permitted: collection => collection.permitted,
       // TODO selected: collection => collection.selected,
       filters: collection => this.getArrayElementsCommaSeparated(collection.filters),

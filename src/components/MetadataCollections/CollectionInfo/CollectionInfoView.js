@@ -44,7 +44,7 @@ class CollectionInfoView extends React.Component {
     const isEmptyMessage = 'No items to show';
     // set values for filters
     const filterItems = metadataCollection.filters;
-    const filterFormatter = (filterItems) => (<li key={filterItems}>{filterItems}</li>);
+    const filterFormatter = (filterItem) => (<li key={filterItem}>{filterItem}</li>);
     // get all available sources
     const sourceData = this.getData('source');
     // get the source-ID, which is saved in the collection

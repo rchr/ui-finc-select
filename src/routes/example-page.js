@@ -11,8 +11,6 @@ import {
   Icon,
 } from '@folio/stripes/components';
 
-import GreetingModal from '../components/greeting-modal';
-
 /*
   STRIPES-NEW-APP
   This page contains some simple examples to illustrate getting started
@@ -47,12 +45,12 @@ export default class ExamplePage extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.buttonClick = this.buttonClick.bind(this);
     this.onClose = this.onClose.bind(this);
-    this.state = { showModal: false };
+    // this.state = { showModal: false };
   }
 
-  toggleModal(showModal) {
-    this.setState({ showModal });
-  }
+  // toggleModal(showModal) {
+  //   this.setState({ showModal });
+  // }
 
   onClose() {
     this.toggleModal(false);
@@ -119,7 +117,6 @@ export default class ExamplePage extends React.Component {
           <div data-test-example-page-button>
             <Button onClick={this.buttonClick}>Click me</Button>
           </div>
-          <GreetingModal onClose={this.onClose} open={this.state.showModal} />
           <hr />
           <Headline
             size="small"
