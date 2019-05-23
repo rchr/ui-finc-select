@@ -29,12 +29,12 @@ class CollectionTechnicalView extends React.Component {
         <div id="id">
           <Row>
             <KeyValue
-              label={<FormattedMessage id="ui-finc-config.collectionTechnical.facetLabel" />}
+              label={<FormattedMessage id="ui-finc-select.collection.facetLabel" />}
               value={_.get(metadataCollection, 'facetLabel', '-')}
             />
           </Row>
           <Row>
-            <Headline size="medium" className={BasicCss.styleForHeadline}><FormattedMessage id="ui-finc-config.collectionTechnical.tickets" /></Headline>
+            <Headline size="medium" className={BasicCss.styleForHeadline}><FormattedMessage id="ui-finc-select.collection.tickets" /></Headline>
           </Row>
           <Row>
             <List

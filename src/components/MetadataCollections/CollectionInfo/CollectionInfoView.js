@@ -5,6 +5,8 @@ import {
   FormattedMessage,
 } from 'react-intl';
 import {
+  Col,
+  Button,
   Headline,
   KeyValue,
   List,
@@ -100,10 +102,20 @@ class CollectionInfoView extends React.Component {
             />
           </Row>
           <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-select.collection.selected" />}
-              value={_.get(metadataCollection, 'selected', '-')}
-            />
+            <Col xs={6}>
+              <KeyValue
+                label={<FormattedMessage id="ui-finc-select.collection.selected" />}
+                value={_.get(metadataCollection, 'selected', '-')}
+              />
+            </Col>
+            <Col xs={6}>
+              <Button
+                id="unselect"
+                buttonStyle="primary"
+              >
+                <FormattedMessage id="ui-finc-select.collection.button.unselect" />
+              </Button>
+            </Col>
           </Row>
           <Row>
             <KeyValue

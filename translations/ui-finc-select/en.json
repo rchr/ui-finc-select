@@ -16,6 +16,10 @@
   "source.tickets": "Tickets",
   "source.sourceId": "Source ID",
 
+  "source.button.showselectedCollections": "Show Selected Collections",
+  "source.button.selectAllCollections": "Select All Collections",
+  "source.button.showAllCollections": "Show All Collections",
+
   "collection.generalAccordion": "Metadata Collection General",
   "collection.contentAccordion": "Content",
   "collection.technicalAccordion": "Technical",
@@ -29,7 +33,9 @@
   "collection.freeContent": "Free content",
   "collection.note": "Note",
   "collection.description": "Description",
+  "collection.facetLabel": "Facet Label",
+  "collection.tickets": "Tickets",
   
+  "collection.button.unselect": "Unselect",
   "collection.form.updateCollection": "Update Collection"
-
 }

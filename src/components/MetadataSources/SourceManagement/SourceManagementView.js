@@ -5,6 +5,8 @@ import {
   FormattedMessage
 } from 'react-intl';
 import {
+  Button,
+  Col,
   KeyValue,
   Row
 } from '@folio/stripes/components';
@@ -27,10 +29,38 @@ class SourceManagementView extends React.Component {
         <div id="id">
           {/* TODO: selectedCollections */}
           <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-select.source.selectedCollections" />}
-              // value={_.get(metadataSource, 'selectedCollections', '-')}
-            />
+            <Col xs={6}>
+              <KeyValue
+                label={<FormattedMessage id="ui-finc-select.source.selectedCollections" />}
+                // value={_.get(metadataSource, 'selectedCollections', '-')}
+              />
+            </Col>
+            <Col xs={6}>
+              <Button
+                id="showselectedCollections"
+                buttonStyle="primary"
+              >
+                <FormattedMessage id="ui-finc-select.source.button.showselectedCollections" />
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>
+              <Button
+                id="selectAllCollections"
+                buttonStyle="primary"
+              >
+                <FormattedMessage id="ui-finc-select.source.button.selectAllCollections" />
+              </Button>
+            </Col>
+            <Col xs={6}>
+              <Button
+                id="showAllCollections"
+                buttonStyle="primary"
+              >
+                <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+              </Button>
+            </Col>
           </Row>
           <Row>
             <KeyValue
