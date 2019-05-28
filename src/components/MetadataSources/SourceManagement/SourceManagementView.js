@@ -10,6 +10,7 @@ import {
   KeyValue,
   Row
 } from '@folio/stripes/components';
+import SelectAllCollections from './SelectAllCollections';
 
 class SourceManagementView extends React.Component {
   static propTypes = {
@@ -21,8 +22,14 @@ class SourceManagementView extends React.Component {
       .isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.connectedSelectAllCollections = this.props.stripes.connect(SelectAllCollections);
+  }
+
   render() {
-    const { metadataSource } = this.props;
+    const { metadataSource, stripes } = this.props;
+    const sourceId = metadataSource.id;
 
     return (
       <React.Fragment>
@@ -44,15 +51,23 @@ class SourceManagementView extends React.Component {
               </Button>
             </Col>
           </Row>
+
           <Row>
-            <Col xs={6}>
+            <this.connectedSelectAllCollections
+              stripes={stripes}
+              sourceId={sourceId}
+            />
+          </Row>
+          <Row>
+            {/* <Col xs={6}>
               <Button
                 id="selectAllCollections"
                 buttonStyle="primary"
               >
                 <FormattedMessage id="ui-finc-select.source.button.selectAllCollections" />
               </Button>
-            </Col>
+            </Col> */}
+
             <Col xs={6}>
               <Button
                 id="showAllCollections"
