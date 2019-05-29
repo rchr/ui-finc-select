@@ -80,7 +80,7 @@ class SourceManagementView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-select.source.organization" />}
-              value={_.get(metadataSource, 'vendor.name', '-')}
+              value={_.get(metadataSource, 'organization.name', '-')}
             />
           </Row>
           <Row>
