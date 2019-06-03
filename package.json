@@ -52,7 +52,7 @@
     "displayName": "ui-finc-select.meta.title",
     "route": "/finc-select",
     "home": "/finc-select",
-    "hasSettings": true,
+    "hasSettings": false,
     "queryResource": "query",
     "okapiInterfaces": {
       "finc-select/metadata-sources": "0.1",
