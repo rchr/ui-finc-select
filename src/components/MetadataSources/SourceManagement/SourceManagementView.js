@@ -42,16 +42,7 @@ class SourceManagementView extends React.Component {
                 // value={_.get(metadataSource, 'selectedCollections', '-')}
               />
             </Col>
-            <Col xs={6}>
-              <Button
-                id="showselectedCollections"
-                buttonStyle="primary"
-              >
-                <FormattedMessage id="ui-finc-select.source.button.showselectedCollections" />
-              </Button>
-            </Col>
           </Row>
-
           <Row>
             <this.connectedSelectAllCollections
               stripes={stripes}
@@ -59,21 +50,20 @@ class SourceManagementView extends React.Component {
             />
           </Row>
           <Row>
-            {/* <Col xs={6}>
-              <Button
-                id="selectAllCollections"
-                buttonStyle="primary"
-              >
-                <FormattedMessage id="ui-finc-select.source.button.selectAllCollections" />
-              </Button>
-            </Col> */}
-
             <Col xs={6}>
               <Button
                 id="showAllCollections"
                 buttonStyle="primary"
               >
                 <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+              </Button>
+            </Col>
+            <Col xs={6}>
+              <Button
+                id="showselectedCollections"
+                buttonStyle="primary"
+              >
+                <FormattedMessage id="ui-finc-select.source.button.showselectedCollections" />
               </Button>
             </Col>
           </Row>
@@ -87,6 +77,12 @@ class SourceManagementView extends React.Component {
             <KeyValue
               label={<FormattedMessage id="ui-finc-select.source.indexingLevel" />}
               value={_.get(metadataSource, 'indexingLevel', '-')}
+            />
+          </Row>
+          <Row>
+            <KeyValue
+              label={<FormattedMessage id="ui-finc-select.source.generalNotes" />}
+              value={_.get(metadataSource, 'generalNotes', '-')}
             />
           </Row>
         </div>

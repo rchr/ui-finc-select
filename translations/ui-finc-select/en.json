@@ -5,6 +5,9 @@
   "source.managementAccordion": "Management",
   "source.technicalAccordion": "Technical",
 
+  "source.modal.selectAllCollections.success": "The Process has been started. It can take some time, until all ISILs will be added to the SelectedBy-field.",
+  "source.modal.selectAllCollections.error": "The Process could not start.",
+
   "source.label": "Source Name",
   "source.id": "Source ID",
   "source.status": "Impl. Status",
@@ -13,6 +16,7 @@
   "source.selectedCollections": "Selected Collections",
   "source.organization": "Organization",
   "source.indexingLevel": "Indexing Level",
+  "source.generalNotes": "General Notes",
   "source.tickets": "Tickets",
   "source.sourceId": "Source ID",
 
@@ -22,16 +26,15 @@
 
   "collection.generalAccordion": "Metadata Collection General",
   "collection.contentAccordion": "Content",
-  "collection.technicalAccordion": "Technical",
+  "collection.technicalAccordion": "Management & Technical",
 
   "collection.label": "Collection Name",
   "collection.mdSource": "Source Name",
   "collection.permitted": "Usage Permitted",
   "collection.selected": "Selected",
-  "collection.licensingNote": "Licensing Note",
+  "collection.generalNotes": "General Notes",
   "collection.filters": "Active Filters",
   "collection.freeContent": "Free content",
-  "collection.note": "Note",
   "collection.description": "Description",
   "collection.facetLabel": "Facet Label",
   "collection.tickets": "Tickets",

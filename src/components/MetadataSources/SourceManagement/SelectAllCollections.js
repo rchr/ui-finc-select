@@ -7,6 +7,7 @@ import {
 import {
   Button,
   Col,
+  Modal,
   Row
 } from '@folio/stripes/components';
 
@@ -38,6 +39,11 @@ class SelectAllCollections extends React.Component {
       'X-Okapi-Token': props.stripes.store.getState().okapi.token,
       'Content-Type': 'application/json'
     });
+
+    this.state = {
+      showInfoModal: false,
+      modalText: ''
+    };
   }
 
   selectAllCollections = (sourceId) => {
@@ -53,16 +59,26 @@ class SelectAllCollections extends React.Component {
       .then((response) => {
         if (response.status >= 400) {
           // show error
-          return (
-            <div>error</div>
+          this.setState(
+            {
+              showInfoModal: true,
+              modalText: <FormattedMessage id="ui-finc-select.source.modal.selectAllCollections.error" />
+            }
           );
         } else {
-        // show success
-          return (
-            <div>success</div>
+          // show success
+          this.setState(
+            {
+              showInfoModal: true,
+              modalText: <FormattedMessage id="ui-finc-select.source.modal.selectAllCollections.success" />
+            }
           );
         }
       });
+  }
+
+  handleClose = () => {
+    this.setState({ showInfoModal: false });
   }
 
   render() {
@@ -81,6 +97,19 @@ class SelectAllCollections extends React.Component {
             </Button>
           </Col>
         </Row>
+        <Modal
+          open={this.state.showInfoModal}
+          label="Select All Collections"
+        >
+          <div>
+            { this.state.modalText }
+          </div>
+          <Button
+            onClick={this.handleClose}
+          >
+            OK
+          </Button>
+        </Modal>
       </div>
     );
   }

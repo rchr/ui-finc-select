@@ -117,12 +117,6 @@ class CollectionInfoView extends React.Component {
               </Button>
             </Col>
           </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-select.collection.licensingNote" />}
-              value={_.get(metadataCollection, 'licensingNote', '-')}
-            />
-          </Row>
         </div>
       </React.Fragment>
     );

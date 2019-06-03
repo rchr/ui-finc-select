@@ -32,12 +32,6 @@ class CollectionContentView extends React.Component {
               value={_.get(metadataCollection, 'freeContent', '-')}
             />
           </Row>
-          <Row>
-            <KeyValue
-              label={<FormattedMessage id="ui-finc-select.collection.note" />}
-              value={_.get(metadataCollection, 'note', '-')}
-            />
-          </Row>
         </div>
       </React.Fragment>
     );
