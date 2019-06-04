@@ -1,44 +1,44 @@
 {
   "meta.title": "Finc Select",
 
-  "source.generalAccordion": "Metadata Source General",
-  "source.managementAccordion": "Management",
-  "source.technicalAccordion": "Technical",
+  "collection.description": "Description",
+  "collection.facetLabel": "Facet Label",
+  "collection.filters": "Active Filters",
+  "collection.freeContent": "Free content",
+  "collection.generalNotes": "General Notes",
+  "collection.label": "Collection Name",
+  "collection.mdSource": "Source Name",
+  "collection.permitted": "Usage Permitted",
+  "collection.selected": "Selected",
+  "collection.tickets": "Tickets",
 
-  "source.modal.selectAllCollections.success": "The Process has been started. It can take some time, until all ISILs will be added to the SelectedBy-field.",
-  "source.modal.selectAllCollections.error": "The Process could not start.",
+  "collection.accordion.general": "Metadata Collection General",
+  "collection.accordion.content": "Content",
+  "collection.accordion.technical": "Management & Technical",
+  
+  "collection.button.unselect": "Unselect",
 
-  "source.label": "Source Name",
-  "source.id": "Source ID",
-  "source.status": "Impl. Status",
-  "source.lastProcessed": "Last Processed",
+  "collection.form.updateCollection": "Update Collection",
+
   "source.description": "Description",
-  "source.selectedCollections": "Selected Collections",
-  "source.organization": "Organization",
-  "source.indexingLevel": "Indexing Level",
   "source.generalNotes": "General Notes",
-  "source.tickets": "Tickets",
+  "source.id": "Source ID",
+  "source.indexingLevel": "Indexing Level",
+  "source.label": "Source Name",
+  "source.lastProcessed": "Last Processed",
+  "source.organization": "Organization",
+  "source.selectedCollections": "Selected Collections",
   "source.sourceId": "Source ID",
+  "source.status": "Impl. Status",
+  "source.tickets": "Tickets",
+
+  "source.accordion.management": "Management",
+  "source.accordion.technical": "Technical",
 
   "source.button.showselectedCollections": "Show Selected Collections",
   "source.button.selectAllCollections": "Select All Collections",
   "source.button.showAllCollections": "Show All Collections",
 
-  "collection.generalAccordion": "Metadata Collection General",
-  "collection.contentAccordion": "Content",
-  "collection.technicalAccordion": "Management & Technical",
-
-  "collection.label": "Collection Name",
-  "collection.mdSource": "Source Name",
-  "collection.permitted": "Usage Permitted",
-  "collection.selected": "Selected",
-  "collection.generalNotes": "General Notes",
-  "collection.filters": "Active Filters",
-  "collection.freeContent": "Free content",
-  "collection.description": "Description",
-  "collection.facetLabel": "Facet Label",
-  "collection.tickets": "Tickets",
-  
-  "collection.button.unselect": "Unselect",
-  "collection.form.updateCollection": "Update Collection"
+  "source.modal.selectAllCollections.success": "The Process has been started. It can take some time, until all ISILs will be added to the SelectedBy-field.",
+  "source.modal.selectAllCollections.error": "The Process could not start."
 }

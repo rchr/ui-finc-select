@@ -168,7 +168,7 @@ class MetadataCollectionView extends React.Component {
           <Accordion
             open={this.state.accordions.contentAccordion}
             onToggle={this.handleAccordionToggle}
-            label={<FormattedMessage id="ui-finc-select.collection.contentAccordion" />}
+            label={<FormattedMessage id="ui-finc-select.collection.accordion.content" />}
             id="contentAccordion"
           >
             <CollectionContentView
@@ -180,7 +180,7 @@ class MetadataCollectionView extends React.Component {
           <Accordion
             open={this.state.accordions.technicalAccordion}
             onToggle={this.handleAccordionToggle}
-            label={<FormattedMessage id="ui-finc-select.collection.technicalAccordion" />}
+            label={<FormattedMessage id="ui-finc-select.collection.accordion.technical" />}
             id="technicalAccordion"
           >
             <CollectionTechnicalView

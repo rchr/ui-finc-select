@@ -57,7 +57,7 @@ class CollectionInfoForm extends React.Component {
 
     return (
       <Accordion
-        label={<FormattedMessage id="ui-finc-select.collection.generalAccordion" />}
+        label={<FormattedMessage id="ui-finc-select.collection.accordion.general" />}
         open={expanded}
         id={accordionId}
         onToggle={onToggle}
