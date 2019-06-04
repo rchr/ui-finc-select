@@ -19,6 +19,15 @@ const RESULT_COUNT_INCREMENT = 30;
 
 const filterConfig = [
   {
+    label: 'Selected',
+    name: 'selected',
+    cql: 'selected',
+    values: [
+      { name: 'Yes', cql: true },
+      { name: 'No', cql: false }
+    ],
+  },
+  {
     label: 'Free Content?',
     name: 'freeContent',
     cql: 'freeContent',

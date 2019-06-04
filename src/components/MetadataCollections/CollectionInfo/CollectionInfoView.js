@@ -41,6 +41,16 @@ class CollectionInfoView extends React.Component {
     });
   }
 
+  getSelectedValue(selectedBoolean) {
+    if (selectedBoolean === false) {
+      return 'No';
+    } else if (selectedBoolean === true) {
+      return 'Yes';
+    } else {
+      return '-';
+    }
+  }
+
   render() {
     const { metadataCollection, id } = this.props;
     const isEmptyMessage = 'No items to show';
@@ -69,6 +79,8 @@ class CollectionInfoView extends React.Component {
         </Link>
       </React.Fragment>
     );
+    // get string for selected
+    const selectedString = this.getSelectedValue(_.get(metadataCollection, 'selected'));
 
     return (
       <React.Fragment>
@@ -105,7 +117,8 @@ class CollectionInfoView extends React.Component {
             <Col xs={6}>
               <KeyValue
                 label={<FormattedMessage id="ui-finc-select.collection.selected" />}
-                value={_.get(metadataCollection, 'selected', '-')}
+                // value={this.getSelectedValue(_.get(metadataCollection, 'selected'))}
+                value={selectedString}
               />
             </Col>
             <Col xs={6}>
