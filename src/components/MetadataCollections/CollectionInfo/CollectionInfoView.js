@@ -14,6 +14,7 @@ import {
 } from '@folio/stripes/components';
 import Link from 'react-router-dom/Link';
 import BasicCss from '../../BasicStyle.css';
+import SelectUnselect from './SelectUnselect';
 
 class CollectionInfoView extends React.Component {
   static propTypes = {
@@ -26,6 +27,11 @@ class CollectionInfoView extends React.Component {
       .isRequired,
     parentResources: PropTypes.object
   };
+
+  constructor(props) {
+    super(props);
+    this.connectedSelectUnselect = this.props.stripes.connect(SelectUnselect);
+  }
 
   getData(resourceName) {
     const { parentResources } = this.props;
@@ -41,18 +47,18 @@ class CollectionInfoView extends React.Component {
     });
   }
 
-  getSelectedValue(selectedBoolean) {
-    if (selectedBoolean === false) {
-      return 'No';
-    } else if (selectedBoolean === true) {
-      return 'Yes';
-    } else {
-      return '-';
-    }
-  }
+  // getSelectedValue(selectedBoolean) {
+  //   if (selectedBoolean === false) {
+  //     return 'No';
+  //   } else if (selectedBoolean === true) {
+  //     return 'Yes';
+  //   } else {
+  //     return '-';
+  //   }
+  // }
 
   render() {
-    const { metadataCollection, id } = this.props;
+    const { metadataCollection, id, stripes } = this.props;
     const isEmptyMessage = 'No items to show';
     // set values for filters
     const filterItems = metadataCollection.filters;
@@ -80,7 +86,8 @@ class CollectionInfoView extends React.Component {
       </React.Fragment>
     );
     // get string for selected
-    const selectedString = this.getSelectedValue(_.get(metadataCollection, 'selected'));
+    // const selectedString = this.getSelectedValue(_.get(metadataCollection, 'selected'));
+    const collectionId = metadataCollection.id;
 
     return (
       <React.Fragment>
@@ -113,7 +120,15 @@ class CollectionInfoView extends React.Component {
               isEmptyMessage={isEmptyMessage}
             />
           </Row>
+
           <Row>
+            <this.connectedSelectUnselect
+              stripes={stripes}
+              selectedInitial={_.get(metadataCollection, 'selected')}
+              collectionId={collectionId}
+            />
+          </Row>
+          {/* <Row>
             <Col xs={6}>
               <KeyValue
                 label={<FormattedMessage id="ui-finc-select.collection.selected" />}
@@ -129,7 +144,8 @@ class CollectionInfoView extends React.Component {
                 <FormattedMessage id="ui-finc-select.collection.button.unselect" />
               </Button>
             </Col>
-          </Row>
+          </Row> */}
+
         </div>
       </React.Fragment>
     );

@@ -23,8 +23,8 @@ const filterConfig = [
     name: 'selected',
     cql: 'selected',
     values: [
-      { name: 'Yes', cql: true },
-      { name: 'No', cql: false }
+      { name: 'Yes', cql: 1 },
+      { name: 'No', cql: 0 }
     ],
   },
   {
