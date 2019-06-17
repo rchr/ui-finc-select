@@ -56,6 +56,7 @@ class MetadataCollections extends React.Component {
       recordsRequired: '%{resultCount}',
       perRequest: 30,
       path: 'finc-select/metadata-collections',
+      resourceShouldRefresh: true,
       GET: {
         params: {
           query: makeQueryFunction(

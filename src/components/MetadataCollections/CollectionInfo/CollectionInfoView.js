@@ -5,8 +5,6 @@ import {
   FormattedMessage,
 } from 'react-intl';
 import {
-  Col,
-  Button,
   Headline,
   KeyValue,
   List,
@@ -47,16 +45,6 @@ class CollectionInfoView extends React.Component {
     });
   }
 
-  // getSelectedValue(selectedBoolean) {
-  //   if (selectedBoolean === false) {
-  //     return 'No';
-  //   } else if (selectedBoolean === true) {
-  //     return 'Yes';
-  //   } else {
-  //     return '-';
-  //   }
-  // }
-
   render() {
     const { metadataCollection, id, stripes } = this.props;
     const isEmptyMessage = 'No items to show';
@@ -85,8 +73,6 @@ class CollectionInfoView extends React.Component {
         </Link>
       </React.Fragment>
     );
-    // get string for selected
-    // const selectedString = this.getSelectedValue(_.get(metadataCollection, 'selected'));
     const collectionId = metadataCollection.id;
 
     return (
@@ -128,24 +114,6 @@ class CollectionInfoView extends React.Component {
               collectionId={collectionId}
             />
           </Row>
-          {/* <Row>
-            <Col xs={6}>
-              <KeyValue
-                label={<FormattedMessage id="ui-finc-select.collection.selected" />}
-                // value={this.getSelectedValue(_.get(metadataCollection, 'selected'))}
-                value={selectedString}
-              />
-            </Col>
-            <Col xs={6}>
-              <Button
-                id="unselect"
-                buttonStyle="primary"
-              >
-                <FormattedMessage id="ui-finc-select.collection.button.unselect" />
-              </Button>
-            </Col>
-          </Row> */}
-
         </div>
       </React.Fragment>
     );

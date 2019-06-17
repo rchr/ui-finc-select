@@ -14,11 +14,8 @@ import {
 class SelectUnselect extends React.Component {
   static propTypes = {
     stripes: PropTypes.object,
-    selectedInitial: PropTypes.bool.isRequired,
     collectionId: PropTypes.string.isRequired,
-    mutator: PropTypes.shape({
-      selectedInitial: PropTypes.bool.isRequired,
-    }),
+    selectedInitial: PropTypes.bool.isRequired
   };
 
   constructor(props) {
@@ -31,7 +28,6 @@ class SelectUnselect extends React.Component {
     });
 
     const s = props.selectedInitial;
-    this.props.mutator.selectedInitial.replace({ selected: props.selectedInitial });
     this.state = {
       showInfoModal: false,
       modalText: '',
@@ -52,32 +48,27 @@ class SelectUnselect extends React.Component {
     );
   }
 
-  // TODO:
   // if clicking on another collection, check, if selectedInitial will be up to date
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.collectionId !== prevProps.collectionId) {
-  //     // this.props.mutator.selectedInitial.replace({ selected: this.props.selectedInitial });
-  //     this.fetchSelected(this.props.collectionId);
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (this.props.collectionId !== prevProps.collectionId) {
+      this.fetchSelected(this.props.collectionId, this.props.selectedInitial);
+    }
+  }
 
-  // fetchSelected = (collectionId) => {
-  //   this.setState({ selected: false });
-  //   return fetch(`${this.okapiUrl}/finc-select/metadata-collections/${collectionId}`, { headers: this.httpHeaders })
-  //     .then((response) => {
-  //       if (response.status >= 400) {
-  //         // error
-  //         return null;
-  //       } else {
-  //         return response.json();
-  //       }
-  //     })
-  //     .then((json) => {
-  //       this.setState({
-  //         selected: json.selected
-  //       });
-  //     });
-  // }
+  fetchSelected = (collectionId, selected) => {
+    const selectedButtonLable = this.getSelectedButtonLable(selected);
+    const selectedValue = this.getSelectedValue(selected);
+
+    // change state for selected-values, if neccessary
+    this.setState(
+      {
+        // shortcut for selected: selected,
+        selected,
+        selectedString: selectedValue,
+        selectedLabel: selectedButtonLable
+      }
+    );
+  }
 
   // get strings from the saved bool value
   getSelectedValue(s) {
@@ -107,7 +98,7 @@ class SelectUnselect extends React.Component {
       })
       .then((response) => {
         if (response.status >= 400) {
-          // show error
+          // show 400 error
           this.setState(
             {
               showInfoModal: true,
@@ -115,7 +106,7 @@ class SelectUnselect extends React.Component {
             }
           );
         } else if (response.status < 400 && response.status >= 300) {
-          // show error?
+          // show 300 error
           this.setState(
             {
               showInfoModal: true,
