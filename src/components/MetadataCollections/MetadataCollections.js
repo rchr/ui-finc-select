@@ -13,9 +13,12 @@ import packageInfo from '../../../package';
 
 import MetadataCollectionView from './MetadataCollectionView';
 import MetadataCollectionForm from './MetadataCollectionForm';
+import Filter from './Filter/Filter';
+// import getActiveFilters from './Filter/Util';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
+const DEFAULT_FILTERS = 'freeContent.Yes,freeContent.No,freeContent.Undetermined';
 
 const filterConfig = [
   {
@@ -37,6 +40,13 @@ const filterConfig = [
       { name: 'Undetermined', cql: 'undetermined' }
     ],
   }
+  // ,
+  // {
+  //   label: 'Metadata Source',
+  //   name: 'mdSource.id',
+  //   cql: 'mdSource.id',
+  //   values: []
+  // }
 ];
 
 class MetadataCollections extends React.Component {
@@ -44,8 +54,8 @@ class MetadataCollections extends React.Component {
     initializedFilterConfig: { initialValue: false },
     query: {
       initialValue: {
-        query: '',
-        filters: '',
+        // query: '',
+        filters: DEFAULT_FILTERS,
         sort: 'label',
       },
     },
@@ -78,6 +88,21 @@ class MetadataCollections extends React.Component {
       path: 'finc-select/metadata-sources',
       resourceShouldRefresh: true
     },
+    allCollectionsBySourceId: {
+      type: 'okapi',
+      records: 'fincSelectMetadataCollections',
+      recordsRequired: '%{resultCount}',
+      perRequest: 30,
+      path: 'finc-select/metadata-collections',
+      resourceShouldRefresh: true,
+      GET: {
+        params: {
+          query: 'mdSource.id=="*" sortby label',
+        },
+        staticFallback: { params: {} },
+      },
+    },
+    // test: TEST,
   });
 
   static propTypes = {
@@ -96,7 +121,16 @@ class MetadataCollections extends React.Component {
     }).isRequired,
     stripes: PropTypes.object,
     intl: intlShape.isRequired,
+    source: PropTypes.shape({
+      records: PropTypes.arrayOf(PropTypes.object),
+    }),
   };
+
+  constructor(props, context) {
+    super(props, context);
+    this.getActiveFilters = this.getActiveFilters.bind(this);
+    this.renderFilters = this.renderFilters.bind(this);
+  }
 
   getArrayElementsCommaSeparated = (array) => {
     let formatted = '';
@@ -108,6 +142,30 @@ class MetadataCollections extends React.Component {
     return formatted;
   }
 
+  renderFilters(onChange) {
+    // const source = _.get(this.source);
+    // TODO: get all sources (label and id) of resultlist
+    const sources = [
+      { name: 'source 1', value: 'value1' },
+      { name: 'source 2', value: 'value2' },
+      { name: 'source 3', value: 'value3' }
+    ];
+
+    return (
+      <Filter
+        activeFilters={this.getActiveFilters()}
+        // get data for test-filter:
+        sources={sources}
+        onChange={onChange}
+        queryMutator={this.props.mutator.query}
+      />
+    );
+  }
+
+  getActiveFilters() {
+    return null;
+  }
+
   render() {
     const packageInfoReWrite = () => {
       const path = '/finc-select/metadata-collections';
@@ -117,6 +175,7 @@ class MetadataCollections extends React.Component {
     };
 
     const { stripes, intl } = this.props;
+    // const allCollectionsBySourceId = _.get(this.metadataCollection, 'mdSource.id', []);
 
     const resultsFormatter = {
       label: collection => collection.label,
@@ -152,6 +211,7 @@ class MetadataCollections extends React.Component {
             filters: intl.formatMessage({ id: 'ui-finc-select.collection.filters' }),
             freeContent: intl.formatMessage({ id: 'ui-finc-select.collection.freeContent' })
           }}
+          renderFilters={this.renderFilters}
           stripes={stripes}
         />
       </div>

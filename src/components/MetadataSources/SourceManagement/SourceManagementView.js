@@ -11,6 +11,7 @@ import {
   Row
 } from '@folio/stripes/components';
 import SelectAllCollections from './SelectAllCollections';
+import ShowAllCollections from './ShowAllCollections';
 
 class SourceManagementView extends React.Component {
   static propTypes = {
@@ -19,13 +20,20 @@ class SourceManagementView extends React.Component {
       .shape({
         connect: PropTypes.func.isRequired,
       })
-      .isRequired,
+      .isRequired
   };
 
   constructor(props) {
     super(props);
     this.connectedSelectAllCollections = this.props.stripes.connect(SelectAllCollections);
+    this.connectedShowAllCollections = this.props.stripes.connect(ShowAllCollections);
+    // this.showAllCollections = this.showAllCollections.bind(this);
   }
+
+  // showAllCollections = (sourceId) => {
+  //   this.props.history.push('/finc-select/metadata-collections');
+  //   // window.location.hash = '/finc-select/metadata-collections';
+  // }
 
   render() {
     const { metadataSource, stripes } = this.props;
@@ -52,21 +60,35 @@ class SourceManagementView extends React.Component {
           <Row>
             <Col xs={6}>
               <Button
-                id="showAllCollections"
-                buttonStyle="primary"
-              >
-                <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button
-                id="showselectedCollections"
+                id="showSelectedCollections"
                 buttonStyle="primary"
               >
                 <FormattedMessage id="ui-finc-select.source.button.showselectedCollections" />
               </Button>
             </Col>
           </Row>
+
+          {/* <Row>
+            <Col xs={6}>
+              <Button
+                id="showAllCollections"
+                buttonStyle="primary"
+                onClick={() => this.showAllCollections(sourceId)}
+              >
+                huhuh <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+              </Button>
+            </Col>
+          </Row> */}
+       
+          <Row>
+            <this.connectedShowAllCollections
+              stripes={stripes}
+              sourceId={sourceId}
+              {...this.props}
+            />
+          </Row>
+
+
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-select.source.organization" />}
@@ -86,6 +108,19 @@ class SourceManagementView extends React.Component {
             />
           </Row>
         </div>
+        {/* <Switch>
+          <Route
+            path={`${match.path}/metadata-collections`}
+            render={props => <this.connectedShowAllCollections
+              stripes={stripes}
+              // mutator={mutator}
+              // resources={resources}
+              {...props}
+            />
+            }
+          />
+        </Switch> */}
+
       </React.Fragment>
     );
   }
