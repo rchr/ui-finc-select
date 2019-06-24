@@ -6,7 +6,9 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 
 ## Introduction
 
-Congratulations on creating a new Stripes UI app module!  Follow the instructions below to run ui-finc-select and start your development.
+This is a [Stripes](https://github.com/folio-org/stripes-core/) UI module for the selection of metadata sources and collections for the finc user community. 
+
+finc-config allows the configuration of metadata sources and collections. finc-select allows members of the finc user community (libraries) to select or deselect metadata collections as well as whole metadata sources.
 
 ## Prerequisites
 
