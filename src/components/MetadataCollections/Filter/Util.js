@@ -17,22 +17,22 @@ export const TEST = {
   records: 'fincSelectMetadataCollections'
 };
 
-export function getActiveFilters() {
-  const { query } = this.props.resources;
+// export function getActiveFilters() {
+//   const { query } = this.props.resources;
 
-  if (!query || !query.filters) return {};
+//   if (!query || !query.filters) return {};
 
-  return query.filters
-    .split(',')
-    .reduce((filterMap, currentFilter) => {
-      const [name, value] = currentFilter.split('.');
+//   return query.filters
+//     .split(',')
+//     .reduce((filterMap, currentFilter) => {
+//       const [name, value] = currentFilter.split('.');
 
-      if (!Array.isArray(filterMap[name])) {
-        filterMap[name] = [];
-      }
+//       if (!Array.isArray(filterMap[name])) {
+//         filterMap[name] = [];
+//       }
 
-      filterMap[name].push(value);
+//       filterMap[name].push(value);
 
-      return filterMap;
-    }, {});
-}
+//       return filterMap;
+//     }, {});
+// }

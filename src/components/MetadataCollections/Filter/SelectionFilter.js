@@ -17,7 +17,7 @@ import { selectOptionsShape } from './Shape';
 const SelectionFilter = ({
   id,
   activeFilters = [],
-  closedByDefault = true,
+  closedByDefault = false,
   labelId,
   name,
   onChange,

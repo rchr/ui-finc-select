@@ -39,7 +39,16 @@ const filterConfig = [
       { name: 'No', cql: 'no' },
       { name: 'Undetermined', cql: 'undetermined' }
     ],
-  }
+  },
+  {
+    label: 'permitted xx',
+    name: 'permitted',
+    cql: 'permitted',
+    values: [
+      { name: 'Yes', cql: 'yes' },
+      { name: 'No', cql: 'no' }
+    ],
+  },
   // ,
   // {
   //   label: 'Metadata Source',

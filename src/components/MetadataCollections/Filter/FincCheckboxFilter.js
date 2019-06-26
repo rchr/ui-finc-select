@@ -7,10 +7,7 @@ import {
   FilterAccordionHeader,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
-
-// import {
-//   createClearFilterHandler,
-// } from '../utils';
+import createClearFilterHandler from './Util';
 
 const FincCheckboxFilter = ({
   activeFilters = [],
@@ -19,6 +16,11 @@ const FincCheckboxFilter = ({
   labelId,
   name,
   onChange,
+  // options = [
+  //   { label: 'Yes', value: 'value1' },
+  //   { label: 'Yes (restricted)', value: 'yes restricted' },
+  //   { label: 'No', value: 'no' }
+  // ],
   options = [],
 }) => {
   return (

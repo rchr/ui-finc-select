@@ -16,6 +16,7 @@
   "collection.accordion.content": "Content",
   "collection.accordion.technical": "Management & Technical",
 
+  "collection.filter.sources": "Metadata Source",
   "collection.form.updateCollection": "Update Collection",
 
   "source.description": "Description",

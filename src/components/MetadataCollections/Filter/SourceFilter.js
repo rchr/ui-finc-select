@@ -6,7 +6,7 @@ import { sourcesShape } from './Shape';
 
 const SourceFilter = ({ sources, ...rest }) => {
   const options = getSourcesOptions(sources);
-  const labelId = 'finc-select.filter.sources';
+  const labelId = 'ui-finc-select.collection.filter.sources';
 
   return (
     <SelectionFilter
