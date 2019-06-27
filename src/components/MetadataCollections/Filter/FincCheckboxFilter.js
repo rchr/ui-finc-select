@@ -16,11 +16,6 @@ const FincCheckboxFilter = ({
   labelId,
   name,
   onChange,
-  // options = [
-  //   { label: 'Yes', value: 'value1' },
-  //   { label: 'Yes (restricted)', value: 'yes restricted' },
-  //   { label: 'No', value: 'no' }
-  // ],
   options = [],
 }) => {
   return (

@@ -7,24 +7,24 @@ import SourceFilter from './SourceFilter';
 import sourceShape from './Shape';
 import FincCheckboxFilter from './FincCheckboxFilter';
 
-const FILTERS = {
-  TEST: 'test',
-  PERMITTED: 'permitted'
-};
-
+// const FILTERS = {
+//   TEST: 'test',
+//   PERMITTED: 'permitted'
+// };
 
 const DEFAULT_FILTERS = [
-  'permitted.no'
+  // 'permitted.no'
 ];
 
 class Filter extends React.Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    sources: sourceShape,
     activeFilters: PropTypes.object,
-    queryMutator: PropTypes.object
+    queryMutator: PropTypes.object,
+    tinySources: PropTypes.object,
+    permitted: PropTypes.bool,
+    selected: PropTypes.bool
   };
-
 
   componentDidMount() {
     const { queryMutator } = this.props;
@@ -33,34 +33,26 @@ class Filter extends React.Component {
     queryMutator.update({ filters });
   }
 
-
   render() {
-    const { activeFilters, onChange, sources } = this.props;
-
-    const permittedOptions = [
-      { label: 'Yes', value: 'yes' },
-      { label: 'Yes (restricted)', value: 'yes restricted' },
-      { label: 'No', value: 'no' }
-    ];
+    const { activeFilters, onChange, tinySources, permitted, selected } = this.props;
     const permittedActive = [];
-
 
     return (
       <AccordionSet>
         <SourceFilter
           // activeFilters={activeFilters[FILTERS.TEST]}
-          name={FILTERS.TEST}
+          name={tinySources}
           onChange={onChange}
-          sources={sources}
+          sources={this.props.tinySources}
         />
         <FincCheckboxFilter
-          activeFilters={permittedActive}
+          // activeFilters={permittedActive}
           closedByDefault={false}
           id="permitted"
           labelId="ui-finc-select.collection.permitted"
           name="permitted"
           onChange={onChange}
-          options={permittedOptions}
+          options={permitted}
 
         />
         <FincCheckboxFilter
@@ -70,7 +62,7 @@ class Filter extends React.Component {
           labelId="ui-finc-select.collection.selected"
           name="selected"
           onChange={onChange}
-          // options={STATUS_FILTER_OPTIONS}
+          options={selected}
         />
         <FincCheckboxFilter
           // activeFilters={activeFilters[FILTERS.STATUS]}

@@ -41,7 +41,7 @@ const filterConfig = [
     ],
   },
   {
-    label: 'permitted xx',
+    label: 'permitted',
     name: 'permitted',
     cql: 'permitted',
     values: [
@@ -49,13 +49,6 @@ const filterConfig = [
       { name: 'No', cql: 'no' }
     ],
   },
-  // ,
-  // {
-  //   label: 'Metadata Source',
-  //   name: 'mdSource.id',
-  //   cql: 'mdSource.id',
-  //   values: []
-  // }
 ];
 
 class MetadataCollections extends React.Component {
@@ -97,26 +90,24 @@ class MetadataCollections extends React.Component {
       path: 'finc-select/metadata-sources',
       resourceShouldRefresh: true
     },
-    allCollectionsBySourceId: {
+    // get for the filter all sources but just the tiny with name and id
+    tinySources: {
       type: 'okapi',
-      records: 'fincSelectMetadataCollections',
-      recordsRequired: '%{resultCount}',
-      perRequest: 30,
-      path: 'finc-select/metadata-collections',
-      resourceShouldRefresh: true,
-      GET: {
-        params: {
-          query: 'mdSource.id=="*" sortby label',
-        },
-        staticFallback: { params: {} },
-      },
-    },
-    // test: TEST,
+      records: 'tinyMetadataSources',
+      path: 'finc-config/tiny-metadata-sources',
+      resourceShouldRefresh: true
+    }
   });
 
   static propTypes = {
     resources: PropTypes.shape({
       metadataCollections: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.object),
+      }),
+      source: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.object),
+      }),
+      tinySources: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
       }),
     }).isRequired,
@@ -128,11 +119,12 @@ class MetadataCollections extends React.Component {
         update: PropTypes.func,
       }).isRequired,
     }).isRequired,
-    stripes: PropTypes.object,
+    stripes: PropTypes
+      .shape({
+        connect: PropTypes.func.isRequired,
+      })
+      .isRequired,
     intl: intlShape.isRequired,
-    source: PropTypes.shape({
-      records: PropTypes.arrayOf(PropTypes.object),
-    }),
   };
 
   constructor(props, context) {
@@ -152,21 +144,23 @@ class MetadataCollections extends React.Component {
   }
 
   renderFilters(onChange) {
-    // const source = _.get(this.source);
-    // TODO: get all sources (label and id) of resultlist
-    const sources = [
-      { name: 'source 1', value: 'value1' },
-      { name: 'source 2', value: 'value2' },
-      { name: 'source 3', value: 'value3' }
+    const { resources } = this.props;
+    const tinySourcesDatea = _.get(resources, 'tinySources.records');
+    const booleanData = [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false }
     ];
 
     return (
       <Filter
         activeFilters={this.getActiveFilters()}
-        // get data for test-filter:
-        sources={sources}
         onChange={onChange}
         queryMutator={this.props.mutator.query}
+        // get data for source-filter from okapi
+        tinySources={tinySourcesDatea}
+        // get bool-data for permitted and selected
+        permitted={booleanData}
+        selected={booleanData}
       />
     );
   }
@@ -184,7 +178,6 @@ class MetadataCollections extends React.Component {
     };
 
     const { stripes, intl } = this.props;
-    // const allCollectionsBySourceId = _.get(this.metadataCollection, 'mdSource.id', []);
 
     const resultsFormatter = {
       label: collection => collection.label,

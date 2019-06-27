@@ -145,6 +145,7 @@ class ShowAllCollections extends React.Component {
         <Link to={{
           pathname: '/finc-select/metadata-collections',
           // search: `?mdSource.id=${sourceId}`
+          // search: `?mdSource.id=${sourceId} AND selected==true`
           search: '?filters=freeContent.Undetermined'
         }}
         >
