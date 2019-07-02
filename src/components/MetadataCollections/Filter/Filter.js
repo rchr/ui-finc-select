@@ -2,18 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   AccordionSet,
+  FilterAccordionHeader
 } from '@folio/stripes/components';
 import SourceFilter from './SourceFilter';
 import sourceShape from './Shape';
 import FincCheckboxFilter from './FincCheckboxFilter';
 
-// const FILTERS = {
-//   TEST: 'test',
-//   PERMITTED: 'permitted'
-// };
-
+// set filter, which will be set by default
 const DEFAULT_FILTERS = [
-  // 'permitted.no'
+  'freeContent.no',
 ];
 
 class Filter extends React.Component {
@@ -23,7 +20,8 @@ class Filter extends React.Component {
     queryMutator: PropTypes.object,
     tinySources: PropTypes.object,
     permitted: PropTypes.bool,
-    selected: PropTypes.bool
+    selected: PropTypes.bool,
+    freeContent: PropTypes.arrayOf(PropTypes.string)
   };
 
   componentDidMount() {
@@ -34,16 +32,29 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { activeFilters, onChange, tinySources, permitted, selected } = this.props;
-    const permittedActive = [];
+    const { activeFilters, onChange, tinySources, permitted, selected, freeContent } = this.props;
 
     return (
       <AccordionSet>
         <SourceFilter
-          // activeFilters={activeFilters[FILTERS.TEST]}
+          // displayClearButton={activeFilters[tinySources].length > 0}
+          header={FilterAccordionHeader}
+          activeFilters={activeFilters[tinySources]}
           name={tinySources}
           onChange={onChange}
+          // set data for the selsct-box
           sources={this.props.tinySources}
+        />
+        <FincCheckboxFilter
+          header={FilterAccordionHeader}
+          activeFilters={activeFilters[freeContent]}
+          closedByDefault={false}
+          id="freeContent"
+          labelId="ui-finc-select.collection.freeContent"
+          // name will be set to url
+          name="freeContent"
+          onChange={onChange}
+          options={freeContent}
         />
         <FincCheckboxFilter
           // activeFilters={permittedActive}
@@ -53,7 +64,6 @@ class Filter extends React.Component {
           name="permitted"
           onChange={onChange}
           options={permitted}
-
         />
         <FincCheckboxFilter
           // activeFilters={activeFilters[FILTERS.TEST]}

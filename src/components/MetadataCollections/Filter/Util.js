@@ -17,22 +17,45 @@ export const TEST = {
   records: 'fincSelectMetadataCollections'
 };
 
-// export function getActiveFilters() {
-//   const { query } = this.props.resources;
+// vgl ui-orders
+export function handleFilterChange({ name, values }) { // example: name="freeContent", values=["undetermined"]
+  const { mutator } = this.props;
 
-//   if (!query || !query.filters) return {};
+  const newFilters = {
+    ...this.getActiveFilters(),
+    [name]: values,
+  };
 
-//   return query.filters
-//     .split(',')
-//     .reduce((filterMap, currentFilter) => {
-//       const [name, value] = currentFilter.split('.');
+  const filters = Object.keys(newFilters)
+    .map((filterName) => {
+      return newFilters[filterName]
+        .map((filterValue) => `${filterName}.${filterValue}`)
+        .join(',');
+    })
+    .filter(filter => filter)
+    .join(',');
 
-//       if (!Array.isArray(filterMap[name])) {
-//         filterMap[name] = [];
-//       }
+  mutator.query.update({ filters });
+}
 
-//       filterMap[name].push(value);
+// vgl ui-orders
+// get current url-query with their filters (before last click on filter)
+export function getActiveFilters() {
+  const { query } = this.props.resources;
 
-//       return filterMap;
-//     }, {});
-// }
+  if (!query || !query.filters) return {};
+
+  return query.filters
+    .split(',')
+    .reduce((filterMap, currentFilter) => {
+      const [name, value] = currentFilter.split('.');
+
+      if (!Array.isArray(filterMap[name])) {
+        filterMap[name] = [];
+      }
+
+      filterMap[name].push(value);
+
+      return filterMap;
+    }, {});
+}

@@ -9,46 +9,47 @@ import {
   makeQueryFunction,
   SearchAndSort
 } from '@folio/stripes/smart-components';
+
+import omitBy from 'lodash/omitBy';
+import isNil from 'lodash/isNil';
+import { parse, stringify } from 'query-string';
+import { onChangeFilter as commonChangeFilter } from '@folio/stripes/components';
 import packageInfo from '../../../package';
 
 import MetadataCollectionView from './MetadataCollectionView';
 import MetadataCollectionForm from './MetadataCollectionForm';
 import Filter from './Filter/Filter';
-// import getActiveFilters from './Filter/Util';
+
+import { handleFilterChange, getActiveFilters } from './Filter/Util';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
-const DEFAULT_FILTERS = 'freeContent.Yes,freeContent.No,freeContent.Undetermined';
 
 const filterConfig = [
   {
     label: 'Selected',
     name: 'selected',
     cql: 'selected',
-    values: [
-      { name: 'Yes', cql: 1 },
-      { name: 'No', cql: 0 }
-    ],
+    values: [],
   },
   {
     label: 'Free Content?',
     name: 'freeContent',
     cql: 'freeContent',
-    values: [
-      { name: 'Yes', cql: 'yes' },
-      { name: 'No', cql: 'no' },
-      { name: 'Undetermined', cql: 'undetermined' }
-    ],
+    values: [],
   },
   {
     label: 'permitted',
     name: 'permitted',
     cql: 'permitted',
-    values: [
-      { name: 'Yes', cql: 'yes' },
-      { name: 'No', cql: 'no' }
-    ],
+    values: [],
   },
+  {
+    label: 'tinySources',
+    name: 'tinySources',
+    cql: 'tinySources',
+    values: [],
+  }
 ];
 
 class MetadataCollections extends React.Component {
@@ -56,8 +57,8 @@ class MetadataCollections extends React.Component {
     initializedFilterConfig: { initialValue: false },
     query: {
       initialValue: {
-        // query: '',
-        filters: DEFAULT_FILTERS,
+        query: '',
+        filters: '',
         sort: 'label',
       },
     },
@@ -125,13 +126,47 @@ class MetadataCollections extends React.Component {
       })
       .isRequired,
     intl: intlShape.isRequired,
+    // upadte URL, if filter is changing
+    // location: PropTypes.shape({
+    //   pathname: PropTypes.string.isRequired,
+    //   search: PropTypes.string.isRequired,
+    // }).isRequired,
+    // history: PropTypes.shape({
+    //   push: PropTypes.func.isRequired,
+    // }).isRequired,
+    // updateLocation: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
     super(props, context);
-    this.getActiveFilters = this.getActiveFilters.bind(this);
     this.renderFilters = this.renderFilters.bind(this);
+    this.onChangeFilter = commonChangeFilter.bind(this);
+    // vgl ui-orders
+    this.handleFilterChange = handleFilterChange.bind(this);
+    this.getActiveFilters = getActiveFilters.bind(this);
+    this.onChangeIndex = this.onChangeIndex.bind(this);
   }
+
+  // // upadte URL, if filter is changing
+  // updateFilters(prevFilters) { // provided for onChangeFilter
+  //   const filters = Object.keys(prevFilters).filter(key => filters[key]).join(',');
+  //   this.props.updateLocation({ filters });
+  // }
+
+  // // upadte URL, if filter is changing
+  // updateLocation = (newParams) => {
+  //   const { location, history } = this.props;
+  //   const { search, pathname } = location;
+  //   const prevParams = parse(search);
+  //   const params = Object.assign(prevParams, newParams);
+  //   const cleanParams = omitBy(params, isNil);
+
+  //   // TODO: map for multiple array values
+  //   const url = `${pathname}?filters=${cleanParams.name}.${cleanParams.values}`;
+  //   // const url = `${pathname}?filters=${filterString}`;
+
+  //   history.push(url);
+  // }
 
   getArrayElementsCommaSeparated = (array) => {
     let formatted = '';
@@ -145,7 +180,13 @@ class MetadataCollections extends React.Component {
 
   renderFilters(onChange) {
     const { resources } = this.props;
-    const tinySourcesDatea = _.get(resources, 'tinySources.records');
+    const tinySourcesData = _.get(resources, 'tinySources.records', []);
+    const freeContentData = [
+      { label: 'Yes', value: 'yes' },
+      { label: 'No', value: 'no' },
+      { label: 'Undetermined', value: 'undetermined' }
+    ];
+
     const booleanData = [
       { label: 'Yes', value: true },
       { label: 'No', value: false }
@@ -157,16 +198,19 @@ class MetadataCollections extends React.Component {
         onChange={onChange}
         queryMutator={this.props.mutator.query}
         // get data for source-filter from okapi
-        tinySources={tinySourcesDatea}
+        tinySources={tinySourcesData}
         // get bool-data for permitted and selected
         permitted={booleanData}
         selected={booleanData}
+        freeContent={freeContentData}
       />
     );
   }
 
-  getActiveFilters() {
-    return null;
+  onChangeIndex(e) {
+    const qindex = e.target.value;
+
+    this.props.mutator.query.update({ qindex });
   }
 
   render() {
@@ -214,6 +258,9 @@ class MetadataCollections extends React.Component {
             freeContent: intl.formatMessage({ id: 'ui-finc-select.collection.freeContent' })
           }}
           renderFilters={this.renderFilters}
+          // onFilterChange={this.updateLocation}
+          onFilterChange={this.handleFilterChange}
+          onChangeIndex={this.onChangeIndex}
           stripes={stripes}
         />
       </div>
