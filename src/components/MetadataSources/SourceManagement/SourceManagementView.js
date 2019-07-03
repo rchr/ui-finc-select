@@ -20,7 +20,7 @@ class SourceManagementView extends React.Component {
       .shape({
         connect: PropTypes.func.isRequired,
       })
-      .isRequired
+      .isRequired,
   };
 
   constructor(props) {

@@ -10,9 +10,9 @@ import {
   SearchAndSort
 } from '@folio/stripes/smart-components';
 
-import omitBy from 'lodash/omitBy';
-import isNil from 'lodash/isNil';
-import { parse, stringify } from 'query-string';
+// import omitBy from 'lodash/omitBy';
+// import isNil from 'lodash/isNil';
+// import { parse, stringify } from 'query-string';
 import { onChangeFilter as commonChangeFilter } from '@folio/stripes/components';
 import packageInfo from '../../../package';
 
@@ -45,9 +45,9 @@ const filterConfig = [
     values: [],
   },
   {
-    label: 'tinySources',
-    name: 'tinySources',
-    cql: 'tinySources',
+    label: 'mdSource',
+    name: 'mdSource',
+    cql: 'mdSource',
     values: [],
   }
 ];
@@ -92,7 +92,7 @@ class MetadataCollections extends React.Component {
       resourceShouldRefresh: true
     },
     // get for the filter all sources but just the tiny with name and id
-    tinySources: {
+    mdSource: {
       type: 'okapi',
       records: 'tinyMetadataSources',
       path: 'finc-config/tiny-metadata-sources',
@@ -106,9 +106,6 @@ class MetadataCollections extends React.Component {
         records: PropTypes.arrayOf(PropTypes.object),
       }),
       source: PropTypes.shape({
-        records: PropTypes.arrayOf(PropTypes.object),
-      }),
-      tinySources: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
       }),
     }).isRequired,
@@ -180,13 +177,14 @@ class MetadataCollections extends React.Component {
 
   renderFilters(onChange) {
     const { resources } = this.props;
-    const tinySourcesData = _.get(resources, 'tinySources.records', []);
+    const mdSource = _.get(resources, 'mdSource.records', []);
     const freeContentData = [
       { label: 'Yes', value: 'yes' },
       { label: 'No', value: 'no' },
       { label: 'Undetermined', value: 'undetermined' }
     ];
 
+    // TODO: should be changed to string; need to wait for changes in backend
     const booleanData = [
       { label: 'Yes', value: true },
       { label: 'No', value: false }
@@ -198,7 +196,7 @@ class MetadataCollections extends React.Component {
         onChange={onChange}
         queryMutator={this.props.mutator.query}
         // get data for source-filter from okapi
-        tinySources={tinySourcesData}
+        mdSource={mdSource}
         // get bool-data for permitted and selected
         permitted={booleanData}
         selected={booleanData}

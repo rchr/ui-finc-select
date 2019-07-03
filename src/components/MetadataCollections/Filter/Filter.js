@@ -5,12 +5,12 @@ import {
   FilterAccordionHeader
 } from '@folio/stripes/components';
 import SourceFilter from './SourceFilter';
-import sourceShape from './Shape';
+import sourcesShape from './Shape';
 import FincCheckboxFilter from './FincCheckboxFilter';
 
 // set filter, which will be set by default
 const DEFAULT_FILTERS = [
-  'freeContent.no',
+  // 'freeContent.no',
 ];
 
 class Filter extends React.Component {
@@ -18,7 +18,7 @@ class Filter extends React.Component {
     onChange: PropTypes.func.isRequired,
     activeFilters: PropTypes.object,
     queryMutator: PropTypes.object,
-    tinySources: PropTypes.object,
+    mdSource: sourcesShape,
     permitted: PropTypes.bool,
     selected: PropTypes.bool,
     freeContent: PropTypes.arrayOf(PropTypes.string)
@@ -32,18 +32,19 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { activeFilters, onChange, tinySources, permitted, selected, freeContent } = this.props;
+    const { activeFilters, onChange, mdSource, permitted, selected, freeContent } = this.props;
 
     return (
       <AccordionSet>
         <SourceFilter
           // displayClearButton={activeFilters[tinySources].length > 0}
           header={FilterAccordionHeader}
-          activeFilters={activeFilters[tinySources]}
-          name={tinySources}
+          activeFilters={activeFilters[mdSource]}
+          // name will be set to url
+          name="mdSource"
           onChange={onChange}
-          // set data for the selsct-box
-          sources={this.props.tinySources}
+          // set data for the select-box
+          sources={this.props.mdSource}
         />
         <FincCheckboxFilter
           header={FilterAccordionHeader}
@@ -54,10 +55,11 @@ class Filter extends React.Component {
           // name will be set to url
           name="freeContent"
           onChange={onChange}
+          // set data for the check-boxes
           options={freeContent}
         />
         <FincCheckboxFilter
-          // activeFilters={permittedActive}
+          activeFilters={activeFilters[permitted]}
           closedByDefault={false}
           id="permitted"
           labelId="ui-finc-select.collection.permitted"
@@ -66,7 +68,7 @@ class Filter extends React.Component {
           options={permitted}
         />
         <FincCheckboxFilter
-          // activeFilters={activeFilters[FILTERS.TEST]}
+          activeFilters={activeFilters[selected]}
           closedByDefault={1}
           id="selected"
           labelId="ui-finc-select.collection.selected"
@@ -75,13 +77,13 @@ class Filter extends React.Component {
           options={selected}
         />
         <FincCheckboxFilter
-          // activeFilters={activeFilters[FILTERS.STATUS]}
+          // activeFilters={activeFilters[activeFilters]}
           closedByDefault={1}
           id="activeFilters"
           labelId="ui-finc-select.collection.filters"
           name="activeFilters"
-          onChange={onChange}
-          // options={STATUS_FILTER_OPTIONS}
+          onChange={activeFilters}
+          // options={}
         />
       </AccordionSet>
     );
