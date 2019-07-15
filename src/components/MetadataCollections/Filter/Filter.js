@@ -8,10 +8,10 @@ import SourceFilter from './SourceFilter';
 import sourcesShape from './Shape';
 import FincCheckboxFilter from './FincCheckboxFilter';
 
-// set filter, which will be set by default
-const DEFAULT_FILTERS = [
-  // 'freeContent.no',
-];
+// set filter, which will be set by default -> NOT POSSIBLE! With default filter the functions showAllCollections and others are not working!
+// const DEFAULT_FILTERS = [
+//   // 'freeContent.no',
+// ];
 
 class Filter extends React.Component {
   static propTypes = {
@@ -26,9 +26,8 @@ class Filter extends React.Component {
 
   componentDidMount() {
     const { queryMutator } = this.props;
-    const filters = DEFAULT_FILTERS.join(',');
-
-    queryMutator.update({ filters });
+    // const filters = DEFAULT_FILTERS.join(',');
+    // queryMutator.update({ filters });
   }
 
   render() {

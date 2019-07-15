@@ -34,9 +34,9 @@
   "source.accordion.management": "Management",
   "source.accordion.technical": "Technical",
 
-  "source.button.showselectedCollections": "Show Selected Collections",
-  "source.button.selectAllCollections": "Select All Collections",
-  "source.button.showAllCollections": "Show All Collections",
+  "source.button.showselectedCollections": "Show selected collections",
+  "source.button.selectAllCollections": "Select all collections",
+  "source.button.showAllCollections": "Show all collections for source ID: ",
 
   "source.modal.selectAllCollections.success": "The Process has been started. It can take some time, until all ISILs will be added to the SelectedBy-field.",
   "source.modal.selectAllCollections.error": "The Process could not start."

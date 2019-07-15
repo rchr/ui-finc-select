@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import {
   FormattedMessage
 } from 'react-intl';
@@ -11,7 +12,6 @@ import {
   Row
 } from '@folio/stripes/components';
 import SelectAllCollections from './SelectAllCollections';
-import ShowAllCollections from './ShowAllCollections';
 
 class SourceManagementView extends React.Component {
   static propTypes = {
@@ -21,19 +21,20 @@ class SourceManagementView extends React.Component {
         connect: PropTypes.func.isRequired,
       })
       .isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.string,
+    }),
   };
 
   constructor(props) {
     super(props);
     this.connectedSelectAllCollections = this.props.stripes.connect(SelectAllCollections);
-    this.connectedShowAllCollections = this.props.stripes.connect(ShowAllCollections);
-    // this.showAllCollections = this.showAllCollections.bind(this);
   }
 
-  // showAllCollections = (sourceId) => {
-  //   this.props.history.push('/finc-select/metadata-collections');
-  //   // window.location.hash = '/finc-select/metadata-collections';
-  // }
+  // just necessary, if button will be used instead of link
+  showAllCollections(sourceId) {
+    this.props.history.push(`/finc-select/metadata-collections?filters=mdSource.${sourceId}`);
+  }
 
   render() {
     const { metadataSource, stripes } = this.props;
@@ -68,26 +69,29 @@ class SourceManagementView extends React.Component {
             </Col>
           </Row>
 
-          {/* <Row>
-            <Col xs={6}>
-              <Button
-                id="showAllCollections"
-                buttonStyle="primary"
-                onClick={() => this.showAllCollections(sourceId)}
-              >
-                huhuh <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
-              </Button>
-            </Col>
-          </Row> */}
-       
           <Row>
-            <this.connectedShowAllCollections
-              stripes={stripes}
-              sourceId={sourceId}
-              {...this.props}
-            />
-          </Row>
+            {/* showAllCollections as link */}
+            {/* <Link to={{
+              pathname: '/finc-select/metadata-collections',
+              search: `?filters=mdSource.${sourceId}`
+            }}
+            >
+              <span>
+                <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+                {sourceId}
+              </span>
+            </Link> */}
 
+            {/* showAllCollections as button */}
+            <Button
+              id="showAllCollections"
+              buttonStyle="primary"
+              onClick={() => this.showAllCollections(sourceId)}
+            >
+              <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+              {sourceId}
+            </Button>
+          </Row>
 
           <Row>
             <KeyValue
@@ -108,22 +112,9 @@ class SourceManagementView extends React.Component {
             />
           </Row>
         </div>
-        {/* <Switch>
-          <Route
-            path={`${match.path}/metadata-collections`}
-            render={props => <this.connectedShowAllCollections
-              stripes={stripes}
-              // mutator={mutator}
-              // resources={resources}
-              {...props}
-            />
-            }
-          />
-        </Switch> */}
-
       </React.Fragment>
     );
   }
 }
 
-export default SourceManagementView;
+export default withRouter(SourceManagementView);
