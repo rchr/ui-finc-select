@@ -13,7 +13,7 @@ import {
 // import omitBy from 'lodash/omitBy';
 // import isNil from 'lodash/isNil';
 // import { parse, stringify } from 'query-string';
-import { onChangeFilter as commonChangeFilter } from '@folio/stripes/components';
+// import { onChangeFilter as commonChangeFilter } from '@folio/stripes/components';
 import packageInfo from '../../../package';
 
 import MetadataCollectionView from './MetadataCollectionView';
@@ -136,12 +136,13 @@ class MetadataCollections extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.renderFilters = this.renderFilters.bind(this);
-    this.onChangeFilter = commonChangeFilter.bind(this);
     // vgl ui-orders
-    this.handleFilterChange = handleFilterChange.bind(this);
     this.getActiveFilters = getActiveFilters.bind(this);
-    this.onChangeIndex = this.onChangeIndex.bind(this);
+    this.handleFilterChange = handleFilterChange.bind(this);
+
+    this.renderFilters = this.renderFilters.bind(this);
+    // this.onChangeFilter = commonChangeFilter.bind(this);
+    // this.onChangeIndex = this.onChangeIndex.bind(this);
   }
 
   // // upadte URL, if filter is changing

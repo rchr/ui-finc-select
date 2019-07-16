@@ -12,6 +12,8 @@ import { CheckboxFilter } from '@folio/stripes/smart-components';
 const FincCheckboxFilter = ({
   activeFilters = [],
   closedByDefault = true,
+  // TODO: displayClearButton is not working; boolean value of displayClearButton is correct
+  displayClearButton = (activeFilters.length > 0) !== false,
   id,
   labelId,
   name,
@@ -21,7 +23,8 @@ const FincCheckboxFilter = ({
   return (
     <Accordion
       closedByDefault={closedByDefault}
-      displayClearButton={activeFilters.length > 0}
+      // displayClearButton={activeFilters.length > 0}
+      displayClearButton={displayClearButton}
       header={FilterAccordionHeader}
       id={id}
       label={<FormattedMessage id={labelId} />}
@@ -40,6 +43,7 @@ const FincCheckboxFilter = ({
 FincCheckboxFilter.propTypes = {
   activeFilters: PropTypes.arrayOf(PropTypes.string),
   closedByDefault: PropTypes.bool,
+  displayClearButton: PropTypes.bool,
   id: PropTypes.string,
   labelId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
