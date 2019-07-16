@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import {
   FormattedMessage
 } from 'react-intl';
@@ -20,11 +21,19 @@ class SourceManagementView extends React.Component {
         connect: PropTypes.func.isRequired,
       })
       .isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.string,
+    }),
   };
 
   constructor(props) {
     super(props);
     this.connectedSelectAllCollections = this.props.stripes.connect(SelectAllCollections);
+  }
+
+  // just necessary, if button will be used instead of link
+  showAllCollections(sourceId) {
+    this.props.history.push(`/finc-select/metadata-collections?filters=mdSource.${sourceId}`);
   }
 
   render() {
@@ -52,21 +61,38 @@ class SourceManagementView extends React.Component {
           <Row>
             <Col xs={6}>
               <Button
-                id="showAllCollections"
-                buttonStyle="primary"
-              >
-                <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button
-                id="showselectedCollections"
+                id="showSelectedCollections"
                 buttonStyle="primary"
               >
                 <FormattedMessage id="ui-finc-select.source.button.showselectedCollections" />
               </Button>
             </Col>
           </Row>
+
+          <Row>
+            {/* showAllCollections as link */}
+            {/* <Link to={{
+              pathname: '/finc-select/metadata-collections',
+              search: `?filters=mdSource.${sourceId}`
+            }}
+            >
+              <span>
+                <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+                {sourceId}
+              </span>
+            </Link> */}
+
+            {/* showAllCollections as button */}
+            <Button
+              id="showAllCollections"
+              buttonStyle="primary"
+              onClick={() => this.showAllCollections(sourceId)}
+            >
+              <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+              {sourceId}
+            </Button>
+          </Row>
+
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-select.source.organization" />}
@@ -91,4 +117,4 @@ class SourceManagementView extends React.Component {
   }
 }
 
-export default SourceManagementView;
+export default withRouter(SourceManagementView);
