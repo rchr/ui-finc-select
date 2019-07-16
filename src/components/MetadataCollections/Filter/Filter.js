@@ -17,7 +17,7 @@ class Filter extends React.Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     activeFilters: PropTypes.object,
-    queryMutator: PropTypes.object,
+    // queryMutator: PropTypes.object,
     mdSource: sourcesShape,
     permitted: PropTypes.bool,
     selected: PropTypes.bool,
@@ -25,7 +25,7 @@ class Filter extends React.Component {
   };
 
   componentDidMount() {
-    const { queryMutator } = this.props;
+    // const { queryMutator } = this.props;
     // const filters = DEFAULT_FILTERS.join(',');
     // queryMutator.update({ filters });
   }
