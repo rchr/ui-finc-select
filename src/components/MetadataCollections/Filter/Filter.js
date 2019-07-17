@@ -10,8 +10,8 @@ class Filter extends React.Component {
     onChange: PropTypes.func.isRequired,
     activeFilters: PropTypes.object,
     mdSource: sourcesShape,
-    permitted: PropTypes.bool,
-    selected: PropTypes.bool,
+    permitted: PropTypes.string,
+    selected: PropTypes.string,
     freeContent: PropTypes.arrayOf(PropTypes.string)
   };
 

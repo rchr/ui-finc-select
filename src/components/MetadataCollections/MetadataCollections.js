@@ -153,8 +153,8 @@ class MetadataCollections extends React.Component {
 
     // TODO: should be changed to string; need to wait for changes in backend
     const booleanData = [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false }
+      { label: 'Yes', value: 'yes' },
+      { label: 'No', value: 'no' }
     ];
 
     return (
@@ -186,7 +186,7 @@ class MetadataCollections extends React.Component {
       label: collection => collection.label,
       mdSource: collection => _.get(collection, 'mdSource.id', '-'),
       permitted: collection => collection.permitted,
-      // TODO selected: collection => collection.selected,
+      selected: collection => collection.selected,
       filters: collection => this.getArrayElementsCommaSeparated(collection.filters),
       freeContent: collection => collection.freeContent,
     };
@@ -212,7 +212,7 @@ class MetadataCollections extends React.Component {
             label: intl.formatMessage({ id: 'ui-finc-select.collection.label' }),
             mdSource: intl.formatMessage({ id: 'ui-finc-select.collection.mdSource' }),
             permitted: intl.formatMessage({ id: 'ui-finc-select.collection.permitted' }),
-            // TODO: selected: intl.formatMessage({ id: 'ui-finc-select.collection.selected' }),
+            selected: intl.formatMessage({ id: 'ui-finc-select.collection.selected' }),
             filters: intl.formatMessage({ id: 'ui-finc-select.collection.filters' }),
             freeContent: intl.formatMessage({ id: 'ui-finc-select.collection.freeContent' })
           }}
