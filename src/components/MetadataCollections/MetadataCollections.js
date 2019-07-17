@@ -10,17 +10,16 @@ import {
   SearchAndSort
 } from '@folio/stripes/smart-components';
 
-// import omitBy from 'lodash/omitBy';
-// import isNil from 'lodash/isNil';
-// import { parse, stringify } from 'query-string';
-// import { onChangeFilter as commonChangeFilter } from '@folio/stripes/components';
 import packageInfo from '../../../package';
 
 import MetadataCollectionView from './MetadataCollectionView';
 import MetadataCollectionForm from './MetadataCollectionForm';
 import Filter from './Filter/Filter';
 
-import { handleFilterChange, getActiveFilters } from './Filter/Util';
+import {
+  handleFilterChange,
+  getActiveFilters
+} from './Filter/Util';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -123,48 +122,15 @@ class MetadataCollections extends React.Component {
       })
       .isRequired,
     intl: intlShape.isRequired,
-    // upadte URL, if filter is changing
-    // location: PropTypes.shape({
-    //   pathname: PropTypes.string.isRequired,
-    //   search: PropTypes.string.isRequired,
-    // }).isRequired,
-    // history: PropTypes.shape({
-    //   push: PropTypes.func.isRequired,
-    // }).isRequired,
-    // updateLocation: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
     super(props, context);
-    // vgl ui-orders
+
     this.getActiveFilters = getActiveFilters.bind(this);
     this.handleFilterChange = handleFilterChange.bind(this);
-
     this.renderFilters = this.renderFilters.bind(this);
-    // this.onChangeFilter = commonChangeFilter.bind(this);
-    // this.onChangeIndex = this.onChangeIndex.bind(this);
   }
-
-  // // upadte URL, if filter is changing
-  // updateFilters(prevFilters) { // provided for onChangeFilter
-  //   const filters = Object.keys(prevFilters).filter(key => filters[key]).join(',');
-  //   this.props.updateLocation({ filters });
-  // }
-
-  // // upadte URL, if filter is changing
-  // updateLocation = (newParams) => {
-  //   const { location, history } = this.props;
-  //   const { search, pathname } = location;
-  //   const prevParams = parse(search);
-  //   const params = Object.assign(prevParams, newParams);
-  //   const cleanParams = omitBy(params, isNil);
-
-  //   // TODO: map for multiple array values
-  //   const url = `${pathname}?filters=${cleanParams.name}.${cleanParams.values}`;
-  //   // const url = `${pathname}?filters=${filterString}`;
-
-  //   history.push(url);
-  // }
 
   getArrayElementsCommaSeparated = (array) => {
     let formatted = '';
@@ -204,12 +170,6 @@ class MetadataCollections extends React.Component {
         freeContent={freeContentData}
       />
     );
-  }
-
-  onChangeIndex(e) {
-    const qindex = e.target.value;
-
-    this.props.mutator.query.update({ qindex });
   }
 
   render() {
@@ -257,9 +217,7 @@ class MetadataCollections extends React.Component {
             freeContent: intl.formatMessage({ id: 'ui-finc-select.collection.freeContent' })
           }}
           renderFilters={this.renderFilters}
-          // onFilterChange={this.updateLocation}
           onFilterChange={this.handleFilterChange}
-          onChangeIndex={this.onChangeIndex}
           stripes={stripes}
         />
       </div>
