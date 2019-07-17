@@ -7,13 +7,11 @@ import {
   FilterAccordionHeader,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
-// import createClearFilterHandler from './Util';
+import { createClearFilterHandler } from './Util';
 
 const FincCheckboxFilter = ({
   activeFilters = [],
   closedByDefault = true,
-  // TODO: displayClearButton is not working; boolean value of displayClearButton is correct
-  displayClearButton = (activeFilters.length > 0) !== false,
   id,
   labelId,
   name,
@@ -23,12 +21,11 @@ const FincCheckboxFilter = ({
   return (
     <Accordion
       closedByDefault={closedByDefault}
-      // displayClearButton={activeFilters.length > 0}
-      displayClearButton={displayClearButton}
+      displayClearButton={activeFilters.length > 0}
       header={FilterAccordionHeader}
       id={id}
       label={<FormattedMessage id={labelId} />}
-      // onClearFilter={createClearFilterHandler(onChange, name)}
+      onClearFilter={createClearFilterHandler(onChange, name)}
     >
       <CheckboxFilter
         dataOptions={options}
@@ -43,7 +40,6 @@ const FincCheckboxFilter = ({
 FincCheckboxFilter.propTypes = {
   activeFilters: PropTypes.arrayOf(PropTypes.string),
   closedByDefault: PropTypes.bool,
-  displayClearButton: PropTypes.bool,
   id: PropTypes.string,
   labelId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

@@ -7,27 +7,15 @@ import SourceFilter from './SourceFilter';
 import sourcesShape from './Shape';
 import FincCheckboxFilter from './FincCheckboxFilter';
 
-// set filter, which will be set by default -> NOT POSSIBLE! With default filter the functions showAllCollections and others are not working!
-// const DEFAULT_FILTERS = [
-//   // 'freeContent.no',
-// ];
-
 class Filter extends React.Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     activeFilters: PropTypes.object,
-    // queryMutator: PropTypes.object,
     mdSource: sourcesShape,
     permitted: PropTypes.bool,
     selected: PropTypes.bool,
     freeContent: PropTypes.arrayOf(PropTypes.string)
   };
-
-  componentDidMount() {
-    // const { queryMutator } = this.props;
-    // const filters = DEFAULT_FILTERS.join(',');
-    // queryMutator.update({ filters });
-  }
 
   render() {
     const { onChange, permitted, selected, freeContent } = this.props;
@@ -35,8 +23,6 @@ class Filter extends React.Component {
     return (
       <AccordionSet>
         <SourceFilter
-          // displayClearButton={activeFilters[tinySources].length > 0}
-          // header={FilterAccordionHeader}
           activeFilters={this.props.activeFilters.mdSource}
           // name will be set to url
           name="mdSource"

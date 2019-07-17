@@ -9,7 +9,6 @@ export const createOnChangeSelectionFilter = (onChange, filterName) => {
 // getting data from tinyMetadataSource.json -> label instead of name ?!
 export const getSourcesOptions = (sources = []) => sources.map(source => ({
   value: source.id,
-  // label: source.name,
   label: source.label,
 }));
 
