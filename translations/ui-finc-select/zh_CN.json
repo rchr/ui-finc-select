@@ -29,8 +29,8 @@
     "source.accordion.technical": "Technical",
     "source.button.showselectedCollections": "Show selected collections",
     "source.button.selectAllCollections": "Select all collections",
-    "source.button.showAllCollections": "Show all collections for source ID: ",
+    "source.button.showAllCollections": "Show all collections",
     "source.modal.selectAllCollections.success": "The process has been started. It can take some time, until all ISILs will be added to the selected by field.",
     "source.modal.selectAllCollections.error": "The process could not start.",
-    "collection.filter.sources": "Metadata source"
+    "collection.filter.sources": "元数据来源"
 }
