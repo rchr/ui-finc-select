@@ -9,7 +9,6 @@ export const createOnChangeSelectionFilter = (onChange, filterName) => {
 // getting data from tinyMetadataSource.json -> label instead of name ?!
 export const getSourcesOptions = (sources = []) => sources.map(source => ({
   value: source.id,
-  // label: source.name,
   label: source.label,
 }));
 
@@ -19,7 +18,7 @@ export const TEST = {
   records: 'fincSelectMetadataCollections'
 };
 
-// vgl ui-orders
+// ui-orders
 export function handleFilterChange({ name, values }) { // example: name="freeContent", values=["undetermined"]
   const { mutator } = this.props;
 
@@ -40,7 +39,7 @@ export function handleFilterChange({ name, values }) { // example: name="freeCon
   mutator.query.update({ filters });
 }
 
-// vgl ui-orders
+// ui-orders
 // get current url-query with their filters (before last click on filter)
 export function getActiveFilters() {
   const { query } = this.props.resources;

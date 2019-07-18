@@ -10,17 +10,16 @@ import {
   SearchAndSort
 } from '@folio/stripes/smart-components';
 
-// import omitBy from 'lodash/omitBy';
-// import isNil from 'lodash/isNil';
-// import { parse, stringify } from 'query-string';
-import { onChangeFilter as commonChangeFilter } from '@folio/stripes/components';
 import packageInfo from '../../../package';
 
 import MetadataCollectionView from './MetadataCollectionView';
 import MetadataCollectionForm from './MetadataCollectionForm';
 import Filter from './Filter/Filter';
 
-import { handleFilterChange, getActiveFilters } from './Filter/Util';
+import {
+  handleFilterChange,
+  getActiveFilters
+} from './Filter/Util';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -123,47 +122,15 @@ class MetadataCollections extends React.Component {
       })
       .isRequired,
     intl: intlShape.isRequired,
-    // upadte URL, if filter is changing
-    // location: PropTypes.shape({
-    //   pathname: PropTypes.string.isRequired,
-    //   search: PropTypes.string.isRequired,
-    // }).isRequired,
-    // history: PropTypes.shape({
-    //   push: PropTypes.func.isRequired,
-    // }).isRequired,
-    // updateLocation: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
     super(props, context);
-    this.renderFilters = this.renderFilters.bind(this);
-    this.onChangeFilter = commonChangeFilter.bind(this);
-    // vgl ui-orders
-    this.handleFilterChange = handleFilterChange.bind(this);
+
     this.getActiveFilters = getActiveFilters.bind(this);
-    this.onChangeIndex = this.onChangeIndex.bind(this);
+    this.handleFilterChange = handleFilterChange.bind(this);
+    this.renderFilters = this.renderFilters.bind(this);
   }
-
-  // // upadte URL, if filter is changing
-  // updateFilters(prevFilters) { // provided for onChangeFilter
-  //   const filters = Object.keys(prevFilters).filter(key => filters[key]).join(',');
-  //   this.props.updateLocation({ filters });
-  // }
-
-  // // upadte URL, if filter is changing
-  // updateLocation = (newParams) => {
-  //   const { location, history } = this.props;
-  //   const { search, pathname } = location;
-  //   const prevParams = parse(search);
-  //   const params = Object.assign(prevParams, newParams);
-  //   const cleanParams = omitBy(params, isNil);
-
-  //   // TODO: map for multiple array values
-  //   const url = `${pathname}?filters=${cleanParams.name}.${cleanParams.values}`;
-  //   // const url = `${pathname}?filters=${filterString}`;
-
-  //   history.push(url);
-  // }
 
   getArrayElementsCommaSeparated = (array) => {
     let formatted = '';
@@ -183,11 +150,9 @@ class MetadataCollections extends React.Component {
       { label: 'No', value: 'no' },
       { label: 'Undetermined', value: 'undetermined' }
     ];
-
-    // TODO: should be changed to string; need to wait for changes in backend
     const booleanData = [
-      { label: 'Yes', value: true },
-      { label: 'No', value: false }
+      { label: 'Yes', value: 'yes' },
+      { label: 'No', value: 'no' }
     ];
 
     return (
@@ -205,12 +170,6 @@ class MetadataCollections extends React.Component {
     );
   }
 
-  onChangeIndex(e) {
-    const qindex = e.target.value;
-
-    this.props.mutator.query.update({ qindex });
-  }
-
   render() {
     const packageInfoReWrite = () => {
       const path = '/finc-select/metadata-collections';
@@ -223,9 +182,9 @@ class MetadataCollections extends React.Component {
 
     const resultsFormatter = {
       label: collection => collection.label,
-      mdSource: collection => _.get(collection, 'mdSource.id', '-'),
+      mdSource: collection => _.get(collection, 'mdSource.name', '-'),
       permitted: collection => collection.permitted,
-      // TODO selected: collection => collection.selected,
+      selected: collection => collection.selected,
       filters: collection => this.getArrayElementsCommaSeparated(collection.filters),
       freeContent: collection => collection.freeContent,
     };
@@ -251,14 +210,12 @@ class MetadataCollections extends React.Component {
             label: intl.formatMessage({ id: 'ui-finc-select.collection.label' }),
             mdSource: intl.formatMessage({ id: 'ui-finc-select.collection.mdSource' }),
             permitted: intl.formatMessage({ id: 'ui-finc-select.collection.permitted' }),
-            // TODO: selected: intl.formatMessage({ id: 'ui-finc-select.collection.selected' }),
+            selected: intl.formatMessage({ id: 'ui-finc-select.collection.selected' }),
             filters: intl.formatMessage({ id: 'ui-finc-select.collection.filters' }),
             freeContent: intl.formatMessage({ id: 'ui-finc-select.collection.freeContent' })
           }}
           renderFilters={this.renderFilters}
-          // onFilterChange={this.updateLocation}
           onFilterChange={this.handleFilterChange}
-          onChangeIndex={this.onChangeIndex}
           stripes={stripes}
         />
       </div>
