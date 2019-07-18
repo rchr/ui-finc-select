@@ -36,6 +36,10 @@ class SourceManagementView extends React.Component {
     this.props.history.push(`/finc-select/metadata-collections?filters=mdSource.${sourceId}`);
   }
 
+  showSelectedCollections(sourceId) {
+    this.props.history.push(`/finc-select/metadata-collections?filters=mdSource.${sourceId},selected.yes`);
+  }
+
   render() {
     const { metadataSource, stripes } = this.props;
     const sourceId = metadataSource.id;
@@ -46,23 +50,17 @@ class SourceManagementView extends React.Component {
           {/* TODO: selectedCollections */}
           <Row>
             <Col xs={6}>
+              TODO:
               <KeyValue
                 label={<FormattedMessage id="ui-finc-select.source.selectedCollections" />}
                 // value={_.get(metadataSource, 'selectedCollections', '-')}
               />
             </Col>
-          </Row>
-          <Row>
-            <this.connectedSelectAllCollections
-              stripes={stripes}
-              sourceId={sourceId}
-            />
-          </Row>
-          <Row>
             <Col xs={6}>
               <Button
                 id="showSelectedCollections"
                 buttonStyle="primary"
+                onClick={() => this.showSelectedCollections(sourceId)}
               >
                 <FormattedMessage id="ui-finc-select.source.button.showselectedCollections" />
               </Button>
@@ -70,27 +68,34 @@ class SourceManagementView extends React.Component {
           </Row>
 
           <Row>
-            {/* showAllCollections as link */}
-            {/* <Link to={{
-              pathname: '/finc-select/metadata-collections',
-              search: `?filters=mdSource.${sourceId}`
-            }}
-            >
-              <span>
-                <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
-                {sourceId}
-              </span>
-            </Link> */}
+            <Col xs={6}>
+              <this.connectedSelectAllCollections
+                stripes={stripes}
+                sourceId={sourceId}
+              />
+            </Col>
+            <Col xs={6}>
+              {/* showAllCollections as link */}
+              {/* <Link to={{
+                pathname: '/finc-select/metadata-collections',
+                search: `?filters=mdSource.${sourceId}`
+              }}
+              >
+                <span>
+                  <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+                  {sourceId}
+                </span>
+              </Link> */}
 
-            {/* showAllCollections as button */}
-            <Button
-              id="showAllCollections"
-              buttonStyle="primary"
-              onClick={() => this.showAllCollections(sourceId)}
-            >
-              <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
-              {sourceId}
-            </Button>
+              {/* showAllCollections as button */}
+              <Button
+                id="showAllCollections"
+                buttonStyle="primary"
+                onClick={() => this.showAllCollections(sourceId)}
+              >
+                <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
+              </Button>
+            </Col>
           </Row>
 
           <Row>
