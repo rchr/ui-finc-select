@@ -150,8 +150,6 @@ class MetadataCollections extends React.Component {
       { label: 'No', value: 'no' },
       { label: 'Undetermined', value: 'undetermined' }
     ];
-
-    // TODO: should be changed to string; need to wait for changes in backend
     const booleanData = [
       { label: 'Yes', value: 'yes' },
       { label: 'No', value: 'no' }
@@ -184,7 +182,7 @@ class MetadataCollections extends React.Component {
 
     const resultsFormatter = {
       label: collection => collection.label,
-      mdSource: collection => _.get(collection, 'mdSource.id', '-'),
+      mdSource: collection => _.get(collection, 'mdSource.name', '-'),
       permitted: collection => collection.permitted,
       selected: collection => collection.selected,
       filters: collection => this.getArrayElementsCommaSeparated(collection.filters),

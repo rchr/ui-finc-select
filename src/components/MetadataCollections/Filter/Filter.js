@@ -28,8 +28,6 @@ class Filter extends React.Component {
           // set data for the select-box
           sources={this.props.mdSource}
         />
-        {/* freeContent is not necessary here!
-          its just a working filter example until permitted and selected will be working!!! */}
         <FincCheckboxFilter
           activeFilters={this.props.activeFilters.freeContent}
           closedByDefault={false}
@@ -52,13 +50,14 @@ class Filter extends React.Component {
         />
         <FincCheckboxFilter
           activeFilters={this.props.activeFilters.selected}
-          closedByDefault={1}
+          closedByDefault={false}
           id="selected"
           labelId="ui-finc-select.collection.selected"
           name="selected"
           onChange={onChange}
           options={selected}
         />
+        {/* TODO: Active filter is missing here */}
       </AccordionSet>
     );
   }
