@@ -31,5 +31,6 @@
     "source.button.selectAllCollections": "تحديد كل المجموعات",
     "source.button.showAllCollections": "عرض كل المجموعات",
     "source.modal.selectAllCollections.success": "لقد بدأت العملية. قد يستغرق الأمر بعض الوقت، حتى تتم إضافة جميع ISILs إلى حقل SelectedBy.",
-    "source.modal.selectAllCollections.error": "تعذر بدء العملية"
+    "source.modal.selectAllCollections.error": "تعذر بدء العملية",
+    "collection.filter.sources": "مصدر الميتاداتا"
 }
