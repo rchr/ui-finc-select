@@ -14,7 +14,7 @@ class SelectUnselect extends React.Component {
   static propTypes = {
     stripes: PropTypes.object,
     collectionId: PropTypes.string.isRequired,
-    selectedInitial: PropTypes.bool.isRequired
+    selectedInitial: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -26,13 +26,11 @@ class SelectUnselect extends React.Component {
       'Content-Type': 'application/json'
     });
 
-    const s = props.selectedInitial;
     this.state = {
       showInfoModal: false,
       modalText: '',
-      selected: false,
-      selectedString: this.getSelectedValue(s),
-      selectedLabel: this.getSelectedButtonLable(s)
+      selected: props.selectedInitial,
+      selectedLabel: this.getSelectedButtonLable(props.selectedInitial)
     };
   }
 
@@ -50,44 +48,46 @@ class SelectUnselect extends React.Component {
   // if clicking on another collection, check, if selectedInitial will be up to date
   componentDidUpdate(prevProps) {
     if (this.props.collectionId !== prevProps.collectionId) {
-      this.fetchSelected(this.props.collectionId, this.props.selectedInitial);
+      this.fetchSelected(this.props.selectedInitial);
     }
   }
 
-  fetchSelected = (collectionId, selected) => {
+  fetchSelected = (selected) => {
     const selectedButtonLable = this.getSelectedButtonLable(selected);
-    const selectedValue = this.getSelectedValue(selected);
 
     // change state for selected-values, if neccessary
     this.setState(
       {
         // shortcut for selected: selected,
         selected,
-        selectedString: selectedValue,
         selectedLabel: selectedButtonLable
       }
     );
   }
 
-  // get strings from the saved bool value
-  getSelectedValue(s) {
-    return s ? 'Yes' : 'No';
+  // get button label from the saved yes or no value
+  getSelectedButtonLable(selected) {
+    if (selected === 'no') {
+      return 'Select';
+    } else {
+      return 'Unselect';
+    }
   }
 
-  getSelectedButtonLable(s) {
-    return s ? 'Unselect' : 'Select';
-  }
-
-  // inverse values for json
-  inversJsonBoolean(s) {
-    return s ? { select: false } : { select: true };
+  // translate yes or no value into inverse boolean for json
+  inversJsonBoolean(selected) {
+    if (selected === 'no') {
+      return { select: true };
+    } else {
+      return { select: false };
+    }
   }
 
   selectUnselect = (collectionId, selected) => {
     const selectedJson = JSON.stringify(this.inversJsonBoolean(selected));
-    const inverseSelected = !selected;
+    let inverseSelected = '';
+    if (selected === 'no') { inverseSelected = 'yes'; } else { inverseSelected = 'no'; }
     const invertSelectedButtonLable = this.getSelectedButtonLable(inverseSelected);
-    const inverseSelectedValue = this.getSelectedValue(inverseSelected);
 
     fetch(`${this.okapiUrl}/finc-select/metadata-collections/${collectionId}/select`,
       {
@@ -117,7 +117,6 @@ class SelectUnselect extends React.Component {
           this.setState(
             {
               selected: inverseSelected,
-              selectedString: inverseSelectedValue,
               selectedLabel: invertSelectedButtonLable
             }
           );
@@ -137,7 +136,7 @@ class SelectUnselect extends React.Component {
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-finc-select.collection.selected" />}
-            value={this.state.selectedString}
+            value={this.state.selected}
           />
         </Col>
         <Col xs={3}>
