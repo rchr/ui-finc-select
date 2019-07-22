@@ -57,6 +57,7 @@
     "okapiInterfaces": {
       "finc-select/metadata-sources": "0.1",
       "finc-select/metadata-collections": "0.1",
+      "finc-select/filters": "0.1",
       "organizations-storage.organizations": "1.0"
     },
     "permissionSets": [
@@ -75,8 +76,8 @@
       },
       {
         "permissionName": "ui-finc-select.view",
-        "displayName": "fincSelect: Can view metadatasources and metadatacollections",
-        "description": "Can view metadatasources and metadatacollections",
+        "displayName": "fincSelect: Can view metadatasources, metadatacollections and filters",
+        "description": "Can view metadatasources, metadatacollections and filters",
         "subPermissions": [
           "module.finc-select.enabled",
           "fincSelect.view"
