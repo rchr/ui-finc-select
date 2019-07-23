@@ -42,5 +42,9 @@
   "source.modal.selectAllCollections.error": "The process could not start.",
 
   "filter.label": "Filter name",
-  "filter.type": "Type"
+  "filter.type": "Type",
+  "filter.isil": "ISIL",
+
+  "filter.form.createFilter": "Create filter",
+  "filter.form.updateFilter": "Update filter"
 }
