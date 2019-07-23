@@ -85,7 +85,7 @@ class Main extends React.Component {
             <Button
               id="filters"
               fullWidth
-              onClick={() => this.handleClick('filters', tabInCurrentUrl)}
+              onClick={() => this.handleClick('filters')}
               buttonStyle={this.state.activeTab === 'filters' ? 'primary' : 'default'}
             >
               Filters
