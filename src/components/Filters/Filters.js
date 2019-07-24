@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -60,12 +61,21 @@ class Filters extends React.Component {
         },
         staticFallback: { params: {} },
       },
+    },
+    filterFiles: {
+      type: 'okapi',
+      records: 'fincSelectFilterFiles',
+      path: 'finc-select/filter-files',
+      resourceShouldRefresh: true
     }
   });
 
   static propTypes = {
     resources: PropTypes.shape({
       filters: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.object),
+      }),
+      filterFiles: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
       }),
     }).isRequired,
@@ -102,7 +112,8 @@ class Filters extends React.Component {
       return packageInfo;
     };
 
-    const { stripes, intl } = this.props;
+    const { stripes, intl, resources } = this.props;
+    const filterFiles = _.get(resources, 'filterFiles.records', []);
 
     return (
       <div data-test-filter-instances>
@@ -126,6 +137,7 @@ class Filters extends React.Component {
             type: intl.formatMessage({ id: 'ui-finc-select.filter.type' })
           }}
           stripes={stripes}
+          xxx={filterFiles}
         />
       </div>
     );

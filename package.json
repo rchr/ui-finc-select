@@ -22,6 +22,7 @@
     "@folio/eslint-config-stripes": "^3.2.1",
     "@folio/stripes": "^2.6.0",
     "@folio/stripes-cli": "^1.10.0",
+    "@folio/stripes-erm-components": "^1.4.0",
     "babel-eslint": "^9.0.0",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
@@ -36,6 +37,7 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
+    "react-dropzone": "^9.0.0",
     "react-intl": "^2.5.0",
     "react-router-dom": "^4.1.1",
     "redux-form": "^7.0.3"
@@ -58,6 +60,8 @@
       "finc-select/metadata-sources": "0.1",
       "finc-select/metadata-collections": "0.1",
       "finc-select/filters": "0.1",
+      "finc-select/filter-files": "0.1",
+      "finc-select/files": "0.1",
       "organizations-storage.organizations": "1.0"
     },
     "permissionSets": [
