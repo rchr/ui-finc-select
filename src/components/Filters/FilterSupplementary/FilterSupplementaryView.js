@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -62,7 +61,7 @@ class FilterSupplementaryView extends React.Component {
   }
 
   render() {
-    const { filter, filterShape: { supplementaryDocs = [] }, id } = this.props;
+    const { filter, filterShape: { supplementaryDocs = [] } } = this.props;
     const filterId = filter.id;
 
     return (
@@ -71,7 +70,8 @@ class FilterSupplementaryView extends React.Component {
           Hallo FilterSupplementaryView
         </Row>
         <Row>
-          Filter-ID: {filterId}
+          Filter-ID:
+          {filterId}
         </Row>
         <Row>
           {supplementaryDocs.length ?

@@ -11,7 +11,6 @@ import {
 
 class FilterInfoView extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
     filter: PropTypes.object.isRequired,
     stripes: PropTypes
       .shape({
@@ -21,7 +20,7 @@ class FilterInfoView extends React.Component {
   };
 
   render() {
-    const { filter, id } = this.props;
+    const { filter } = this.props;
 
     return (
       <React.Fragment>

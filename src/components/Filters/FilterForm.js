@@ -12,6 +12,7 @@ import {
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 import FilterInfoForm from './FilterInfo/FilterInfoForm';
+import FilterFileUpload from './FilterFile/FilterFileUpload';
 import FilterSupplementaryForm from './FilterSupplementary/FilterSupplementaryForm';
 
 class FilterForm extends React.Component {
@@ -88,6 +89,10 @@ class FilterForm extends React.Component {
             <div className="FilterForm" style={{ paddingBottom: '100px' }}>
               <FilterInfoForm
                 accordionId="editFilterInfo"
+                {...this.props}
+              />
+              <FilterFileUpload
+                accordionId="editFilterUpload"
                 {...this.props}
               />
               <FilterSupplementaryForm

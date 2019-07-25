@@ -6,7 +6,6 @@ import { DocumentsFieldArray } from '@folio/stripes-erm-components';
 
 class FilterSupplementaryForm extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
     stripes: PropTypes.shape({
       okapi: PropTypes.shape({
         tenant: PropTypes.string.isRequired,
@@ -52,8 +51,6 @@ class FilterSupplementaryForm extends React.Component {
   }
 
   render() {
-    const { id } = this.props;
-
     return (
       <React.Fragment>
         Hallo FilterSupplementaryForm

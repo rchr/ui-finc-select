@@ -113,7 +113,8 @@ class Filters extends React.Component {
     };
 
     const { stripes, intl, resources } = this.props;
-    const filterFiles = _.get(resources, 'filterFiles.records', []);
+    // const filterFiles = _.get(resources, 'filterFiles.records', []);
+    // const filterFiles = resources.filterFiles.records;
 
     return (
       <div data-test-filter-instances>
@@ -137,7 +138,7 @@ class Filters extends React.Component {
             type: intl.formatMessage({ id: 'ui-finc-select.filter.type' })
           }}
           stripes={stripes}
-          xxx={filterFiles}
+          // xxx={filterFiles}
         />
       </div>
     );

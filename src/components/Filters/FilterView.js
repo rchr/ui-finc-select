@@ -13,6 +13,7 @@ import {
   TitleManager
 } from '@folio/stripes/core';
 import FilterInfoView from './FilterInfo/FilterInfoView';
+import FilterFileDownload from './FilterFile/FilterFileDownload';
 import FilterSupplementaryView from './FilterSupplementary/FilterSupplementaryView';
 import FilterForm from './FilterForm';
 
@@ -50,7 +51,6 @@ class FilterView extends React.Component {
     onEdit: PropTypes.func,
     editLink: PropTypes.string,
     onCloseEdit: PropTypes.func,
-    xxx: PropTypes.shape(),
   };
 
   constructor(props) {
@@ -61,7 +61,7 @@ class FilterView extends React.Component {
   }
 
   getData = () => {
-    const { parentResources, match: { params: { id }, xxx } } = this.props;
+    const { parentResources, match: { params: { id } } } = this.props;
     const filter = (parentResources.records || {}).records || [];
     if (!filter || filter.length === 0 || !id) return null;
     return filter.find(u => u.id === id);
@@ -127,6 +127,7 @@ class FilterView extends React.Component {
       );
 
       const label = _.get(initialValues, 'label', '-');
+      const filterFiles = this.props.parentResources.filterFiles;
 
       return (
         <Pane
@@ -143,6 +144,13 @@ class FilterView extends React.Component {
               id="filterInfo"
               filter={initialValues}
               stripes={this.props.stripes}
+              filterFiles={filterFiles.records}
+            />
+            <FilterFileDownload
+              id="filterInfo"
+              filter={initialValues}
+              stripes={this.props.stripes}
+              filterFiles={filterFiles.records}
             />
             <FilterSupplementaryView
               id="filterSupplementary"
