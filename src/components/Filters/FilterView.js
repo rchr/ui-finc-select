@@ -20,6 +20,12 @@ import FilterForm from './FilterForm';
 class FilterView extends React.Component {
   static manifest = Object.freeze({
     query: {},
+    files: {
+      type: 'okapi',
+      records: 'fincSelectFiles',
+      path: 'finc-select/files',
+      resourceShouldRefresh: true
+    },
   });
 
   static propTypes = {
@@ -36,6 +42,9 @@ class FilterView extends React.Component {
     resources: PropTypes.shape({
       filter: PropTypes.shape(),
       query: PropTypes.object,
+      files: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.object),
+      }),
     }),
     mutator: PropTypes.shape({
       query: PropTypes.object.isRequired,
@@ -93,6 +102,8 @@ class FilterView extends React.Component {
     const { resources, stripes } = this.props;
     const query = resources.query;
     const initialValues = this.getData();
+    // const files = _.get(resources, 'files', []);
+    const files = [];
 
     if (_.isEmpty(initialValues)) {
       return <div style={{ paddingTop: '1rem' }}><Icon icon="spinner-ellipsis" width="100px" /></div>;
@@ -151,6 +162,7 @@ class FilterView extends React.Component {
               filter={initialValues}
               stripes={this.props.stripes}
               filterFiles={filterFiles.records}
+              files={files}
             />
             <FilterSupplementaryView
               id="filterSupplementary"

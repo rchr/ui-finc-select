@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FieldArray } from 'redux-form';
-import { DocumentsFieldArray } from '@folio/stripes-erm-components';
-// import DocumentsFieldArray from '../DocumentsFieldArray/DocumentsFieldArray';
+// import { DocumentsFieldArray } from '@folio/stripes-erm-components';
+import DocumentsFieldArray from '../../DocumentsFieldArray/DocumentsFieldArray';
 
 class FilterSupplementaryForm extends React.Component {
   static propTypes = {
@@ -12,7 +12,15 @@ class FilterSupplementaryForm extends React.Component {
         token: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
+    fileId: PropTypes.string,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      fileId: null
+    };
+  }
 
   handleUploadFile = (file) => {
     const { stripes: { okapi } } = this.props;
@@ -25,9 +33,20 @@ class FilterSupplementaryForm extends React.Component {
       headers: {
         'X-Okapi-Tenant': okapi.tenant,
         'X-Okapi-Token': okapi.token,
+        'Content-Type': 'application/octet-stream'
       },
       body: formData,
-    });
+    }).then(response => {
+      return response.json();
+    })
+      .then(json => {
+        console.log(JSON.stringify(json));
+      });
+    // .then(data => { console.log(data); });
+  }
+
+  doSomething = (file) => {
+    const fileId = this.handleUploadFile(file);
   }
 
   handleDownloadFile = (file) => {
@@ -51,9 +70,11 @@ class FilterSupplementaryForm extends React.Component {
   }
 
   render() {
+    const { fileId } = this.props;
+
     return (
       <React.Fragment>
-        Hallo FilterSupplementaryForm
+        Hallo FilterSupplementaryForm: {this.state.data}
         <FieldArray
           // addDocBtnLabel="Button label"
           component={DocumentsFieldArray}
@@ -61,6 +82,7 @@ class FilterSupplementaryForm extends React.Component {
           name="supplementaryDocs"
           onDownloadFile={this.handleDownloadFile}
           onUploadFile={this.handleUploadFile}
+          // onUploadFile={this.doSomething}
         />
       </React.Fragment>
     );
