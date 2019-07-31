@@ -79,13 +79,15 @@ class FilterFileUpload extends React.Component {
         headers: this.httpHeaders,
         method: 'POST',
         body: data
-      }).then(response => {
-      return response.json();
-    })
-      .then(json => {
-        console.log(JSON.stringify(json));
       })
+      // .then(response => {
+      // return response.json();
+    // })
+      // .then(json => {
+      //   console.log(JSON.stringify(json));
+      // })
       .then((response) => {
+        console.log(response);
         if (response.status >= 400) {
           this.showErrorInfo(response);
         } else {
@@ -98,7 +100,6 @@ class FilterFileUpload extends React.Component {
               selectedFile: {}
             }
           );
-          console.log(response);
         }
       })
       .catch(err => {

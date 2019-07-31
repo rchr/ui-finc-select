@@ -10,7 +10,6 @@ import {
   Layout,
   Row,
   Select,
-  TextArea,
   TextField,
 } from '@folio/stripes/components';
 
@@ -35,35 +34,22 @@ class DocumentsFieldArray extends React.Component {
   }
 
   static defaultProps = {
-    addDocBtnLabel: <FormattedMessage id="stripes-erm-components.doc.addDoc" />,
-    isEmptyMessage: <FormattedMessage id="stripes-erm-components.doc.noDocs" />,
+    addDocBtnLabel: 'addDocBtnLabel',
+    isEmptyMessage: 'isEmptyMessage',
   }
 
   validateDocIsSpecified = (value, allValues, props, fieldName) => {
     const index = parseInt(/\[([0-9]*)\]/.exec(fieldName)[1], 10);
-    const { fileUpload, location, name, url } = get(allValues, [this.props.name, index], {});
-    if (name && (!fileUpload && !location && !url)) {
-      return <FormattedMessage id="stripes-erm-components.doc.error.docsMustHaveLocationOrURL" />;
-    }
-
-    return undefined;
-  }
-
-  validateURLIsValid = (value) => {
-    if (value) {
-      try {
-        // Test if the URL is valid
-        new URL(value); // eslint-disable-line no-new
-      } catch (_) {
-        return <FormattedMessage id="stripes-erm-components.doc.error.invalidURL" />;
-      }
+    const { fileUpload, name } = get(allValues, [this.props.name, index], {});
+    if (name && (!fileUpload)) {
+      return 'add name and file';
     }
 
     return undefined;
   }
 
   validateRequired = (value) => (
-    !value ? <FormattedMessage id="stripes-core.label.missingRequiredField" /> : undefined
+    !value ? 'missingRequiredField' : undefined
   )
 
   renderCategory = (i) => {
@@ -120,7 +106,7 @@ class DocumentsFieldArray extends React.Component {
                   data-test-document-field-name
                   component={TextField}
                   id={`${name}-name-${i}`}
-                  label={<FormattedMessage id="stripes-erm-components.doc.name" />}
+                  label="doc name"
                   name={`${name}[${i}].name`}
                   required
                   validate={this.validateRequired}
@@ -128,17 +114,6 @@ class DocumentsFieldArray extends React.Component {
               </Col>
             </Row>
             { this.renderCategory(i) }
-            {/* <Row>
-              <Col xs={12}>
-                <Field
-                  data-test-document-field-note
-                  component={TextArea}
-                  id={`${name}-note-${i}`}
-                  label={<FormattedMessage id="stripes-erm-components.doc.note" />}
-                  name={`${name}[${i}].note`}
-                />
-              </Col>
-            </Row> */}
           </Col>
           {onUploadFile &&
             <Col xs={12} md={6}>
@@ -148,7 +123,7 @@ class DocumentsFieldArray extends React.Component {
                     component={FileUploaderField}
                     data-test-document-field-file
                     id={`${name}-file-${i}`}
-                    label={<FormattedMessage id="stripes-erm-components.doc.file" />}
+                    label="filter file"
                     name={`${name}[${i}].fileUpload`}
                     onDownloadFile={onDownloadFile}
                     onUploadFile={onUploadFile}
@@ -159,33 +134,6 @@ class DocumentsFieldArray extends React.Component {
             </Col>
           }
         </Row>
-        {/* <Row>
-          <Col xs={12}>
-            <Field
-              data-test-document-field-location
-              component={TextField}
-              id={`${name}-location-${i}`}
-              label={<FormattedMessage id="stripes-erm-components.doc.location" />}
-              name={`${name}[${i}].location`}
-              // validate={this.validateDocIsSpecified}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Field
-              component={TextField}
-              data-test-document-field-url
-              id={`${name}-url-${i}`}
-              label={<FormattedMessage id="stripes-erm-components.doc.url" />}
-              name={`${name}[${i}].url`}
-              // validate={[
-              //   this.validateDocIsSpecified,
-              //   this.validateURLIsValid,
-              // ]}
-            />
-          </Col>
-        </Row> */}
         <Row>
           <Col xs={12}>
             <Field

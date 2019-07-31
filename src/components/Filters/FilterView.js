@@ -20,12 +20,12 @@ import FilterForm from './FilterForm';
 class FilterView extends React.Component {
   static manifest = Object.freeze({
     query: {},
-    files: {
-      type: 'okapi',
-      records: 'fincSelectFiles',
-      path: 'finc-select/files',
-      resourceShouldRefresh: true
-    },
+    // files: {
+    //   type: 'okapi',
+    //   records: 'fincSelectFiles',
+    //   path: 'finc-select/files',
+    //   resourceShouldRefresh: true
+    // },
   });
 
   static propTypes = {
