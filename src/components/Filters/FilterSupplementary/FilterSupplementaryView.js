@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {
   Row
 } from '@folio/stripes/components';
-import { DocumentCard } from '@folio/stripes-erm-components';
-// import DocumentCard from './DocumentCard';
+// import { DocumentCard } from '@folio/stripes-erm-components';
+import DocumentCard from '../../DocumentsFieldArray/DocumentCard';
 
 class FilterSupplementaryView extends React.Component {
   static propTypes = {

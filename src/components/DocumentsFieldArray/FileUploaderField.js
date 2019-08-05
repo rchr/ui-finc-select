@@ -59,12 +59,6 @@ class FileUploaderField extends React.Component {
     });
 
     this.props.onUploadFile(acceptedFiles[0])
-      // .then(response => { console.log(response); })
-      // .then(file => {
-      //   // this.props.input.onChange(file.id);
-      //   this.setState({ file });
-      // })
-
       .then(response => {
         if (response.ok) {
           response.json().then(file => {

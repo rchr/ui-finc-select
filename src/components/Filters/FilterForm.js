@@ -91,12 +91,13 @@ class FilterForm extends React.Component {
                 accordionId="editFilterInfo"
                 {...this.props}
               />
-              <FilterFileUpload
+              {/* <FilterFileUpload
                 accordionId="editFilterUpload"
                 {...this.props}
-              />
+              /> */}
               <FilterSupplementaryForm
                 accordionId="editFilterSupplementary"
+                filter={initialValues}
                 {...this.props}
               />
             </div>

@@ -6,19 +6,28 @@ import DocumentsFieldArray from '../../DocumentsFieldArray/DocumentsFieldArray';
 
 class FilterSupplementaryForm extends React.Component {
   static propTypes = {
-    // handlers: PropTypes.shape({
-    //   onDownloadFile: PropTypes.func.isRequired,
-    //   onUploadFile: PropTypes.func.isRequired,
-    // }),
+    filter: PropTypes.object.isRequired,
+    handlers: PropTypes.shape({
+      // onDownloadFile: PropTypes.func.isRequired,
+      onUploadFile: PropTypes.func.isRequired,
+    }),
     stripes: PropTypes.shape({
       okapi: PropTypes.shape({
         tenant: PropTypes.string.isRequired,
         token: PropTypes.string.isRequired,
       }).isRequired,
-    }).isRequired,
+    }).isRequired
   };
 
-  handleUploadFile = (file) => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fileId: ''
+    };
+  }
+
+  onUploadFile = (file) => {
     const { stripes: { okapi } } = this.props;
 
     const formData = new FormData();
@@ -32,43 +41,53 @@ class FilterSupplementaryForm extends React.Component {
         'Content-Type': 'application/octet-stream'
       },
       body: formData,
-    }).then(response => {
-      console.log(response);
-    });
-  }
-
-  handleDownloadFile = (file) => {
-    const { stripes: { okapi } } = this.props;
-
-    return fetch(`${okapi.url}/finc-select/files/${file.id}`, {
-      headers: {
-        'X-Okapi-Tenant': okapi.tenant,
-        'X-Okapi-Token': okapi.token,
-        // 'Content-Type': 'application/octet-stream'
-      },
-    }).then(response => response.blob())
-      .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = file.name;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+    })
+    // get id of the uploaded file, on which the file is saved in the database
+      .then(response => {
+        return response.text();
+      }).then(data => {
+        this.setState({ fileId: data });
+        // const fileId = data;
+        // console.log(fileId);
       });
   }
 
+  // onDownloadFile = (file) => {
+  //   const { stripes: { okapi } } = this.props;
+
+  //   return fetch(`${okapi.url}/finc-select/files/${file.id}`, {
+  //     headers: {
+  //       'X-Okapi-Tenant': okapi.tenant,
+  //       'X-Okapi-Token': okapi.token,
+  //       // 'Content-Type': 'application/octet-stream'
+  //     },
+  //   }).then(response => response.blob())
+  //     .then(blob => {
+  //       const url = window.URL.createObjectURL(blob);
+  //       const a = document.createElement('a');
+  //       a.href = url;
+  //       a.download = file.name;
+  //       document.body.appendChild(a);
+  //       a.click();
+  //       a.remove();
+  //     });
+  // }
+
   render() {
+    const { handlers, filter } = this.props;
+    const filterId = filter.id;
+
     return (
       <React.Fragment>
-        Hallo FilterSupplementaryForm
+        Filter ID: { filterId }
+        File ID: {this.state.fileId}
         <FieldArray
           // addDocBtnLabel="Button label"
           component={DocumentsFieldArray}
           // isEmptyMessage="empty message"
           name="supplementaryDocs"
-          onDownloadFile={this.handleDownloadFile}
-          onUploadFile={this.handleUploadFile}
+          onDownloadFile={this.onDownloadFile}
+          onUploadFile={this.onUploadFile}
         />
       </React.Fragment>
     );

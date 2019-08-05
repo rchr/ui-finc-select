@@ -157,13 +157,13 @@ class FilterView extends React.Component {
               stripes={this.props.stripes}
               filterFiles={filterFiles.records}
             />
-            <FilterFileDownload
+            {/* <FilterFileDownload
               id="filterInfo"
               filter={initialValues}
               stripes={this.props.stripes}
               filterFiles={filterFiles.records}
               files={files}
-            />
+            /> */}
             <FilterSupplementaryView
               id="filterSupplementary"
               filter={initialValues}
