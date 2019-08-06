@@ -26,9 +26,9 @@ class DocumentCard extends React.Component {
   };
 
   renderType = (line) => {
-    if (line.location) return <FormattedMessage id="stripes-erm-components.doc.location" />;
-    if (line.url) return <FormattedMessage id="stripes-erm-components.doc.url" />;
-    if (line.fileUpload) return <FormattedMessage id="stripes-erm-components.doc.file" />;
+    if (line.location) return 'doc.location';
+    if (line.url) return 'doc.url';
+    if (line.fileUpload) return 'doc.file';
 
     // istanbul ignore next
     return null;
@@ -91,14 +91,14 @@ class DocumentCard extends React.Component {
         <Row>
           <Col xs={category ? 8 : 12}>
             {note &&
-              <KeyValue label={<FormattedMessage id="stripes-erm-components.doc.note" />}>
+              <KeyValue label="doc.note">
                 <div data-test-doc-note>{note}</div>
               </KeyValue>
             }
           </Col>
           <Col xs={category ? 4 : 0}>
             {category &&
-              <KeyValue label={<FormattedMessage id="stripes-erm-components.doc.category" />}>
+              <KeyValue label="doc.category">
                 <div data-test-doc-category>{category}</div>
               </KeyValue>
             }
@@ -106,8 +106,8 @@ class DocumentCard extends React.Component {
         </Row>
         <MultiColumnList
           columnMapping={{
-            type: <FormattedMessage id="stripes-erm-components.doc.type" />,
-            reference: <FormattedMessage id="stripes-erm-components.doc.reference" />,
+            type: 'doc.type',
+            reference: 'doc.reference',
           }}
           contentData={contentData}
           formatter={{
@@ -123,4 +123,3 @@ class DocumentCard extends React.Component {
 }
 
 export default withStripes(DocumentCard);
-

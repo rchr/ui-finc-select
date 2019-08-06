@@ -87,10 +87,10 @@ class FilterForm extends React.Component {
           >
             {/* add padding behind last Row; otherwise content is cutted of */}
             <div className="FilterForm" style={{ paddingBottom: '100px' }}>
-              <FilterInfoForm
+              {/* <FilterInfoForm
                 accordionId="editFilterInfo"
                 {...this.props}
-              />
+              /> */}
               {/* <FilterFileUpload
                 accordionId="editFilterUpload"
                 {...this.props}

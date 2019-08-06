@@ -2,11 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FieldArray } from 'redux-form';
 // import { DocumentsFieldArray } from '@folio/stripes-erm-components';
+import {
+  Col,
+  Field,
+  Row,
+  Select,
+  TextField
+} from '@folio/stripes/components';
 import DocumentsFieldArray from '../../DocumentsFieldArray/DocumentsFieldArray';
 
 class FilterSupplementaryForm extends React.Component {
+  static manifest = Object.freeze({
+    filterFiles: {
+      type: 'okapi',
+      records: 'fincSelectFilterFiles',
+      path: 'finc-select/filter-files',
+      resourceShouldRefresh: true
+    }
+  });
+
   static propTypes = {
     filter: PropTypes.object.isRequired,
+    mutator: PropTypes.shape({
+      filterFiles: PropTypes.object.isRequired,
+    }),
     handlers: PropTypes.shape({
       // onDownloadFile: PropTypes.func.isRequired,
       onUploadFile: PropTypes.func.isRequired,
@@ -23,14 +42,20 @@ class FilterSupplementaryForm extends React.Component {
     super(props);
 
     this.state = {
-      fileId: ''
+      fileId: '',
+      showInfoModal: false,
+      modalText: ''
     };
+
+    this.successText = 'success';
+    this.failText = 'fail';
   }
 
   onUploadFile = (file) => {
     const { stripes: { okapi } } = this.props;
 
     const formData = new FormData();
+
     formData.append('upload', file);
 
     return fetch(`${okapi.url}/finc-select/files`, {
@@ -82,11 +107,11 @@ class FilterSupplementaryForm extends React.Component {
         Filter ID: { filterId }
         File ID: {this.state.fileId}
         <FieldArray
-          // addDocBtnLabel="Button label"
+          addDocBtnLabel="add file"
           component={DocumentsFieldArray}
           // isEmptyMessage="empty message"
-          name="supplementaryDocs"
-          onDownloadFile={this.onDownloadFile}
+          name="docs"
+          // onDownloadFile={this.onDownloadFile}
           onUploadFile={this.onUploadFile}
         />
       </React.Fragment>

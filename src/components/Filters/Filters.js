@@ -132,6 +132,7 @@ class Filters extends React.Component {
           viewRecordPerms="filters.item.get"
           // newRecordPerms="filters.item.post"
           parentResources={this.props.resources}
+          // parentResources={this.props.filterFiles}
           parentMutator={this.props.mutator}
           columnMapping={{
             label: intl.formatMessage({ id: 'ui-finc-select.filter.label' }),

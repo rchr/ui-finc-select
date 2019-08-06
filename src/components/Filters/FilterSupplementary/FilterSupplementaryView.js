@@ -1,23 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import {
+  Accordion,
+  Badge,
+  Layout,
+  MultiColumnList,
   Row
 } from '@folio/stripes/components';
 // import { DocumentCard } from '@folio/stripes-erm-components';
 import DocumentCard from '../../DocumentsFieldArray/DocumentCard';
+import Spinner from '../../DocumentsFieldArray/Spinner';
 
 class FilterSupplementaryView extends React.Component {
   static propTypes = {
     id: PropTypes.string,
+    parentResources: PropTypes.object,
+    filterFiles: PropTypes.object,
     filter: PropTypes.object.isRequired,
-    filterShape: PropTypes.shape({
-      supplementaryDocs: PropTypes.arrayOf(
+    record: PropTypes.shape({
+      docs: PropTypes.arrayOf(
         PropTypes.shape({
-          label: PropTypes.string,
+          label: PropTypes.string.isRequired,
           criteria: PropTypes.string,
           filterId: PropTypes.string,
-          fileId: PropTypes.string,
-          isil: PropTypes.string,
+          fileId: PropTypes.string.isRequired,
+          isil: PropTypes.string.isRequired,
           filename: PropTypes.string,
           created: PropTypes.string,
         }),
@@ -54,32 +62,65 @@ class FilterSupplementaryView extends React.Component {
     return docs.map(doc => (
       <DocumentCard
         key={doc.id}
-        onDownloadFile={this.handleDownloadFile(doc)}
+        // download is starting without clicking on file-element
+        // onDownloadFile={this.handleDownloadFile(doc)}
         {...doc}
       />
     ));
   }
 
+  renderBadge = () => {
+    // const count = get(this.props.record, ['docs', 'length']);
+    const count = this.props.filterFiles.length;
+    return count !== undefined ? <Badge>{count}</Badge> : <Spinner />;
+  }
+
+  getData(resourceName) {
+    const { parentResources } = this.props;
+    const records = (parentResources[`${resourceName}`] || {}).records || [];
+    if (!records || records.length === 0) return null;
+    return records;
+  }
+
   render() {
-    const { filter, filterShape: { supplementaryDocs = [] } } = this.props;
+    const { filterFiles, filter } = this.props;
     const filterId = filter.id;
+    // const { docs = [] } = this.props.record;
+    // get all FliterFiles with the filterId of the selected filter-record
+    const currentFilterFiles = filterFiles.filter(row => {
+      return row.filter === filterId;
+    });
 
     return (
-      <React.Fragment>
-        <Row>
-          Hallo FilterSupplementaryView
-        </Row>
+      <Accordion
+        displayWhenClosed={this.renderBadge()}
+        displayWhenOpen={this.renderBadge()}
+        id={filterId}
+        label="coreDocs"
+        onToggle
+        open
+      >
+        <Layout className="padding-bottom-gutter">
+          { currentFilterFiles.length ? this.renderDocs(currentFilterFiles) : 'coreDocs.none' }
+        </Layout>
         <Row>
           Filter-ID:
           {filterId}
         </Row>
         <Row>
-          {supplementaryDocs.length ?
-            this.renderDocs(supplementaryDocs) :
-            'no files'
-          }
+          <MultiColumnList
+            contentData={currentFilterFiles}
+            isEmptyMessage="no filter files"
+            visibleColumns={['label', 'criteria', 'filter', 'file']}
+            columnMapping={{
+              label: 'Filter file',
+              criteria: 'Filter Criteria',
+              filter: 'Filter ID',
+              file: 'File ID'
+            }}
+          />
         </Row>
-      </React.Fragment>
+      </Accordion>
     );
   }
 }

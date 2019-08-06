@@ -169,6 +169,8 @@ class FilterView extends React.Component {
               filter={initialValues}
               stripes={this.props.stripes}
               filterShape={initialValues}
+              filterFiles={filterFiles.records}
+              {...this.props}
             />
           </div>
           <Layer
