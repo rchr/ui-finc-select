@@ -83,6 +83,9 @@ class Filters extends React.Component {
       filters: PropTypes.shape({
         POST: PropTypes.func.isRequired,
       }),
+      filterFiles: PropTypes.shape({
+        POST: PropTypes.func.isRequired,
+      }),
       query: PropTypes.shape({
         update: PropTypes.func,
       }).isRequired,
@@ -139,7 +142,6 @@ class Filters extends React.Component {
             type: intl.formatMessage({ id: 'ui-finc-select.filter.type' })
           }}
           stripes={stripes}
-          // xxx={filterFiles}
         />
       </div>
     );

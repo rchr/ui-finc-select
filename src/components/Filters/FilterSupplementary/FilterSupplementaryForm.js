@@ -1,45 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FieldArray } from 'redux-form';
+import stripesForm from '@folio/stripes/form';
+import {
+  Field,
+  FieldArray
+} from 'redux-form';
 // import { DocumentsFieldArray } from '@folio/stripes-erm-components';
 import {
+  Button,
   Col,
-  Field,
+  Modal,
+  Pane,
   Row,
   Select,
   TextField
 } from '@folio/stripes/components';
 import DocumentsFieldArray from '../../DocumentsFieldArray/DocumentsFieldArray';
+import FilterSupplementarySubform from './FilterSupplementarySubform';
 
 class FilterSupplementaryForm extends React.Component {
-  static manifest = Object.freeze({
-    filterFiles: {
-      type: 'okapi',
-      records: 'fincSelectFilterFiles',
-      path: 'finc-select/filter-files',
-      resourceShouldRefresh: true
-    }
-  });
-
   static propTypes = {
     filter: PropTypes.object.isRequired,
-    mutator: PropTypes.shape({
-      filterFiles: PropTypes.object.isRequired,
-    }),
-    handlers: PropTypes.shape({
-      // onDownloadFile: PropTypes.func.isRequired,
-      onUploadFile: PropTypes.func.isRequired,
-    }),
+    // mutator: PropTypes.shape({
+    //   newFilterFiles: PropTypes.object,
+    // }),
+    parentMutator: PropTypes.object.isRequired,
     stripes: PropTypes.shape({
       okapi: PropTypes.shape({
         tenant: PropTypes.string.isRequired,
         token: PropTypes.string.isRequired,
       }).isRequired,
-    }).isRequired
+      connect: PropTypes.func.isRequired,
+    }).isRequired,
+    filterFiles: PropTypes.arrayOf(PropTypes.object),
+    pristine: PropTypes.bool,
+    submitting: PropTypes.bool,
   };
 
   constructor(props) {
     super(props);
+    this.connectedFilterSupplementarySubform = this.props.stripes.connect(FilterSupplementarySubform);
+
 
     this.state = {
       fileId: '',
@@ -67,54 +68,56 @@ class FilterSupplementaryForm extends React.Component {
       },
       body: formData,
     })
+    // hier wird ID zurückgegeben, daher ist der response in FileUploaderField unbekannt
     // get id of the uploaded file, on which the file is saved in the database
       .then(response => {
         return response.text();
-      }).then(data => {
+      })
+      .then(data => {
         this.setState({ fileId: data });
         // const fileId = data;
         // console.log(fileId);
       });
   }
 
-  // onDownloadFile = (file) => {
-  //   const { stripes: { okapi } } = this.props;
+  doSomething = () => {
+    this.setState(
+      {
+        showInfoModal: true,
+        modalText: 'modal text'
+      }
+    );
+  }
 
-  //   return fetch(`${okapi.url}/finc-select/files/${file.id}`, {
-  //     headers: {
-  //       'X-Okapi-Tenant': okapi.tenant,
-  //       'X-Okapi-Token': okapi.token,
-  //       // 'Content-Type': 'application/octet-stream'
-  //     },
-  //   }).then(response => response.blob())
-  //     .then(blob => {
-  //       const url = window.URL.createObjectURL(blob);
-  //       const a = document.createElement('a');
-  //       a.href = url;
-  //       a.download = file.name;
-  //       document.body.appendChild(a);
-  //       a.click();
-  //       a.remove();
-  //     });
-  // }
+  handleClose = () => {
+    this.setState({ showInfoModal: false });
+  }
 
   render() {
-    const { handlers, filter } = this.props;
+    const { filter, stripes, filterFiles, pristine, submitting, parentMutator } = this.props;
     const filterId = filter.id;
 
+    const buttonDef = (
+      <Button
+        onClick={() => this.doSomething()}
+        // onClick={() => this.onUploadFile()}
+      >
+        { 'open Modal' }
+      </Button>
+    );
+
     return (
-      <React.Fragment>
-        Filter ID: { filterId }
-        File ID: {this.state.fileId}
-        <FieldArray
-          addDocBtnLabel="add file"
-          component={DocumentsFieldArray}
-          // isEmptyMessage="empty message"
-          name="docs"
-          // onDownloadFile={this.onDownloadFile}
-          onUploadFile={this.onUploadFile}
-        />
-      </React.Fragment>
+      // <FilterSupplementarySubform
+      //   id="subform"
+      //   filterFiles={filterFiles.records}
+      // />
+      <this.connectedFilterSupplementarySubform
+        stripes={stripes}
+        filterFiles={filterFiles.records}
+        filterId={filterId}
+        fileId={this.state.fileId}
+        parentMutator={parentMutator}
+      />
     );
   }
 }

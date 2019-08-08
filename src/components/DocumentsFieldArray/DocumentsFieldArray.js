@@ -113,6 +113,20 @@ class DocumentsFieldArray extends React.Component {
                 />
               </Col>
             </Row>
+            <Row>
+              <Col xs={12}>
+                <Field
+                  component={TextField}
+                  data-test-document-field-criteria
+                  id={`${name}-url-${i}`}
+                  label={<FormattedMessage id="criteria" />}
+                  name={`${name}[${i}].criteria`}
+                  // validate={[
+                  //   this.validateDocIsSpecified
+                  // ]}
+                />
+              </Col>
+            </Row>
             { this.renderCategory(i) }
           </Col>
           {onUploadFile &&
@@ -133,20 +147,6 @@ class DocumentsFieldArray extends React.Component {
               </Row>
             </Col>
           }
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Field
-              component={TextField}
-              data-test-document-field-criteria
-              id={`${name}-url-${i}`}
-              label={<FormattedMessage id="criteria" />}
-              name={`${name}[${i}].criteria`}
-              // validate={[
-              //   this.validateDocIsSpecified
-              // ]}
-            />
-          </Col>
         </Row>
       </EditCard>
     ));

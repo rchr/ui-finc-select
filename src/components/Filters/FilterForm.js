@@ -29,6 +29,13 @@ class FilterForm extends React.Component {
     parentMutator: PropTypes.object.isRequired,
   };
 
+  getData = () => {
+    const { parentResources, match: { params: { id } } } = this.props;
+    const filter = (parentResources.records || {}).records || [];
+    if (!filter || filter.length === 0 || !id) return null;
+    return filter.find(u => u.id === id);
+  }
+
   getAddFirstMenu() {
     const { onCancel } = this.props;
 
@@ -69,12 +76,14 @@ class FilterForm extends React.Component {
   }
 
   render() {
-    const { initialValues, handleSubmit } = this.props;
+    const { initialValues, handleSubmit, parentMutator } = this.props;
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-select.filter.form.createFilter" />;
     const lastMenu = initialValues.id ?
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.updateFilter" />) :
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.createFilter" />);
+
+    const filterFiles = this.props.parentResources.filterFiles;
 
     return (
       <form id="form-filter" onSubmit={handleSubmit}>
@@ -98,6 +107,9 @@ class FilterForm extends React.Component {
               <FilterSupplementaryForm
                 accordionId="editFilterSupplementary"
                 filter={initialValues}
+                filterFiles={filterFiles.records}
+                data={filterFiles.records}
+                parentMutator={parentMutator}
                 {...this.props}
               />
             </div>
