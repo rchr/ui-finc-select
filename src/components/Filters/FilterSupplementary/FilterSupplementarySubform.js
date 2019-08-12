@@ -12,7 +12,10 @@ import {
   Row,
   TextField
 } from '@folio/stripes/components';
+import Dropzone from 'react-dropzone';
+import FileUploaderField from '../../DocumentsFieldArray/FileUploaderField';
 import DocumentsFieldArray from '../../DocumentsFieldArray/DocumentsFieldArray';
+
 
 class FilterSupplementarySubform extends React.Component {
   static propTypes = {
@@ -72,8 +75,13 @@ class FilterSupplementarySubform extends React.Component {
     const { stripes: { okapi } } = this.props;
 
     const addData = {
-      file: '7016ac9c-d59c-4718-9e5c-dfa772408a0c',
-      id: '6016ac9c-d59c-4718-9e5c-dfa772408a0c'
+      // set ID of the uploaded file
+      file: this.state.fileId,
+      // set ID of the current filter
+      filter: this.props.filterId
+      // file: '2116ac9c-d59c-4718-9e5c-dfa772408a0c',
+      // filter: 'd7307f5c-04f2-4f6d-81ab-47f4d4b95b77'
+      // id: '6016ac9c-d59c-4718-9e5c-dfa772408a0c'
     };
 
     const newData = Object.assign(data, addData);
@@ -149,6 +157,16 @@ class FilterSupplementarySubform extends React.Component {
               />
             </Row>
             {/* created will be set by backend */}
+
+            <Field
+              component={FileUploaderField}
+              data-test-document-field-file
+              id="id"
+              label="filter file"
+              name="name"
+              onUploadFile={this.onUploadFile}
+            />
+
             <FieldArray
               addDocBtnLabel="add file"
               component={DocumentsFieldArray}
