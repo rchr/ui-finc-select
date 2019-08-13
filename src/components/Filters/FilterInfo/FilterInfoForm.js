@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Field
 } from 'redux-form';
@@ -6,6 +7,7 @@ import {
   FormattedMessage
 } from 'react-intl';
 import {
+  Accordion,
   Col,
   Row,
   Select,
@@ -17,13 +19,19 @@ import {
 
 class FilterInfoForm extends React.Component {
   render() {
+    const { expanded, onToggle, accordionId } = this.props;
     const dataType = [
       { value: 'Whitelist', label: 'Whitelist' },
       { value: 'Blacklist', label: 'Blacklist' }
     ];
 
     return (
-      <React.Fragment>
+      <Accordion
+        label={<FormattedMessage id="ui-finc-select.filter.generalAccordion" />}
+        open={expanded}
+        id={accordionId}
+        onToggle={onToggle}
+      >
         <Row>
           <Col xs={4}>
             <Field
@@ -70,8 +78,15 @@ class FilterInfoForm extends React.Component {
             />
           </Col>
         </Row> */}
-      </React.Fragment>
+      </Accordion>
     );
   }
 }
+
+FilterInfoForm.propTypes = {
+  expanded: PropTypes.bool,
+  onToggle: PropTypes.func,
+  accordionId: PropTypes.string.isRequired,
+};
+
 export default FilterInfoForm;

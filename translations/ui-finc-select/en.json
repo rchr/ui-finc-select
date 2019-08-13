@@ -45,6 +45,10 @@
   "filter.type": "Type",
   "filter.isil": "ISIL",
 
+  "filter.generalAccordion": "Filter general",
+  "filter.fileAccordion": "Filter file",
+
+  "filter.form.deleteFilter": "Delete filter",
   "filter.form.createFilter": "Create filter",
   "filter.form.updateFilter": "Update filter"
 }

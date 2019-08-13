@@ -2,30 +2,31 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {
+  FormattedMessage
+} from 'react-intl';
+import {
+  Accordion,
+  Col,
+  ExpandAllButton,
   Icon,
   IconButton,
   Layer,
   Pane,
-  PaneMenu
+  PaneMenu,
+  Row
 } from '@folio/stripes/components';
 import {
   IfPermission,
   TitleManager
 } from '@folio/stripes/core';
 import FilterInfoView from './FilterInfo/FilterInfoView';
-import FilterFileDownload from './FilterFile/FilterFileDownload';
+import FilterFileView from './FilterFile/FilterFileView';
 import FilterSupplementaryView from './FilterSupplementary/FilterSupplementaryView';
 import FilterForm from './FilterForm';
 
 class FilterView extends React.Component {
   static manifest = Object.freeze({
     query: {},
-    // files: {
-    //   type: 'okapi',
-    //   records: 'fincSelectFiles',
-    //   path: 'finc-select/files',
-    //   resourceShouldRefresh: true
-    // },
   });
 
   static propTypes = {
@@ -67,6 +68,12 @@ class FilterView extends React.Component {
     const logger = props.stripes.logger;
     this.log = logger.log.bind(logger);
     this.connectedFilterForm = this.props.stripes.connect(FilterForm);
+
+    this.state = {
+      accordions: {
+        fileAccordion: false
+      },
+    };
   }
 
   getData = () => {
@@ -74,6 +81,23 @@ class FilterView extends React.Component {
     const filter = (parentResources.records || {}).records || [];
     if (!filter || filter.length === 0 || !id) return null;
     return filter.find(u => u.id === id);
+  }
+
+  handleExpandAll = (obj) => {
+    this.setState((curState) => {
+      const newState = _.cloneDeep(curState);
+      newState.accordions = obj;
+      return newState;
+    });
+  }
+
+  handleAccordionToggle = ({ id }) => {
+    this.setState((state) => {
+      const newState = _.cloneDeep(state);
+      if (!_.has(newState.accordions, id)) newState.accordions[id] = true;
+      newState.accordions[id] = !newState.accordions[id];
+      return newState;
+    });
   }
 
   update = (filter) => {
@@ -157,13 +181,27 @@ class FilterView extends React.Component {
               stripes={this.props.stripes}
               filterFiles={filterFiles.records}
             />
-            {/* <FilterFileDownload
-              id="filterInfo"
-              filter={initialValues}
-              stripes={this.props.stripes}
-              filterFiles={filterFiles.records}
-              files={files}
-            /> */}
+            <Row end="xs">
+              <Col xs>
+                <ExpandAllButton
+                  accordionStatus={this.state.accordions}
+                  onToggle={this.handleExpandAll}
+                />
+              </Col>
+            </Row>
+            <Accordion
+              open={this.state.accordions.fileAccordion}
+              onToggle={this.handleAccordionToggle}
+              label={<FormattedMessage id="ui-finc-select.filter.fileAccordion" />}
+              id="fileAccordion"
+            >
+              <FilterFileView
+                id="filterInfo"
+                filter={initialValues}
+                stripes={this.props.stripes}
+                filterFiles={filterFiles.records}
+              />
+            </Accordion>
             <FilterSupplementaryView
               id="filterSupplementary"
               filter={initialValues}
