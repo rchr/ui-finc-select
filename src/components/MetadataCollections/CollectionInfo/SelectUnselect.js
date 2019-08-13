@@ -14,7 +14,8 @@ class SelectUnselect extends React.Component {
   static propTypes = {
     stripes: PropTypes.object,
     collectionId: PropTypes.string.isRequired,
-    selectedInitial: PropTypes.string.isRequired
+    selectedInitial: PropTypes.string.isRequired,
+    permitted: PropTypes.string
   };
 
   constructor(props) {
@@ -49,6 +50,7 @@ class SelectUnselect extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.collectionId !== prevProps.collectionId) {
       this.fetchSelected(this.props.selectedInitial);
+      this.isUsagePermitted(this.props.permitted);
     }
   }
 
@@ -63,6 +65,14 @@ class SelectUnselect extends React.Component {
         selectedLabel: selectedButtonLable
       }
     );
+  }
+
+  isUsagePermitted(permitted) {
+    if (permitted === 'no') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // get button label from the saved yes or no value
@@ -129,7 +139,7 @@ class SelectUnselect extends React.Component {
   }
 
   render() {
-    const { collectionId } = this.props;
+    const { collectionId, permitted } = this.props;
 
     return (
       <React.Fragment>
@@ -144,6 +154,7 @@ class SelectUnselect extends React.Component {
             id="unselect"
             buttonStyle="primary"
             onClick={() => this.selectUnselect(collectionId, this.state.selected)}
+            disabled={this.isUsagePermitted(permitted)}
           >
             {this.state.selectedLabel}
           </Button>
