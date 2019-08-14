@@ -6,6 +6,7 @@ import {
 import {
   Accordion
 } from '@folio/stripes/components';
+import DocumentsFieldArray from './UploadFile/DocumentsFieldArray';
 
 class FilterFileForm extends React.Component {
   render() {
