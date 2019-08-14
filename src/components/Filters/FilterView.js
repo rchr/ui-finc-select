@@ -111,17 +111,6 @@ class FilterView extends React.Component {
     return filterFormData;
   }
 
-  deleteFilter = (filter) => {
-    const { parentMutator } = this.props;
-    parentMutator.records.DELETE({ id: filter.id })
-      .then(() => {
-        parentMutator.query.update({
-          _path: '/finc-select/filters',
-          layer: null
-        });
-      });
-  }
-
   render() {
     const { resources, stripes } = this.props;
     const query = resources.query;
@@ -135,15 +124,6 @@ class FilterView extends React.Component {
       const filterFormData = this.getFilterFormData(initialValues);
       const detailMenu = (
         <PaneMenu>
-          <IfPermission perm="filter.item.delete">
-            <IconButton
-              icon="trash"
-              id="clickable-delete-filter"
-              style={{ visibility: !initialValues ? 'hidden' : 'visible' }}
-              onClick={() => this.deleteFilter(initialValues)}
-              title="Delete Filter"
-            />
-          </IfPermission>
           <IfPermission perm="filter.item.put">
             <IconButton
               icon="edit"

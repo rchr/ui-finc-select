@@ -65,7 +65,7 @@ class FilterForm extends React.Component {
 
   confirmDelete = (confirmation) => {
     if (confirmation) {
-      this.deleteCollection();
+      this.deleteFilter();
     } else {
       this.setState({ confirmDelete: false });
     }

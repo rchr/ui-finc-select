@@ -99,13 +99,13 @@ class Filters extends React.Component {
     this.props.mutator.query.update({ layer: null });
   }
 
-  // create = (filter) => {
-  //   const { mutator } = this.props;
-  //   mutator.records.POST(filter)
-  //     .then(() => {
-  //       this.closeNewInstance();
-  //     });
-  // }
+  create = (filter) => {
+    const { mutator } = this.props;
+    mutator.records.POST(filter)
+      .then(() => {
+        this.closeNewInstance();
+      });
+  }
 
   render() {
     const packageInfoReWrite = () => {
@@ -129,11 +129,11 @@ class Filters extends React.Component {
           resultCountIncrement={RESULT_COUNT_INCREMENT}
           viewRecordComponent={FilterView}
           editRecordComponent={FilterForm}
-          // newRecordInitialValues={{}}
+          newRecordInitialValues={{}}
           visibleColumns={['label', 'type']}
-          // onCreate={this.create}
+          onCreate={this.create}
           viewRecordPerms="filters.item.get"
-          // newRecordPerms="filters.item.post"
+          newRecordPerms="filters.item.post"
           parentResources={this.props.resources}
           // parentResources={this.props.filterFiles}
           parentMutator={this.props.mutator}
