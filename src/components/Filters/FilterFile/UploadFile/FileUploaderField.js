@@ -44,7 +44,7 @@ class FileUploaderField extends React.Component {
     if (contentType.startsWith('application/json')) {
       throw new Error(`${resp.message} (${resp.error})`);
     } else {
-      throw new Error(intl.formatMessage({ id: 'stripes-erm-components.errors.uploadError' }));
+      throw new Error(intl.formatMessage({ id: 'errors.uploadError' }));
     }
   }
 

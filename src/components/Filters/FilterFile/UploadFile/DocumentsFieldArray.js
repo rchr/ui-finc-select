@@ -35,15 +35,15 @@ class DocumentsFieldArray extends React.Component {
   }
 
   static defaultProps = {
-    addDocBtnLabel: <FormattedMessage id="stripes-erm-components.doc.addDoc" />,
-    isEmptyMessage: <FormattedMessage id="stripes-erm-components.doc.noDocs" />,
+    addDocBtnLabel: <FormattedMessage id="doc.addDoc" />,
+    isEmptyMessage: <FormattedMessage id="doc.noDocs" />,
   }
 
   validateDocIsSpecified = (value, allValues, props, fieldName) => {
     const index = parseInt(/\[([0-9]*)\]/.exec(fieldName)[1], 10);
-    const { fileUpload, location, name, url } = get(allValues, [this.props.name, index], {});
-    if (name && (!fileUpload && !location && !url)) {
-      return <FormattedMessage id="stripes-erm-components.doc.error.docsMustHaveLocationOrURL" />;
+    const { fileUpload, label, name } = get(allValues, [this.props.name, index], {});
+    if (name && (!fileUpload && !label)) {
+      return <FormattedMessage id="doc.error.docsMustHaveLocationOrURL" />;
     }
 
     return undefined;
@@ -55,7 +55,7 @@ class DocumentsFieldArray extends React.Component {
         // Test if the URL is valid
         new URL(value); // eslint-disable-line no-new
       } catch (_) {
-        return <FormattedMessage id="stripes-erm-components.doc.error.invalidURL" />;
+        return <FormattedMessage id="doc.error.invalidURL" />;
       }
     }
 
@@ -63,7 +63,7 @@ class DocumentsFieldArray extends React.Component {
   }
 
   validateRequired = (value) => (
-    !value ? <FormattedMessage id="stripes-core.label.missingRequiredField" /> : undefined
+    !value ? <FormattedMessage id="missingRequiredField" /> : undefined
   )
 
   renderCategory = (i) => {
@@ -74,14 +74,14 @@ class DocumentsFieldArray extends React.Component {
     return (
       <Row>
         <Col xs={12}>
-          <FormattedMessage id="stripes-erm-components.placeholder.documentCategory">
+          <FormattedMessage id="placeholder.documentCategory">
             {placeholder => (
               <Field
                 component={Select}
                 data-test-document-field-category
                 dataOptions={documentCategories}
                 id={`${name}-category-${i}`}
-                label={<FormattedMessage id="stripes-erm-components.doc.category" />}
+                label={<FormattedMessage id="doc.category" />}
                 name={`${name}[${i}].atType`}
                 placeholder={placeholder}
               />
@@ -108,7 +108,7 @@ class DocumentsFieldArray extends React.Component {
           'id': `${name}-delete-${i}`,
           'data-test-delete-field-button': true
         }}
-        header={<FormattedMessage id="stripes-erm-components.doc.title" values={{ number: i + 1 }} />}
+        header={<FormattedMessage id="doc.title" values={{ number: i + 1 }} />}
         key={i}
         onDelete={() => onDeleteField(i, doc)}
       >
@@ -117,28 +117,28 @@ class DocumentsFieldArray extends React.Component {
             <Row>
               <Col xs={12}>
                 <Field
-                  data-test-document-field-name
+                  data-test-document-field-label
                   component={TextField}
-                  id={`${name}-name-${i}`}
-                  label={<FormattedMessage id="stripes-erm-components.doc.name" />}
-                  name={`${name}[${i}].name`}
+                  id={`${name}-label-${i}`}
+                  label={<FormattedMessage id="doc.label" />}
+                  name={`${name}[${i}].label`}
                   required
                   validate={this.validateRequired}
                 />
               </Col>
             </Row>
             { this.renderCategory(i) }
-            <Row>
+            {/* <Row>
               <Col xs={12}>
                 <Field
-                  data-test-document-field-note
+                  data-test-document-field-criteria
                   component={TextArea}
-                  id={`${name}-note-${i}`}
-                  label={<FormattedMessage id="stripes-erm-components.doc.note" />}
-                  name={`${name}[${i}].note`}
+                  id={`${name}-criteria-${i}`}
+                  label={<FormattedMessage id="doc.criteria" />}
+                  name={`${name}[${i}].criteria`}
                 />
               </Col>
-            </Row>
+            </Row> */}
           </Col>
           {onUploadFile &&
             <Col xs={12} md={6}>
@@ -148,8 +148,8 @@ class DocumentsFieldArray extends React.Component {
                     component={FileUploaderField}
                     data-test-document-field-file
                     id={`${name}-file-${i}`}
-                    label={<FormattedMessage id="stripes-erm-components.doc.file" />}
-                    name={`${name}[${i}].fileUpload`}
+                    label={<FormattedMessage id="doc.file" />}
+                    name={`${name}[${i}].files`}
                     onDownloadFile={onDownloadFile}
                     onUploadFile={onUploadFile}
                     validate={this.validateDocIsSpecified}
@@ -159,25 +159,25 @@ class DocumentsFieldArray extends React.Component {
             </Col>
           }
         </Row>
-        <Row>
+        {/* <Row>
           <Col xs={12}>
             <Field
               data-test-document-field-location
               component={TextField}
               id={`${name}-location-${i}`}
-              label={<FormattedMessage id="stripes-erm-components.doc.location" />}
+              label={<FormattedMessage id="doc.location" />}
               name={`${name}[${i}].location`}
               validate={this.validateDocIsSpecified}
             />
           </Col>
-        </Row>
-        <Row>
+        </Row> */}
+        {/* <Row>
           <Col xs={12}>
             <Field
               component={TextField}
               data-test-document-field-url
               id={`${name}-url-${i}`}
-              label={<FormattedMessage id="stripes-erm-components.doc.url" />}
+              label={<FormattedMessage id="doc.url" />}
               name={`${name}[${i}].url`}
               validate={[
                 this.validateDocIsSpecified,
@@ -185,7 +185,7 @@ class DocumentsFieldArray extends React.Component {
               ]}
             />
           </Col>
-        </Row>
+        </Row> */}
       </EditCard>
     ));
   }
@@ -209,7 +209,8 @@ class DocumentsFieldArray extends React.Component {
           id={`add-${name}-btn`}
           onClick={() => onAddField({})}
         >
-          { this.props.addDocBtnLabel }
+          {/* { this.props.addDocBtnLabel } */}
+          add file to filter
         </Button>
       </div>
     );

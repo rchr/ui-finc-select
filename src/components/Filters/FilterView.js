@@ -139,7 +139,7 @@ class FilterView extends React.Component {
       );
 
       const label = _.get(initialValues, 'label', '-');
-      const filterFiles = this.props.parentResources.filterFiles;
+      // const filterFiles = this.props.parentResources.filterFiles;
 
       return (
         <Pane
@@ -175,6 +175,7 @@ class FilterView extends React.Component {
                 id="filterInfo"
                 filter={initialValues}
                 stripes={this.props.stripes}
+                docs={initialValues.filterFiles}
               />
             </Accordion>
             {/* <FilterSupplementaryView

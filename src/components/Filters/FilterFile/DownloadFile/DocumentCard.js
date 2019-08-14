@@ -18,17 +18,17 @@ class DocumentCard extends React.Component {
       id: PropTypes.string,
       name: PropTypes.string,
     }),
-    location: PropTypes.string,
-    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    criteria: PropTypes.string,
     note: PropTypes.string,
     onDownloadFile: PropTypes.func,
     url: PropTypes.string,
   };
 
   renderType = (line) => {
-    if (line.location) return <FormattedMessage id="stripes-erm-components.doc.location" />;
-    if (line.url) return <FormattedMessage id="stripes-erm-components.doc.url" />;
-    if (line.fileUpload) return <FormattedMessage id="stripes-erm-components.doc.file" />;
+    if (line.location) return <FormattedMessage id="doc.location" />;
+    if (line.url) return <FormattedMessage id="doc.url" />;
+    if (line.fileUpload) return <FormattedMessage id="doc.file" />;
 
     // istanbul ignore next
     return null;
@@ -46,7 +46,7 @@ class DocumentCard extends React.Component {
     </a>
   )
 
-  renderLocation = (location) => <span data-test-doc-location>{location}</span>
+  renderLabel = (label) => <span data-test-doc-location>{label}</span>
 
   renderFile = (file) => (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -60,26 +60,26 @@ class DocumentCard extends React.Component {
       rel="noopener noreferrer"
       target="_blank"
     >
-      {file.name}
+      {file.label}
       <Icon icon="external-link" />
     </a>
   )
 
   renderReference = (line) => {
-    if (line.url) return this.renderUrl(line.url);
-    if (line.location) return this.renderLocation(line.location);
+    // if (line.url) return this.renderUrl(line.url);
+    if (line.label) return this.renderLabel(line.label);
     if (line.fileUpload) return this.renderFile(line.fileUpload);
 
     return null;
   }
 
   render() {
-    const { fileUpload, location, name, note, url } = this.props;
+    const { fileUpload, label, name, note, url } = this.props;
     const category = get(this.props, ['atType', 'label']);
 
     const contentData = [];
-    if (location) contentData.push({ location });
-    if (url) contentData.push({ url });
+    if (label) contentData.push({ label });
+    // if (url) contentData.push({ url });
     if (fileUpload) contentData.push({ fileUpload });
 
     return (
@@ -90,24 +90,24 @@ class DocumentCard extends React.Component {
       >
         <Row>
           <Col xs={category ? 8 : 12}>
-            {note &&
-              <KeyValue label={<FormattedMessage id="stripes-erm-components.doc.note" />}>
-                <div data-test-doc-note>{note}</div>
+            {label &&
+              <KeyValue label={<FormattedMessage id="doc.label" />}>
+                <div data-test-doc-label>{label}</div>
               </KeyValue>
             }
           </Col>
-          <Col xs={category ? 4 : 0}>
+          {/* <Col xs={category ? 4 : 0}>
             {category &&
-              <KeyValue label={<FormattedMessage id="stripes-erm-components.doc.category" />}>
+              <KeyValue label={<FormattedMessage id="doc.category" />}>
                 <div data-test-doc-category>{category}</div>
               </KeyValue>
             }
-          </Col>
+          </Col> */}
         </Row>
         <MultiColumnList
           columnMapping={{
-            type: <FormattedMessage id="stripes-erm-components.doc.type" />,
-            reference: <FormattedMessage id="stripes-erm-components.doc.reference" />,
+            type: <FormattedMessage id="doc.type" />,
+            reference: <FormattedMessage id="doc.reference" />,
           }}
           contentData={contentData}
           formatter={{

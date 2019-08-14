@@ -35,7 +35,7 @@ export default class FileUploaderFieldView extends React.Component {
     return (
       <Row>
         <Col xs={6}>
-          <KeyValue label={<FormattedMessage id="stripes-erm-components.fuf.filename" />}>
+          <KeyValue label={<FormattedMessage id="fuf.filename" />}>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a
               data-test-fuf-name
@@ -55,7 +55,7 @@ export default class FileUploaderFieldView extends React.Component {
         </Col>
         <Col xs={4}>
           <KeyValue
-            label={<FormattedMessage id="stripes-erm-components.fuf.uploaded" />}
+            label={<FormattedMessage id="fuf.uploaded" />}
             value={(
               <span data-test-fuf-uploaded>
                 <div><FormattedDate value={file.modified} tagName="div" /></div>
@@ -65,7 +65,7 @@ export default class FileUploaderFieldView extends React.Component {
           />
         </Col>
         <Col xs={2}>
-          <FormattedMessage id="stripes-erm-components.fuf.removeUploaded">
+          <FormattedMessage id="fuf.removeUploaded">
             {ariaLabel => (
               <IconButton
                 aria-label={ariaLabel}
@@ -96,7 +96,7 @@ export default class FileUploaderFieldView extends React.Component {
     } = this.props;
 
     return (
-      <FormattedMessage id="stripes-erm-components.fuf.buttonAriaLabel">
+      <FormattedMessage id="fuf.buttonAriaLabel">
         { buttonAriaLabel => (
           <FileUploader
             errorMessage={error}
@@ -106,14 +106,14 @@ export default class FileUploaderFieldView extends React.Component {
             onDragEnter={onDragEnter}
             onDragLeave={onDragLeave}
             onDrop={onDrop}
-            title={<FormattedMessage id="stripes-erm-components.fuf.title" />}
+            title={<FormattedMessage id="fuf.title" />}
             uploadButtonAriaLabel={buttonAriaLabel}
-            uploadButtonText={<FormattedMessage id="stripes-erm-components.fuf.subtitle" />}
+            uploadButtonText={<FormattedMessage id="fuf.subtitle" />}
             uploadInProgress={uploadInProgress}
-            uploadInProgressText={<FormattedMessage id="stripes-erm-components.fuf.uploading" />}
+            uploadInProgressText={<FormattedMessage id="fuf.uploading" />}
             {...rest}
           >
-            <FormattedMessage id="stripes-erm-components.fuf.maxFileSize" />
+            <FormattedMessage id="fuf.maxFileSize" />
           </FileUploader>
         )}
       </FormattedMessage>
