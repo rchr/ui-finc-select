@@ -61,12 +61,6 @@ class Filters extends React.Component {
         },
         staticFallback: { params: {} },
       },
-    },
-    filterFiles: {
-      type: 'okapi',
-      records: 'fincSelectFilterFiles',
-      path: 'finc-select/filter-files',
-      resourceShouldRefresh: true
     }
   });
 
@@ -75,15 +69,9 @@ class Filters extends React.Component {
       filters: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
       }),
-      filterFiles: PropTypes.shape({
-        records: PropTypes.arrayOf(PropTypes.object),
-      }),
     }).isRequired,
     mutator: PropTypes.shape({
       filters: PropTypes.shape({
-        POST: PropTypes.func.isRequired,
-      }),
-      filterFiles: PropTypes.shape({
         POST: PropTypes.func.isRequired,
       }),
       query: PropTypes.shape({
@@ -115,9 +103,7 @@ class Filters extends React.Component {
       return packageInfo;
     };
 
-    const { stripes, intl, resources } = this.props;
-    // const filterFiles = _.get(resources, 'filterFiles.records', []);
-    // const filterFiles = resources.filterFiles.records;
+    const { stripes, intl } = this.props;
 
     return (
       <div data-test-filter-instances>
@@ -135,7 +121,6 @@ class Filters extends React.Component {
           viewRecordPerms="filters.item.get"
           newRecordPerms="filters.item.post"
           parentResources={this.props.resources}
-          // parentResources={this.props.filterFiles}
           parentMutator={this.props.mutator}
           columnMapping={{
             label: intl.formatMessage({ id: 'ui-finc-select.filter.label' }),

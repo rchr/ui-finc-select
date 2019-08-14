@@ -43,9 +43,6 @@ class FilterView extends React.Component {
     resources: PropTypes.shape({
       filter: PropTypes.shape(),
       query: PropTypes.object,
-      files: PropTypes.shape({
-        records: PropTypes.arrayOf(PropTypes.object),
-      }),
     }),
     mutator: PropTypes.shape({
       query: PropTypes.object.isRequired,
@@ -159,7 +156,6 @@ class FilterView extends React.Component {
               id="filterInfo"
               filter={initialValues}
               stripes={this.props.stripes}
-              filterFiles={filterFiles.records}
             />
             <Row end="xs">
               <Col xs>
@@ -179,17 +175,16 @@ class FilterView extends React.Component {
                 id="filterInfo"
                 filter={initialValues}
                 stripes={this.props.stripes}
-                filterFiles={filterFiles.records}
               />
             </Accordion>
-            <FilterSupplementaryView
+            {/* <FilterSupplementaryView
               id="filterSupplementary"
               filter={initialValues}
               stripes={this.props.stripes}
               filterShape={initialValues}
-              filterFiles={filterFiles.records}
+              // filterFiles={filterFiles.records}
               {...this.props}
-            />
+            /> */}
           </div>
           <Layer
             isOpen={query.layer ? query.layer === 'edit' : false}

@@ -104,7 +104,8 @@ class FilterSupplementarySubform extends React.Component {
     const { handleSubmit, pristine, submitting } = this.props;
 
     return (
-      <form id="form-filter-files" onSubmit={handleSubmit(this.handleSubmit)}>
+      // onSubmit={handleSubmit(this.handleSubmit)}
+      <form id="form-filter-files">
         <Paneset style={{ position: 'relative' }}>
           <Pane
             defaultWidth="fill"
