@@ -11,7 +11,7 @@ class FilterFileView extends React.Component {
       docs: PropTypes.arrayOf(
         PropTypes.shape({
           lable: PropTypes.string.isRequired,
-          // criteria: PropTypes.string,
+          criteria: PropTypes.string,
         }),
       ),
     }),

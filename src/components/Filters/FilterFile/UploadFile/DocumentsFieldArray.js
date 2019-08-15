@@ -49,18 +49,18 @@ class DocumentsFieldArray extends React.Component {
     return undefined;
   }
 
-  validateURLIsValid = (value) => {
-    if (value) {
-      try {
-        // Test if the URL is valid
-        new URL(value); // eslint-disable-line no-new
-      } catch (_) {
-        return <FormattedMessage id="doc.error.invalidURL" />;
-      }
-    }
+  // validateURLIsValid = (value) => {
+  //   if (value) {
+  //     try {
+  //       // Test if the URL is valid
+  //       new URL(value); // eslint-disable-line no-new
+  //     } catch (_) {
+  //       return <FormattedMessage id="doc.error.invalidURL" />;
+  //     }
+  //   }
 
-    return undefined;
-  }
+  //   return undefined;
+  // }
 
   validateRequired = (value) => (
     !value ? <FormattedMessage id="missingRequiredField" /> : undefined
@@ -127,18 +127,18 @@ class DocumentsFieldArray extends React.Component {
                 />
               </Col>
             </Row>
-            { this.renderCategory(i) }
-            {/* <Row>
+            <Row>
               <Col xs={12}>
                 <Field
                   data-test-document-field-criteria
-                  component={TextArea}
+                  component={TextField}
                   id={`${name}-criteria-${i}`}
                   label={<FormattedMessage id="doc.criteria" />}
                   name={`${name}[${i}].criteria`}
                 />
               </Col>
-            </Row> */}
+            </Row>
+            { this.renderCategory(i) }
           </Col>
           {onUploadFile &&
             <Col xs={12} md={6}>
@@ -146,13 +146,13 @@ class DocumentsFieldArray extends React.Component {
                 <Col xs={12}>
                   <Field
                     component={FileUploaderField}
-                    data-test-document-field-file
-                    id={`${name}-file-${i}`}
+                    data-test-document-field-fileId
+                    id={`${name}-fileId-${i}`}
                     label={<FormattedMessage id="doc.file" />}
-                    name={`${name}[${i}].files`}
+                    name={`${name}[${i}].fileId`}
                     onDownloadFile={onDownloadFile}
                     onUploadFile={onUploadFile}
-                    validate={this.validateDocIsSpecified}
+                    // validate={this.validateDocIsSpecified}
                   />
                 </Col>
               </Row>

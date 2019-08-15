@@ -19,6 +19,7 @@ class FileUploaderField extends React.Component {
   state = {
     error: null,
     file: {},
+    // file: { fileID: null },
     isDropZoneActive: false,
     uploadInProgress: false,
   }
@@ -41,6 +42,7 @@ class FileUploaderField extends React.Component {
 
   processError(resp, intl) {
     const contentType = resp.headers ? resp.headers.get('Content-Type') : '';
+    // if (contentType.startsWith('application/octet-stream')) {
     if (contentType.startsWith('application/json')) {
       throw new Error(`${resp.message} (${resp.error})`);
     } else {
@@ -49,6 +51,11 @@ class FileUploaderField extends React.Component {
   }
 
   handleDrop = (acceptedFiles, intl) => {
+    // the value of the fieldId will connected with the Field in DocuemtsFieldArray with onChange(file);
+    // const {
+    //   input: { value, onChange }
+    // } = this.props;
+
     if (acceptedFiles.length !== 1) return;
 
     this.setState({
@@ -60,9 +67,12 @@ class FileUploaderField extends React.Component {
     this.props.onUploadFile(acceptedFiles[0])
       .then(response => {
         if (response.ok) {
-          response.json().then(file => {
-            this.props.input.onChange(file.id);
+          // example: file = "34bdd9da-b765-448a-8519-11d460a4df5d"
+          response.text().then(file => {
+            this.props.input.onChange(file);
             this.setState({ file });
+            // console.log(this.state.file);
+            // onChange(file);
           });
         } else {
           this.processError(response, intl);

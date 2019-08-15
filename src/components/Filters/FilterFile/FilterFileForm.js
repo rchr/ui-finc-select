@@ -33,6 +33,7 @@ class FilterFileForm extends React.Component {
       headers: {
         'X-Okapi-Tenant': okapi.tenant,
         'X-Okapi-Token': okapi.token,
+        'Content-Type': 'application/octet-stream'
       },
       body: formData,
     });

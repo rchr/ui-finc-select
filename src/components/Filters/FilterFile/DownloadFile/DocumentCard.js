@@ -20,16 +20,15 @@ class DocumentCard extends React.Component {
     }),
     label: PropTypes.string.isRequired,
     criteria: PropTypes.string,
-    note: PropTypes.string,
     onDownloadFile: PropTypes.func,
-    url: PropTypes.string,
+    // note: PropTypes.string,
+    // url: PropTypes.string,
   };
 
   renderType = (line) => {
-    if (line.location) return <FormattedMessage id="doc.location" />;
-    if (line.url) return <FormattedMessage id="doc.url" />;
+    if (line.label) return <FormattedMessage id="doc.label" />;
+    if (line.criteria) return <FormattedMessage id="doc.criteria" />;
     if (line.fileUpload) return <FormattedMessage id="doc.file" />;
-
     // istanbul ignore next
     return null;
   }
@@ -46,7 +45,8 @@ class DocumentCard extends React.Component {
     </a>
   )
 
-  renderLabel = (label) => <span data-test-doc-location>{label}</span>
+  renderLabel = (label) => <span data-test-doc-label>{label}</span>
+  renderCriteria = (criteria) => <span data-test-doc-criteria>{criteria}</span>
 
   renderFile = (file) => (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -66,29 +66,29 @@ class DocumentCard extends React.Component {
   )
 
   renderReference = (line) => {
-    // if (line.url) return this.renderUrl(line.url);
     if (line.label) return this.renderLabel(line.label);
+    if (line.criteria) return this.renderCriteria(line.criteria);
     if (line.fileUpload) return this.renderFile(line.fileUpload);
 
     return null;
   }
 
   render() {
-    const { fileUpload, label, name, note, url } = this.props;
-    const category = get(this.props, ['atType', 'label']);
+    const { fileUpload, label, criteria } = this.props;
+    // const category = get(this.props, ['atType', 'label']);
 
     const contentData = [];
     if (label) contentData.push({ label });
-    // if (url) contentData.push({ url });
+    if (criteria) contentData.push({ criteria });
     if (fileUpload) contentData.push({ fileUpload });
 
     return (
       <Card
-        data-test-doc={name}
-        headerProps={{ 'data-test-doc-name': name }}
-        headerStart={<strong>{name}</strong>}
+        data-test-doc={label}
+        headerProps={{ 'data-test-doc-label': label }}
+        headerStart={<strong>{label}</strong>}
       >
-        <Row>
+        {/* <Row>
           <Col xs={category ? 8 : 12}>
             {label &&
               <KeyValue label={<FormattedMessage id="doc.label" />}>
@@ -96,17 +96,25 @@ class DocumentCard extends React.Component {
               </KeyValue>
             }
           </Col>
-          {/* <Col xs={category ? 4 : 0}>
+          <Col xs={category ? 8 : 12}>
+            {criteria &&
+              <KeyValue criteria={<FormattedMessage id="doc.criteria" />}>
+                <div data-test-doc-criteria>{criteria}</div>
+              </KeyValue>
+            }
+          </Col>
+          <Col xs={category ? 4 : 0}>
             {category &&
               <KeyValue label={<FormattedMessage id="doc.category" />}>
                 <div data-test-doc-category>{category}</div>
               </KeyValue>
             }
-          </Col> */}
-        </Row>
+          </Col>
+        </Row> */}
         <MultiColumnList
           columnMapping={{
             type: <FormattedMessage id="doc.type" />,
+            // set name of uploaded file including download link
             reference: <FormattedMessage id="doc.reference" />,
           }}
           contentData={contentData}

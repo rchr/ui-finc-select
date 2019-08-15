@@ -18,6 +18,7 @@ export default class FileUploaderFieldView extends React.Component {
       modified: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       name: PropTypes.string,
     }).isRequired,
+    // file: PropTypes.string,
     isDropZoneActive: PropTypes.bool,
     onDelete: PropTypes.func.isRequired,
     onDownloadFile: PropTypes.func.isRequired,
@@ -30,7 +31,7 @@ export default class FileUploaderFieldView extends React.Component {
   renderFileInfo = () => {
     const { file } = this.props;
 
-    if (!file.name) return null;
+    if (!file) return null;
 
     return (
       <Row>
@@ -48,21 +49,11 @@ export default class FileUploaderFieldView extends React.Component {
               rel="noopener noreferrer"
               target="_blank"
             >
-              {file.name}
+              {/* TODO: get filename */}
+              {file.name} filename
               <Icon icon="external-link" />
             </a>
           </KeyValue>
-        </Col>
-        <Col xs={4}>
-          <KeyValue
-            label={<FormattedMessage id="fuf.uploaded" />}
-            value={(
-              <span data-test-fuf-uploaded>
-                <div><FormattedDate value={file.modified} tagName="div" /></div>
-                <div><FormattedTime value={file.modified} tagName="div" /></div>
-              </span>
-            )}
-          />
         </Col>
         <Col xs={2}>
           <FormattedMessage id="fuf.removeUploaded">
@@ -106,14 +97,14 @@ export default class FileUploaderFieldView extends React.Component {
             onDragEnter={onDragEnter}
             onDragLeave={onDragLeave}
             onDrop={onDrop}
-            title={<FormattedMessage id="fuf.title" />}
+            title={<FormattedMessage id="Drag and drop to upload" />}
             uploadButtonAriaLabel={buttonAriaLabel}
-            uploadButtonText={<FormattedMessage id="fuf.subtitle" />}
+            uploadButtonText={<FormattedMessage id="or choose file" />}
             uploadInProgress={uploadInProgress}
             uploadInProgressText={<FormattedMessage id="fuf.uploading" />}
             {...rest}
           >
-            <FormattedMessage id="fuf.maxFileSize" />
+            <FormattedMessage id="maxFileSize" />
           </FileUploader>
         )}
       </FormattedMessage>
