@@ -49,19 +49,6 @@ class DocumentsFieldArray extends React.Component {
     return undefined;
   }
 
-  // validateURLIsValid = (value) => {
-  //   if (value) {
-  //     try {
-  //       // Test if the URL is valid
-  //       new URL(value); // eslint-disable-line no-new
-  //     } catch (_) {
-  //       return <FormattedMessage id="doc.error.invalidURL" />;
-  //     }
-  //   }
-
-  //   return undefined;
-  // }
-
   validateRequired = (value) => (
     !value ? <FormattedMessage id="missingRequiredField" /> : undefined
   )
@@ -148,7 +135,7 @@ class DocumentsFieldArray extends React.Component {
                     component={FileUploaderField}
                     data-test-document-field-fileId
                     id={`${name}-fileId-${i}`}
-                    label={<FormattedMessage id="doc.file" />}
+                    label={<FormattedMessage id="doc.fileId" />}
                     name={`${name}[${i}].fileId`}
                     onDownloadFile={onDownloadFile}
                     onUploadFile={onUploadFile}
@@ -159,33 +146,6 @@ class DocumentsFieldArray extends React.Component {
             </Col>
           }
         </Row>
-        {/* <Row>
-          <Col xs={12}>
-            <Field
-              data-test-document-field-location
-              component={TextField}
-              id={`${name}-location-${i}`}
-              label={<FormattedMessage id="doc.location" />}
-              name={`${name}[${i}].location`}
-              validate={this.validateDocIsSpecified}
-            />
-          </Col>
-        </Row> */}
-        {/* <Row>
-          <Col xs={12}>
-            <Field
-              component={TextField}
-              data-test-document-field-url
-              id={`${name}-url-${i}`}
-              label={<FormattedMessage id="doc.url" />}
-              name={`${name}[${i}].url`}
-              validate={[
-                this.validateDocIsSpecified,
-                this.validateURLIsValid,
-              ]}
-            />
-          </Col>
-        </Row> */}
       </EditCard>
     ));
   }

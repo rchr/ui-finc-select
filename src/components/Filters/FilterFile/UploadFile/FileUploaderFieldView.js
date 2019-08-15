@@ -16,7 +16,7 @@ export default class FileUploaderFieldView extends React.Component {
     error: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
     file: PropTypes.shape({
       modified: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-      name: PropTypes.string,
+      fileId: PropTypes.string,
     }).isRequired,
     // file: PropTypes.string,
     isDropZoneActive: PropTypes.bool,
@@ -50,7 +50,7 @@ export default class FileUploaderFieldView extends React.Component {
               target="_blank"
             >
               {/* TODO: get filename */}
-              {file.name} filename
+              {file.fileId}
               <Icon icon="external-link" />
             </a>
           </KeyValue>
@@ -104,7 +104,7 @@ export default class FileUploaderFieldView extends React.Component {
             uploadInProgressText={<FormattedMessage id="fuf.uploading" />}
             {...rest}
           >
-            <FormattedMessage id="maxFileSize" />
+            {/* <FormattedMessage id="maxFileSize" /> */}
           </FileUploader>
         )}
       </FormattedMessage>

@@ -19,7 +19,6 @@ class FileUploaderField extends React.Component {
   state = {
     error: null,
     file: {},
-    // file: { fileID: null },
     isDropZoneActive: false,
     uploadInProgress: false,
   }
@@ -27,12 +26,12 @@ class FileUploaderField extends React.Component {
   static getDerivedStateFromProps(props, state) {
     const { input: { value } } = props;
 
-    if (value && value.id) {
+    if (value && value.fileId) {
       // We've been passed an initial value for the field that is an object
       // with an ID. This means we're currently showing a previously-saved file.
       // So if this is different from the file we've saved to our internal state,
       // save it off so we can properly render the metadata.
-      if (state.file && (state.file.id !== value.id)) {
+      if (state.file && (state.file.fileId !== value.fileId)) {
         return { file: value };
       }
     }
@@ -68,9 +67,9 @@ class FileUploaderField extends React.Component {
       .then(response => {
         if (response.ok) {
           // example: file = "34bdd9da-b765-448a-8519-11d460a4df5d"
-          response.text().then(file => {
-            this.props.input.onChange(file);
-            this.setState({ file });
+          response.text().then(fileId => {
+            this.props.input.onChange(fileId);
+            this.setState({ file: { fileId } });
             // console.log(this.state.file);
             // onChange(file);
           });
