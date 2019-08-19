@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import {
   Card,
-  Col,
   Icon,
-  KeyValue,
-  MultiColumnList,
-  Row,
+  MultiColumnList
 } from '@folio/stripes/components';
 import { withStripes } from '@folio/stripes/core';
 
@@ -18,16 +14,43 @@ class DocumentCard extends React.Component {
       id: PropTypes.string,
       name: PropTypes.string,
     }),
+    fileId: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     criteria: PropTypes.string,
-    onDownloadFile: PropTypes.func,
-    // note: PropTypes.string,
-    // url: PropTypes.string,
+    location: PropTypes.string,
+    url: PropTypes.string,
+    stripes: PropTypes.shape({
+      okapi: PropTypes.shape({
+        tenant: PropTypes.string.isRequired,
+        token: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
   };
+
+
+  handleDownloadFile = (file) => {
+    const { stripes: { okapi } } = this.props;
+
+    return fetch(`${okapi.url}/finc-select/files/${file.fileId}`, {
+      headers: {
+        'X-Okapi-Tenant': okapi.tenant,
+        'X-Okapi-Token': okapi.token,
+      },
+    }).then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = file.name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+  }
 
   renderType = (line) => {
     if (line.label) return <FormattedMessage id="doc.label" />;
-    if (line.criteria) return <FormattedMessage id="doc.criteria" />;
+    if (line.url) return <FormattedMessage id="doc.url" />;
     if (line.fileUpload) return <FormattedMessage id="doc.file" />;
     // istanbul ignore next
     return null;
@@ -45,6 +68,8 @@ class DocumentCard extends React.Component {
     </a>
   )
 
+  renderLocation = (location) => <span data-test-doc-location>{location}</span>
+
   renderLabel = (label) => <span data-test-doc-label>{label}</span>
   renderCriteria = (criteria) => <span data-test-doc-criteria>{criteria}</span>
 
@@ -54,7 +79,7 @@ class DocumentCard extends React.Component {
       data-test-doc-file
       href="#"
       onClick={(e) => {
-        this.props.onDownloadFile(file);
+        this.onDownloadFile(file);
         e.preventDefault();
       }}
       rel="noopener noreferrer"
@@ -66,20 +91,23 @@ class DocumentCard extends React.Component {
   )
 
   renderReference = (line) => {
-    if (line.label) return this.renderLabel(line.label);
-    if (line.criteria) return this.renderCriteria(line.criteria);
+    if (line.url) return this.renderUrl(line.url);
+    // if (line.label) return this.renderLabel(line.label);
+    // if (line.criteria) return this.renderCriteria(line.criteria);
+    if (line.location) return this.renderLocation(line.location);
     if (line.fileUpload) return this.renderFile(line.fileUpload);
 
     return null;
   }
 
   render() {
-    const { fileUpload, label, criteria } = this.props;
+    const { fileUpload, label, fileId, url, location } = this.props;
     // const category = get(this.props, ['atType', 'label']);
 
     const contentData = [];
     if (label) contentData.push({ label });
-    if (criteria) contentData.push({ criteria });
+    // if (criteria) contentData.push({ criteria });
+    if (url) contentData.push({ url });
     if (fileUpload) contentData.push({ fileUpload });
 
     return (

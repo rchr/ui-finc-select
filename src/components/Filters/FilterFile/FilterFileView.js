@@ -20,7 +20,7 @@ class FilterFileView extends React.Component {
   renderDocs = (docs) => {
     return docs.map(doc => (
       <DocumentCard
-        key={doc.id}
+        key={doc.fileId}
         onDownloadFile={this.handleDownloadFile}
         {...doc}
       />
@@ -29,8 +29,9 @@ class FilterFileView extends React.Component {
 
   handleDownloadFile = (file) => {
     const { stripes: { okapi } } = this.props;
+    const test = file.fileId;
 
-    return fetch(`${okapi.url}/finc-select/files/${file.id}`, {
+    return fetch(`${okapi.url}/finc-select/files/${file.fileId}`, {
       headers: {
         'X-Okapi-Tenant': okapi.tenant,
         'X-Okapi-Token': okapi.token,

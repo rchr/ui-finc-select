@@ -21,7 +21,6 @@ import {
 } from '@folio/stripes/core';
 import FilterInfoView from './FilterInfo/FilterInfoView';
 import FilterFileView from './FilterFile/FilterFileView';
-import FilterSupplementaryView from './FilterSupplementary/FilterSupplementaryView';
 import FilterForm from './FilterForm';
 
 class FilterView extends React.Component {

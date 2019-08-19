@@ -20,7 +20,6 @@ import {
 import stripesForm from '@folio/stripes/form';
 import FilterInfoForm from './FilterInfo/FilterInfoForm';
 import FilterFileForm from './FilterFile/FilterFileForm';
-import FilterSupplementaryForm from './FilterSupplementary/FilterSupplementaryForm';
 
 class FilterForm extends React.Component {
   static propTypes = {
