@@ -57,8 +57,7 @@
     "okapiInterfaces": {
       "finc-select/metadata-sources": "1.0",
       "finc-select/metadata-collections": "1.0",
-      "finc-select/filters": "1.0",
-      "organizations-storage.organizations": "1.0"
+      "finc-select/filters": "1.0"
     },
     "permissionSets": [
       {
