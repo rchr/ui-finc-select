@@ -45,6 +45,17 @@
   "filter.type": "Type",
   "filter.isil": "ISIL",
 
+  "filter.file.label": "Filter file",
+  "filter.file.criteria": "Filter criteria",
+  "filter.file.download": "Download",
+  "filter.file.filename": "Filename",
+  "filter.file.remove": "Remove",
+  "filter.file.dragDrop": "Drag and drop to upload",
+  "filter.file.choose": "or choose file",
+  "filter.file.upload": "uploading",
+  "filter.file.buttonAriaLabel": "buttonAriaLabel",
+  "filter.file.addFile": "Add file to filter",
+
   "filter.generalAccordion": "Filter general",
   "filter.fileAccordion": "Filter file",
 

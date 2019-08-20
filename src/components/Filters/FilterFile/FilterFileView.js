@@ -1,9 +1,13 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  MultiColumnList,
+  Button
+} from '@folio/stripes/components';
+import {
   FormattedMessage
 } from 'react-intl';
-import DocumentCard from './DownloadFile/DocumentCard';
 
 class FilterFileView extends React.Component {
   static propTypes = {
@@ -15,21 +19,16 @@ class FilterFileView extends React.Component {
         }),
       ),
     }),
+    stripes: PropTypes.shape({
+      okapi: PropTypes.shape({
+        tenant: PropTypes.string.isRequired,
+        token: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
   };
-
-  renderDocs = (docs) => {
-    return docs.map(doc => (
-      <DocumentCard
-        key={doc.fileId}
-        onDownloadFile={this.handleDownloadFile}
-        {...doc}
-      />
-    ));
-  }
 
   handleDownloadFile = (file) => {
     const { stripes: { okapi } } = this.props;
-    const test = file.fileId;
 
     return fetch(`${okapi.url}/finc-select/files/${file.fileId}`, {
       headers: {
@@ -37,11 +36,14 @@ class FilterFileView extends React.Component {
         'X-Okapi-Token': okapi.token,
       },
     }).then(response => response.blob())
+      // .then(text => {
+      //   console.log(text);
+      // });
       .then(blob => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = file.name;
+        a.download = file.label;
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -49,14 +51,41 @@ class FilterFileView extends React.Component {
   }
 
   render() {
-    return (
-      <React.Fragment>
-        {this.props.docs.length ?
-          this.renderDocs(this.props.docs) :
-          <FormattedMessage id="supplementaryInfo.agreementHasNone" />
-        }
+    const { filter } = this.props;
+    const formatter = {
+      label: (item) => <span data-test-doc-label>{item.label}</span>,
+      criteria: (item) => <span data-test-doc-criteria>{item.criteria}</span>,
+      fileId: (item) => (
+        <div>
+          <Button
+            buttonStyle="danger"
+            onClick={(e) => {
+              this.handleDownloadFile(item);
+              e.preventDefault();
+            }}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <FormattedMessage id="ui-finc-select.filter.file.download" />
+          </Button>
+        </div>
+      ),
+    };
 
-      </React.Fragment>);
+    return (
+      <MultiColumnList
+        contentData={_.get(filter, 'filterFiles', [])}
+        formatter={formatter}
+        interactive={false}
+        isEmptyMessage="empty"
+        visibleColumns={['label', 'criteria', 'fileId']}
+        columnMapping={{
+          label: <FormattedMessage id="ui-finc-select.filter.file.label" />,
+          criteria: <FormattedMessage id="ui-finc-select.filter.file.criteria" />,
+          fileId: <FormattedMessage id="ui-finc-select.filter.file.download" />
+        }}
+      />
+    );
   }
 }
 

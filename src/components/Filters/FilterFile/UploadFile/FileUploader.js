@@ -5,8 +5,6 @@ import { isFunction, pickBy } from 'lodash';
 
 import { Button, Icon } from '@folio/stripes/components';
 
-// import Spinner from './Spinner';
-
 import css from './FileUploader.css';
 
 export default class FileUploader extends React.Component {
@@ -78,7 +76,6 @@ export default class FileUploader extends React.Component {
             <div>
               {uploadInProgressText}
               <Icon icon="spinner-ellipsis" width="10px" />
-              {/* <Spinner /> */}
             </div>
           ) : this.props.title}
         </span>

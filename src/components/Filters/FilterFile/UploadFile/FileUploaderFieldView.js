@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedDate, FormattedMessage, FormattedTime } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import {
   Col,
   Icon,
@@ -18,7 +18,6 @@ export default class FileUploaderFieldView extends React.Component {
       modified: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       fileId: PropTypes.string,
     }).isRequired,
-    // file: PropTypes.string,
     isDropZoneActive: PropTypes.bool,
     onDelete: PropTypes.func.isRequired,
     onDownloadFile: PropTypes.func.isRequired,
@@ -36,7 +35,7 @@ export default class FileUploaderFieldView extends React.Component {
     return (
       <Row>
         <Col xs={6}>
-          <KeyValue label={<FormattedMessage id="fuf.filename" />}>
+          <KeyValue label={<FormattedMessage id="ui-finc-select.filter.file.filename" />}>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a
               data-test-fuf-name
@@ -56,7 +55,7 @@ export default class FileUploaderFieldView extends React.Component {
           </KeyValue>
         </Col>
         <Col xs={2}>
-          <FormattedMessage id="fuf.removeUploaded">
+          <FormattedMessage id="ui-finc-select.filter.file.remove">
             {ariaLabel => (
               <IconButton
                 aria-label={ariaLabel}
@@ -87,7 +86,7 @@ export default class FileUploaderFieldView extends React.Component {
     } = this.props;
 
     return (
-      <FormattedMessage id="fuf.buttonAriaLabel">
+      <FormattedMessage id="ui-finc-select.filter.file.buttonAriaLabel">
         { buttonAriaLabel => (
           <FileUploader
             errorMessage={error}
@@ -97,11 +96,11 @@ export default class FileUploaderFieldView extends React.Component {
             onDragEnter={onDragEnter}
             onDragLeave={onDragLeave}
             onDrop={onDrop}
-            title={<FormattedMessage id="Drag and drop to upload" />}
+            title={<FormattedMessage id="ui-finc-select.filter.file.dragDrop" />}
             uploadButtonAriaLabel={buttonAriaLabel}
-            uploadButtonText={<FormattedMessage id="or choose file" />}
+            uploadButtonText={<FormattedMessage id="ui-finc-select.filter.file.choose" />}
             uploadInProgress={uploadInProgress}
-            uploadInProgressText={<FormattedMessage id="fuf.uploading" />}
+            uploadInProgressText={<FormattedMessage id="ui-finc-select.filter.file.upload" />}
             {...rest}
           >
             {/* <FormattedMessage id="maxFileSize" /> */}

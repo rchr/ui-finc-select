@@ -10,7 +10,6 @@ import {
   Layout,
   Row,
   Select,
-  TextArea,
   TextField,
 } from '@folio/stripes/components';
 
@@ -35,7 +34,7 @@ class DocumentsFieldArray extends React.Component {
   }
 
   static defaultProps = {
-    addDocBtnLabel: <FormattedMessage id="doc.addDoc" />,
+    addDocBtnLabel: <FormattedMessage id="ui-finc-select.filter.file.addFile" />,
     isEmptyMessage: <FormattedMessage id="doc.noDocs" />,
   }
 
@@ -95,7 +94,7 @@ class DocumentsFieldArray extends React.Component {
           'id': `${name}-delete-${i}`,
           'data-test-delete-field-button': true
         }}
-        header={<FormattedMessage id="doc.title" values={{ number: i + 1 }} />}
+        header={<FormattedMessage id="ui-finc-select.filter.file.label" values={{ number: i + 1 }} />}
         key={i}
         onDelete={() => onDeleteField(i, doc)}
       >
@@ -107,7 +106,7 @@ class DocumentsFieldArray extends React.Component {
                   data-test-document-field-label
                   component={TextField}
                   id={`${name}-label-${i}`}
-                  label={<FormattedMessage id="doc.label" />}
+                  label={<FormattedMessage id="ui-finc-select.filter.file.label" />}
                   name={`${name}[${i}].label`}
                   required
                   validate={this.validateRequired}
@@ -120,7 +119,7 @@ class DocumentsFieldArray extends React.Component {
                   data-test-document-field-criteria
                   component={TextField}
                   id={`${name}-criteria-${i}`}
-                  label={<FormattedMessage id="doc.criteria" />}
+                  label={<FormattedMessage id="ui-finc-select.filter.file.criteria" />}
                   name={`${name}[${i}].criteria`}
                 />
               </Col>
@@ -169,8 +168,7 @@ class DocumentsFieldArray extends React.Component {
           id={`add-${name}-btn`}
           onClick={() => onAddField({})}
         >
-          {/* { this.props.addDocBtnLabel } */}
-          add file to filter
+          { this.props.addDocBtnLabel }
         </Button>
       </div>
     );

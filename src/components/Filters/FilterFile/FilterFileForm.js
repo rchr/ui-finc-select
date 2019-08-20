@@ -11,8 +11,6 @@ import DocumentsFieldArray from './UploadFile/DocumentsFieldArray';
 
 class FilterFileForm extends React.Component {
   static propTypes = {
-    // handleDownloadFile: PropTypes.func.isRequired,
-    // handleUploadFile: PropTypes.func.isRequired,
     onToggle: PropTypes.func,
     stripes: PropTypes.shape({
       okapi: PropTypes.shape({
@@ -25,9 +23,6 @@ class FilterFileForm extends React.Component {
   handleUploadFile = (file) => {
     const { stripes: { okapi } } = this.props;
 
-    const formData = new FormData();
-    formData.append('upload', file);
-
     return fetch(`${okapi.url}/finc-select/files`, {
       method: 'POST',
       headers: {
@@ -35,7 +30,7 @@ class FilterFileForm extends React.Component {
         'X-Okapi-Token': okapi.token,
         'Content-Type': 'application/octet-stream'
       },
-      body: formData,
+      body: file,
     });
   }
 
@@ -69,13 +64,11 @@ class FilterFileForm extends React.Component {
         id={accordionId}
         onToggle={onToggle}
       >
-        FilterFileForm
         <FieldArray
-          addDocBtnLabel={<FormattedMessage id="supplementaryInfo.addSupplementaryInfo" />}
+          addDocBtnLabel={<FormattedMessage id="ui-finc-select.filter.file.addFile" />}
           component={DocumentsFieldArray}
           onDownloadFile={this.handleDownloadFile}
           onUploadFile={this.handleUploadFile}
-          isEmptyMessage={<FormattedMessage id="supplementaryInfo.agreementHasNone" />}
           name="filterFiles"
         />
       </Accordion>

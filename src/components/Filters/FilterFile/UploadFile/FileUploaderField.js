@@ -50,7 +50,6 @@ class FileUploaderField extends React.Component {
   }
 
   handleDrop = (acceptedFiles, intl) => {
-    // the value of the fieldId will connected with the Field in DocuemtsFieldArray with onChange(file);
     // const {
     //   input: { value, onChange }
     // } = this.props;
@@ -68,10 +67,10 @@ class FileUploaderField extends React.Component {
         if (response.ok) {
           // example: file = "34bdd9da-b765-448a-8519-11d460a4df5d"
           response.text().then(fileId => {
+            // the value of the fieldId will connected with the Field in DocuemtsFieldArray with onChange(file);
             this.props.input.onChange(fileId);
             this.setState({ file: { fileId } });
             // console.log(this.state.file);
-            // onChange(file);
           });
         } else {
           this.processError(response, intl);
