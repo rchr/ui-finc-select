@@ -57,10 +57,10 @@
     "hasSettings": false,
     "queryResource": "query",
     "okapiInterfaces": {
-      "finc-select/metadata-sources": "0.1",
-      "finc-select/metadata-collections": "0.1",
-      "finc-select/filters": "0.1",
-      "finc-select/files": "0.1"
+      "finc-select/metadata-sources": "1.0",
+      "finc-select/metadata-collections": "1.0",
+      "finc-select/filters": "1.0",
+      "finc-select/files": "1.0"
     },
     "permissionSets": [
       {

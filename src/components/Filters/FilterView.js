@@ -111,8 +111,6 @@ class FilterView extends React.Component {
     const { resources, stripes } = this.props;
     const query = resources.query;
     const initialValues = this.getData();
-    // const files = _.get(resources, 'files', []);
-    const files = [];
 
     if (_.isEmpty(initialValues)) {
       return <div style={{ paddingTop: '1rem' }}><Icon icon="spinner-ellipsis" width="100px" /></div>;

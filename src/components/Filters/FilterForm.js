@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -148,15 +149,13 @@ class FilterForm extends React.Component {
   }
 
   render() {
-    const { initialValues, handleSubmit, parentMutator } = this.props;
+    const { initialValues, handleSubmit } = this.props;
     const { confirmDelete, sections } = this.state;
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-select.filter.form.createFilter" />;
     const lastMenu = initialValues.id ?
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.updateFilter" />) :
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.createFilter" />);
-
-    const filterFiles = this.props.parentResources.filterFiles;
 
     return (
       <form id="form-filter" onSubmit={handleSubmit}>
