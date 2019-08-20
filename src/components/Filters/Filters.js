@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -11,6 +12,7 @@ import {
 import packageInfo from '../../../package';
 
 import FilterView from './FilterView';
+import FilterForm from './FilterForm';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -80,6 +82,19 @@ class Filters extends React.Component {
     intl: intlShape.isRequired
   };
 
+  closeNewInstance = (e) => {
+    if (e) e.preventDefault();
+    this.props.mutator.query.update({ layer: null });
+  }
+
+  create = (filter) => {
+    const { mutator } = this.props;
+    mutator.records.POST(filter)
+      .then(() => {
+        this.closeNewInstance();
+      });
+  }
+
   render() {
     const packageInfoReWrite = () => {
       const path = '/finc-select/filters';
@@ -99,8 +114,12 @@ class Filters extends React.Component {
           initialResultCount={INITIAL_RESULT_COUNT}
           resultCountIncrement={RESULT_COUNT_INCREMENT}
           viewRecordComponent={FilterView}
+          editRecordComponent={FilterForm}
+          newRecordInitialValues={{}}
           visibleColumns={['label', 'type']}
+          onCreate={this.create}
           viewRecordPerms="filters.item.get"
+          newRecordPerms="filters.item.post"
           parentResources={this.props.resources}
           parentMutator={this.props.mutator}
           columnMapping={{

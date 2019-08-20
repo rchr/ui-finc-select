@@ -20,6 +20,7 @@
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^3.2.1",
+    "@folio/stripes-erm-components": "^1.4.0",
     "@folio/stripes": "^2.7.0",
     "@folio/stripes-cli": "^1.12.0",
     "babel-eslint": "^9.0.0",
@@ -27,8 +28,8 @@
     "chai": "^4.2.0",
     "eslint": "^5.5.0",
     "mocha": "^5.2.0",
-    "react": "~16.6.3",
-    "react-dom": "~16.6.3",
+    "react": "~16.8.0",
+    "react-dom": "~16.8.0",
     "react-redux": "~5.1.1",
     "redux": "^4.0.0",
     "sinon": "^7.2.4"
@@ -36,6 +37,7 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
+    "react-dropzone": "^9.0.0",
     "react-intl": "^2.5.0",
     "react-router-dom": "^4.1.1",
     "redux-form": "^7.0.3"
@@ -55,9 +57,10 @@
     "hasSettings": false,
     "queryResource": "query",
     "okapiInterfaces": {
-      "finc-select/metadata-sources": "1.0",
-      "finc-select/metadata-collections": "1.0",
-      "finc-select/filters": "1.0"
+      "finc-select/metadata-sources": "0.1",
+      "finc-select/metadata-collections": "0.1",
+      "finc-select/filters": "0.1",
+      "finc-select/files": "0.1"
     },
     "permissionSets": [
       {
