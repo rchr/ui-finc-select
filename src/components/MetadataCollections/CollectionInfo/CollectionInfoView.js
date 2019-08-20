@@ -74,6 +74,7 @@ class CollectionInfoView extends React.Component {
       </React.Fragment>
     );
     const collectionId = metadataCollection.id;
+    const permitted = metadataCollection.permitted;
 
     return (
       <React.Fragment>
@@ -112,6 +113,7 @@ class CollectionInfoView extends React.Component {
               stripes={stripes}
               selectedInitial={_.get(metadataCollection, 'selected')}
               collectionId={collectionId}
+              permitted={permitted}
             />
           </Row>
         </div>
