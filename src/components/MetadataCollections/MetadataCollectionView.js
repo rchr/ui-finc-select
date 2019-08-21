@@ -119,24 +119,24 @@ class MetadataCollectionView extends React.Component {
       return <div style={{ paddingTop: '1rem' }}><Icon icon="spinner-ellipsis" width="100px" /></div>;
     } else {
       const collectionFormData = this.getCollectionFormData(initialValues);
-      const detailMenu = (
-        <PaneMenu>
-          <IfPermission perm="metadatacollections.item.put">
-            <IconButton
-              icon="edit"
-              id="clickable-edit-collection"
-              style={{
-                visibility: !initialValues
-                  ? 'hidden'
-                  : 'visible'
-              }}
-              onClick={this.props.onEdit}
-              href={this.props.editLink}
-              title="Edit Metadata Collection"
-            />
-          </IfPermission>
-        </PaneMenu>
-      );
+      // const detailMenu = (
+      //   <PaneMenu>
+      //     <IfPermission perm="metadatacollections.item.put">
+      //       <IconButton
+      //         icon="edit"
+      //         id="clickable-edit-collection"
+      //         style={{
+      //           visibility: !initialValues
+      //             ? 'hidden'
+      //             : 'visible'
+      //         }}
+      //         onClick={this.props.onEdit}
+      //         href={this.props.editLink}
+      //         title="Edit Metadata Collection"
+      //       />
+      //     </IfPermission>
+      //   </PaneMenu>
+      // );
 
       const label = _.get(initialValues, 'label', '-');
 
@@ -145,7 +145,7 @@ class MetadataCollectionView extends React.Component {
           defaultWidth={this.props.paneWidth}
           id="pane-collectiondetails"
           paneTitle={<span data-test-collection-header-title>{label}</span>}
-          lastMenu={detailMenu}
+          // lastMenu={detailMenu}
           dismissible
           onClose={this.props.onClose}
         >

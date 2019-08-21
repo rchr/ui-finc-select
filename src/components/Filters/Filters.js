@@ -117,8 +117,8 @@ class Filters extends React.Component {
           newRecordInitialValues={{}}
           visibleColumns={['label', 'type']}
           onCreate={this.create}
-          viewRecordPerms="filters.item.get"
-          newRecordPerms="filters.item.post"
+          viewRecordPerms="finc-select.filters.item.get"
+          newRecordPerms="finc-select.filters.item.post"
           parentResources={this.props.resources}
           parentMutator={this.props.mutator}
           columnMapping={{

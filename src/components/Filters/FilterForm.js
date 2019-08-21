@@ -109,7 +109,7 @@ class FilterForm extends React.Component {
       // set button to save changes
       <PaneMenu>
         {isEditing &&
-        <IfPermission perm="metadatacollections.item.delete">
+        <IfPermission perm="finc-select.filters.item.delete">
           <Button
             id="clickable-delete-udp"
             title="delete"
@@ -118,7 +118,7 @@ class FilterForm extends React.Component {
             disabled={confirmDelete}
             marginBottom0
           >
-            <FormattedMessage id="ui-finc-config.collection.form.deleteCollection" />
+            <FormattedMessage id="ui-finc-select.filter.form.deleteFilter" />
           </Button>
         </IfPermission>
         }

@@ -117,7 +117,7 @@ class MetadataSources extends React.Component {
           resultCountIncrement={RESULT_COUNT_INCREMENT}
           viewRecordComponent={MetadataSourceView}
           visibleColumns={['label', 'sourceId', 'status', 'lastProcessed']}
-          viewRecordPerms="metadatasources.item.get"
+          viewRecordPerms="finc-select.metadata-sources.item.get"
           parentResources={this.props.resources}
           parentMutator={this.props.mutator}
           columnMapping={{
