@@ -77,12 +77,12 @@ class FilterFileView extends React.Component {
         contentData={_.get(filter, 'filterFiles', [])}
         formatter={formatter}
         interactive={false}
-        isEmptyMessage="isEmptyMessage"
+        isEmptyMessage={<FormattedMessage id="ui-finc-select.filter.file.empty" />}
         visibleColumns={['label', 'criteria', 'fileId']}
         columnMapping={{
           label: <FormattedMessage id="ui-finc-select.filter.file.label" />,
           criteria: <FormattedMessage id="ui-finc-select.filter.file.criteria" />,
-          fileId: <FormattedMessage id="ui-finc-select.filter.file.download" />
+          fileId: ''
         }}
       />
     );

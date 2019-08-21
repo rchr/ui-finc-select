@@ -25,10 +25,11 @@ export default class FileUploaderFieldView extends React.Component {
     onDragLeave: PropTypes.func,
     onDrop: PropTypes.func.isRequired,
     uploadInProgress: PropTypes.bool,
+    fileLabel: PropTypes.string
   }
 
   renderFileInfo = () => {
-    const { file } = this.props;
+    const { file, fileLabel } = this.props;
 
     if (!file) return null;
 
@@ -48,8 +49,7 @@ export default class FileUploaderFieldView extends React.Component {
               rel="noopener noreferrer"
               target="_blank"
             >
-              {/* TODO: get filename */}
-              {file.fileId}
+              {fileLabel}
               <Icon icon="external-link" />
             </a>
           </KeyValue>

@@ -9,7 +9,6 @@ import {
   Col,
   Layout,
   Row,
-  Select,
   TextField,
 } from '@folio/stripes/components';
 
@@ -26,16 +25,12 @@ class DocumentsFieldArray extends React.Component {
     items: PropTypes.arrayOf(PropTypes.object),
     name: PropTypes.string.isRequired,
     onAddField: PropTypes.func.isRequired,
-    onDeleteField: PropTypes.func.isRequired,
-    documentCategories: PropTypes.arrayOf(PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.string,
-    })),
+    onDeleteField: PropTypes.func.isRequired
   }
 
   static defaultProps = {
     addDocBtnLabel: <FormattedMessage id="ui-finc-select.filter.file.addFile" />,
-    isEmptyMessage: <FormattedMessage id="doc.noDocs" />,
+    isEmptyMessage: <FormattedMessage id="ui-finc-select.filter.file.empty" />,
   }
 
   validateDocIsSpecified = (value, allValues, props, fieldName) => {
@@ -51,32 +46,6 @@ class DocumentsFieldArray extends React.Component {
   validateRequired = (value) => (
     !value ? <FormattedMessage id="missingRequiredField" /> : undefined
   )
-
-  renderCategory = (i) => {
-    const { documentCategories, name } = this.props;
-
-    if (get(documentCategories, 'length', 0) === 0) return null;
-
-    return (
-      <Row>
-        <Col xs={12}>
-          <FormattedMessage id="placeholder.documentCategory">
-            {placeholder => (
-              <Field
-                component={Select}
-                data-test-document-field-category
-                dataOptions={documentCategories}
-                id={`${name}-category-${i}`}
-                label={<FormattedMessage id="doc.category" />}
-                name={`${name}[${i}].atType`}
-                placeholder={placeholder}
-              />
-            )}
-          </FormattedMessage>
-        </Col>
-      </Row>
-    );
-  }
 
   renderDocs = () => {
     const {
@@ -124,7 +93,6 @@ class DocumentsFieldArray extends React.Component {
                 />
               </Col>
             </Row>
-            { this.renderCategory(i) }
           </Col>
           {onUploadFile &&
             <Col xs={12} md={6}>
@@ -138,6 +106,7 @@ class DocumentsFieldArray extends React.Component {
                     name={`${name}[${i}].fileId`}
                     onDownloadFile={onDownloadFile}
                     onUploadFile={onUploadFile}
+                    fileLabel={doc.label}
                     // validate={this.validateDocIsSpecified}
                   />
                 </Col>

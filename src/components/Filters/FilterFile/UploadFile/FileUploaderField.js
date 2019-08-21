@@ -14,6 +14,7 @@ class FileUploaderField extends React.Component {
       value: PropTypes.string,
     }).isRequired,
     meta: PropTypes.object,
+    fileLabel: PropTypes.string
   };
 
   state = {
@@ -92,6 +93,8 @@ class FileUploaderField extends React.Component {
   }
 
   render() {
+    const { fileLabel } = this.props;
+
     return (
       /* TODO: Refactor this component to use `injectIntl` when Folio starts using react-intl 3.0 */
       <IntlConsumer>
@@ -107,6 +110,7 @@ class FileUploaderField extends React.Component {
             onDrop={(file) => this.handleDrop(file, intl)}
             uploadInProgress={this.state.uploadInProgress}
             {...pickBy(this.props, (_, key) => key.startsWith('data-test-'))}
+            fileLabel={fileLabel}
           />
         )}
       </IntlConsumer>
