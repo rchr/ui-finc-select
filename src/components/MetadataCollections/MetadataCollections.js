@@ -203,7 +203,7 @@ class MetadataCollections extends React.Component {
           editRecordComponent={MetadataCollectionForm}
           visibleColumns={['label', 'mdSource', 'permitted', 'filters', 'freeContent']}
           resultsFormatter={resultsFormatter}
-          viewRecordPerms="metadatacollections.item.get"
+          viewRecordPerms="finc-select.metadata-collections.item.get"
           parentResources={this.props.resources}
           parentMutator={this.props.mutator}
           columnMapping={{

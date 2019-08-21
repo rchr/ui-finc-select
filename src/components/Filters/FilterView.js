@@ -118,7 +118,7 @@ class FilterView extends React.Component {
       const filterFormData = this.getFilterFormData(initialValues);
       const detailMenu = (
         <PaneMenu>
-          <IfPermission perm="filter.item.put">
+          <IfPermission perm="finc-select.filters.item.put">
             <IconButton
               icon="edit"
               id="clickable-edit-filter"
