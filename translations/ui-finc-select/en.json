@@ -55,6 +55,7 @@
   "filter.file.upload": "uploading",
   "filter.file.buttonAriaLabel": "buttonAriaLabel",
   "filter.file.addFile": "Add file to filter",
+  "filter.file.empty": "Filter has no file",
 
   "filter.generalAccordion": "Filter general",
   "filter.fileAccordion": "Filter file",

@@ -189,14 +189,6 @@ class FilterForm extends React.Component {
                 onToggle={this.handleSectionToggle}
                 {...this.props}
               />
-              {/* <FilterSupplementaryForm
-                accordionId="editFilterSupplementary"
-                filter={initialValues}
-                filterFiles={filterFiles.records}
-                data={filterFiles.records}
-                parentMutator={parentMutator}
-                {...this.props}
-              /> */}
               <ConfirmationModal
                 id="delete-filter-confirmation"
                 heading={<FormattedMessage id="ui-finc-select.filter.form.deleteFilter" />}
