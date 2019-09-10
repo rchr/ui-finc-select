@@ -11,6 +11,10 @@ import MetadataCollections from './components/MetadataCollections/MetadataCollec
 import Filters from './components/Filters/Filters';
 import css from './components/BasicStyle.css';
 
+const defaultFiltersCollections = 'permitted.yes,selected.yes';
+const defaultFiltersSources = 'status.Active,status.Technical implementation';
+const defaultFiltersFilters = 'type.Whitelist,type.Blacklist';
+
 class Main extends React.Component {
   static propTypes = {
     location: PropTypes.shape({
@@ -40,16 +44,6 @@ class Main extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.setTabID();
-  }
-
-  setTabID(tabInCurrentUrl) {
-    this.setState({
-      activeTab: tabInCurrentUrl,
-    });
-  }
-
   handleClick(id) {
     this.props.history.push(`/finc-select/${id}`);
   }
@@ -69,7 +63,7 @@ class Main extends React.Component {
             <Button
               id="metadata-sources"
               fullWidth
-              onClick={() => this.handleClick('metadata-sources')}
+              onClick={() => this.handleClick(`metadata-sources?filters=${defaultFiltersSources}`)}
               buttonStyle={this.state.activeTab === 'metadata-sources' ? 'primary' : 'default'}
             >
               Sources
@@ -77,7 +71,7 @@ class Main extends React.Component {
             <Button
               id="metadata-collections"
               fullWidth
-              onClick={() => this.handleClick('metadata-collections')}
+              onClick={() => this.handleClick(`metadata-collections?filters=${defaultFiltersCollections}`)}
               buttonStyle={this.state.activeTab === 'metadata-collections' ? 'primary' : 'default'}
             >
               Collections
@@ -85,7 +79,7 @@ class Main extends React.Component {
             <Button
               id="filters"
               fullWidth
-              onClick={() => this.handleClick('filters')}
+              onClick={() => this.handleClick(`filters?filters=${defaultFiltersFilters}`)}
               buttonStyle={this.state.activeTab === 'filters' ? 'primary' : 'default'}
             >
               Filters
@@ -125,7 +119,7 @@ class Main extends React.Component {
               />
               }
             />
-            <Redirect exact from={`${match.path}`} to={`${match.path}/metadata-sources`} />
+            <Redirect exact from={`${match.path}`} to={`${match.path}/metadata-sources?filters=${defaultFiltersSources}`} />
           </Switch>
         </div>
       </div>

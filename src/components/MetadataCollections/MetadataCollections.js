@@ -57,7 +57,7 @@ class MetadataCollections extends React.Component {
     query: {
       initialValue: {
         query: '',
-        filters: '',
+        filters: 'permitted.yes,selected.yes',
         sort: 'label',
       },
     },

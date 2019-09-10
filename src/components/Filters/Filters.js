@@ -34,7 +34,7 @@ class Filters extends React.Component {
     query: {
       initialValue: {
         query: '',
-        filters: '',
+        filters: 'type.Whitelist,type.Blacklist',
         sort: 'label',
       },
     },
