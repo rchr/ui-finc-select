@@ -44,7 +44,7 @@ class MetadataSources extends React.Component {
     query: {
       initialValue: {
         query: '',
-        filters: '',
+        filters: 'status.Active,status.Technical implementation',
         sort: 'label',
       },
     },
