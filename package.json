@@ -51,11 +51,10 @@
     "redux": "*"
   },
   "stripes": {
-    "type": "app",
+    "actsAs": ["app"],
     "displayName": "ui-finc-select.meta.title",
     "route": "/finc-select",
     "home": "/finc-select",
-    "hasSettings": false,
     "queryResource": "query",
     "okapiInterfaces": {
       "finc-select/metadata-sources": "1.0",
