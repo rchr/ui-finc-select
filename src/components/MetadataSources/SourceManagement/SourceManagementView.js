@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import {
@@ -21,9 +22,7 @@ class SourceManagementView extends React.Component {
         connect: PropTypes.func.isRequired,
       })
       .isRequired,
-    history: PropTypes.shape({
-      push: PropTypes.string,
-    }),
+    history: ReactRouterPropTypes.history,
   };
 
   constructor(props) {

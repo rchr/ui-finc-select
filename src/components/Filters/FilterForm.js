@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage
@@ -34,6 +35,7 @@ class FilterForm extends React.Component {
     initialValues: PropTypes.object,
     parentResources: PropTypes.shape().isRequired,
     parentMutator: PropTypes.object.isRequired,
+    match: ReactRouterPropTypes.match,
   };
 
   constructor(props) {
