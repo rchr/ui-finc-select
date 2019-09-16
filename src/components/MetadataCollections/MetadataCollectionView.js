@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {
@@ -9,14 +10,11 @@ import {
   Col,
   ExpandAllButton,
   Icon,
-  IconButton,
   Layer,
   Pane,
-  PaneMenu,
   Row
 } from '@folio/stripes/components';
 import {
-  IfPermission,
   TitleManager
 } from '@folio/stripes/core';
 
@@ -48,11 +46,7 @@ class MetadataCollectionView extends React.Component {
     mutator: PropTypes.shape({
       query: PropTypes.object.isRequired,
     }),
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string
-      })
-    }),
+    match: ReactRouterPropTypes.match,
     parentResources: PropTypes.shape(),
     parentMutator: PropTypes.shape().isRequired,
     onClose: PropTypes.func,

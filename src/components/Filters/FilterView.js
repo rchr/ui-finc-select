@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {
@@ -46,11 +47,7 @@ class FilterView extends React.Component {
     mutator: PropTypes.shape({
       query: PropTypes.object.isRequired,
     }),
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string
-      })
-    }),
+    match: ReactRouterPropTypes.match,
     parentResources: PropTypes.shape(),
     parentMutator: PropTypes.shape().isRequired,
     onClose: PropTypes.func,

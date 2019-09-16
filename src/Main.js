@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import {
@@ -17,12 +18,9 @@ const defaultFiltersFilters = 'type.Whitelist,type.Blacklist';
 
 class Main extends React.Component {
   static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
-    match: PropTypes.shape({
-      path: PropTypes.string,
-    }),
+    history: ReactRouterPropTypes.history,
+    location: ReactRouterPropTypes.location,
+    match: ReactRouterPropTypes.match,
     stripes: PropTypes.object,
     mutator: PropTypes.object,
     resources: PropTypes.object,

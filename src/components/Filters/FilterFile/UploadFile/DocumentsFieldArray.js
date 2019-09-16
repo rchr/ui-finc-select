@@ -100,7 +100,7 @@ class DocumentsFieldArray extends React.Component {
                 <Col xs={12}>
                   <Field
                     component={FileUploaderField}
-                    data-test-document-field-fileId
+                    data-test-document-field-fileid
                     id={`${name}-fileId-${i}`}
                     label={<FormattedMessage id="doc.fileId" />}
                     name={`${name}[${i}].fileId`}
