@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import {
   Col,
   Icon,
-  IconButton,
   KeyValue,
   Row,
 } from '@folio/stripes/components';
@@ -53,21 +52,6 @@ export default class FileUploaderFieldView extends React.Component {
               <Icon icon="external-link" />
             </a>
           </KeyValue>
-        </Col>
-        <Col xs={2}>
-          <FormattedMessage id="ui-finc-select.filter.file.remove">
-            {ariaLabel => (
-              <IconButton
-                aria-label={ariaLabel}
-                data-test-fuf-delete
-                icon="trash"
-                onClick={e => {
-                  e.stopPropagation();
-                  this.props.onDelete(file);
-                }}
-              />
-            )}
-          </FormattedMessage>
         </Col>
       </Row>
     );

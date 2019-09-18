@@ -37,8 +37,9 @@ export default function withKiwtFieldArray(WrappedComponent) {
 
     handleMarkForDeletion = (field) => {
       const { fields } = this.props;
-      if (field.id) {
-        fields.push({ id: field.id, _delete: true });
+      // set _delete true for removing file in database after conform deletion
+      if (field.fileId) {
+        fields.push({ label: field.label, fileId: field.fileId, _delete: true });
       }
     }
 
