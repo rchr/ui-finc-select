@@ -1,5 +1,16 @@
 # Change history for ui-finc-select
 
+## [1.1.0](https://github.com/folio-org/ui-finc-select/tree/v1.1.0) (2019-09-18)
+* Frontend manages filters filter-files (UIFC-60)
+* Disable select button, if usage is not permitted (UIFC-72)
+* Organizations plugin (UIFC-75)
+* Adapt interface version
+* Show name of filterfile in edit form (UIFC-77)
+* Rename permissions (UIFC-78)
+* Change order of filters (UIFC-74)
+* Set default filters for finc-select (UIFC-80)
+* Update dependencies; fixing warnings (UIFC-82)
+
 ## [1.0.0](https://github.com/folio-org/ui-finc-select/tree/v1.0.0) (2019-07-23)
 * Frontend manages filters SearchAndSort (UIFC-56)
 * "show selected collections" redirects to filtered collections list view (UIFC-44)
