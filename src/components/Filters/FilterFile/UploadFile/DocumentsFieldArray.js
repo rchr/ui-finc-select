@@ -107,6 +107,8 @@ class DocumentsFieldArray extends React.Component {
                     onDownloadFile={onDownloadFile}
                     onUploadFile={onUploadFile}
                     fileLabel={doc.label}
+                    required
+                    validate={this.validateRequired}
                     // validate={this.validateDocIsSpecified}
                   />
                 </Col>
