@@ -31,7 +31,7 @@ export default function withKiwtFieldArray(WrappedComponent) {
     handleReplaceField = (index, field) => {
       setTimeout(() => {
         this.props.fields.remove(index);
-        this.props.fields.insert(index, field);
+        this.props.fields.insert(index, field.fileId);
       }, 500);
     }
 

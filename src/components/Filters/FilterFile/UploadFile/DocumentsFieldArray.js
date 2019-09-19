@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
+// import { get } from 'lodash';
+import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 
 import {
   Button,
   Col,
+  Icon,
   Layout,
   Row,
   TextField,
@@ -25,7 +27,16 @@ class DocumentsFieldArray extends React.Component {
     items: PropTypes.arrayOf(PropTypes.object),
     name: PropTypes.string.isRequired,
     onAddField: PropTypes.func.isRequired,
-    onDeleteField: PropTypes.func.isRequired
+    onDeleteField: PropTypes.func.isRequired,
+    onMarkforDeletion: PropTypes.func,
+    onReplaceField: PropTypes.func,
+    fields: PropTypes.shape({
+      getAll: PropTypes.func.isRequired,
+      insert: PropTypes.func.isRequired,
+      name: PropTypes.string.isRequired,
+      push: PropTypes.func.isRequired,
+      remove: PropTypes.func.isRequired,
+    }).isRequired
   }
 
   static defaultProps = {
@@ -33,19 +44,71 @@ class DocumentsFieldArray extends React.Component {
     isEmptyMessage: <FormattedMessage id="ui-finc-select.filter.file.empty" />,
   }
 
-  validateDocIsSpecified = (value, allValues, props, fieldName) => {
-    const index = parseInt(/\[([0-9]*)\]/.exec(fieldName)[1], 10);
-    const { fileUpload, label, name } = get(allValues, [this.props.name, index], {});
-    if (name && (!fileUpload && !label)) {
-      return <FormattedMessage id="doc.error.docsMustHaveLocationOrURL" />;
-    }
+  // validateDocIsSpecified = (value, allValues, props, fieldName) => {
+  //   const index = parseInt(/\[([0-9]*)\]/.exec(fieldName)[1], 10);
+  //   const { fileUpload, label, name } = get(allValues, [this.props.name, index], {});
+  //   if (name && (!fileUpload && !label)) {
+  //     return <FormattedMessage id="doc.error.docsMustHaveLocationOrURL" />;
+  //   }
 
-    return undefined;
-  }
+  //   return undefined;
+  // }
 
   validateRequired = (value) => (
     !value ? <FormattedMessage id="missingRequiredField" /> : undefined
   )
+
+  renderFileUpload = (doc, onUploadFile, onDownloadFile, name, i) => {
+    const { onDeleteField, onMarkforDeletion, onReplaceField } = this.props;
+
+    if (_.isEmpty(doc)) {
+      return (
+        <React.Fragment>
+          {onUploadFile &&
+            <Col xs={12} md={6}>
+              <Row>
+                <Col xs={12}>
+                  <Field
+                    component={FileUploaderField}
+                    data-test-document-field-fileid
+                    id={`${name}-fileId-${i}`}
+                    label={<FormattedMessage id="doc.fileId" />}
+                    name={`${name}[${i}].fileId`}
+                    onDownloadFile={onDownloadFile}
+                    onUploadFile={onUploadFile}
+                    fileLabel={doc.label}
+                    required
+                    validate={this.validateRequired}
+                    // validate={this.validateDocIsSpecified}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          }
+        </React.Fragment>
+      );
+    } else {
+      const fileConnectedText = `The filter file ${doc.label} is connected.`;
+      return (
+        <React.Fragment>
+          {fileConnectedText}
+          <Button
+            buttonStyle="link slim"
+            style={{ margin: 0, padding: 0 }}
+            // onClick={() => onMarkforDeletion(doc)}
+            onClick={e => {
+              e.stopPropagation();
+              // onDeleteField(i, doc);
+              onMarkforDeletion(doc); // need this and additionaly need to remove the file-FK in the filters table
+              // onReplaceField(i, doc);
+            }}
+          >
+            <Icon icon="trash" />
+          </Button>
+        </React.Fragment>
+      );
+    }
+  }
 
   renderDocs = () => {
     const {
@@ -94,7 +157,8 @@ class DocumentsFieldArray extends React.Component {
               </Col>
             </Row>
           </Col>
-          {onUploadFile &&
+          {this.renderFileUpload(doc, onUploadFile, onDownloadFile, name, i)}
+          {/* {onUploadFile &&
             <Col xs={12} md={6}>
               <Row>
                 <Col xs={12}>
@@ -114,7 +178,7 @@ class DocumentsFieldArray extends React.Component {
                 </Col>
               </Row>
             </Col>
-          }
+          } */}
         </Row>
       </EditCard>
     ));
