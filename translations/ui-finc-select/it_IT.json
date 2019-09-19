@@ -1,6 +1,6 @@
 {
     "meta.title": "Selezione Finc",
-    "collection.description": "Description",
+    "collection.description": "Descrizione",
     "collection.facetLabel": "Etichetta della faccetta",
     "collection.filters": "Attiva filtri",
     "collection.freeContent": "Free content",
@@ -20,7 +20,7 @@
     "source.indexingLevel": "Livello di indicizzazione",
     "source.label": "Nome della fonte",
     "source.lastProcessed": "Ultima elaborazione",
-    "source.organization": "Organization",
+    "source.organization": "Organizzazione",
     "source.selectedCollections": "Collezioni selezionate",
     "source.sourceId": "Source ID",
     "source.status": "Impl. stato",
