@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   Col,
-  Icon,
   KeyValue,
   Row,
 } from '@folio/stripes/components';
@@ -37,7 +36,7 @@ export default class FileUploaderFieldView extends React.Component {
         <Col xs={6}>
           <KeyValue label={<FormattedMessage id="ui-finc-select.filter.file.filename" />}>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a
+            {/* <a
               data-test-fuf-name
               href="#"
               onClick={(e) => {
@@ -50,7 +49,8 @@ export default class FileUploaderFieldView extends React.Component {
             >
               {fileLabel}
               <Icon icon="external-link" />
-            </a>
+            </a> */}
+            {fileLabel}
           </KeyValue>
         </Col>
       </Row>
