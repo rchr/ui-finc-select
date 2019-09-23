@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   Col,
-  Icon,
   KeyValue,
   Row,
 } from '@folio/stripes/components';

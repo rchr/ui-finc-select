@@ -8,7 +8,7 @@ import { Field } from 'redux-form';
 import {
   Button,
   Col,
-  Icon,
+  // Icon,
   Layout,
   Row,
   TextField,
@@ -28,8 +28,8 @@ class DocumentsFieldArray extends React.Component {
     name: PropTypes.string.isRequired,
     onAddField: PropTypes.func.isRequired,
     onDeleteField: PropTypes.func.isRequired,
-    onMarkforDeletion: PropTypes.func,
-    onReplaceField: PropTypes.func,
+    // onMarkforDeletion: PropTypes.func,
+    // onReplaceField: PropTypes.func,
     fields: PropTypes.shape({
       getAll: PropTypes.func.isRequired,
       insert: PropTypes.func.isRequired,
@@ -59,9 +59,9 @@ class DocumentsFieldArray extends React.Component {
   )
 
   renderFileUpload = (doc, onUploadFile, onDownloadFile, name, i) => {
-    const { onDeleteField, onMarkforDeletion, onReplaceField } = this.props;
+    // const { onDeleteField, onMarkforDeletion, onReplaceField } = this.props;
 
-    if (_.isEmpty(doc)) {
+    if (_.isEmpty(doc.fileId)) {
       return (
         <React.Fragment>
           {onUploadFile &&
@@ -92,19 +92,19 @@ class DocumentsFieldArray extends React.Component {
       return (
         <React.Fragment>
           {fileConnectedText}
-          <Button
+          {/* delete-Button */}
+          {/* <Button
             buttonStyle="link slim"
             style={{ margin: 0, padding: 0 }}
-            // onClick={() => onMarkforDeletion(doc)}
             onClick={e => {
               e.stopPropagation();
-              // onDeleteField(i, doc);
-              onMarkforDeletion(doc); // need this and additionaly need to remove the file-FK in the filters table
+              onDeleteField(i, doc);
+              // onMarkforDeletion(doc); // need this and additionaly need to remove the file-FK in the filters table
               // onReplaceField(i, doc);
             }}
           >
             <Icon icon="trash" />
-          </Button>
+          </Button> */}
         </React.Fragment>
       );
     }
@@ -158,27 +158,6 @@ class DocumentsFieldArray extends React.Component {
             </Row>
           </Col>
           {this.renderFileUpload(doc, onUploadFile, onDownloadFile, name, i)}
-          {/* {onUploadFile &&
-            <Col xs={12} md={6}>
-              <Row>
-                <Col xs={12}>
-                  <Field
-                    component={FileUploaderField}
-                    data-test-document-field-fileid
-                    id={`${name}-fileId-${i}`}
-                    label={<FormattedMessage id="doc.fileId" />}
-                    name={`${name}[${i}].fileId`}
-                    onDownloadFile={onDownloadFile}
-                    onUploadFile={onUploadFile}
-                    fileLabel={doc.label}
-                    required
-                    validate={this.validateRequired}
-                    // validate={this.validateDocIsSpecified}
-                  />
-                </Col>
-              </Row>
-            </Col>
-          } */}
         </Row>
       </EditCard>
     ));
