@@ -48,7 +48,7 @@
     "filter.file.addFile": "Add file to filter",
     "filter.generalAccordion": "Filter general",
     "filter.fileAccordion": "Filter file",
-    "filter.form.deleteFilter": "Delete filter",
+    "filter.form.deleteFilter": "Elimina filtro",
     "filter.form.createFilter": "Create filter",
     "filter.form.updateFilter": "Update filter",
     "filter.file.empty": "Filter has no file"
