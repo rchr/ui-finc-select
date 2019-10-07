@@ -1,5 +1,10 @@
 # Change history for ui-finc-select
 
+## [1.2.0](https://github.com/folio-org/ui-finc-select/tree/v1.2.0) (2019-10-07)
+* Filter files cannot be edited. On change files need to be deleted and posted (UIFC-88)
+* Choosing a filter file is required (UIFC-87)
+* Delete filter files (UIFC-76)
+
 ## [1.1.0](https://github.com/folio-org/ui-finc-select/tree/v1.1.0) (2019-09-18)
 * Frontend manages filters filter-files (UIFC-60)
 * Disable select button, if usage is not permitted (UIFC-72)
