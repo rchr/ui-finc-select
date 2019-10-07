@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Card, Icon } from '@folio/stripes/components';
+import {
+  Button,
+  Card,
+  Icon
+} from '@folio/stripes/components';
 
 
 export default class EditCard extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    deleteBtnProps: PropTypes.object,
     header: PropTypes.node.isRequired,
+    deleteBtnProps: PropTypes.object,
     onDelete: PropTypes.func,
   }
 

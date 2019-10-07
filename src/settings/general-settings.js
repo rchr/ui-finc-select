@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Pane } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
+
+import { Pane } from '@folio/stripes/components';
 
 export default class GeneralSettings extends React.Component {
   static propTypes = {
@@ -10,7 +11,11 @@ export default class GeneralSettings extends React.Component {
 
   render() {
     return (
-      <Pane defaultWidth="fill" fluidContentWidth paneTitle={this.props.label}>
+      <Pane
+        defaultWidth="fill"
+        fluidContentWidth
+        paneTitle={this.props.label}
+      >
         <div data-test-application-settings-general-message>
           <FormattedMessage id="ui-finc-select.settings.general.message" />
         </div>

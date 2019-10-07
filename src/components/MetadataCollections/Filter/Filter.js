@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { AccordionSet } from '@folio/stripes/components';
+
 import SourceFilter from './SourceFilter';
-import { sourcesShape } from './Shape';
 import FincCheckboxFilter from './FincCheckboxFilter';
+import { sourcesShape } from './Shape';
 
 class Filter extends React.Component {
   static propTypes = {

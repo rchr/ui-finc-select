@@ -5,17 +5,16 @@ import {
   injectIntl,
   intlShape
 } from 'react-intl';
+
 import {
   makeQueryFunction,
   SearchAndSort
 } from '@folio/stripes/smart-components';
 
 import packageInfo from '../../../package';
-
 import MetadataCollectionView from './MetadataCollectionView';
 import MetadataCollectionForm from './MetadataCollectionForm';
 import Filter from './Filter/Filter';
-
 import {
   handleFilterChange,
   getActiveFilters
@@ -134,6 +133,7 @@ class MetadataCollections extends React.Component {
 
   getArrayElementsCommaSeparated = (array) => {
     let formatted = '';
+
     if (array && array.length) {
       for (let i = 0; i < array.length; i += 1) {
         formatted += (i > 0 ? '; ' : '') + array[i];

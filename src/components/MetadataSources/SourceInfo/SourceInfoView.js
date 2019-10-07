@@ -1,9 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   KeyValue,
   Row
@@ -11,13 +10,13 @@ import {
 
 class SourceInfoView extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
     metadataSource: PropTypes.object.isRequired,
     stripes: PropTypes
       .shape({
         connect: PropTypes.func.isRequired,
       })
       .isRequired,
+    id: PropTypes.string,
   };
 
   render() {

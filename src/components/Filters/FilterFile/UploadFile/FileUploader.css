@@ -2,9 +2,9 @@
 
 .upload {
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 100%;
   padding: var(--gutter);
   border: 1px dashed var(--color-border);
@@ -20,9 +20,9 @@
 }
 
 .activeUpload {
-  background-color: var(--color-fill-current);
-  color: var(--bg);
   border-style: dashed;
+  color: var(--bg);
+  background-color: var(--color-fill-current);
 }
 
 .activeUploadTitle {
@@ -35,9 +35,9 @@
 }
 
 .footer {
-  border-top: 1px solid var(--color-border);
   width: 100%;
   padding: var(--gutter-static-one-third) var(--gutter);
+  border-top: 1px solid var(--color-border);
 }
 
 .errorMessage {

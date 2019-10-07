@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { pickBy } from 'lodash';
-import { withStripes, IntlConsumer } from '@folio/stripes/core';
+
+import {
+  withStripes,
+  IntlConsumer
+} from '@folio/stripes/core';
 
 import FileUploaderFieldView from './FileUploaderFieldView';
 
@@ -42,6 +46,7 @@ class FileUploaderField extends React.Component {
 
   processError(resp, intl) {
     const contentType = resp.headers ? resp.headers.get('Content-Type') : '';
+
     // if (contentType.startsWith('application/octet-stream')) {
     if (contentType.startsWith('application/json')) {
       throw new Error(`${resp.message} (${resp.error})`);

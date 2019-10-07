@@ -20,11 +20,6 @@ import withKiwtFieldArray from './withKiwtFieldArray';
 
 class DocumentsFieldArray extends React.Component {
   static propTypes = {
-    addDocBtnLabel: PropTypes.node,
-    onDownloadFile: PropTypes.func,
-    onUploadFile: PropTypes.func,
-    isEmptyMessage: PropTypes.node,
-    items: PropTypes.arrayOf(PropTypes.object),
     name: PropTypes.string.isRequired,
     onAddField: PropTypes.func.isRequired,
     onDeleteField: PropTypes.func.isRequired,
@@ -36,7 +31,12 @@ class DocumentsFieldArray extends React.Component {
       name: PropTypes.string.isRequired,
       push: PropTypes.func.isRequired,
       remove: PropTypes.func.isRequired,
-    }).isRequired
+    }).isRequired,
+    addDocBtnLabel: PropTypes.node,
+    onDownloadFile: PropTypes.func,
+    onUploadFile: PropTypes.func,
+    isEmptyMessage: PropTypes.node,
+    items: PropTypes.arrayOf(PropTypes.object),
   }
 
   static defaultProps = {
@@ -164,7 +164,10 @@ class DocumentsFieldArray extends React.Component {
   }
 
   renderEmpty = () => (
-    <Layout data-test-document-field-empty-message className="padding-bottom-gutter">
+    <Layout
+      data-test-document-field-empty-message
+      className="padding-bottom-gutter"
+    >
       { this.props.isEmptyMessage }
     </Layout>
   )
