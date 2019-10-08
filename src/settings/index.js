@@ -1,6 +1,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { Settings } from '@folio/stripes/smart-components';
+
 import GeneralSettings from './general-settings';
 import SomeFeatureSettings from './some-feature-settings';
 
@@ -26,7 +28,11 @@ export default class FincSelectSettings extends React.Component {
 
   render() {
     return (
-      <Settings {...this.props} pages={this.pages} paneTitle="finc-select" />
+      <Settings
+        {...this.props}
+        pages={this.pages}
+        paneTitle="finc-select"
+      />
     );
   }
 }

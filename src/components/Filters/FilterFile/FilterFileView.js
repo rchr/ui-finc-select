@@ -1,13 +1,12 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+
 import {
   MultiColumnList,
   Button
 } from '@folio/stripes/components';
-import {
-  FormattedMessage
-} from 'react-intl';
 
 class FilterFileView extends React.Component {
   static propTypes = {

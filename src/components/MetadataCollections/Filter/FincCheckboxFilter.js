@@ -7,6 +7,7 @@ import {
   FilterAccordionHeader,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
+
 import { createClearFilterHandler } from './Util';
 
 const FincCheckboxFilter = ({
@@ -38,12 +39,12 @@ const FincCheckboxFilter = ({
 };
 
 FincCheckboxFilter.propTypes = {
-  activeFilters: PropTypes.arrayOf(PropTypes.string),
-  closedByDefault: PropTypes.bool,
-  id: PropTypes.string,
   labelId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  activeFilters: PropTypes.arrayOf(PropTypes.string),
+  closedByDefault: PropTypes.bool,
+  id: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.shape({
     disabled: PropTypes.bool,
     label: PropTypes.node,

@@ -4,12 +4,13 @@ import {
   injectIntl,
   intlShape
 } from 'react-intl';
+
 import {
   makeQueryFunction,
   SearchAndSort
 } from '@folio/stripes/smart-components';
-import packageInfo from '../../../package';
 
+import packageInfo from '../../../package';
 import FilterView from './FilterView';
 import FilterForm from './FilterForm';
 
@@ -77,8 +78,8 @@ class Filters extends React.Component {
         update: PropTypes.func,
       }).isRequired,
     }).isRequired,
+    intl: intlShape.isRequired,
     stripes: PropTypes.object,
-    intl: intlShape.isRequired
   };
 
   closeNewInstance = (e) => {
@@ -88,6 +89,7 @@ class Filters extends React.Component {
 
   create = (filter) => {
     const { mutator } = this.props;
+
     mutator.records.POST(filter)
       .then(() => {
         this.closeNewInstance();
@@ -97,6 +99,7 @@ class Filters extends React.Component {
   render() {
     const packageInfoReWrite = () => {
       const path = '/finc-select/filters';
+
       packageInfo.stripes.route = path;
       packageInfo.stripes.home = path;
       return packageInfo;

@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Field
-} from 'redux-form';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { Field } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Accordion,
   Col,
@@ -13,9 +10,8 @@ import {
   Select,
   TextField
 } from '@folio/stripes/components';
-import {
-  Required
-} from '../../DisplayUtils/Validate';
+
+import { Required } from '../../DisplayUtils/Validate';
 
 class FilterInfoForm extends React.Component {
   render() {
@@ -84,9 +80,9 @@ class FilterInfoForm extends React.Component {
 }
 
 FilterInfoForm.propTypes = {
+  accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
   onToggle: PropTypes.func,
-  accordionId: PropTypes.string.isRequired,
 };
 
 export default FilterInfoForm;

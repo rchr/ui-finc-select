@@ -5,12 +5,13 @@ import {
   injectIntl,
   intlShape
 } from 'react-intl';
+
 import {
   makeQueryFunction,
   SearchAndSort
 } from '@folio/stripes/smart-components';
-import packageInfo from '../../../package';
 
+import packageInfo from '../../../package';
 import MetadataSourceView from './MetadataSourceView';
 
 const INITIAL_RESULT_COUNT = 30;
@@ -87,19 +88,21 @@ class MetadataSources extends React.Component {
         update: PropTypes.func,
       }).isRequired,
     }).isRequired,
+    intl: intlShape.isRequired,
     stripes: PropTypes.object,
-    intl: intlShape.isRequired
   };
 
   // add update if search-selectbox is changing
   onChangeIndex = (e) => {
     const qindex = e.target.value;
+
     this.props.mutator.query.update({ qindex });
   }
 
   render() {
     const packageInfoReWrite = () => {
       const path = '/finc-select/metadata-sources';
+
       packageInfo.stripes.route = path;
       packageInfo.stripes.home = path;
       return packageInfo;

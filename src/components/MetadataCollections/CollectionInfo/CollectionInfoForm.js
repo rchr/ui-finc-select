@@ -5,9 +5,8 @@ import {
   Field,
   FieldArray
 } from 'redux-form';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Accordion,
   Col,
@@ -15,11 +14,10 @@ import {
   Row,
   Select
 } from '@folio/stripes/components';
-import {
-  Required
-} from '../../DisplayUtils/Validate';
 
+import { Required } from '../../DisplayUtils/Validate';
 import RepeatableField from '../../DisplayUtils/RepeatableField';
+
 import BasicCss from '../../BasicStyle.css';
 
 class CollectionInfoForm extends React.Component {
@@ -64,7 +62,12 @@ class CollectionInfoForm extends React.Component {
       >
         {/* FILTERS is repeatable */}
         <Row>
-          <Headline size="medium" className={BasicCss.styleForHeadline}><FormattedMessage id="ui-finc-select.collection.filters" /></Headline>
+          <Headline
+            size="medium"
+            className={BasicCss.styleForHeadline}
+          >
+            <FormattedMessage id="ui-finc-select.collection.filters" />
+          </Headline>
         </Row>
         <Row>
           <Col xs={6}>
@@ -102,9 +105,9 @@ class CollectionInfoForm extends React.Component {
 }
 
 CollectionInfoForm.propTypes = {
+  accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
   onToggle: PropTypes.func,
-  accordionId: PropTypes.string.isRequired,
 };
 
 export default CollectionInfoForm;

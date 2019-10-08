@@ -1,39 +1,42 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+import Link from 'react-router-dom/Link';
+
 import {
   Headline,
   KeyValue,
   List,
   Row
 } from '@folio/stripes/components';
-import Link from 'react-router-dom/Link';
-import BasicCss from '../../BasicStyle.css';
+
 import SelectUnselect from './SelectUnselect';
+
+import BasicCss from '../../BasicStyle.css';
 
 class CollectionInfoView extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
     metadataCollection: PropTypes.object.isRequired,
     stripes: PropTypes
       .shape({
         connect: PropTypes.func.isRequired,
       })
       .isRequired,
+    id: PropTypes.string,
     parentResources: PropTypes.object
   };
 
   constructor(props) {
     super(props);
+
     this.connectedSelectUnselect = this.props.stripes.connect(SelectUnselect);
   }
 
   getData(resourceName) {
     const { parentResources } = this.props;
     const records = (parentResources[`${resourceName}`] || {}).records || [];
+
     if (!records || records.length === 0) return null;
     return records;
   }
@@ -98,7 +101,12 @@ class CollectionInfoView extends React.Component {
             />
           </Row>
           <Row>
-            <Headline size="medium" className={BasicCss.styleForHeadline}><FormattedMessage id="ui-finc-select.collection.filters" /></Headline>
+            <Headline
+              size="medium"
+              className={BasicCss.styleForHeadline}
+            >
+              <FormattedMessage id="ui-finc-select.collection.filters" />
+            </Headline>
           </Row>
           <Row>
             <List
