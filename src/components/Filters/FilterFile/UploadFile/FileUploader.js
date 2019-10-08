@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDropzone from 'react-dropzone';
-import { isFunction, pickBy } from 'lodash';
+import {
+  isFunction,
+  pickBy
+} from 'lodash';
 
-import { Button, Icon } from '@folio/stripes/components';
+import {
+  Button,
+  Icon
+} from '@folio/stripes/components';
 
 import css from './FileUploader.css';
 

@@ -2,9 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import {
   Button,
@@ -17,9 +15,7 @@ import {
   Paneset,
   Row
 } from '@folio/stripes/components';
-import {
-  IfPermission
-} from '@folio/stripes/core';
+import { IfPermission } from '@folio/stripes/core';
 import stripesForm from '@folio/stripes/form';
 
 import FilterInfoForm from './FilterInfo/FilterInfoForm';
