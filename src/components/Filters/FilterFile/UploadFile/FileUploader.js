@@ -1,14 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDropzone from 'react-dropzone';
-import { isFunction, pickBy } from 'lodash';
+import {
+  isFunction,
+  pickBy
+} from 'lodash';
 
-import { Button, Icon } from '@folio/stripes/components';
+import {
+  Button,
+  Icon
+} from '@folio/stripes/components';
 
 import css from './FileUploader.css';
 
 export default class FileUploader extends React.Component {
   static propTypes = {
+    isDropZoneActive: PropTypes.bool.isRequired,
+    title: PropTypes.node.isRequired,
+    uploadButtonText: PropTypes.node.isRequired,
+    onDrop: PropTypes.func.isRequired,
+    maxSize: PropTypes.number,
+    onDragEnter: PropTypes.func,
+    onDragLeave: PropTypes.func,
+    rejectClassName: PropTypes.string,
+    style: PropTypes.object,
+    uploadButtonAriaLabel: PropTypes.string,
+    uploadInProgress: PropTypes.bool,
+    uploadInProgressText: PropTypes.node,
     accept: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
@@ -24,18 +42,6 @@ export default class FileUploader extends React.Component {
     disabledClassName: PropTypes.string,
     errorMessage: PropTypes.node,
     footer: PropTypes.node,
-    isDropZoneActive: PropTypes.bool.isRequired,
-    maxSize: PropTypes.number,
-    onDragEnter: PropTypes.func,
-    onDragLeave: PropTypes.func,
-    onDrop: PropTypes.func.isRequired,
-    rejectClassName: PropTypes.string,
-    style: PropTypes.object,
-    title: PropTypes.node.isRequired,
-    uploadButtonAriaLabel: PropTypes.string,
-    uploadButtonText: PropTypes.node.isRequired,
-    uploadInProgress: PropTypes.bool,
-    uploadInProgressText: PropTypes.node,
   };
 
   static defaultProps = {

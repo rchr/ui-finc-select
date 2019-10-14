@@ -1,15 +1,22 @@
 import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import {
+  Route,
+  Redirect,
+  Switch
+} from 'react-router-dom';
+
 import {
   Button,
   ButtonGroup,
   Layout
 } from '@folio/stripes/components';
+
 import MetadataSources from './components/MetadataSources/MetadataSources';
 import MetadataCollections from './components/MetadataCollections/MetadataCollections';
 import Filters from './components/Filters/Filters';
+
 import css from './components/BasicStyle.css';
 
 const defaultFiltersCollections = 'permitted.yes,selected.yes';
@@ -33,6 +40,7 @@ class Main extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.connectedSource = props.stripes.connect(MetadataSources);
     this.connectedCollection = props.stripes.connect(MetadataCollections);
     this.connectedFilter = props.stripes.connect(Filters);
@@ -51,6 +59,7 @@ class Main extends React.Component {
     const currentUrl = this.props.location.pathname;
     const splitUrl = currentUrl.split('/');
     const tabInCurrentUrl = splitUrl[2];
+
     // set active tab always to the value in the current url
     this.state.activeTab = tabInCurrentUrl;
 

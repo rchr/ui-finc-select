@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Button,
   Col,
@@ -23,8 +22,8 @@ class SelectAllCollections extends React.Component {
   });
 
   static propTypes = {
-    stripes: PropTypes.object,
     sourceId: PropTypes.string.isRequired,
+    stripes: PropTypes.object,
     mutator: PropTypes.shape({
       selectAll: PropTypes.object,
     }),
@@ -32,6 +31,7 @@ class SelectAllCollections extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.okapiUrl = props.stripes.okapi.url;
     this.httpHeaders = Object.assign({}, {
       'X-Okapi-Tenant': props.stripes.okapi.tenant,

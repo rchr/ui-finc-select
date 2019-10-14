@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { FieldArray } from 'redux-form';
-import {
-  Accordion
-} from '@folio/stripes/components';
+
+import { Accordion } from '@folio/stripes/components';
+
 import DocumentsFieldArray from './UploadFile/DocumentsFieldArray';
 
 class FilterFileForm extends React.Component {
   static propTypes = {
-    onToggle: PropTypes.func,
     stripes: PropTypes.shape({
       okapi: PropTypes.shape({
         tenant: PropTypes.string.isRequired,
         token: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
+    onToggle: PropTypes.func,
   };
 
   handleUploadFile = (file) => {
@@ -46,6 +44,7 @@ class FilterFileForm extends React.Component {
       .then(blob => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
+
         a.href = url;
         a.download = file.name;
         document.body.appendChild(a);
@@ -77,8 +76,8 @@ class FilterFileForm extends React.Component {
 }
 
 FilterFileForm.propTypes = {
+  accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
   onToggle: PropTypes.func,
-  accordionId: PropTypes.string.isRequired,
 };
 export default FilterFileForm;

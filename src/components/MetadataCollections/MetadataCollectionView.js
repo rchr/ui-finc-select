@@ -2,9 +2,8 @@ import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Accordion,
   Col,
@@ -14,9 +13,7 @@ import {
   Pane,
   Row
 } from '@folio/stripes/components';
-import {
-  TitleManager
-} from '@folio/stripes/core';
+import { TitleManager } from '@folio/stripes/core';
 
 import MetadataCollectionForm from './MetadataCollectionForm';
 import CollectionInfoView from './CollectionInfo/CollectionInfoView';
@@ -31,24 +28,24 @@ class MetadataCollectionView extends React.Component {
   static propTypes = {
     stripes: PropTypes
       .shape({
-        hasPerm: PropTypes.func,
         connect: PropTypes.func.isRequired,
         logger: PropTypes
           .shape({ log: PropTypes.func.isRequired })
-          .isRequired
+          .isRequired,
+        hasPerm: PropTypes.func,
       })
       .isRequired,
+    mutator: PropTypes.shape({
+      query: PropTypes.object.isRequired,
+    }),
+    parentMutator: PropTypes.shape().isRequired,
     paneWidth: PropTypes.string,
     resources: PropTypes.shape({
       metadataCollection: PropTypes.shape(),
       query: PropTypes.object,
     }),
-    mutator: PropTypes.shape({
-      query: PropTypes.object.isRequired,
-    }),
     match: ReactRouterPropTypes.match,
     parentResources: PropTypes.shape(),
-    parentMutator: PropTypes.shape().isRequired,
     onClose: PropTypes.func,
     onEdit: PropTypes.func,
     editLink: PropTypes.string,
@@ -57,7 +54,9 @@ class MetadataCollectionView extends React.Component {
 
   constructor(props) {
     super(props);
+
     const logger = props.stripes.logger;
+
     this.log = logger.log.bind(logger);
     this.connectedMetadataCollectionForm = this.props.stripes.connect(MetadataCollectionForm);
 
@@ -72,6 +71,7 @@ class MetadataCollectionView extends React.Component {
   getData = () => {
     const { parentResources, match: { params: { id } } } = this.props;
     const collection = (parentResources.records || {}).records || [];
+
     if (!collection || collection.length === 0 || !id) return null;
     return collection.find(u => u.id === id);
   }
@@ -79,6 +79,7 @@ class MetadataCollectionView extends React.Component {
   handleExpandAll = (obj) => {
     this.setState((curState) => {
       const newState = _.cloneDeep(curState);
+
       newState.accordions = obj;
       return newState;
     });
@@ -87,6 +88,7 @@ class MetadataCollectionView extends React.Component {
   handleAccordionToggle = ({ id }) => {
     this.setState((state) => {
       const newState = _.cloneDeep(state);
+
       if (!_.has(newState.accordions, id)) newState.accordions[id] = true;
       newState.accordions[id] = !newState.accordions[id];
       return newState;
@@ -101,6 +103,7 @@ class MetadataCollectionView extends React.Component {
 
   getCollectionFormData = (collection) => {
     const collectionFormData = collection ? _.cloneDeep(collection) : collection;
+
     return collectionFormData;
   }
 
@@ -113,6 +116,7 @@ class MetadataCollectionView extends React.Component {
       return <div style={{ paddingTop: '1rem' }}><Icon icon="spinner-ellipsis" width="100px" /></div>;
     } else {
       const collectionFormData = this.getCollectionFormData(initialValues);
+      const label = _.get(initialValues, 'label', '-');
       // const detailMenu = (
       //   <PaneMenu>
       //     <IfPermission perm="metadatacollections.item.put">
@@ -131,8 +135,6 @@ class MetadataCollectionView extends React.Component {
       //     </IfPermission>
       //   </PaneMenu>
       // );
-
-      const label = _.get(initialValues, 'label', '-');
 
       return (
         <Pane

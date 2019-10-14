@@ -2,9 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Button,
   Col,
@@ -16,10 +15,9 @@ import {
   Paneset,
   Row
 } from '@folio/stripes/components';
-import {
-  IfPermission
-} from '@folio/stripes/core';
+import { IfPermission } from '@folio/stripes/core';
 import stripesForm from '@folio/stripes/form';
+
 import FilterInfoForm from './FilterInfo/FilterInfoForm';
 import FilterFileForm from './FilterFile/FilterFileForm';
 
@@ -29,12 +27,12 @@ class FilterForm extends React.Component {
       connect: PropTypes.func,
     }).isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    parentResources: PropTypes.shape().isRequired,
+    parentMutator: PropTypes.object.isRequired,
     onCancel: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     initialValues: PropTypes.object,
-    parentResources: PropTypes.shape().isRequired,
-    parentMutator: PropTypes.object.isRequired,
     match: ReactRouterPropTypes.match,
   };
 
@@ -55,6 +53,7 @@ class FilterForm extends React.Component {
   getData = () => {
     const { parentResources, match: { params: { id } } } = this.props;
     const filter = (parentResources.records || {}).records || [];
+
     if (!filter || filter.length === 0 || !id) return null;
     return filter.find(u => u.id === id);
   }
@@ -75,6 +74,7 @@ class FilterForm extends React.Component {
 
   deleteFilter = () => {
     const { parentMutator, initialValues: { id } } = this.props;
+
     parentMutator.records.DELETE({ id }).then(() => {
       parentMutator.query.update({
         _path: 'finc-select/filters',
@@ -145,6 +145,7 @@ class FilterForm extends React.Component {
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {
       const newState = _.cloneDeep(state);
+
       newState.sections[id] = !newState.sections[id];
       return newState;
     });
@@ -160,7 +161,10 @@ class FilterForm extends React.Component {
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.createFilter" />);
 
     return (
-      <form id="form-filter" onSubmit={handleSubmit}>
+      <form
+        id="form-filter"
+        onSubmit={handleSubmit}
+      >
         <Paneset style={{ position: 'relative' }}>
           <Pane
             defaultWidth="100%"
@@ -169,7 +173,10 @@ class FilterForm extends React.Component {
             paneTitle={paneTitle}
           >
             {/* add padding behind last Row; otherwise content is cutted of */}
-            <div className="FilterForm" style={{ paddingBottom: '100px' }}>
+            <div
+              className="FilterForm"
+              style={{ paddingBottom: '100px' }}
+            >
               <Row end="xs">
                 <Col xs>
                   <ExpandAllButton

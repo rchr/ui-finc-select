@@ -2,9 +2,8 @@ import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Accordion,
   Col,
@@ -20,6 +19,7 @@ import {
   IfPermission,
   TitleManager
 } from '@folio/stripes/core';
+
 import FilterInfoView from './FilterInfo/FilterInfoView';
 import FilterFileView from './FilterFile/FilterFileView';
 import FilterForm from './FilterForm';
@@ -30,13 +30,17 @@ class FilterView extends React.Component {
   });
 
   static propTypes = {
+    mutator: PropTypes.shape({
+      query: PropTypes.object.isRequired,
+    }),
+    parentMutator: PropTypes.shape().isRequired,
     stripes: PropTypes
       .shape({
-        hasPerm: PropTypes.func,
         connect: PropTypes.func.isRequired,
         logger: PropTypes
           .shape({ log: PropTypes.func.isRequired })
-          .isRequired
+          .isRequired,
+        hasPerm: PropTypes.func,
       })
       .isRequired,
     paneWidth: PropTypes.string,
@@ -44,12 +48,8 @@ class FilterView extends React.Component {
       filter: PropTypes.shape(),
       query: PropTypes.object,
     }),
-    mutator: PropTypes.shape({
-      query: PropTypes.object.isRequired,
-    }),
     match: ReactRouterPropTypes.match,
     parentResources: PropTypes.shape(),
-    parentMutator: PropTypes.shape().isRequired,
     onClose: PropTypes.func,
     onEdit: PropTypes.func,
     editLink: PropTypes.string,
@@ -58,7 +58,9 @@ class FilterView extends React.Component {
 
   constructor(props) {
     super(props);
+
     const logger = props.stripes.logger;
+
     this.log = logger.log.bind(logger);
     this.connectedFilterForm = this.props.stripes.connect(FilterForm);
 
@@ -72,6 +74,7 @@ class FilterView extends React.Component {
   getData = () => {
     const { parentResources, match: { params: { id } } } = this.props;
     const filter = (parentResources.records || {}).records || [];
+
     if (!filter || filter.length === 0 || !id) return null;
     return filter.find(u => u.id === id);
   }
@@ -101,6 +104,7 @@ class FilterView extends React.Component {
 
   getFilterFormData = (filter) => {
     const filterFormData = filter ? _.cloneDeep(filter) : filter;
+
     return filterFormData;
   }
 

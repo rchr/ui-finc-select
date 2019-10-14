@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Button,
   Col,
@@ -23,13 +22,13 @@ class MetadataCollectionForm extends React.Component {
     stripes: PropTypes.shape({
       connect: PropTypes.func,
     }).isRequired,
+    parentResources: PropTypes.shape().isRequired,
+    parentMutator: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     initialValues: PropTypes.object,
-    parentResources: PropTypes.shape().isRequired,
-    parentMutator: PropTypes.object.isRequired,
   };
 
   constructor(props) {

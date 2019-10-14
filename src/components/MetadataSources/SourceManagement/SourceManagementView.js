@@ -3,15 +3,15 @@ import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import {
-  FormattedMessage
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Button,
   Col,
   KeyValue,
   Row
 } from '@folio/stripes/components';
+
 import SelectAllCollections from './SelectAllCollections';
 
 class SourceManagementView extends React.Component {
@@ -27,6 +27,7 @@ class SourceManagementView extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.connectedSelectAllCollections = this.props.stripes.connect(SelectAllCollections);
   }
 
@@ -96,7 +97,6 @@ class SourceManagementView extends React.Component {
               </Button>
             </Col>
           </Row>
-
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-select.source.organization" />}

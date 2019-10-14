@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Col,
   Button,
@@ -12,14 +11,15 @@ import {
 
 class SelectUnselect extends React.Component {
   static propTypes = {
-    stripes: PropTypes.object,
     collectionId: PropTypes.string.isRequired,
     selectedInitial: PropTypes.string.isRequired,
-    permitted: PropTypes.string
+    permitted: PropTypes.string,
+    stripes: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
+
     this.okapiUrl = props.stripes.okapi.url;
     this.httpHeaders = Object.assign({}, {
       'X-Okapi-Tenant': props.stripes.okapi.tenant,
@@ -39,6 +39,7 @@ class SelectUnselect extends React.Component {
   // but need the selected-value also as a state for futher working and changing its value
   componentDidMount() {
     const { selectedInitial } = this.props;
+
     this.setState(
       {
         selected: selectedInitial
@@ -95,7 +96,9 @@ class SelectUnselect extends React.Component {
 
   selectUnselect = (collectionId, selected) => {
     const selectedJson = JSON.stringify(this.inversJsonBoolean(selected));
+
     let inverseSelected = '';
+
     if (selected === 'no') { inverseSelected = 'yes'; } else { inverseSelected = 'no'; }
     const invertSelectedButtonLable = this.getSelectedButtonLable(inverseSelected);
 

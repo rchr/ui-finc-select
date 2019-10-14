@@ -1,15 +1,15 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Headline,
   KeyValue,
   List,
   Row
 } from '@folio/stripes/components';
+
 import BasicCss from '../../BasicStyle.css';
 
 class SourceTechnicalView extends React.Component {
@@ -40,7 +40,12 @@ class SourceTechnicalView extends React.Component {
           </Row>
           {/* TICKET is repeatable */}
           <Row>
-            <Headline size="medium" className={BasicCss.styleForHeadline}><FormattedMessage id="ui-finc-select.source.tickets" /></Headline>
+            <Headline
+              size="medium"
+              className={BasicCss.styleForHeadline}
+            >
+              <FormattedMessage id="ui-finc-select.source.tickets" />
+            </Headline>
           </Row>
           <Row>
             <List

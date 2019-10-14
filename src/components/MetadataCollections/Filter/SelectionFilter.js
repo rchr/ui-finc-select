@@ -42,12 +42,12 @@ const SelectionFilter = ({
 };
 
 SelectionFilter.propTypes = {
-  id: PropTypes.string,
-  activeFilters: PropTypes.arrayOf(PropTypes.string),
-  closedByDefault: PropTypes.bool,
   labelId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  id: PropTypes.string,
+  activeFilters: PropTypes.arrayOf(PropTypes.string),
+  closedByDefault: PropTypes.bool,
   options: selectOptionsShape,
 };
 

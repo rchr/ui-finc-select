@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Field
-} from 'redux-form';
+import { Field } from 'redux-form';
+
 import {
   Button,
   Col,
@@ -17,6 +16,7 @@ class RepeatableField extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.renderSubContract = this.renderSubContract.bind(this);
   }
 
@@ -31,8 +31,14 @@ class RepeatableField extends React.Component {
             fullWidth
           />
         </Col>
-        <Col xs={2} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
+        <Col
+          xs={2}
+          style={{ textAlign: 'right' }}
+        >
+          <Button
+            onClick={() => fields.remove(index)}
+            buttonStyle="danger"
+          >
             Remove
           </Button>
         </Col>
@@ -42,12 +48,16 @@ class RepeatableField extends React.Component {
 
   render() {
     const { fields } = this.props;
+
     return (
       <Row>
         <Col xs={12}>
           {fields.map(this.renderSubContract)}
         </Col>
-        <Col xs={12} style={{ paddingTop: '10px' }}>
+        <Col
+          xs={12}
+          style={{ paddingTop: '10px' }}
+        >
           <Button onClick={() => fields.push('')}>+ Add</Button>
         </Col>
       </Row>
