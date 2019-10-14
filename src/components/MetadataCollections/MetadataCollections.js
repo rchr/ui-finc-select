@@ -200,7 +200,6 @@ class MetadataCollections extends React.Component {
           initialResultCount={INITIAL_RESULT_COUNT}
           resultCountIncrement={RESULT_COUNT_INCREMENT}
           viewRecordComponent={MetadataCollectionView}
-          editRecordComponent={MetadataCollectionForm}
           visibleColumns={['label', 'mdSource', 'permitted', 'filters', 'freeContent']}
           resultsFormatter={resultsFormatter}
           viewRecordPerms="finc-select.metadata-collections.item.get"

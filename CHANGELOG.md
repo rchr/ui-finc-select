@@ -1,5 +1,8 @@
 # Change history for ui-finc-select
 
+## [1.2.1](https://github.com/folio-org/ui-finc-select/tree/v1.2.1) (2019-10-14)
+* Bugfix: Permission not found when opening Metadata Collections view.
+
 ## [1.2.0](https://github.com/folio-org/ui-finc-select/tree/v1.2.0) (2019-10-07)
 * Filter files cannot be edited. On change files need to be deleted and posted (UIFC-88)
 * Choosing a filter file is required (UIFC-87)
