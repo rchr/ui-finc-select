@@ -42,25 +42,17 @@ class SourceManagementView extends React.Component {
 
   render() {
     const { metadataSource, stripes } = this.props;
-    // const sourceId = metadataSource.id;
+    const sourceId = _.get(metadataSource, 'id', '-');
 
     return (
       <React.Fragment>
         <div id="id">
-          {/* TODO: selectedCollections */}
           <Row>
-            <Col xs={6}>
-              TODO:
-              <KeyValue
-                label={<FormattedMessage id="ui-finc-select.source.selectedCollections" />}
-                // value={_.get(metadataSource, 'selectedCollections', '-')}
-              />
-            </Col>
             <Col xs={6}>
               <Button
                 id="showSelectedCollections"
                 buttonStyle="primary"
-                // onClick={() => this.showSelectedCollections(sourceId)}
+                onClick={() => this.showSelectedCollections(sourceId)}
               >
                 <FormattedMessage id="ui-finc-select.source.button.showselectedCollections" />
               </Button>
@@ -92,7 +84,7 @@ class SourceManagementView extends React.Component {
               <Button
                 id="showAllCollections"
                 buttonStyle="primary"
-                // onClick={() => this.showAllCollections(sourceId)}
+                onClick={() => this.showAllCollections(sourceId)}
               >
                 <FormattedMessage id="ui-finc-select.source.button.showAllCollections" />
               </Button>
