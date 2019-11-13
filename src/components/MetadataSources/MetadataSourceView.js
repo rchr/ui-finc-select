@@ -8,13 +8,10 @@ import {
   Col,
   ExpandAllButton,
   Icon,
-  IconButton,
   Layout,
   Pane,
-  PaneMenu,
   Row,
 } from '@folio/stripes/components';
-import { IfPermission } from '@folio/stripes/core';
 
 import SourceInfoView from './SourceInfo/SourceInfoView';
 import SourceManagementView from './SourceManagement/SourceManagementView';
@@ -61,28 +58,6 @@ class MetadataSourceView extends React.Component {
     });
   }
 
-  renderEditPaneMenu = () => {
-    const { record, handlers } = this.props;
-
-    return (
-      <IfPermission perm="finc-config.metadata-sources.item.put">
-        <PaneMenu>
-          <IconButton
-            icon="edit"
-            id="clickable-edit-source"
-            onClick={handlers.onEdit}
-            style={{
-              visibility: !record
-                ? 'hidden'
-                : 'visible'
-            }}
-            title="Edit Metadata Source"
-          />
-        </PaneMenu>
-      </IfPermission>
-    );
-  }
-
   renderLoadingPane = () => {
     return (
       <Pane
@@ -110,7 +85,6 @@ class MetadataSourceView extends React.Component {
         <Pane
           defaultWidth="40%"
           id="pane-sourcedetails"
-          lastMenu={this.renderEditPaneMenu()}
           onClose={this.props.handlers.onClose}
           paneTitle={<span data-test-source-header-title>{label}</span>}
         >

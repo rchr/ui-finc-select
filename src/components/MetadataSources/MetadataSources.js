@@ -155,33 +155,6 @@ class MetadataSources extends React.Component {
     return <FormattedMessage id="stripes-smart-components.searchCriteria" />;
   }
 
-  // button for creating a new record
-  renderResultsLastMenu() {
-    if (this.props.disableRecordCreation) {
-      return null;
-    }
-
-    return (
-      <IfPermission perm="ui-licenses.licenses.edit">
-        <PaneMenu>
-          <FormattedMessage id="ui-finc-select.source.form.createSource">
-            {ariaLabel => (
-              <Button
-                aria-label={ariaLabel}
-                buttonStyle="primary"
-                id="clickable-new-source"
-                marginBottom0
-                to={`${urls.sourceCreate()}${this.props.searchString}`}
-              >
-                <FormattedMessage id="stripes-smart-components.new" />
-              </Button>
-            )}
-          </FormattedMessage>
-        </PaneMenu>
-      </IfPermission>
-    );
-  }
-
   render() {
     const { intl, queryGetter, querySetter, onChangeIndex, onSelectRow, selectedRecordId, source } = this.props;
     const count = source ? source.totalCount() : 0;
@@ -283,7 +256,6 @@ class MetadataSources extends React.Component {
                   appIcon={<AppIcon app="finc-select" />}
                   defaultWidth="fill"
                   firstMenu={this.renderResultsFirstMenu(activeFilters)}
-                  lastMenu={this.renderResultsLastMenu()}
                   padContent={false}
                   paneTitle="Finc Select"
                   paneSub={this.renderResultsPaneSubtitle(source)}
