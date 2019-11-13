@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -9,49 +8,31 @@ import {
   Col,
   ExpandAllButton,
   Icon,
+  IconButton,
+  Layout,
   Pane,
-  Row
+  PaneMenu,
+  Row,
 } from '@folio/stripes/components';
-import { TitleManager } from '@folio/stripes/core';
+import { IfPermission } from '@folio/stripes/core';
 
 import SourceInfoView from './SourceInfo/SourceInfoView';
 import SourceManagementView from './SourceManagement/SourceManagementView';
 import SourceTechnicalView from './SourceTechnical/SourceTechnicalView';
 
 class MetadataSourceView extends React.Component {
-  static manifest = Object.freeze({
-    query: {},
-  });
-
   static propTypes = {
-    stripes: PropTypes
-      .shape({
-        hasPerm: PropTypes.func,
-        connect: PropTypes.func.isRequired,
-        logger: PropTypes
-          .shape({ log: PropTypes.func.isRequired })
-          .isRequired
-      })
-      .isRequired,
-    mutator: PropTypes.shape({
-      query: PropTypes.object.isRequired,
-    }),
-    paneWidth: PropTypes.string,
-    resources: PropTypes.shape({
-      metadataSource: PropTypes.shape(),
-      query: PropTypes.object,
-    }),
-    match: ReactRouterPropTypes.match,
-    parentResources: PropTypes.shape(),
-    onClose: PropTypes.func
+    handlers: PropTypes.shape({
+      onClose: PropTypes.func.isRequired,
+      onEdit: PropTypes.func,
+    }).isRequired,
+    isLoading: PropTypes.bool,
+    record: PropTypes.object,
+    stripes: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
-
-    const logger = props.stripes.logger;
-
-    this.log = logger.log.bind(logger);
 
     this.state = {
       accordions: {
@@ -59,14 +40,6 @@ class MetadataSourceView extends React.Component {
         technicalAccordion: false
       },
     };
-  }
-
-  getData = () => {
-    const { parentResources, match: { params: { id } } } = this.props;
-    const source = (parentResources.records || {}).records || [];
-
-    if (!source || source.length === 0 || !id) return null;
-    return source.find(u => u.id === id);
   }
 
   handleExpandAll = (obj) => {
@@ -88,26 +61,62 @@ class MetadataSourceView extends React.Component {
     });
   }
 
+  renderEditPaneMenu = () => {
+    const { record, handlers } = this.props;
+
+    return (
+      <IfPermission perm="finc-config.metadata-sources.item.put">
+        <PaneMenu>
+          <IconButton
+            icon="edit"
+            id="clickable-edit-source"
+            onClick={handlers.onEdit}
+            style={{
+              visibility: !record
+                ? 'hidden'
+                : 'visible'
+            }}
+            title="Edit Metadata Source"
+          />
+        </PaneMenu>
+      </IfPermission>
+    );
+  }
+
+  renderLoadingPane = () => {
+    return (
+      <Pane
+        defaultWidth="40%"
+        dismissible
+        id="pane-sourcedetails"
+        onClose={this.props.handlers.onClose}
+        paneTitle={<span data-test-source-header-title>loading</span>}
+      >
+        <Layout className="marginTop1">
+          <Icon icon="spinner-ellipsis" width="10px" />
+        </Layout>
+      </Pane>
+    );
+  }
+
   render() {
-    const initialValues = this.getData();
+    const { record, isLoading } = this.props;
+    const label = _.get(record, 'label', '-');
 
-    if (_.isEmpty(initialValues)) {
-      return <div style={{ paddingTop: '1rem' }}><Icon icon="spinner-ellipsis" width="100px" /></div>;
-    } else {
-      const label = _.get(initialValues, 'label', '-');
+    if (isLoading) return this.renderLoadingPane();
 
-      return (
+    return (
+      <React.Fragment>
         <Pane
-          defaultWidth={this.props.paneWidth}
+          defaultWidth="40%"
           id="pane-sourcedetails"
+          lastMenu={this.renderEditPaneMenu()}
+          onClose={this.props.handlers.onClose}
           paneTitle={<span data-test-source-header-title>{label}</span>}
-          dismissible
-          onClose={this.props.onClose}
         >
-          <TitleManager record={label} />
           <SourceInfoView
             id="sourceInfo"
-            metadataSource={initialValues}
+            metadataSource={record}
             stripes={this.props.stripes}
           />
           <Row end="xs">
@@ -126,7 +135,7 @@ class MetadataSourceView extends React.Component {
           >
             <SourceManagementView
               id="sourceManagement"
-              metadataSource={initialValues}
+              metadataSource={record}
               stripes={this.props.stripes}
             />
           </Accordion>
@@ -138,13 +147,13 @@ class MetadataSourceView extends React.Component {
           >
             <SourceTechnicalView
               id="sourceTechnical"
-              metadataSource={initialValues}
+              metadataSource={record}
               stripes={this.props.stripes}
             />
           </Accordion>
         </Pane>
-      );
-    }
+      </React.Fragment>
+    );
   }
 }
 

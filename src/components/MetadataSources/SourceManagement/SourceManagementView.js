@@ -16,7 +16,7 @@ import SelectAllCollections from './SelectAllCollections';
 
 class SourceManagementView extends React.Component {
   static propTypes = {
-    metadataSource: PropTypes.object.isRequired,
+    metadataSource: PropTypes.object,
     stripes: PropTypes
       .shape({
         connect: PropTypes.func.isRequired,
@@ -25,11 +25,11 @@ class SourceManagementView extends React.Component {
     history: ReactRouterPropTypes.history,
   };
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.connectedSelectAllCollections = this.props.stripes.connect(SelectAllCollections);
-  }
+  //   this.connectedSelectAllCollections = this.props.stripes.connect(SelectAllCollections);
+  // }
 
   // just necessary, if button will be used instead of link
   showAllCollections(sourceId) {
@@ -69,10 +69,11 @@ class SourceManagementView extends React.Component {
 
           <Row>
             <Col xs={6}>
-              <this.connectedSelectAllCollections
+              {/* TODO: Select All Collections */}
+              {/* <this.connectedSelectAllCollections
                 stripes={stripes}
                 sourceId={sourceId}
-              />
+              /> */}
             </Col>
             <Col xs={6}>
               {/* showAllCollections as link */}
