@@ -26,6 +26,12 @@ const filterConfig = [
       { name: 'Yes', cql: 'yes' },
       { name: 'No', cql: 'no' }
     ],
+  },
+  {
+    label: 'Source',
+    name: 'mdSource',
+    cql: 'mdSource',
+    values: [],
   }
 ];
 

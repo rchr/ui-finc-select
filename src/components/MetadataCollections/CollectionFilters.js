@@ -117,7 +117,7 @@ class CollectionFilters extends React.Component {
         <Selection
           dataOptions={dataOptions}
           id="mdSource-filter"
-          onChange={value => this.props.filterHandlers.state({ ...activeFilters, contactRole: [value] })}
+          onChange={value => this.props.filterHandlers.state({ ...activeFilters, mdSource: [value] })}
           placeholder="Select a Source"
           value={mdSourceFilters[0] || ''}
         />
