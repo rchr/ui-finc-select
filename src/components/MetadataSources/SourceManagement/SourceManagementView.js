@@ -12,7 +12,7 @@ import {
   Row
 } from '@folio/stripes/components';
 
-import SelectAllCollections from './SelectAllCollections';
+// import SelectAllCollections from './SelectAllCollections';
 
 class SourceManagementView extends React.Component {
   static propTypes = {
@@ -41,7 +41,7 @@ class SourceManagementView extends React.Component {
   }
 
   render() {
-    const { metadataSource, stripes } = this.props;
+    const { metadataSource } = this.props;
     const sourceId = _.get(metadataSource, 'id', '-');
 
     return (

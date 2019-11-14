@@ -11,64 +11,52 @@ import {
   Row
 } from '@folio/stripes/components';
 
-import SelectUnselect from './SelectUnselect';
+// import SelectUnselect from './SelectUnselect';
+import urls from '../../DisplayUtils/urls';
 
 import BasicCss from '../../BasicStyle.css';
 
 class CollectionInfoView extends React.Component {
   static propTypes = {
-    metadataCollection: PropTypes.object.isRequired,
-    stripes: PropTypes
-      .shape({
-        connect: PropTypes.func.isRequired,
-      })
-      .isRequired,
     id: PropTypes.string,
-    parentResources: PropTypes.object
+    metadataCollection: PropTypes.object,
+    sourceElement: PropTypes.object,
   };
 
-  constructor(props) {
-    super(props);
+  renderList = (values) => {
+    const { metadataCollection } = this.props;
 
-    this.connectedSelectUnselect = this.props.stripes.connect(SelectUnselect);
-  }
+    if (!metadataCollection) {
+      return 'no values';
+    } else {
+      const valueItems = metadataCollection[values];
+      const valueFormatter = (valueItem) => (<li key={valueItem}>{valueItem}</li>);
+      const isEmptyMessage = 'No items to show';
 
-  getData(resourceName) {
-    const { parentResources } = this.props;
-    const records = (parentResources[`${resourceName}`] || {}).records || [];
-
-    if (!records || records.length === 0) return null;
-    return records;
-  }
-
-  getSourceElement = (id, data) => {
-    if (!data || data.length === 0 || !id) return null;
-    return data.find((element) => {
-      return element.id === id;
-    });
+      return (
+        <List
+          items={valueItems}
+          itemFormatter={valueFormatter}
+          isEmptyMessage={isEmptyMessage}
+        />
+      );
+    }
   }
 
   render() {
-    const { metadataCollection, id, stripes } = this.props;
-    const isEmptyMessage = 'No items to show';
-    // set values for filters
-    const filterItems = metadataCollection.filters;
-    const filterFormatter = (filterItem) => (<li key={filterItem}>{filterItem}</li>);
-    // get all available sources
-    const sourceData = this.getData('source');
-    // get the source-ID, which is saved in the collection
-    const sourceId = metadataCollection.mdSource.id;
-    // get the one source and all its information (which has the source ID saved in the collection)
-    const sourceElement = this.getSourceElement(sourceId, sourceData);
-    // get the name of the source
+    const { metadataCollection, id, sourceElement } = this.props;
+    // // get the one source and all its information (which has the source ID saved in the collection)
+    // const sourceElement = this.getSourceElement(sourceId, sourceData);
+    const sourceId = _.get(sourceElement, 'id', '-');
+    // // get the name of the source
     const sourceName = _.get(sourceElement, 'label', '-');
-    // get the status of the source for setting filter in url
+    // // get the status of the source for setting filter in url
     const sourceStatus = _.get(sourceElement, 'status', '-');
-    // set the complete source link with name and status
+    // // set the complete source link with name and status
     const sourceLink = (
       <React.Fragment>
         <Link to={{
-          pathname: `/finc-select/metadata-sources/view/${sourceId}`,
+          pathname: `${urls.sourceView(sourceId)}`,
           search: `?filters=status.${sourceStatus}`
         }}
         >
@@ -76,8 +64,6 @@ class CollectionInfoView extends React.Component {
         </Link>
       </React.Fragment>
     );
-    const collectionId = metadataCollection.id;
-    const permitted = metadataCollection.permitted;
 
     return (
       <React.Fragment>
@@ -109,20 +95,16 @@ class CollectionInfoView extends React.Component {
             </Headline>
           </Row>
           <Row>
-            <List
-              items={filterItems}
-              itemFormatter={filterFormatter}
-              isEmptyMessage={isEmptyMessage}
-            />
+            { this.renderList('filters') }
           </Row>
-
           <Row>
-            <this.connectedSelectUnselect
+            TODO: Select Unselect
+            {/* <this.connectedSelectUnselect
               stripes={stripes}
               selectedInitial={_.get(metadataCollection, 'selected')}
               collectionId={collectionId}
               permitted={permitted}
-            />
+            /> */}
           </Row>
         </div>
       </React.Fragment>

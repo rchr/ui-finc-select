@@ -7,8 +7,8 @@ import { Route } from '@folio/stripes/core';
 
 import SourcesRoute from './routes/SourcesRoute';
 import SourceViewRoute from './routes/SourceViewRoute';
-// import CollectionsRoute from './routes/CollectionsRoute';
-// import CollectionViewRoute from './routes/CollectionViewRoute';
+import CollectionsRoute from './routes/CollectionsRoute';
+import CollectionViewRoute from './routes/CollectionViewRoute';
 
 import Settings from './settings';
 
@@ -31,9 +31,9 @@ class FincSelect extends React.Component {
         <Route path={`${path}/metadata-sources/:id?`} component={SourcesRoute}>
           <Route path={`${path}/metadata-sources/:id`} component={SourceViewRoute} />
         </Route>
-        {/* <Route path={`${path}/metadata-collections/:id?`} component={CollectionsRoute}>
+        <Route path={`${path}/metadata-collections/:id?`} component={CollectionsRoute}>
           <Route path={`${path}/metadata-collections/:id`} component={CollectionViewRoute} />
-        </Route> */}
+        </Route>
       </Switch>
     );
   }

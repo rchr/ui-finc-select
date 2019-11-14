@@ -22,10 +22,7 @@ import {
   Paneset,
   SearchField,
 } from '@folio/stripes/components';
-import {
-  AppIcon,
-  IfPermission
-} from '@folio/stripes/core';
+import { AppIcon } from '@folio/stripes/core';
 
 import urls from '../DisplayUtils/urls';
 import SourceFilters from './SourceFilters';
