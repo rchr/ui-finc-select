@@ -27,13 +27,6 @@ const filterConfig = [
       { name: 'No', cql: 'no' }
     ],
   }
-  // ,
-  // {
-  //   label: 'mdSource',
-  //   name: 'mdSource',
-  //   cql: 'mdSource',
-  //   values: [],
-  // }
 ];
 
 export default filterConfig;

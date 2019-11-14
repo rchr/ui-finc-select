@@ -52,9 +52,13 @@ class MetadataCollections extends React.Component {
     querySetter: PropTypes.func,
     searchString: PropTypes.string,
     selectedRecordId: PropTypes.string,
+    filterData: PropTypes.shape({
+      mdSources: PropTypes.array,
+    }),
   };
 
   static defaultProps = {
+    filterData: {},
     contentData: {},
     searchString: '',
   }
@@ -195,7 +199,7 @@ class MetadataCollections extends React.Component {
   // }
 
   render() {
-    const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, collection } = this.props;
+    const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, collection, filterData } = this.props;
     const count = collection ? collection.totalCount() : 0;
 
     return (
@@ -243,6 +247,13 @@ class MetadataCollections extends React.Component {
                         >
                           Collections
                         </Button>
+                        <Button
+                          buttonStyle="default"
+                          id="metadata-filters"
+                          // to={urls.filters()}
+                        >
+                          Filters
+                        </Button>
                       </ButtonGroup>
                       <div>
                         <SearchField
@@ -275,6 +286,7 @@ class MetadataCollections extends React.Component {
                       <CollectionFilters
                         activeFilters={activeFilters.state}
                         filterHandlers={getFilterHandlers()}
+                        filterData={filterData}
                       />
                     </form>
                   </Pane>

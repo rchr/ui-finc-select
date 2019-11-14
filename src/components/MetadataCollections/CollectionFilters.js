@@ -5,7 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import {
   Accordion,
   AccordionSet,
-  FilterAccordionHeader
+  FilterAccordionHeader,
+  Selection,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
@@ -15,6 +16,7 @@ class CollectionFilters extends React.Component {
   static propTypes = {
     activeFilters: PropTypes.object,
     filterHandlers: PropTypes.object,
+    filterData: PropTypes.object,
   };
 
   static defaultProps = {
@@ -22,7 +24,7 @@ class CollectionFilters extends React.Component {
       selected: [],
       freeContent: [],
       permitted: [],
-      // mdSource: [],
+      mdSource: [],
     }
   };
 
@@ -30,7 +32,7 @@ class CollectionFilters extends React.Component {
     selected: [],
     freeContent: [],
     permitted: [],
-    // mdSource: [],
+    mdSource: [],
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -40,7 +42,13 @@ class CollectionFilters extends React.Component {
     filterConfig.forEach(filter => {
       const newValues = [];
       let values = {};
-      values = filter.values;
+      if (filter === 'mdSource') {
+        // get filter values from okapi
+        values = props.filterData[filter] || [];
+      } else {
+        // get filte values from filterConfig
+        values = filter.values;
+      }
 
       values.forEach((key) => {
         let newValue = {};
@@ -87,13 +95,43 @@ class CollectionFilters extends React.Component {
     );
   }
 
+  renderMetadataSourceFilter = () => {
+    const mdSources = this.props.filterData.mdSources;
+    const dataOptions = mdSources.map(mdSource => ({
+      value: mdSource.id,
+      label: mdSource.label,
+    }));
+
+    const { activeFilters } = this.props;
+    const mdSourceFilters = activeFilters.mdSource || [];
+
+    return (
+      <Accordion
+        displayClearButton={mdSourceFilters.length > 0}
+        header={FilterAccordionHeader}
+        id="filter-accordion-mdSource"
+        label="Metadata source"
+        onClearFilter={() => { this.props.filterHandlers.clearGroup('mdSource'); }}
+        separator={false}
+      >
+        <Selection
+          dataOptions={dataOptions}
+          id="mdSource-filter"
+          onChange={value => this.props.filterHandlers.state({ ...activeFilters, contactRole: [value] })}
+          placeholder="Select a Source"
+          value={mdSourceFilters[0] || ''}
+        />
+      </Accordion>
+    );
+  }
+
   render() {
     return (
       <AccordionSet>
+        {this.renderMetadataSourceFilter('mdSource', 'Source')}
         {this.renderCheckboxFilter('freeContent', 'Free content')}
         {this.renderCheckboxFilter('permitted', 'Usage permitted')}
         {this.renderCheckboxFilter('selected', 'Selected')}
-        {/* TODO: render mdSource */}
       </AccordionSet>
     );
   }
