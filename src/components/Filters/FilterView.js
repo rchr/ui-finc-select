@@ -25,9 +25,9 @@ import FilterFileView from './FilterFile/FilterFileView';
 import FilterForm from './FilterForm';
 
 class FilterView extends React.Component {
-  static manifest = Object.freeze({
-    query: {},
-  });
+  // static manifest = Object.freeze({
+  //   query: {},
+  // });
 
   static propTypes = {
     mutator: PropTypes.shape({
@@ -180,7 +180,7 @@ class FilterView extends React.Component {
             isOpen={query.layer ? query.layer === 'edit' : false}
             contentLabel="Edit Filter Dialog"
           >
-            <this.connectedFilterForm
+            {/* <this.connectedFilterForm
               stripes={stripes}
               initialValues={filterFormData}
               onSubmit={(record) => { this.update(record); }}
@@ -190,7 +190,7 @@ class FilterView extends React.Component {
                 ...this.props.parentResources,
               }}
               parentMutator={this.props.parentMutator}
-            />
+            /> */}
           </Layer>
         </Pane>
       );

@@ -4,6 +4,9 @@ const urls = {
 
   collections: () => '/finc-select/metadata-collections',
   collectionView: id => `/finc-select/metadata-collections/${id}`,
+
+  filters: () => '/finc-select/filters',
+  filterView: id => `/finc-select/filters/${id}`,
 };
 
 export default urls;

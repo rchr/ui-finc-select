@@ -203,8 +203,8 @@ class MetadataSources extends React.Component {
                         </Button>
                         <Button
                           buttonStyle="default"
-                          id="metadata-filters"
-                          // to={urls.filters()}
+                          id="filters"
+                          to={urls.filters()}
                         >
                           Filters
                         </Button>

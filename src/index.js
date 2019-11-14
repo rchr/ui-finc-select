@@ -9,6 +9,8 @@ import SourcesRoute from './routes/SourcesRoute';
 import SourceViewRoute from './routes/SourceViewRoute';
 import CollectionsRoute from './routes/CollectionsRoute';
 import CollectionViewRoute from './routes/CollectionViewRoute';
+import FiltersRoute from './routes/FiltersRoute';
+import FilterViewRoute from './routes/FilterViewRoute';
 
 import Settings from './settings';
 
@@ -33,6 +35,9 @@ class FincSelect extends React.Component {
         </Route>
         <Route path={`${path}/metadata-collections/:id?`} component={CollectionsRoute}>
           <Route path={`${path}/metadata-collections/:id`} component={CollectionViewRoute} />
+        </Route>
+        <Route path={`${path}/filters/:id?`} component={FiltersRoute}>
+          <Route path={`${path}/filters/:id`} component={FilterViewRoute} />
         </Route>
       </Switch>
     );
