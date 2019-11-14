@@ -59,7 +59,6 @@ class CollectionViewRoute extends React.Component {
 
   render() {
     const { handlers } = this.props;
-    // const selectedRecord = this.getRecord(this.props.match.params.id);
 
     return (
       <MetadataCollectionView

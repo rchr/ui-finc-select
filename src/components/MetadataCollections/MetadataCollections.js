@@ -24,14 +24,8 @@ import {
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 
-// import Filter from './Filter/Filter';
-// import {
-//   handleFilterChange,
-//   getActiveFilters
-// } from './Filter/Util';
-
-import urls from '../DisplayUtils/urls';
 import CollectionFilters from './CollectionFilters';
+import urls from '../DisplayUtils/urls';
 
 class MetadataCollections extends React.Component {
   static propTypes = {
@@ -39,6 +33,9 @@ class MetadataCollections extends React.Component {
     collection: PropTypes.object,
     contentData: PropTypes.arrayOf(PropTypes.object),
     disableRecordCreation: PropTypes.bool,
+    filterData: PropTypes.shape({
+      mdSources: PropTypes.array,
+    }),
     intl: intlShape.isRequired,
     onSelectRow: PropTypes.func,
     packageInfo: PropTypes.shape({ // values pulled from the provider's package.json config object
@@ -52,14 +49,11 @@ class MetadataCollections extends React.Component {
     querySetter: PropTypes.func,
     searchString: PropTypes.string,
     selectedRecordId: PropTypes.string,
-    filterData: PropTypes.shape({
-      mdSources: PropTypes.array,
-    }),
   };
 
   static defaultProps = {
-    filterData: {},
     contentData: {},
+    filterData: {},
     searchString: '',
   }
 
@@ -69,10 +63,6 @@ class MetadataCollections extends React.Component {
     this.state = {
       filterPaneIsVisible: true,
     };
-
-    // this.getActiveFilters = getActiveFilters.bind(this);
-    // this.handleFilterChange = handleFilterChange.bind(this);
-    // this.renderFilters = this.renderFilters.bind(this);
   }
 
   getArrayElementsCommaSeparated = (array) => {
@@ -170,34 +160,6 @@ class MetadataCollections extends React.Component {
     return <FormattedMessage id="stripes-smart-components.searchCriteria" />;
   }
 
-  // renderFilters(onChange) {
-  //   const { resources } = this.props;
-  //   const mdSource = _.get(resources, 'mdSource.records', []);
-  //   const freeContentData = [
-  //     { label: 'Yes', value: 'yes' },
-  //     { label: 'No', value: 'no' },
-  //     { label: 'Undetermined', value: 'undetermined' }
-  //   ];
-  //   const booleanData = [
-  //     { label: 'Yes', value: 'yes' },
-  //     { label: 'No', value: 'no' }
-  //   ];
-
-  //   return (
-  //     <Filter
-  //       activeFilters={this.getActiveFilters()}
-  //       onChange={onChange}
-  //       queryMutator={this.props.mutator.query}
-  //       // get data for source-filter from okapi
-  //       mdSource={mdSource}
-  //       // get bool-data for permitted and selected
-  //       permitted={booleanData}
-  //       selected={booleanData}
-  //       freeContent={freeContentData}
-  //     />
-  //   );
-  // }
-
   render() {
     const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, collection, filterData } = this.props;
     const count = collection ? collection.totalCount() : 0;
@@ -285,8 +247,8 @@ class MetadataCollections extends React.Component {
                       </Button>
                       <CollectionFilters
                         activeFilters={activeFilters.state}
-                        filterHandlers={getFilterHandlers()}
                         filterData={filterData}
+                        filterHandlers={getFilterHandlers()}
                       />
                     </form>
                   </Pane>
@@ -295,7 +257,6 @@ class MetadataCollections extends React.Component {
                   appIcon={<AppIcon app="finc-config" />}
                   defaultWidth="fill"
                   firstMenu={this.renderResultsFirstMenu(activeFilters)}
-                  // lastMenu={this.renderResultsLastMenu()}
                   padContent={false}
                   paneTitle="Finc Config"
                   paneSub={this.renderResultsPaneSubtitle(collection)}
@@ -318,7 +279,6 @@ class MetadataCollections extends React.Component {
                     onHeaderClick={onSort}
                     onRowClick={onSelectRow}
                     rowFormatter={this.rowFormatter}
-                    // selectedRow={this.state.selectedItem}
                     totalCount={count}
                     virtualize
                     visibleColumns={['label', 'mdSource', 'permitted', 'filters', 'freeContent']}
