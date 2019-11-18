@@ -254,11 +254,11 @@ class MetadataCollections extends React.Component {
                   </Pane>
                 }
                 <Pane
-                  appIcon={<AppIcon app="finc-config" />}
+                  appIcon={<AppIcon app="finc-select" />}
                   defaultWidth="fill"
                   firstMenu={this.renderResultsFirstMenu(activeFilters)}
                   padContent={false}
-                  paneTitle="Finc Config"
+                  paneTitle="Finc Select"
                   paneSub={this.renderResultsPaneSubtitle(collection)}
                 >
                   <MultiColumnList

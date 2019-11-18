@@ -12,12 +12,12 @@ class CollectionViewRoute extends React.Component {
   static manifest = Object.freeze({
     collection: {
       type: 'okapi',
-      path: 'finc-config/metadata-collections/:{id}',
+      path: 'finc-select/metadata-collections/:{id}',
     },
     sources: {
       type: 'okapi',
-      records: 'fincConfigMetadataSources',
-      path: 'finc-config/metadata-sources',
+      records: 'fincSelectMetadataSources',
+      path: 'finc-select/metadata-sources',
       resourceShouldRefresh: true
     },
     query: {},
@@ -39,6 +39,7 @@ class CollectionViewRoute extends React.Component {
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
       okapi: PropTypes.object.isRequired,
+      connect: PropTypes.func.isRequired,
     }).isRequired,
   };
 
@@ -58,7 +59,7 @@ class CollectionViewRoute extends React.Component {
   }
 
   render() {
-    const { handlers } = this.props;
+    const { handlers, stripes } = this.props;
 
     return (
       <MetadataCollectionView
@@ -70,6 +71,7 @@ class CollectionViewRoute extends React.Component {
         isLoading={_.get(this.props.resources, 'collection.isPending', true)}
         record={_.get(this.props.resources, 'collection.records', []).find(i => i.id === this.props.match.params.id)}
         sources={_.get(this.props.resources, 'sources.records', [])}
+        stripes={stripes}
       />
     );
   }

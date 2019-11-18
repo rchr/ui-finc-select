@@ -11,7 +11,7 @@ import {
   Row
 } from '@folio/stripes/components';
 
-// import SelectUnselect from './SelectUnselect';
+import SelectUnselect from './SelectUnselect';
 import urls from '../../DisplayUtils/urls';
 
 import BasicCss from '../../BasicStyle.css';
@@ -21,7 +21,16 @@ class CollectionInfoView extends React.Component {
     id: PropTypes.string,
     metadataCollection: PropTypes.object,
     sourceElement: PropTypes.object,
+    stripes: PropTypes.shape({
+      connect: PropTypes.func.isRequired,
+    }).isRequired,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.connectedSelectUnselect = this.props.stripes.connect(SelectUnselect);
+  }
 
   renderList = (values) => {
     const { metadataCollection } = this.props;
@@ -44,7 +53,11 @@ class CollectionInfoView extends React.Component {
   }
 
   render() {
-    const { metadataCollection, id, sourceElement } = this.props;
+    const { metadataCollection, id, sourceElement, stripes } = this.props;
+    const collectionId = _.get(metadataCollection, 'id', '-');
+    const permitted = _.get(metadataCollection, 'permitted', '-');
+    const selectedInitial = _.get(metadataCollection, 'selected');
+
     // // get the one source and all its information (which has the source ID saved in the collection)
     // const sourceElement = this.getSourceElement(sourceId, sourceData);
     const sourceId = _.get(sourceElement, 'id', '-');
@@ -98,13 +111,12 @@ class CollectionInfoView extends React.Component {
             { this.renderList('filters') }
           </Row>
           <Row>
-            TODO: Select Unselect
-            {/* <this.connectedSelectUnselect
+            <this.connectedSelectUnselect
               stripes={stripes}
-              selectedInitial={_.get(metadataCollection, 'selected')}
+              selectedInitial={selectedInitial}
               collectionId={collectionId}
               permitted={permitted}
-            /> */}
+            />
           </Row>
         </div>
       </React.Fragment>

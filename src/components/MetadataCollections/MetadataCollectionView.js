@@ -26,8 +26,10 @@ class CollectionViewRoute extends React.Component {
     }).isRequired,
     isLoading: PropTypes.bool,
     record: PropTypes.object,
-    stripes: PropTypes.object,
     sources: PropTypes.arrayOf(PropTypes.object),
+    stripes: PropTypes.shape({
+      connect: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -35,7 +37,7 @@ class CollectionViewRoute extends React.Component {
 
     this.state = {
       accordions: {
-        managementAccordion: false,
+        contentAccordion: false,
         technicalAccordion: false
       },
     };
@@ -91,7 +93,7 @@ class CollectionViewRoute extends React.Component {
   }
 
   render() {
-    const { record, isLoading } = this.props;
+    const { record, isLoading, stripes } = this.props;
     const label = _.get(record, 'label', '-');
 
     if (isLoading) return this.renderLoadingPane();
@@ -116,8 +118,8 @@ class CollectionViewRoute extends React.Component {
           <CollectionInfoView
             id="collectionInfo"
             metadataCollection={record}
-            stripes={this.props.stripes}
             sourceElement={sourceElement}
+            stripes={stripes}
           />
           <Row end="xs">
             <Col xs>
@@ -128,10 +130,10 @@ class CollectionViewRoute extends React.Component {
             </Col>
           </Row>
           <Accordion
-            id="managementAccordion"
-            label={<FormattedMessage id="ui-finc-config.collection.managementAccordion" />}
+            id="contentAccordion"
+            label={<FormattedMessage id="ui-finc-select.collection.accordion.content" />}
             onToggle={this.handleAccordionToggle}
-            open={this.state.accordions.managementAccordion}
+            open={this.state.accordions.contentAccordion}
           >
             <CollectionContentView
               id="collectionContent"
@@ -141,7 +143,7 @@ class CollectionViewRoute extends React.Component {
           </Accordion>
           <Accordion
             id="technicalAccordion"
-            label={<FormattedMessage id="ui-finc-config.collection.technicalAccordion" />}
+            label={<FormattedMessage id="ui-finc-select.collection.accordion.technical" />}
             onToggle={this.handleAccordionToggle}
             open={this.state.accordions.technicalAccordion}
           >

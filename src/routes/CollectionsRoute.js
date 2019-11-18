@@ -19,10 +19,11 @@ class CollectionsRoute extends React.Component {
   static manifest = Object.freeze({
     collections: {
       type: 'okapi',
-      records: 'fincConfigMetadataCollections',
+      records: 'fincSelectMetadataCollections',
       recordsRequired: '%{resultCount}',
       perRequest: 30,
-      path: 'finc-config/metadata-collections',
+      path: 'finc-select/metadata-collections',
+      resourceShouldRefresh: true,
       GET: {
         params: {
           query: makeQueryFunction(
@@ -40,8 +41,8 @@ class CollectionsRoute extends React.Component {
     },
     source: {
       type: 'okapi',
-      records: 'fincConfigMetadataSources',
-      path: 'finc-config/metadata-sources',
+      records: 'fincSelectMetadataSources',
+      path: 'finc-select/metadata-sources',
       resourceShouldRefresh: true
     },
     // get for the filter all sources but just the tiny with name and id
