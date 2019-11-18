@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React from 'react';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -9,6 +8,7 @@ import {
   Col,
   ConfirmationModal,
   ExpandAllButton,
+  Icon,
   IconButton,
   Pane,
   PaneMenu,
@@ -23,18 +23,22 @@ import FilterFileForm from './FilterFile/FilterFileForm';
 
 class FilterForm extends React.Component {
   static propTypes = {
-    stripes: PropTypes.shape({
-      connect: PropTypes.func,
-    }).isRequired,
+    handlers: PropTypes.PropTypes.shape({
+      onClose: PropTypes.func.isRequired,
+    }),
     handleSubmit: PropTypes.func.isRequired,
-    parentResources: PropTypes.shape().isRequired,
-    parentMutator: PropTypes.object.isRequired,
+    initialValues: PropTypes.object,
+    isLoading: PropTypes.bool,
     onCancel: PropTypes.func,
+    onDelete: PropTypes.func,
+    onSubmit: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
-    initialValues: PropTypes.object,
-    match: ReactRouterPropTypes.match,
   };
+
+  static defaultProps = {
+    initialValues: {},
+  }
 
   constructor(props) {
     super(props);
@@ -50,13 +54,13 @@ class FilterForm extends React.Component {
     this.handleExpandAll = this.handleExpandAll.bind(this);
   }
 
-  getData = () => {
-    const { parentResources, match: { params: { id } } } = this.props;
-    const filter = (parentResources.records || {}).records || [];
+  // getData = () => {
+  //   const { parentResources, match: { params: { id } } } = this.props;
+  //   const filter = (parentResources.records || {}).records || [];
 
-    if (!filter || filter.length === 0 || !id) return null;
-    return filter.find(u => u.id === id);
-  }
+  //   if (!filter || filter.length === 0 || !id) return null;
+  //   return filter.find(u => u.id === id);
+  // }
 
   beginDelete = () => {
     this.setState({
@@ -72,29 +76,27 @@ class FilterForm extends React.Component {
     }
   }
 
-  deleteFilter = () => {
-    const { parentMutator, initialValues: { id } } = this.props;
+  // deleteFilter = () => {
+  //   const { parentMutator, initialValues: { id } } = this.props;
 
-    parentMutator.records.DELETE({ id }).then(() => {
-      parentMutator.query.update({
-        _path: 'finc-select/filters',
-        layer: null
-      });
-    });
-  }
+  //   parentMutator.records.DELETE({ id }).then(() => {
+  //     parentMutator.query.update({
+  //       _path: 'finc-select/filters',
+  //       layer: null
+  //     });
+  //   });
+  // }
 
   getAddFirstMenu() {
-    const { onCancel } = this.props;
-
     return (
       <PaneMenu>
         <FormattedMessage id="ui-finc-select.filter.form.close">
           { ariaLabel => (
             <IconButton
-              id="clickable-closefilterdialog"
-              onClick={onCancel}
               ariaLabel={ariaLabel}
               icon="times"
+              id="clickable-closefilterdialog"
+              onClick={this.props.handlers.onClose}
             />
           )}
         </FormattedMessage>
@@ -103,7 +105,7 @@ class FilterForm extends React.Component {
   }
 
   getLastMenu(id, label) {
-    const { pristine, submitting, initialValues } = this.props;
+    const { pristine, submitting, initialValues, handleSubmit } = this.props;
     const { confirmDelete } = this.state;
     const isEditing = initialValues && initialValues.id;
 
@@ -113,24 +115,25 @@ class FilterForm extends React.Component {
         {isEditing &&
         <IfPermission perm="finc-select.filters.item.delete">
           <Button
-            id="clickable-delete-udp"
-            title="delete"
             buttonStyle="danger"
-            onClick={this.beginDelete}
             disabled={confirmDelete}
+            id="clickable-delete-udp"
             marginBottom0
+            onClick={this.beginDelete}
+            title="delete"
           >
             <FormattedMessage id="ui-finc-select.filter.form.deleteFilter" />
           </Button>
         </IfPermission>
         }
         <Button
-          id={id}
-          type="submit"
-          title={label}
-          disabled={pristine || submitting}
           buttonStyle="primary paneHeaderNewButton"
+          disabled={pristine || submitting}
+          id={id}
           marginBottom0
+          onClick={handleSubmit}
+          title={label}
+          type="submit"
         >
           {label}
         </Button>
@@ -152,7 +155,7 @@ class FilterForm extends React.Component {
   }
 
   render() {
-    const { initialValues, handleSubmit } = this.props;
+    const { initialValues, isLoading, onDelete } = this.props;
     const { confirmDelete, sections } = this.state;
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-select.filter.form.createFilter" />;
@@ -160,11 +163,10 @@ class FilterForm extends React.Component {
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.updateFilter" />) :
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.createFilter" />);
 
+    if (isLoading) return <Icon icon="spinner-ellipsis" width="10px" />;
+
     return (
-      <form
-        id="form-filter"
-        onSubmit={handleSubmit}
-      >
+      <form id="form-filter">
         <Paneset style={{ position: 'relative' }}>
           <Pane
             defaultWidth="100%"
@@ -199,12 +201,12 @@ class FilterForm extends React.Component {
                 {...this.props}
               />
               <ConfirmationModal
-                id="delete-filter-confirmation"
                 heading={<FormattedMessage id="ui-finc-select.filter.form.deleteFilter" />}
+                id="delete-filter-confirmation"
                 message={`Do you really want to delete ${initialValues.label}?`}
-                open={confirmDelete}
-                onConfirm={() => { this.confirmDelete(true); }}
                 onCancel={() => { this.confirmDelete(false); }}
+                onConfirm={onDelete}
+                open={confirmDelete}
               />
             </div>
           </Pane>

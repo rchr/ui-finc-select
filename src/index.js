@@ -11,6 +11,8 @@ import CollectionsRoute from './routes/CollectionsRoute';
 import CollectionViewRoute from './routes/CollectionViewRoute';
 import FiltersRoute from './routes/FiltersRoute';
 import FilterViewRoute from './routes/FilterViewRoute';
+import FilterEditRoute from './routes/FilterEditRoute';
+import FilterCreateRoute from './routes/FilterCreateRoute';
 
 import Settings from './settings';
 
@@ -36,6 +38,8 @@ class FincSelect extends React.Component {
         <Route path={`${path}/metadata-collections/:id?`} component={CollectionsRoute}>
           <Route path={`${path}/metadata-collections/:id`} component={CollectionViewRoute} />
         </Route>
+        <Route path={`${path}/filters/create`} component={FilterCreateRoute} />
+        <Route path={`${path}/filters/:id/edit`} component={FilterEditRoute} />
         <Route path={`${path}/filters/:id?`} component={FiltersRoute}>
           <Route path={`${path}/filters/:id`} component={FilterViewRoute} />
         </Route>

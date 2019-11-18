@@ -7,6 +7,8 @@ const urls = {
 
   filters: () => '/finc-select/filters',
   filterView: id => `/finc-select/filters/${id}`,
+  filterEdit: id => `/finc-select/filters/${id}/edit`,
+  filterCreate: () => '/finc-select/filters/create',
 };
 
 export default urls;

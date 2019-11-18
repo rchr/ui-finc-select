@@ -22,7 +22,10 @@ import {
   Paneset,
   SearchField,
 } from '@folio/stripes/components';
-import { AppIcon } from '@folio/stripes/core';
+import {
+  AppIcon,
+  IfPermission
+} from '@folio/stripes/core';
 
 import urls from '../DisplayUtils/urls';
 import FilterFilters from './FilterFilters';
@@ -141,6 +144,33 @@ class Filters extends React.Component {
     return <FormattedMessage id="stripes-smart-components.searchCriteria" />;
   }
 
+  // button for creating a new record
+  renderResultsLastMenu() {
+    if (this.props.disableRecordCreation) {
+      return null;
+    }
+
+    return (
+      <IfPermission perm="ui-licenses.licenses.edit">
+        <PaneMenu>
+          <FormattedMessage id="ui-select-config.filter.form.createFilter">
+            {ariaLabel => (
+              <Button
+                aria-label={ariaLabel}
+                buttonStyle="primary"
+                id="clickable-new-filter"
+                marginBottom0
+                to={`${urls.filterCreate()}${this.props.searchString}`}
+              >
+                <FormattedMessage id="stripes-smart-components.new" />
+              </Button>
+            )}
+          </FormattedMessage>
+        </PaneMenu>
+      </IfPermission>
+    );
+  }
+
   render() {
     const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, filter } = this.props;
     const count = filter ? filter.totalCount() : 0;
@@ -238,6 +268,7 @@ class Filters extends React.Component {
                   appIcon={<AppIcon app="finc-select" />}
                   defaultWidth="fill"
                   firstMenu={this.renderResultsFirstMenu(activeFilters)}
+                  lastMenu={this.renderResultsLastMenu()}
                   padContent={false}
                   paneTitle="Finc Select"
                   paneSub={this.renderResultsPaneSubtitle(filter)}

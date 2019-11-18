@@ -69,18 +69,18 @@ class FilterView extends React.Component {
     const { record, handlers } = this.props;
 
     return (
-      <IfPermission perm="finc-config.metadata-collections.item.put">
+      <IfPermission perm="finc-select.filters.item.put">
         <PaneMenu>
           <IconButton
             icon="edit"
-            id="clickable-edit-collection"
+            id="clickable-edit-filter"
             onClick={handlers.onEdit}
             style={{
               visibility: !record
                 ? 'hidden'
                 : 'visible'
             }}
-            title="Edit Metadata Collection"
+            title="Edit Filter"
           />
         </PaneMenu>
       </IfPermission>
@@ -92,9 +92,9 @@ class FilterView extends React.Component {
       <Pane
         defaultWidth="40%"
         dismissible
-        id="pane-collectiondetails"
+        id="pane-filterdetails"
         onClose={this.props.handlers.onClose}
-        paneTitle={<span data-test-collection-header-title>loading</span>}
+        paneTitle={<span data-test-filter-header-title>loading</span>}
       >
         <Layout className="marginTop1">
           <Icon icon="spinner-ellipsis" width="10px" />

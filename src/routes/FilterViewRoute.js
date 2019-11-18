@@ -42,7 +42,7 @@ class FilterViewRoute extends React.Component {
 
   handleEdit = () => {
     const { location, match } = this.props;
-    this.props.history.push(`${urls.collectionEdit(match.params.id)}${location.search}`);
+    this.props.history.push(`${urls.filterEdit(match.params.id)}${location.search}`);
   }
 
   getRecord = (id) => {
