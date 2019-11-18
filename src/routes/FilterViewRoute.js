@@ -40,6 +40,11 @@ class FilterViewRoute extends React.Component {
     this.props.history.push(`${urls.filters()}${location.search}`);
   }
 
+  handleEdit = () => {
+    const { location, match } = this.props;
+    this.props.history.push(`${urls.collectionEdit(match.params.id)}${location.search}`);
+  }
+
   getRecord = (id) => {
     return _.get(this.props.resources, 'filters.records', [])
       .find(i => i.id === id);
@@ -53,6 +58,7 @@ class FilterViewRoute extends React.Component {
         handlers={{
           ...handlers,
           onClose: this.handleClose,
+          onEdit: this.handleEdit,
         }}
         isLoading={_.get(this.props.resources, 'filter.isPending', true)}
         record={_.get(this.props.resources, 'filter.records', []).find(i => i.id === this.props.match.params.id)}

@@ -69,14 +69,6 @@
         "visible": true
       },
       {
-        "permissionName": "settings.finc-select.enabled",
-        "displayName": "Settings (finc-select): display list of settings pages",
-        "subPermissions": [
-          "settings.enabled"
-        ],
-        "visible": true
-      },
-      {
         "permissionName": "ui-finc-select.view",
         "displayName": "fincSelect: Can view metadatasources, metadatacollections and filters",
         "description": "Can view metadatasources, metadatacollections and filters",

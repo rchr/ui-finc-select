@@ -26,15 +26,15 @@ class FiltersRoute extends React.Component {
       resourceShouldRefresh: true,
       GET: {
         params: {
-          // query: makeQueryFunction(
-          //   'cql.allRecords=1',
-          //   '(label="%{query.query}*")',
-          //   {
-          //     'Filter Name': 'label'
-          //   },
-          //   filterConfig,
-          //   2,
-          // ),
+          query: makeQueryFunction(
+            'cql.allRecords=1',
+            '(label="%{query.query}*")',
+            {
+              'Filter Name': 'label'
+            },
+            filterConfig,
+            2,
+          ),
         },
         staticFallback: { params: {} },
       },
@@ -106,13 +106,6 @@ class FiltersRoute extends React.Component {
 
   queryGetter = () => {
     return _.get(this.props.resources, 'query', {});
-  }
-
-  // add update if search-selectbox is changing
-  onChangeIndex = (e) => {
-    const qindex = e.target.value;
-
-    this.props.mutator.query.update({ qindex });
   }
 
   render() {
