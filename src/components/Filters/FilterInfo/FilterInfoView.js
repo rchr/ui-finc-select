@@ -10,7 +10,7 @@ import {
 
 class FilterInfoView extends React.Component {
   static propTypes = {
-    filter: PropTypes.object.isRequired,
+    filter: PropTypes.object,
     stripes: PropTypes.shape({
       connect: PropTypes.func,
     }),

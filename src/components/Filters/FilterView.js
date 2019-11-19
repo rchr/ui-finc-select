@@ -9,7 +9,6 @@ import {
   ExpandAllButton,
   Icon,
   IconButton,
-  Layer,
   Layout,
   Pane,
   PaneMenu,
@@ -33,13 +32,12 @@ class FilterView extends React.Component {
     record: PropTypes.object,
     stripes: PropTypes.shape({
       connect: PropTypes.func,
+      okapi: PropTypes.object.isRequired,
     }),
   };
 
   constructor(props) {
     super(props);
-
-    // this.connectedFilterForm = this.props.stripes.connect(FilterForm);
 
     this.state = {
       accordions: {
@@ -115,6 +113,7 @@ class FilterView extends React.Component {
     if (isLoading) return this.renderLoadingPane();
 
     const label = _.get(record, 'label', '-');
+    const docs = _.get(record, 'filterFiles', '-');
 
     return (
       <React.Fragment>
@@ -131,7 +130,7 @@ class FilterView extends React.Component {
             <FilterInfoView
               id="filterInfo"
               filter={record}
-              stripes={this.props.stripes}
+              stripes={stripes}
             />
             <Row end="xs">
               <Col xs>
@@ -147,30 +146,14 @@ class FilterView extends React.Component {
               onToggle={this.handleAccordionToggle}
               open={this.state.accordions.fileAccordion}
             >
-              {/* <FilterFileView
+              <FilterFileView
                 id="filterInfo"
                 filter={record}
-                stripes={this.props.stripes}
-                docs={record.filterFiles}
-              /> */}
+                stripes={stripes}
+                docs={docs}
+              />
             </Accordion>
           </div>
-          {/* <Layer
-            isOpen={query.layer ? query.layer === 'edit' : false}
-            contentLabel="Edit Filter Dialog"
-          >
-            <this.connectedFilterForm
-              stripes={stripes}
-              initialValues={filterFormData}
-              onSubmit={(record) => { this.update(record); }}
-              onCancel={this.props.onCloseEdit}
-              parentResources={{
-                ...this.props.resources,
-                ...this.props.parentResources,
-              }}
-              parentMutator={this.props.parentMutator}
-            />
-          </Layer> */}
         </Pane>
       </React.Fragment>
     );

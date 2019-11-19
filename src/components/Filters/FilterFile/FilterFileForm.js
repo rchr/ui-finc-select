@@ -58,17 +58,17 @@ class FilterFileForm extends React.Component {
 
     return (
       <Accordion
+        id={accordionId}
         label={<FormattedMessage id="ui-finc-select.filter.fileAccordion" />}
         open={expanded}
-        id={accordionId}
         onToggle={onToggle}
       >
         <FieldArray
           addDocBtnLabel={<FormattedMessage id="ui-finc-select.filter.file.addFile" />}
           component={DocumentsFieldArray}
+          name="filterFiles"
           onDownloadFile={this.handleDownloadFile}
           onUploadFile={this.handleUploadFile}
-          name="filterFiles"
         />
       </Accordion>
     );

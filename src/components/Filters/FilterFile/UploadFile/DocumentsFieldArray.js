@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { get } from 'lodash';
 import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
@@ -8,7 +7,6 @@ import { Field } from 'redux-form';
 import {
   Button,
   Col,
-  // Icon,
   Layout,
   Row,
   TextField,
@@ -20,11 +18,7 @@ import withKiwtFieldArray from './withKiwtFieldArray';
 
 class DocumentsFieldArray extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    onAddField: PropTypes.func.isRequired,
-    onDeleteField: PropTypes.func.isRequired,
-    // onMarkforDeletion: PropTypes.func,
-    // onReplaceField: PropTypes.func,
+    addDocBtnLabel: PropTypes.node,
     fields: PropTypes.shape({
       getAll: PropTypes.func.isRequired,
       insert: PropTypes.func.isRequired,
@@ -32,11 +26,13 @@ class DocumentsFieldArray extends React.Component {
       push: PropTypes.func.isRequired,
       remove: PropTypes.func.isRequired,
     }).isRequired,
-    addDocBtnLabel: PropTypes.node,
-    onDownloadFile: PropTypes.func,
-    onUploadFile: PropTypes.func,
     isEmptyMessage: PropTypes.node,
     items: PropTypes.arrayOf(PropTypes.object),
+    name: PropTypes.string.isRequired,
+    onAddField: PropTypes.func.isRequired,
+    onDeleteField: PropTypes.func.isRequired,
+    onDownloadFile: PropTypes.func,
+    onUploadFile: PropTypes.func,
   }
 
   static defaultProps = {
@@ -59,8 +55,6 @@ class DocumentsFieldArray extends React.Component {
   )
 
   renderFileUpload = (doc, onUploadFile, onDownloadFile, name, i) => {
-    // const { onDeleteField, onMarkforDeletion, onReplaceField } = this.props;
-
     if (_.isEmpty(doc.fileId)) {
       return (
         <React.Fragment>
@@ -71,12 +65,12 @@ class DocumentsFieldArray extends React.Component {
                   <Field
                     component={FileUploaderField}
                     data-test-document-field-fileid
+                    fileLabel={doc.label}
                     id={`${name}-fileId-${i}`}
                     label={<FormattedMessage id="doc.fileId" />}
                     name={`${name}[${i}].fileId`}
                     onDownloadFile={onDownloadFile}
                     onUploadFile={onUploadFile}
-                    fileLabel={doc.label}
                     required
                     validate={this.validateRequired}
                     // validate={this.validateDocIsSpecified}
@@ -135,8 +129,8 @@ class DocumentsFieldArray extends React.Component {
             <Row>
               <Col xs={12}>
                 <Field
-                  data-test-document-field-label
                   component={TextField}
+                  data-test-document-field-label
                   id={`${name}-label-${i}`}
                   label={<FormattedMessage id="ui-finc-select.filter.file.label" />}
                   name={`${name}[${i}].label`}
@@ -148,8 +142,8 @@ class DocumentsFieldArray extends React.Component {
             <Row>
               <Col xs={12}>
                 <Field
-                  data-test-document-field-criteria
                   component={TextField}
+                  data-test-document-field-criteria
                   id={`${name}-criteria-${i}`}
                   label={<FormattedMessage id="ui-finc-select.filter.file.criteria" />}
                   name={`${name}[${i}].criteria`}

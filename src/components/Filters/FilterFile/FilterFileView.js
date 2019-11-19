@@ -73,16 +73,16 @@ class FilterFileView extends React.Component {
 
     return (
       <MultiColumnList
-        contentData={_.get(filter, 'filterFiles', [])}
-        formatter={formatter}
-        interactive={false}
-        isEmptyMessage={<FormattedMessage id="ui-finc-select.filter.file.empty" />}
-        visibleColumns={['label', 'criteria', 'fileId']}
         columnMapping={{
           label: <FormattedMessage id="ui-finc-select.filter.file.label" />,
           criteria: <FormattedMessage id="ui-finc-select.filter.file.criteria" />,
           fileId: ''
         }}
+        contentData={_.get(filter, 'filterFiles', [])}
+        formatter={formatter}
+        interactive={false}
+        isEmptyMessage={<FormattedMessage id="ui-finc-select.filter.file.empty" />}
+        visibleColumns={['label', 'criteria', 'fileId']}
       />
     );
   }

@@ -51,7 +51,7 @@ class FilterViewRoute extends React.Component {
   }
 
   render() {
-    const { handlers } = this.props;
+    const { handlers, stripes } = this.props;
 
     return (
       <FilterView
@@ -62,6 +62,7 @@ class FilterViewRoute extends React.Component {
         }}
         isLoading={_.get(this.props.resources, 'filter.isPending', true)}
         record={_.get(this.props.resources, 'filter.records', []).find(i => i.id === this.props.match.params.id)}
+        stripes={stripes}
       />
     );
   }

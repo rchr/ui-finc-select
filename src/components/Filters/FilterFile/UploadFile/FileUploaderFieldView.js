@@ -17,6 +17,7 @@ export default class FileUploaderFieldView extends React.Component {
       modified: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       fileId: PropTypes.string,
     }).isRequired,
+    fileLabel: PropTypes.string,
     isDropZoneActive: PropTypes.bool,
     onDelete: PropTypes.func.isRequired,
     onDownloadFile: PropTypes.func.isRequired,
@@ -24,7 +25,6 @@ export default class FileUploaderFieldView extends React.Component {
     onDragLeave: PropTypes.func,
     onDrop: PropTypes.func.isRequired,
     uploadInProgress: PropTypes.bool,
-    fileLabel: PropTypes.string
   }
 
   renderFileInfo = () => {
@@ -36,21 +36,6 @@ export default class FileUploaderFieldView extends React.Component {
       <Row>
         <Col xs={6}>
           <KeyValue label={<FormattedMessage id="ui-finc-select.filter.file.filename" />}>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            {/* <a
-              data-test-fuf-name
-              href="#"
-              onClick={(e) => {
-                this.props.onDownloadFile(file);
-                e.preventDefault();
-                e.stopPropagation();
-              }}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {fileLabel}
-              <Icon icon="external-link" />
-            </a> */}
             {fileLabel}
           </KeyValue>
         </Col>

@@ -11,8 +11,8 @@ import {
 export default class EditCard extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    header: PropTypes.node.isRequired,
     deleteBtnProps: PropTypes.object,
+    header: PropTypes.node.isRequired,
     onDelete: PropTypes.func,
   }
 
@@ -23,8 +23,8 @@ export default class EditCard extends React.Component {
   renderDeleteButton = () => (
     <Button
       buttonStyle="link slim"
-      style={{ margin: 0, padding: 0 }}
       onClick={this.props.onDelete}
+      style={{ margin: 0, padding: 0 }}
       {...this.props.deleteBtnProps}
     >
       <Icon icon="trash" />

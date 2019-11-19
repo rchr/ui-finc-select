@@ -34,6 +34,9 @@ class FilterForm extends React.Component {
     onSubmit: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
+    stripes: PropTypes.shape({
+      okapi: PropTypes.object,
+    }),
   };
 
   static defaultProps = {
@@ -54,14 +57,6 @@ class FilterForm extends React.Component {
     this.handleExpandAll = this.handleExpandAll.bind(this);
   }
 
-  // getData = () => {
-  //   const { parentResources, match: { params: { id } } } = this.props;
-  //   const filter = (parentResources.records || {}).records || [];
-
-  //   if (!filter || filter.length === 0 || !id) return null;
-  //   return filter.find(u => u.id === id);
-  // }
-
   beginDelete = () => {
     this.setState({
       confirmDelete: true,
@@ -75,17 +70,6 @@ class FilterForm extends React.Component {
       this.setState({ confirmDelete: false });
     }
   }
-
-  // deleteFilter = () => {
-  //   const { parentMutator, initialValues: { id } } = this.props;
-
-  //   parentMutator.records.DELETE({ id }).then(() => {
-  //     parentMutator.query.update({
-  //       _path: 'finc-select/filters',
-  //       layer: null
-  //     });
-  //   });
-  // }
 
   getAddFirstMenu() {
     return (
@@ -155,7 +139,7 @@ class FilterForm extends React.Component {
   }
 
   render() {
-    const { initialValues, isLoading, onDelete } = this.props;
+    const { initialValues, isLoading, onDelete, stripes } = this.props;
     const { confirmDelete, sections } = this.state;
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-select.filter.form.createFilter" />;
@@ -198,6 +182,7 @@ class FilterForm extends React.Component {
                 accordionId="editFilterFile"
                 expanded={sections.editFilterFile}
                 onToggle={this.handleSectionToggle}
+                stripes={stripes}
                 {...this.props}
               />
               <ConfirmationModal
