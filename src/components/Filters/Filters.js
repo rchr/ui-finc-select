@@ -178,8 +178,7 @@ class Filters extends React.Component {
       <SearchAndSortQuery
         initialFilterState={{ type: ['Whitelist', 'Blacklist'] }}
         initialSearchState={{ query: '' }}
-        // initialSortState={{ sort: 'label' }}
-        initialSortState={{}}
+        initialSortState={{ sort: 'label' }}
         queryGetter={queryGetter}
         querySetter={querySetter}
       >
