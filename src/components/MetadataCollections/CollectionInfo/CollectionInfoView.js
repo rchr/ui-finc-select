@@ -23,7 +23,7 @@ class CollectionInfoView extends React.Component {
     sourceElement: PropTypes.object,
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
-    }).isRequired,
+    }),
   };
 
   constructor(props) {

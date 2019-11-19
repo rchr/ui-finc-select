@@ -57,7 +57,7 @@ class FilterCreateRoute extends React.Component {
   }
 
   render() {
-    const { handlers, resources } = this.props;
+    const { handlers, resources, stripes } = this.props;
 
     return (
       <FilterForm
@@ -67,6 +67,7 @@ class FilterCreateRoute extends React.Component {
           ...handlers,
         }}
         onSubmit={this.handleSubmit}
+        stripes={stripes}
       />
     );
   }

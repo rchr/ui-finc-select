@@ -20,8 +20,7 @@ class SourceManagementView extends React.Component {
     stripes: PropTypes
       .shape({
         connect: PropTypes.func.isRequired,
-      })
-      .isRequired,
+      }),
     history: ReactRouterPropTypes.history,
   };
 

@@ -139,7 +139,7 @@ class FilterForm extends React.Component {
   }
 
   render() {
-    const { initialValues, isLoading, onDelete, stripes } = this.props;
+    const { initialValues, isLoading, onDelete } = this.props;
     const { confirmDelete, sections } = this.state;
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-select.filter.form.createFilter" />;
@@ -182,7 +182,7 @@ class FilterForm extends React.Component {
                 accordionId="editFilterFile"
                 expanded={sections.editFilterFile}
                 onToggle={this.handleSectionToggle}
-                stripes={stripes}
+                // stripes={stripes}
                 {...this.props}
               />
               <ConfirmationModal

@@ -14,7 +14,7 @@ import BasicCss from '../../BasicStyle.css';
 
 class SourceTechnicalView extends React.Component {
   static propTypes = {
-    metadataSource: PropTypes.object.isRequired,
+    metadataSource: PropTypes.object,
   };
 
   renderList = (values) => {
