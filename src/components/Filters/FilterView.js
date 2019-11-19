@@ -69,7 +69,7 @@ class FilterView extends React.Component {
     const { record, handlers } = this.props;
 
     return (
-      <IfPermission perm="finc-select.filters.item.put">
+      <IfPermission perm="ui-finc-select.filters.item.put">
         <PaneMenu>
           <IconButton
             icon="edit"

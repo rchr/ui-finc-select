@@ -151,9 +151,9 @@ class Filters extends React.Component {
     }
 
     return (
-      <IfPermission perm="ui-licenses.licenses.edit">
+      <IfPermission perm="ui-finc-select.filter.edit">
         <PaneMenu>
-          <FormattedMessage id="ui-select-config.filter.form.createFilter">
+          <FormattedMessage id="ui-finc-select.filter.form.createFilter">
             {ariaLabel => (
               <Button
                 aria-label={ariaLabel}
