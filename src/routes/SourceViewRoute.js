@@ -30,6 +30,7 @@ class SourceViewRoute extends React.Component {
       source: PropTypes.object,
     }).isRequired,
     stripes: PropTypes.shape({
+      connect: PropTypes.func.isRequired,
       hasPerm: PropTypes.func.isRequired,
       okapi: PropTypes.object.isRequired,
     }).isRequired,
@@ -46,7 +47,7 @@ class SourceViewRoute extends React.Component {
   }
 
   render() {
-    const { handlers } = this.props;
+    const { handlers, stripes } = this.props;
     // const selectedRecord = this.getRecord(this.props.match.params.id);
 
     return (
@@ -57,6 +58,7 @@ class SourceViewRoute extends React.Component {
         }}
         isLoading={_.get(this.props.resources, 'source.isPending', true)}
         record={_.get(this.props.resources, 'source.records', []).find(i => i.id === this.props.match.params.id)}
+        stripes={stripes}
       />
     );
   }
