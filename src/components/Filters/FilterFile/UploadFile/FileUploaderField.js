@@ -10,8 +10,6 @@ import {
 import FileUploaderFieldView from './FileUploaderFieldView';
 
 class FileUploaderField extends React.Component {
-  _isMounted = false;
-
   static propTypes = {
     fileLabel: PropTypes.string,
     input: PropTypes.shape({
@@ -46,14 +44,6 @@ class FileUploaderField extends React.Component {
     return null;
   }
 
-  componentDidMount() {
-    this._isMounted = true;
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
   processError(resp, intl) {
     const contentType = resp.headers ? resp.headers.get('Content-Type') : '';
 
@@ -72,13 +62,13 @@ class FileUploaderField extends React.Component {
 
     if (acceptedFiles.length !== 1) return;
 
-    if (this._isMounted) {
-      this.setState({
-        error: undefined,
-        isDropZoneActive: false,
-        uploadInProgress: true,
-      });
-    }
+    let mounted = true;
+
+    this.setState({
+      error: undefined,
+      isDropZoneActive: false,
+      uploadInProgress: true,
+    });
 
     this.props.onUploadFile(acceptedFiles[0])
       .then(response => {
@@ -87,7 +77,7 @@ class FileUploaderField extends React.Component {
           response.text().then(fileId => {
             // the value of the fieldId will connected with the Field in DocuemtsFieldArray with onChange(file);
             this.props.input.onChange(fileId);
-            if (this._isMounted) {
+            if (mounted) {
               this.setState({ file: { fileId } });
             }
             // console.log(this.state.file);
@@ -104,6 +94,8 @@ class FileUploaderField extends React.Component {
         });
       })
       .finally(() => this.setState({ uploadInProgress: false }));
+
+    mounted = false;
   }
 
   handleDelete = () => {
