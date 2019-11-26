@@ -1,37 +1,37 @@
-import { beforeEach, describe, it } from '@bigtest/mocha';
-import { expect } from 'chai';
+// import { beforeEach, describe, it } from '@bigtest/mocha';
+// import { expect } from 'chai';
 
-import setupApplication from '../helpers/setup-application';
-import ExamplePageInteractor from '../interactors/example-page';
+// import setupApplication from '../helpers/setup-application';
+// import ExamplePageInteractor from '../interactors/example-page';
 
-describe('ExamplePage', () => {
-  const examplePage = new ExamplePageInteractor();
+// describe('ExamplePage', () => {
+//   const examplePage = new ExamplePageInteractor();
 
-  setupApplication();
+//   setupApplication();
 
-  beforeEach(function () {
-    this.visit('/fincselect/examples');
-  });
+//   beforeEach(function () {
+//     this.visit('/fincselect/examples');
+//   });
 
-  it('has a link home', () => {
-    expect(examplePage.homeLink).to.include('');
-  });
+//   it('has a link home', () => {
+//     expect(examplePage.homeLink).to.include('');
+//   });
 
-  it('has a link to stripes-components', () => {
-    expect(examplePage.componentsLink).to.include('/folio-org/stripes-components/');
-  });
+//   it('has a link to stripes-components', () => {
+//     expect(examplePage.componentsLink).to.include('/folio-org/stripes-components/');
+//   });
 
-  it('has an example button', () => {
-    expect(examplePage.button.isPresent).to.be.true;
-  });
+//   it('has an example button', () => {
+//     expect(examplePage.button.isPresent).to.be.true;
+//   });
 
-  describe('clicking the example button', () => {
-    beforeEach(async () => {
-      await examplePage.button.click();
-    });
+//   describe('clicking the example button', () => {
+//     beforeEach(async () => {
+//       await examplePage.button.click();
+//     });
 
-    it('shows a greetings modal', () => {
-      expect(examplePage.modal.greetingMessage).to.equal('Congratulations!');
-    });
-  });
-});
+//     it('shows a greetings modal', () => {
+//       expect(examplePage.modal.greetingMessage).to.equal('Congratulations!');
+//     });
+//   });
+// });

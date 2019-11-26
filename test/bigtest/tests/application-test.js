@@ -1,27 +1,27 @@
-import { beforeEach, describe, it } from '@bigtest/mocha';
-import { expect } from 'chai';
+// import { beforeEach, describe, it } from '@bigtest/mocha';
+// import { expect } from 'chai';
 
-import setupApplication from '../helpers/setup-application';
-import ApplicationInteractor from '../interactors/application';
+// import setupApplication from '../helpers/setup-application';
+// import ApplicationInteractor from '../interactors/application';
 
-describe('Application', () => {
-  const app = new ApplicationInteractor();
+// describe('Application', () => {
+//   const app = new ApplicationInteractor();
 
-  setupApplication();
+//   setupApplication();
 
-  beforeEach(function () {
-    this.visit('/fincselect');
-  });
+//   beforeEach(function () {
+//     this.visit('/fincselect');
+//   });
 
-  it('shows a greeting message', () => {
-    expect(app.greetingMessage).to.equal('Congratulations!');
-  });
+//   it('shows a greeting message', () => {
+//     expect(app.greetingMessage).to.equal('Congratulations!');
+//   });
 
-  it('has a link to examples', () => {
-    expect(app.exampleLink).to.include('/fincselect/examples');
-  });
+//   it('has a link to examples', () => {
+//     expect(app.exampleLink).to.include('/fincselect/examples');
+//   });
 
-  it('has a link to the developer guides', () => {
-    expect(app.guideLink).to.include('/dev-guide.md');
-  });
-});
+//   it('has a link to the developer guides', () => {
+//     expect(app.guideLink).to.include('/dev-guide.md');
+//   });
+// });
