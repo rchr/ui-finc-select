@@ -14,20 +14,31 @@ import BasicCss from '../../BasicStyle.css';
 
 class SourceTechnicalView extends React.Component {
   static propTypes = {
-    metadataSource: PropTypes.object.isRequired,
-    stripes: PropTypes
-      .shape({
-        connect: PropTypes.func.isRequired,
-      })
-      .isRequired,
+    metadataSource: PropTypes.object,
   };
+
+  renderList = (values) => {
+    const { metadataSource } = this.props;
+
+    if (!metadataSource) {
+      return 'no values';
+    } else {
+      const valueItems = metadataSource[values];
+      const valueFormatter = (valueItem) => (<li key={valueItem}>{valueItem}</li>);
+      const isEmptyMessage = 'No items to show';
+
+      return (
+        <List
+          items={valueItems}
+          itemFormatter={valueFormatter}
+          isEmptyMessage={isEmptyMessage}
+        />
+      );
+    }
+  }
 
   render() {
     const { metadataSource } = this.props;
-    const isEmptyMessage = 'No items to show';
-    // set values for tickets
-    const ticketsItems = metadataSource.tickets;
-    const ticketsFormatter = (ticketsItem) => (<li key={ticketsItem}>{ticketsItem}</li>);
 
     return (
       <React.Fragment>
@@ -48,11 +59,7 @@ class SourceTechnicalView extends React.Component {
             </Headline>
           </Row>
           <Row>
-            <List
-              items={ticketsItems}
-              itemFormatter={ticketsFormatter}
-              isEmptyMessage={isEmptyMessage}
-            />
+            { this.renderList('tickets') }
           </Row>
           <Row>
             <KeyValue

@@ -52,13 +52,13 @@ export default function withKiwtFieldArray(WrappedComponent) {
 
       return (
         <WrappedComponent
-          {...this.props}
           items={items}
           name={fields.name}
           onAddField={this.handleAddField}
           onDeleteField={this.handleDeleteField}
           onMarkforDeletion={this.handleMarkForDeletion}
           onReplaceField={this.handleReplaceField}
+          {...this.props}
         />
       );
     }

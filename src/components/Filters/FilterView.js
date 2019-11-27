@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -10,7 +9,7 @@ import {
   ExpandAllButton,
   Icon,
   IconButton,
-  Layer,
+  Layout,
   Pane,
   PaneMenu,
   Row
@@ -22,61 +21,29 @@ import {
 
 import FilterInfoView from './FilterInfo/FilterInfoView';
 import FilterFileView from './FilterFile/FilterFileView';
-import FilterForm from './FilterForm';
 
 class FilterView extends React.Component {
-  static manifest = Object.freeze({
-    query: {},
-  });
-
   static propTypes = {
-    mutator: PropTypes.shape({
-      query: PropTypes.object.isRequired,
+    handlers: PropTypes.shape({
+      onClose: PropTypes.func.isRequired,
+      onEdit: PropTypes.func,
+    }).isRequired,
+    isLoading: PropTypes.bool,
+    record: PropTypes.object,
+    stripes: PropTypes.shape({
+      connect: PropTypes.func,
+      okapi: PropTypes.object.isRequired,
     }),
-    parentMutator: PropTypes.shape().isRequired,
-    stripes: PropTypes
-      .shape({
-        connect: PropTypes.func.isRequired,
-        logger: PropTypes
-          .shape({ log: PropTypes.func.isRequired })
-          .isRequired,
-        hasPerm: PropTypes.func,
-      })
-      .isRequired,
-    paneWidth: PropTypes.string,
-    resources: PropTypes.shape({
-      filter: PropTypes.shape(),
-      query: PropTypes.object,
-    }),
-    match: ReactRouterPropTypes.match,
-    parentResources: PropTypes.shape(),
-    onClose: PropTypes.func,
-    onEdit: PropTypes.func,
-    editLink: PropTypes.string,
-    onCloseEdit: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
-
-    const logger = props.stripes.logger;
-
-    this.log = logger.log.bind(logger);
-    this.connectedFilterForm = this.props.stripes.connect(FilterForm);
 
     this.state = {
       accordions: {
         fileAccordion: false
       },
     };
-  }
-
-  getData = () => {
-    const { parentResources, match: { params: { id } } } = this.props;
-    const filter = (parentResources.records || {}).records || [];
-
-    if (!filter || filter.length === 0 || !id) return null;
-    return filter.find(u => u.id === id);
   }
 
   handleExpandAll = (obj) => {
@@ -96,10 +63,42 @@ class FilterView extends React.Component {
     });
   }
 
-  update = (filter) => {
-    this.props.parentMutator.records.PUT(filter).then(() => {
-      this.props.onCloseEdit();
-    });
+  renderEditPaneMenu = () => {
+    const { record, handlers } = this.props;
+
+    return (
+      <IfPermission perm="ui-finc-select.filters.item.put">
+        <PaneMenu>
+          <IconButton
+            icon="edit"
+            id="clickable-edit-filter"
+            onClick={handlers.onEdit}
+            style={{
+              visibility: !record
+                ? 'hidden'
+                : 'visible'
+            }}
+            title="Edit Filter"
+          />
+        </PaneMenu>
+      </IfPermission>
+    );
+  }
+
+  renderLoadingPane = () => {
+    return (
+      <Pane
+        defaultWidth="40%"
+        dismissible
+        id="pane-filterdetails"
+        onClose={this.props.handlers.onClose}
+        paneTitle={<span data-test-filter-header-title>loading</span>}
+      >
+        <Layout className="marginTop1">
+          <Icon icon="spinner-ellipsis" width="10px" />
+        </Layout>
+      </Pane>
+    );
   }
 
   getFilterFormData = (filter) => {
@@ -109,50 +108,29 @@ class FilterView extends React.Component {
   }
 
   render() {
-    const { resources, stripes } = this.props;
-    const query = resources.query;
-    const initialValues = this.getData();
+    const { record, isLoading, stripes } = this.props;
 
-    if (_.isEmpty(initialValues)) {
-      return <div style={{ paddingTop: '1rem' }}><Icon icon="spinner-ellipsis" width="100px" /></div>;
-    } else {
-      const filterFormData = this.getFilterFormData(initialValues);
-      const detailMenu = (
-        <PaneMenu>
-          <IfPermission perm="finc-select.filters.item.put">
-            <IconButton
-              icon="edit"
-              id="clickable-edit-filter"
-              style={{
-                visibility: !initialValues
-                  ? 'hidden'
-                  : 'visible'
-              }}
-              onClick={this.props.onEdit}
-              href={this.props.editLink}
-              title="Edit Filter"
-            />
-          </IfPermission>
-        </PaneMenu>
-      );
+    if (isLoading) return this.renderLoadingPane();
 
-      const label = _.get(initialValues, 'label', '-');
+    const label = _.get(record, 'label', '-');
+    const docs = _.get(record, 'filterFiles', '-');
 
-      return (
+    return (
+      <React.Fragment>
         <Pane
-          defaultWidth={this.props.paneWidth}
-          id="pane-filterdetails"
-          paneTitle={<span data-test-filter-header-title>{label}</span>}
-          lastMenu={detailMenu}
+          defaultWidth="40%"
           dismissible
-          onClose={this.props.onClose}
+          id="pane-filterdetails"
+          lastMenu={this.renderEditPaneMenu()}
+          onClose={this.props.handlers.onClose}
+          paneTitle={<span data-test-filter-header-title>{label}</span>}
         >
           <TitleManager record={label} />
           <div id="filterDetails">
             <FilterInfoView
               id="filterInfo"
-              filter={initialValues}
-              stripes={this.props.stripes}
+              filter={record}
+              stripes={stripes}
             />
             <Row end="xs">
               <Col xs>
@@ -163,39 +141,24 @@ class FilterView extends React.Component {
               </Col>
             </Row>
             <Accordion
-              open={this.state.accordions.fileAccordion}
-              onToggle={this.handleAccordionToggle}
-              label={<FormattedMessage id="ui-finc-select.filter.fileAccordion" />}
               id="fileAccordion"
+              label={<FormattedMessage id="ui-finc-select.filter.fileAccordion" />}
+              onToggle={this.handleAccordionToggle}
+              open={this.state.accordions.fileAccordion}
             >
               <FilterFileView
                 id="filterInfo"
-                filter={initialValues}
-                stripes={this.props.stripes}
-                docs={initialValues.filterFiles}
+                filter={record}
+                stripes={stripes}
+                docs={docs}
               />
             </Accordion>
           </div>
-          <Layer
-            isOpen={query.layer ? query.layer === 'edit' : false}
-            contentLabel="Edit Filter Dialog"
-          >
-            <this.connectedFilterForm
-              stripes={stripes}
-              initialValues={filterFormData}
-              onSubmit={(record) => { this.update(record); }}
-              onCancel={this.props.onCloseEdit}
-              parentResources={{
-                ...this.props.resources,
-                ...this.props.parentResources,
-              }}
-              parentMutator={this.props.parentMutator}
-            />
-          </Layer>
         </Pane>
-      );
-    }
+      </React.Fragment>
+    );
   }
 }
+
 
 export default FilterView;

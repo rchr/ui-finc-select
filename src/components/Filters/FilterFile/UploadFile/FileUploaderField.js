@@ -11,14 +11,14 @@ import FileUploaderFieldView from './FileUploaderFieldView';
 
 class FileUploaderField extends React.Component {
   static propTypes = {
-    onDownloadFile: PropTypes.func.isRequired,
-    onUploadFile: PropTypes.func.isRequired,
+    fileLabel: PropTypes.string,
     input: PropTypes.shape({
       onChange: PropTypes.func.isRequired,
       value: PropTypes.string,
     }).isRequired,
     meta: PropTypes.object,
-    fileLabel: PropTypes.string
+    onDownloadFile: PropTypes.func.isRequired,
+    onUploadFile: PropTypes.func.isRequired,
   };
 
   state = {
@@ -62,6 +62,8 @@ class FileUploaderField extends React.Component {
 
     if (acceptedFiles.length !== 1) return;
 
+    let mounted = true;
+
     this.setState({
       error: undefined,
       isDropZoneActive: false,
@@ -75,7 +77,9 @@ class FileUploaderField extends React.Component {
           response.text().then(fileId => {
             // the value of the fieldId will connected with the Field in DocuemtsFieldArray with onChange(file);
             this.props.input.onChange(fileId);
-            this.setState({ file: { fileId } });
+            if (mounted) {
+              this.setState({ file: { fileId } });
+            }
             // console.log(this.state.file);
           });
         } else {
@@ -90,6 +94,8 @@ class FileUploaderField extends React.Component {
         });
       })
       .finally(() => this.setState({ uploadInProgress: false }));
+
+    mounted = false;
   }
 
   handleDelete = () => {
@@ -107,6 +113,7 @@ class FileUploaderField extends React.Component {
           <FileUploaderFieldView
             error={this.props.meta.error || this.state.error}
             file={this.props.input.value ? this.state.file : {}}
+            fileLabel={fileLabel}
             isDropZoneActive={this.state.isDropZoneActive}
             onDelete={this.handleDelete}
             onDownloadFile={this.props.onDownloadFile}
@@ -115,7 +122,6 @@ class FileUploaderField extends React.Component {
             onDrop={(file) => this.handleDrop(file, intl)}
             uploadInProgress={this.state.uploadInProgress}
             {...pickBy(this.props, (_, key) => key.startsWith('data-test-'))}
-            fileLabel={fileLabel}
           />
         )}
       </IntlConsumer>

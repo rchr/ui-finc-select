@@ -10,12 +10,10 @@ import {
 
 class FilterInfoView extends React.Component {
   static propTypes = {
-    filter: PropTypes.object.isRequired,
-    stripes: PropTypes
-      .shape({
-        connect: PropTypes.func.isRequired,
-      })
-      .isRequired,
+    filter: PropTypes.object,
+    stripes: PropTypes.shape({
+      connect: PropTypes.func,
+    }),
   };
 
   render() {

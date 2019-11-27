@@ -54,7 +54,7 @@
     "actsAs": ["app"],
     "displayName": "ui-finc-select.meta.title",
     "route": "/finc-select",
-    "home": "/finc-select",
+    "home": "/finc-select/metadata-sources",
     "queryResource": "query",
     "okapiInterfaces": {
       "finc-select/metadata-sources": "1.0",
@@ -66,14 +66,6 @@
       {
         "permissionName": "module.finc-select.enabled",
         "displayName": "UI: finc-select module is enabled",
-        "visible": true
-      },
-      {
-        "permissionName": "settings.finc-select.enabled",
-        "displayName": "Settings (finc-select): display list of settings pages",
-        "subPermissions": [
-          "settings.enabled"
-        ],
         "visible": true
       },
       {

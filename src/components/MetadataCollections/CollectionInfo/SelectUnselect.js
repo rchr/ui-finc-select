@@ -11,8 +11,8 @@ import {
 
 class SelectUnselect extends React.Component {
   static propTypes = {
-    collectionId: PropTypes.string.isRequired,
-    selectedInitial: PropTypes.string.isRequired,
+    collectionId: PropTypes.string,
+    selectedInitial: PropTypes.string,
     permitted: PropTypes.string,
     stripes: PropTypes.object,
   };

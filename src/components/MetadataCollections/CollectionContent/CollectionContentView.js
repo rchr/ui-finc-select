@@ -10,7 +10,7 @@ import {
 
 class CollectionContentView extends React.Component {
   static propTypes = {
-    metadataCollection: PropTypes.object.isRequired
+    metadataCollection: PropTypes.object,
   };
 
   render() {
