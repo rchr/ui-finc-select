@@ -14,7 +14,6 @@ import {
 } from '@folio/stripes/smart-components';
 import {
   Button,
-  ButtonGroup,
   Icon,
   MultiColumnList,
   Pane,
@@ -26,6 +25,7 @@ import { AppIcon } from '@folio/stripes/core';
 
 import CollectionFilters from './CollectionFilters';
 import urls from '../DisplayUtils/urls';
+import Navigation from '../Navigation/Navigation';
 
 class MetadataCollections extends React.Component {
   static propTypes = {
@@ -160,6 +160,12 @@ class MetadataCollections extends React.Component {
     return <FormattedMessage id="stripes-smart-components.searchCriteria" />;
   }
 
+  renderNavigation = (id) => (
+    <Navigation
+      id={id}
+    />
+  );
+
   render() {
     const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, collection, filterData } = this.props;
     const count = collection ? collection.totalCount() : 0;
@@ -195,28 +201,7 @@ class MetadataCollections extends React.Component {
                     paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
                   >
                     <form onSubmit={onSubmitSearch}>
-                      <ButtonGroup tagName="nav" fullWidth>
-                        <Button
-                          buttonStyle="default"
-                          id="metadata-sources"
-                          to={urls.sources()}
-                        >
-                          Sources
-                        </Button>
-                        <Button
-                          buttonStyle="primary"
-                          id="metadata-collections"
-                        >
-                          Collections
-                        </Button>
-                        <Button
-                          buttonStyle="default"
-                          id="filters"
-                          to={urls.filters()}
-                        >
-                          Filters
-                        </Button>
-                      </ButtonGroup>
+                      {this.renderNavigation('collection')}
                       <div>
                         <SearchField
                           autoFocus
