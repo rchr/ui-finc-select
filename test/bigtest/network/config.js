@@ -84,15 +84,15 @@ export default function config() {
 
 
   // return a model, which will pass through the serializer:
-  // this.get('/finc-select/metadata-sources', ({ fincSelectMetadataSources }) => {
-  //   return fincSelectMetadataSources.all();
-  // });
+  this.get('/finc-select/metadata-sources', ({ fincSelectMetadataSources }) => {
+    return fincSelectMetadataSources.all();
+  });
   // this.get('/finc-select/metadata-sources/:id', (schema, request) => {
   //   return schema.fincSelectMetadataSources.find(request.params.id).attrs;
   // });
-  // this.get('/finc-select/metadata-collections', ({ fincSelectMetadataCollections }) => {
-  //   return fincSelectMetadataCollections.all();
-  // });
+  this.get('/finc-select/metadata-collections', ({ fincSelectMetadataCollections }) => {
+    return fincSelectMetadataCollections.all();
+  });
   // this.get('/finc-select/metadata-collections/:id', (schema, request) => {
   //   return schema.fincSelectMetadataCollections.find(request.params.id).attrs;
   // });
