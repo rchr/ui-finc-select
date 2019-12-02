@@ -163,113 +163,117 @@ class MetadataSources extends React.Component {
     const count = source ? source.totalCount() : 0;
 
     return (
-      <SearchAndSortQuery
-        initialFilterState={{ status: ['active', 'technical implementation'] }}
-        initialSearchState={{ query: '' }}
-        initialSortState={{ sort: 'label' }}
-        queryGetter={queryGetter}
-        querySetter={querySetter}
-      >
-        {
-          ({
-            activeFilters,
-            filterChanged,
-            getFilterHandlers,
-            getSearchHandlers,
-            onSort,
-            onSubmitSearch,
-            resetAll,
-            searchChanged,
-            searchValue,
-          }) => {
-            const disableReset = () => (!filterChanged && !searchChanged);
+      <div data-test-sources>
+        <SearchAndSortQuery
+          initialFilterState={{ status: ['active', 'technical implementation'] }}
+          initialSearchState={{ query: '' }}
+          initialSortState={{ sort: 'label' }}
+          queryGetter={queryGetter}
+          querySetter={querySetter}
+        >
+          {
+            ({
+              activeFilters,
+              filterChanged,
+              getFilterHandlers,
+              getSearchHandlers,
+              onSort,
+              onSubmitSearch,
+              resetAll,
+              searchChanged,
+              searchValue,
+            }) => {
+              const disableReset = () => (!filterChanged && !searchChanged);
 
-            return (
-              <Paneset>
-                {this.state.filterPaneIsVisible &&
-                  <Pane
-                    defaultWidth="18%"
-                    onClose={this.toggleFilterPane}
-                    paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
-                  >
-                    <form onSubmit={onSubmitSearch}>
-                      {this.renderNavigation('source')}
-                      <div>
-                        <SearchField
-                          autoFocus
-                          inputRef={this.searchField}
-                          name="query"
-                          onChange={getSearchHandlers().query}
-                          onClear={getSearchHandlers().reset}
-                          value={searchValue.query}
-                          // add values for search-selectbox
-                          onChangeIndex={onChangeIndex}
-                          searchableIndexes={searchableIndexes}
-                          searchableIndexesPlaceholder={null}
-                          selectedIndex={_.get(this.props.contentData, 'qindex')}
-                        />
+              return (
+                <Paneset>
+                  {this.state.filterPaneIsVisible &&
+                    <Pane
+                      defaultWidth="18%"
+                      onClose={this.toggleFilterPane}
+                      paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
+                    >
+                      <form onSubmit={onSubmitSearch}>
+                        {this.renderNavigation('source')}
+                        <div>
+                          <SearchField
+                            autoFocus
+                            inputRef={this.searchField}
+                            name="query"
+                            onChange={getSearchHandlers().query}
+                            onClear={getSearchHandlers().reset}
+                            value={searchValue.query}
+                            // add values for search-selectbox
+                            onChangeIndex={onChangeIndex}
+                            searchableIndexes={searchableIndexes}
+                            searchableIndexesPlaceholder={null}
+                            selectedIndex={_.get(this.props.contentData, 'qindex')}
+                          />
+                          <Button
+                            buttonStyle="primary"
+                            disabled={!searchValue.query || searchValue.query === ''}
+                            fullWidth
+                            type="submit"
+                          >
+                            <FormattedMessage id="stripes-smart-components.search" />
+                          </Button>
+                        </div>
                         <Button
-                          buttonStyle="primary"
-                          disabled={!searchValue.query || searchValue.query === ''}
-                          fullWidth
-                          type="submit"
+                          buttonStyle="none"
+                          disabled={disableReset()}
+                          id="clickable-reset-all"
+                          onClick={resetAll}
                         >
-                          <FormattedMessage id="stripes-smart-components.search" />
+                          <Icon icon="times-circle-solid">
+                            <FormattedMessage id="stripes-smart-components.resetAll" />
+                          </Icon>
                         </Button>
-                      </div>
-                      <Button
-                        buttonStyle="none"
-                        disabled={disableReset()}
-                        id="clickable-reset-all"
-                        onClick={resetAll}
-                      >
-                        <Icon icon="times-circle-solid">
-                          <FormattedMessage id="stripes-smart-components.resetAll" />
-                        </Icon>
-                      </Button>
-                      <SourceFilters
-                        activeFilters={activeFilters.state}
-                        filterHandlers={getFilterHandlers()}
-                      />
-                    </form>
+                        <SourceFilters
+                          activeFilters={activeFilters.state}
+                          filterHandlers={getFilterHandlers()}
+                        />
+                      </form>
+                    </Pane>
+                  }
+                  <Pane
+                    appIcon={<AppIcon app="finc-select" />}
+                    data-test-source-pane-results
+                    defaultWidth="fill"
+                    firstMenu={this.renderResultsFirstMenu(activeFilters)}
+                    id="pane-sourceresults"
+                    padContent={false}
+                    paneTitle="Finc Select"
+                    paneSub={this.renderResultsPaneSubtitle(source)}
+                  >
+                    <MultiColumnList
+                      autosize
+                      columnMapping={{
+                        label: intl.formatMessage({ id: 'ui-finc-select.source.label' }),
+                        sourceId: intl.formatMessage({ id: 'ui-finc-select.source.id' }),
+                        status: intl.formatMessage({ id: 'ui-finc-select.source.status' }),
+                        lastProcessed: intl.formatMessage({ id: 'ui-finc-select.source.lastProcessed' }),
+                      }}
+                      contentData={this.props.contentData}
+                      formatter={this.resultsFormatter}
+                      id="list-sources"
+                      isEmptyMessage="no results"
+                      isSelected={({ item }) => item.id === selectedRecordId}
+                      onHeaderClick={onSort}
+                      onRowClick={onSelectRow}
+                      rowFormatter={this.rowFormatter}
+                      // selectedRow={this.state.selectedItem}
+                      totalCount={count}
+                      virtualize
+                      visibleColumns={['label', 'sourceId', 'status', 'lastProcessed']}
+                    />
                   </Pane>
-                }
-                <Pane
-                  appIcon={<AppIcon app="finc-select" />}
-                  defaultWidth="fill"
-                  firstMenu={this.renderResultsFirstMenu(activeFilters)}
-                  padContent={false}
-                  paneTitle="Finc Select"
-                  paneSub={this.renderResultsPaneSubtitle(source)}
-                >
-                  <MultiColumnList
-                    autosize
-                    columnMapping={{
-                      label: intl.formatMessage({ id: 'ui-finc-select.source.label' }),
-                      sourceId: intl.formatMessage({ id: 'ui-finc-select.source.id' }),
-                      status: intl.formatMessage({ id: 'ui-finc-select.source.status' }),
-                      lastProcessed: intl.formatMessage({ id: 'ui-finc-select.source.lastProcessed' }),
-                    }}
-                    contentData={this.props.contentData}
-                    formatter={this.resultsFormatter}
-                    id="list-sources"
-                    isEmptyMessage="no results"
-                    isSelected={({ item }) => item.id === selectedRecordId}
-                    onHeaderClick={onSort}
-                    onRowClick={onSelectRow}
-                    rowFormatter={this.rowFormatter}
-                    // selectedRow={this.state.selectedItem}
-                    totalCount={count}
-                    virtualize
-                    visibleColumns={['label', 'sourceId', 'status', 'lastProcessed']}
-                  />
-                </Pane>
-                {this.props.children}
-              </Paneset>
-            );
+                  {this.props.children}
+                </Paneset>
+              );
+            }
           }
-        }
-      </SearchAndSortQuery>
+        </SearchAndSortQuery>
+      </div>
     );
   }
 }
