@@ -13,7 +13,6 @@ import {
 } from '@folio/stripes/smart-components';
 import {
   Button,
-  ButtonGroup,
   Icon,
   MultiColumnList,
   Pane,
@@ -28,6 +27,7 @@ import {
 
 import urls from '../DisplayUtils/urls';
 import FilterFilters from './FilterFilters';
+import Navigation from '../Navigation/Navigation';
 
 class Filters extends React.Component {
   static propTypes = {
@@ -170,6 +170,12 @@ class Filters extends React.Component {
     );
   }
 
+  renderNavigation = (id) => (
+    <Navigation
+      id={id}
+    />
+  );
+
   render() {
     const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, filter } = this.props;
     const count = filter ? filter.totalCount() : 0;
@@ -205,28 +211,7 @@ class Filters extends React.Component {
                     paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
                   >
                     <form onSubmit={onSubmitSearch}>
-                      <ButtonGroup tagName="nav" fullWidth>
-                        <Button
-                          buttonStyle="default"
-                          id="metadata-sources"
-                          to={urls.sources()}
-                        >
-                          Sources
-                        </Button>
-                        <Button
-                          buttonStyle="default"
-                          id="metadata-collections"
-                          to={urls.collections()}
-                        >
-                          Collections
-                        </Button>
-                        <Button
-                          buttonStyle="primary"
-                          id="filters"
-                        >
-                          Filters
-                        </Button>
-                      </ButtonGroup>
+                      {this.renderNavigation('filter')}
                       <div>
                         <SearchField
                           autoFocus

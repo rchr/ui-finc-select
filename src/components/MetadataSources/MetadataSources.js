@@ -14,7 +14,6 @@ import {
 } from '@folio/stripes/smart-components';
 import {
   Button,
-  ButtonGroup,
   Icon,
   MultiColumnList,
   Pane,
@@ -26,6 +25,7 @@ import { AppIcon } from '@folio/stripes/core';
 
 import urls from '../DisplayUtils/urls';
 import SourceFilters from './SourceFilters';
+import Navigation from '../Navigation/Navigation';
 
 const searchableIndexes = [
   { label: 'All', value: '', makeQuery: term => `(label="${term}*" or sourceId="${term}*")` },
@@ -152,6 +152,12 @@ class MetadataSources extends React.Component {
     return <FormattedMessage id="stripes-smart-components.searchCriteria" />;
   }
 
+  renderNavigation = (id) => (
+    <Navigation
+      id={id}
+    />
+  );
+
   render() {
     const { intl, queryGetter, querySetter, onChangeIndex, onSelectRow, selectedRecordId, source } = this.props;
     const count = source ? source.totalCount() : 0;
@@ -187,28 +193,7 @@ class MetadataSources extends React.Component {
                     paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
                   >
                     <form onSubmit={onSubmitSearch}>
-                      <ButtonGroup tagName="nav" fullWidth>
-                        <Button
-                          buttonStyle="primary"
-                          id="metadata-sources"
-                        >
-                          Sources
-                        </Button>
-                        <Button
-                          buttonStyle="default"
-                          id="metadata-collections"
-                          to={urls.collections()}
-                        >
-                          Collections
-                        </Button>
-                        <Button
-                          buttonStyle="default"
-                          id="filters"
-                          to={urls.filters()}
-                        >
-                          Filters
-                        </Button>
-                      </ButtonGroup>
+                      {this.renderNavigation('source')}
                       <div>
                         <SearchField
                           autoFocus
