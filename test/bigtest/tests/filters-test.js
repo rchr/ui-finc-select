@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import setupApplication from '../helpers/setup-application';
 import FilterInteractor from '../interactors/filter';
 import SourceInteractor from '../interactors/source';
-// import CollectionInteractor from '../interactors/collection';
+import CollectionInteractor from '../interactors/collection';
 
 const FILTER_COUNT = 25;
 
@@ -61,17 +61,17 @@ describe('Filter', () => {
       });
     });
 
-    // describe('click on Collection Tab', () => {
-    //   const collectionInteractor = new CollectionInteractor();
+    describe('click on Collection Tab', () => {
+      const collectionInteractor = new CollectionInteractor();
 
-    //   beforeEach(async function () {
-    //     await filterInteractor.navigation.collectionNavBtn.click();
-    //     await collectionInteractor.whenLoaded();
-    //   });
+      beforeEach(async function () {
+        await filterInteractor.navigation.collectionNavBtn.click();
+        await collectionInteractor.whenLoaded();
+      });
 
-    //   it('should open the collections list', () => {
-    //     expect(collectionInteractor.isPresent).to.be.true;
-    //   });
-    // });
+      it('should open the collections list', () => {
+        expect(collectionInteractor.isPresent).to.be.true;
+      });
+    });
   });
 });
