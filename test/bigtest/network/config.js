@@ -99,4 +99,8 @@ export default function config() {
   this.get('/finc-select/filters', ({ fincSelectFilters }) => {
     return fincSelectFilters.all();
   });
+
+  this.get('/finc-config/tiny-metadata-sources', ({ tinyMetadataSources }) => {
+    return tinyMetadataSources.all();
+  });
 }
