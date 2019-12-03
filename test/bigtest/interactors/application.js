@@ -10,6 +10,7 @@ export default @interactor class ApplicationInteractor {
   // button = scoped('[class*=buttonGroup---] button');
   buttonSources = 'button[id="metadata-sources"]';
   buttonCollection = 'button[id="metadata-collections"]';
+  buttonFilter = 'button[id="filters"]';
 
   // static defaultScope = '#pane-results';
   // appTitle = text('[class*=paneTitleLabel---]');

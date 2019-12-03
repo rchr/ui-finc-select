@@ -3,7 +3,8 @@ import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
 import SourceInteractor from '../interactors/source';
-import CollectionInteractor from '../interactors/collection';
+import FilterInteractor from '../interactors/filter';
+// import CollectionInteractor from '../interactors/collection';
 
 const SOURCE_COUNT = 25;
 
@@ -26,15 +27,15 @@ describe('Metadata Source', () => {
     expect(sourceInteractor.instances().length).to.be.equal(SOURCE_COUNT);
   });
 
-  describe('clicking on the first source', function () {
-    beforeEach(async function () {
-      await sourceInteractor.instances(0).click();
-    });
+  // describe('clicking on the first source', function () {
+  //   beforeEach(async function () {
+  //     await sourceInteractor.instances(0).click();
+  //   });
 
-    it('loads the source-instance details', function () {
-      expect(sourceInteractor.instance.isVisible).to.equal(true);
-    });
-  });
+  //   it('loads the source-instance details', function () {
+  //     expect(sourceInteractor.instance.isVisible).to.equal(true);
+  //   });
+  // });
 
   describe('Navigation with active source tab', () => {
     it('should be present', () => {
@@ -44,19 +45,33 @@ describe('Metadata Source', () => {
     it('should make source tab primary', () => {
       expect(sourceInteractor.navigation.sourceNavBtn.isPrimary).to.be.true;
       expect(sourceInteractor.navigation.collectionNavBtn.isPrimary).to.be.false;
+      expect(sourceInteractor.navigation.filterNavBtn.isPrimary).to.be.false;
     });
 
-    describe('click on Collection Tab', () => {
-      const collectionInteractor = new CollectionInteractor();
+    describe('click on Filter Tab', () => {
+      const filterInteractor = new FilterInteractor();
 
       beforeEach(async function () {
-        await sourceInteractor.navigation.collectionNavBtn.click();
-        await collectionInteractor.whenLoaded();
+        await sourceInteractor.navigation.filterNavBtn.click();
+        await filterInteractor.whenLoaded();
       });
 
-      it('should open the collections list', () => {
-        expect(collectionInteractor.isPresent).to.be.true;
+      it('should open the filter list', () => {
+        expect(filterInteractor.isPresent).to.be.true;
       });
     });
+
+    // describe('click on Collection Tab', () => {
+    //   const collectionInteractor = new CollectionInteractor();
+
+    //   beforeEach(async function () {
+    //     await sourceInteractor.navigation.collectionNavBtn.click();
+    //     await collectionInteractor.whenLoaded();
+    //   });
+
+    //   it('should open the collections list', () => {
+    //     expect(collectionInteractor.isPresent).to.be.true;
+    //   });
+    // });
   });
 });
