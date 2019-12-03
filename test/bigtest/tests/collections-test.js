@@ -16,9 +16,6 @@
 //     this.server.createList('finc-select-metadata-collection', COLLECTION_COUNT);
 //     this.visit('/finc-select/metadata-collections?filters=freeContent.yes');
 //     await collectionInteractor.whenLoaded();
-
-//     // click checkbox not working always
-//     // await collectionInteractor.clickMetadataAvailableCOLLECTIONsCheckbox();
 //   });
 
 //   it('shows the list of collection items', () => {
@@ -29,15 +26,15 @@
 //     expect(collectionInteractor.instances().length).to.be.equal(COLLECTION_COUNT);
 //   });
 
-//   describe('clicking on the first collection', function () {
-//     beforeEach(async function () {
-//       await collectionInteractor.instances(0).click();
-//     });
+//   // describe('clicking on the first collection', function () {
+//   //   beforeEach(async function () {
+//   //     await collectionInteractor.instances(0).click();
+//   //   });
 
-//     it('loads the collection-instance details', function () {
-//       expect(collectionInteractor.instance.isVisible).to.equal(true);
-//     });
-//   });
+//   //   it('loads the collection-instance details', function () {
+//   //     expect(collectionInteractor.instance.isVisible).to.equal(true);
+//   //   });
+//   // });
 
 //   describe('Navigation with active collection tab', () => {
 //     it('should be present', () => {

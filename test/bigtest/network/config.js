@@ -96,4 +96,7 @@ export default function config() {
   // this.get('/finc-select/metadata-collections/:id', (schema, request) => {
   //   return schema.fincSelectMetadataCollections.find(request.params.id).attrs;
   // });
+  this.get('/finc-select/filters', ({ fincSelectFilters }) => {
+    return fincSelectFilters.all();
+  });
 }
