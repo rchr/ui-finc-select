@@ -97,7 +97,7 @@ class FilterForm extends React.Component {
       // set button to save changes
       <PaneMenu>
         {isEditing &&
-        <IfPermission perm="ui-finc-select.filters.item.delete">
+        <IfPermission perm="finc-select.filters.item.delete">
           <Button
             buttonStyle="danger"
             disabled={confirmDelete}

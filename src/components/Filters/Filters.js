@@ -150,7 +150,7 @@ class Filters extends React.Component {
     }
 
     return (
-      <IfPermission perm="ui-finc-select.filter.edit">
+      <IfPermission perm="finc-select.filters.item.post">
         <PaneMenu>
           <FormattedMessage id="ui-finc-select.filter.form.createFilter">
             {ariaLabel => (
