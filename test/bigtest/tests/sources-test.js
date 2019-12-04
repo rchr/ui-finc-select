@@ -27,16 +27,6 @@ describe('Metadata Source', () => {
     expect(sourceInteractor.instances().length).to.be.equal(SOURCE_COUNT);
   });
 
-  // describe('clicking on the first source', function () {
-  //   beforeEach(async function () {
-  //     await sourceInteractor.instances(0).click();
-  //   });
-
-  //   it('loads the source-instance details', function () {
-  //     expect(sourceInteractor.instance.isVisible).to.equal(true);
-  //   });
-  // });
-
   describe('Navigation with active source tab', () => {
     it('should be present', () => {
       expect(sourceInteractor.navigation.isPresent).to.be.true;
