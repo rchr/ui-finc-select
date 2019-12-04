@@ -47,4 +47,14 @@ describe('SourceDetailsPage', () => {
       expect(sourceDetailsPage.technicalAccordion.isPresent).to.equal(true);
     });
   });
+
+  describe('close source details pane', () => {
+    beforeEach(async function () {
+      await sourceDetailsPage.closePane.click();
+    });
+
+    it('source details pane is not presented', () => {
+      expect(sourceDetailsPage.isPresent).to.be.false;
+    });
+  });
 });

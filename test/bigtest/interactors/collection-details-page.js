@@ -1,7 +1,13 @@
 import {
   interactor,
-  text
+  is,
+  isPresent,
+  text,
 } from '@bigtest/interactor';
+
+@interactor class ButtonInteractor {
+  isButton = is('button');
+}
 
 @interactor class ContentAccordion {
   static defaultScope = '#contentAccordion';
@@ -13,7 +19,11 @@ import {
 
 export default @interactor class CollectionDetailsPage {
   static defaultScope = '#pane-collectiondetails';
+
   title = text('[data-test-collection-header-title]');
   contentAccordion = new ContentAccordion();
   technicalAccordion = new TechnicalAccordion();
+  closePane = new ButtonInteractor('[icon=times]');
+  editButtonPresent = isPresent('#clickable-edit-collection');
+  clickEditButton = new ButtonInteractor('#clickable-edit-collection');
 }
