@@ -27,16 +27,6 @@ describe('Filter', () => {
     expect(filterInteractor.instances().length).to.be.equal(FILTER_COUNT);
   });
 
-  // describe('clicking on the first filter', function () {
-  //   beforeEach(async function () {
-  //     await filterInteractor.instances(0).click();
-  //   });
-
-  //   it('loads the filter-instance details', function () {
-  //     expect(filterInteractor.instance.isVisible).to.equal(true);
-  //   });
-  // });
-
   describe('Navigation with active filter tab', () => {
     it('should be present', () => {
       expect(filterInteractor.navigation.isPresent).to.be.true;

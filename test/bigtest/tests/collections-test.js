@@ -29,16 +29,6 @@ describe('Metadata Collection', () => {
     expect(collectionInteractor.instances().length).to.be.equal(COLLECTION_COUNT);
   });
 
-  // describe('clicking on the first collection', function () {
-  //   beforeEach(async function () {
-  //     await collectionInteractor.instances(0).click();
-  //   });
-
-  //   it('loads the collection-instance details', function () {
-  //     expect(collectionInteractor.instance.isVisible).to.equal(true);
-  //   });
-  // });
-
   describe('Navigation with active collection tab', () => {
     it('should be present', () => {
       expect(collectionInteractor.navigation.isPresent).to.be.true;

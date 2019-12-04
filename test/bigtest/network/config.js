@@ -87,17 +87,20 @@ export default function config() {
   this.get('/finc-select/metadata-sources', ({ fincSelectMetadataSources }) => {
     return fincSelectMetadataSources.all();
   });
-  // this.get('/finc-select/metadata-sources/:id', (schema, request) => {
-  //   return schema.fincSelectMetadataSources.find(request.params.id).attrs;
-  // });
+  this.get('/finc-select/metadata-sources/:id', (schema, request) => {
+    return schema.fincSelectMetadataSources.find(request.params.id).attrs;
+  });
   this.get('/finc-select/metadata-collections', ({ fincSelectMetadataCollections }) => {
     return fincSelectMetadataCollections.all();
   });
-  // this.get('/finc-select/metadata-collections/:id', (schema, request) => {
-  //   return schema.fincSelectMetadataCollections.find(request.params.id).attrs;
-  // });
+  this.get('/finc-select/metadata-collections/:id', (schema, request) => {
+    return schema.fincSelectMetadataCollections.find(request.params.id).attrs;
+  });
   this.get('/finc-select/filters', ({ fincSelectFilters }) => {
     return fincSelectFilters.all();
+  });
+  this.get('/finc-select/filters/:id', (schema, request) => {
+    return schema.fincSelectFilters.find(request.params.id).attrs;
   });
 
   this.get('/finc-config/tiny-metadata-sources', ({ tinyMetadataSources }) => {
