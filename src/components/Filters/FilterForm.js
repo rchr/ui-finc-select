@@ -101,7 +101,7 @@ class FilterForm extends React.Component {
           <Button
             buttonStyle="danger"
             disabled={confirmDelete}
-            id="clickable-delete-udp"
+            id="clickable-delete-filter"
             marginBottom0
             onClick={this.beginDelete}
             title="delete"
@@ -150,7 +150,7 @@ class FilterForm extends React.Component {
     if (isLoading) return <Icon icon="spinner-ellipsis" width="10px" />;
 
     return (
-      <form id="form-filter">
+      <form id="form-filter" data-test-filter-form-page>
         <Paneset style={{ position: 'relative' }}>
           <Pane
             defaultWidth="100%"
