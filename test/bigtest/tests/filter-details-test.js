@@ -46,4 +46,14 @@ describe('FilterDetailsPage', () => {
       expect(filterDetailsPage.fileAccordion.isPresent).to.equal(true);
     });
   });
+
+  describe('close filter details pane', () => {
+    beforeEach(async function () {
+      await filterDetailsPage.closePane.click();
+    });
+
+    it('filter details pane is not presented', () => {
+      expect(filterDetailsPage.isPresent).to.be.false;
+    });
+  });
 });

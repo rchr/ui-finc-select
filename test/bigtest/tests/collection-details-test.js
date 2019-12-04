@@ -47,4 +47,14 @@ describe('CollectionDetailsPage', () => {
       expect(collectionDetailsPage.technicalAccordion.isPresent).to.equal(true);
     });
   });
+
+  describe('close collection details pane', () => {
+    beforeEach(async function () {
+      await collectionDetailsPage.closePane.click();
+    });
+
+    it('collection details pane is not presented', () => {
+      expect(collectionDetailsPage.isPresent).to.be.false;
+    });
+  });
 });
