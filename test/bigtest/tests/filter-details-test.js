@@ -14,10 +14,10 @@ describe('FilterDetailsPage', () => {
   const filterDetailsPage = new FilterDetailsPage();
   const filterInteractor = new FilterInteractor();
 
-  let collection = null;
+  let filter = null;
 
   beforeEach(async function () {
-    collection = this.server.create('finc-select-filter');
+    filter = this.server.create('finc-select-filter', 'withFilterFile');
     await this.visit('/finc-select/filters?filters=type.Whitelist');
   });
 
@@ -39,7 +39,7 @@ describe('FilterDetailsPage', () => {
     });
 
     it('displays filter label in the pane header', function () {
-      expect(filterDetailsPage.title).to.include(collection.label);
+      expect(filterDetailsPage.title).to.include(filter.label); // 'FILTER 0'
     });
 
     it('all accordions in filter-instance are present', function () {
@@ -54,6 +54,15 @@ describe('FilterDetailsPage', () => {
 
     it('filter details pane is not presented', () => {
       expect(filterDetailsPage.isPresent).to.be.false;
+    });
+  });
+
+  describe('can open file accordion', () => {
+    beforeEach(async function () {
+      await filterDetailsPage.fileAccordion.click();
+    });
+    it('download button is present', () => {
+      expect(filterDetailsPage.downloadFileButton.isPresent).to.equal(true);
     });
   });
 });

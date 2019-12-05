@@ -21,4 +21,5 @@ export default @interactor class FilterDetailsPage {
   closePane = new ButtonInteractor('[icon=times]');
   editButtonPresent = isPresent('#clickable-edit-filter');
   clickEditButton = new ButtonInteractor('#clickable-edit-filter');
+  downloadFileButton = new ButtonInteractor('#download-file');
 }
