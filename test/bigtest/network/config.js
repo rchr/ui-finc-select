@@ -102,7 +102,12 @@ export default function config() {
   this.get('/finc-select/filters/:id', (schema, request) => {
     return schema.fincSelectFilters.find(request.params.id).attrs;
   });
-
+  this.get('/finc-select/filter-files', ({ fincSelectFilterFiles }) => {
+    return fincSelectFilterFiles.all();
+  });
+  this.get('/finc-select/filter-files/:id', (schema, request) => {
+    return schema.fincSelectFilterFiles.find(request.params.id).attrs;
+  });
   this.get('/finc-config/tiny-metadata-sources', ({ tinyMetadataSources }) => {
     return tinyMetadataSources.all();
   });

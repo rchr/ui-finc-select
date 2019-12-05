@@ -58,6 +58,7 @@ class FilterFileView extends React.Component {
         <div>
           <Button
             buttonStyle="danger"
+            id="download-file"
             onClick={(e) => {
               this.handleDownloadFile(item);
               e.preventDefault();
