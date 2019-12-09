@@ -2,6 +2,8 @@ import {
   interactor
 } from '@bigtest/interactor';
 
+import NavigationInteractor from './navigation';
+
 // https://bigtestjs.io/guides/interactors/introduction/
 export default @interactor class ApplicationInteractor {
   // fincHeader = text('[data-test-layout]');
@@ -11,6 +13,7 @@ export default @interactor class ApplicationInteractor {
   buttonSources = 'button[id="metadata-sources"]';
   buttonCollection = 'button[id="metadata-collections"]';
   buttonFilter = 'button[id="filters"]';
+  navigation = new NavigationInteractor();
 
   // static defaultScope = '#pane-results';
   // appTitle = text('[class*=paneTitleLabel---]');

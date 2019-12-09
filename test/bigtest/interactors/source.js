@@ -15,6 +15,10 @@ export default @interactor class SourceInteractor {
   instances = collection('[role=group] div a');
   instance = scoped('#pane-sourcedetails');
   navigation = new NavigationInteractor();
+  statusFilterIsPresent = isPresent('section[id="filter-accordion-status"]');
+  resetAllBtnIsPresent = isPresent('button[id="clickable-reset-all"]');
+  submitBtnIsPresent = isPresent('button[id="sourceSubmitSearch"]');
+  searchFieldIsPresent = isPresent('input[id="sourceSearchField"]');
 
   isLoaded = isPresent('#pane-sourceresults');
   whenLoaded() {

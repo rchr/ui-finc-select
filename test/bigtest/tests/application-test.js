@@ -13,14 +13,6 @@ describe('Application', () => {
     this.visit('/finc-select');
   });
 
-  // it('shows a greeting message', () => {
-  //   expect(app.greetingMessage).to.equal('Congratulations!');
-  // });
-
-  // it('has a link to the developer guides', () => {
-  //   expect(app.guideLink).to.include('/dev-guide.md');
-  // });
-
   it('renders', () => {
     expect(app.isPresent).to.be.true;
   });
@@ -36,13 +28,4 @@ describe('Application', () => {
   it('displays filter-tab', () => {
     expect(app.buttonFilter).to.exist;
   });
-
-  // it('show app title', () => {
-  //   expect(app.appTitle).to.equal('Finc Select');
-  // });
-
-  // describe('clicking the example button', () => {
-  //   beforeEach(async () => {
-  //     await examplePage.button.click();
-  //   });
 });

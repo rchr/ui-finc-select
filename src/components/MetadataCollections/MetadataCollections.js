@@ -206,6 +206,7 @@ class MetadataCollections extends React.Component {
                         <div>
                           <SearchField
                             autoFocus
+                            id="collectionSearchField"
                             inputRef={this.searchField}
                             name="query"
                             onChange={getSearchHandlers().query}
@@ -216,6 +217,7 @@ class MetadataCollections extends React.Component {
                             buttonStyle="primary"
                             disabled={!searchValue.query || searchValue.query === ''}
                             fullWidth
+                            id="collectionSubmitSearch"
                             type="submit"
                           >
                             <FormattedMessage id="stripes-smart-components.search" />

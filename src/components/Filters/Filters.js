@@ -216,6 +216,7 @@ class Filters extends React.Component {
                         <div>
                           <SearchField
                             autoFocus
+                            id="filterSearchField"
                             inputRef={this.searchField}
                             name="query"
                             onChange={getSearchHandlers().query}
@@ -226,6 +227,7 @@ class Filters extends React.Component {
                             buttonStyle="primary"
                             disabled={!searchValue.query || searchValue.query === ''}
                             fullWidth
+                            id="filterSubmitSearch"
                             type="submit"
                           >
                             <FormattedMessage id="stripes-smart-components.search" />

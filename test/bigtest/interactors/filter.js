@@ -15,6 +15,10 @@ export default @interactor class FilterInteractor {
   instances = collection('[role=group] div a');
   instance = scoped('#pane-filterdetails');
   navigation = new NavigationInteractor();
+  typeFilterIsPresent = isPresent('section[id="filter-accordion-type"]');
+  resetAllBtnIsPresent = isPresent('button[id="clickable-reset-all"]');
+  submitBtnIsPresent = isPresent('button[id="filterSubmitSearch"]');
+  searchFieldIsPresent = isPresent('input[id="filterSearchField"]');
 
   isLoaded = isPresent('#pane-filterresults');
   whenLoaded() {
