@@ -64,9 +64,9 @@ class DocumentsFieldArray extends React.Component {
                 <Col xs={12}>
                   <Field
                     component={FileUploaderField}
-                    data-test-document-field-fileid
+                    data-test-filter-file-card-fileid
                     fileLabel={doc.label}
-                    id={`${name}-fileId-${i}`}
+                    id={`filter-file-card-fileId-${i}`}
                     label={<FormattedMessage id="doc.fileId" />}
                     name={`${name}[${i}].fileId`}
                     onDownloadFile={onDownloadFile}
@@ -115,10 +115,10 @@ class DocumentsFieldArray extends React.Component {
 
     return items.map((doc, i) => (
       <EditCard
-        data-test-document-field
+        data-test-filter-file
         deleteBtnProps={{
           'id': `${name}-delete-${i}`,
-          'data-test-delete-field-button': true
+          'data-test-delete-filter-file-button': true
         }}
         header={<FormattedMessage id="ui-finc-select.filter.file.label" values={{ number: i + 1 }} />}
         key={i}
@@ -130,8 +130,8 @@ class DocumentsFieldArray extends React.Component {
               <Col xs={12}>
                 <Field
                   component={TextField}
-                  data-test-document-field-label
-                  id={`${name}-label-${i}`}
+                  data-test-filter-file-label
+                  id={`filter-file-label-${i}`}
                   label={<FormattedMessage id="ui-finc-select.filter.file.label" />}
                   name={`${name}[${i}].label`}
                   required
@@ -143,8 +143,8 @@ class DocumentsFieldArray extends React.Component {
               <Col xs={12}>
                 <Field
                   component={TextField}
-                  data-test-document-field-criteria
-                  id={`${name}-criteria-${i}`}
+                  data-test-filter-file-criteria
+                  id={`filter-file-criteria-${i}`}
                   label={<FormattedMessage id="ui-finc-select.filter.file.criteria" />}
                   name={`${name}[${i}].criteria`}
                 />
@@ -159,7 +159,7 @@ class DocumentsFieldArray extends React.Component {
 
   renderEmpty = () => (
     <Layout
-      data-test-document-field-empty-message
+      data-test-filter-file-card-empty-message
       className="padding-bottom-gutter"
     >
       { this.props.isEmptyMessage }
@@ -167,16 +167,16 @@ class DocumentsFieldArray extends React.Component {
   )
 
   render() {
-    const { items, name, onAddField } = this.props;
+    const { items, onAddField } = this.props;
 
     return (
-      <div data-test-documents-field-array>
+      <div data-test-filter-file-card>
         <div>
           { items.length ? this.renderDocs() : this.renderEmpty() }
         </div>
         <Button
-          data-test-documents-field-array-add-button
-          id={`add-${name}-btn`}
+          data-test-filter-file-card-add-button
+          id="add-filter-file-btn"
           onClick={() => onAddField({})}
         >
           { this.props.addDocBtnLabel }

@@ -14,10 +14,7 @@ describe('Create Filter', () => {
   const filterInteractor = new FilterInteractor();
   const editFilterPage = new EditFilterPage();
 
-  // let filter = null;
-
   beforeEach(async function () {
-    // filter = this.server.create('finc-select-filter');
     return this.visit('/finc-select/filters/create?filters=type.Whitelist', () => {
       expect(filterInteractor.$root).to.exist;
     });
@@ -45,6 +42,17 @@ describe('Create Filter', () => {
 
     it('type is changed to Blacklist', () => {
       expect(editFilterPage.typeSelect.value).to.be.equal('Blacklist');
+    });
+  });
+
+  describe('add filter file', () => {
+    beforeEach(async () => {
+      await editFilterPage.addFilterFileBtn.click();
+    });
+
+    it('filter file card and upload button are present', () => {
+      expect(editFilterPage.filterFileCardIsPresent).to.be.true;
+      expect(editFilterPage.uploadFilterFileBtnIsPresent).to.be.true;
     });
   });
 

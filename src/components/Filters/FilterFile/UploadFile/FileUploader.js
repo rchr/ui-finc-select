@@ -57,7 +57,7 @@ export default class FileUploader extends React.Component {
         hidden={isDropZoneActive}
       >
         <Icon icon="exclamation-circle">
-          <span data-test-error-msg>{errorMessage}</span>
+          <span data-test-filter-file-error-msg>{errorMessage}</span>
         </Icon>
       </span>
     );
@@ -76,7 +76,7 @@ export default class FileUploader extends React.Component {
       <React.Fragment>
         <span
           className={`${css.uploadTitle} ${isDropZoneActive ? css.activeUploadTitle : ''}`}
-          data-test-title
+          data-test-filter-file-upload-title
         >
           {uploadInProgress ? (
             <div>
@@ -88,7 +88,7 @@ export default class FileUploader extends React.Component {
         <Button
           aria-label={uploadButtonAriaLabel}
           buttonStyle="primary"
-          data-test-button
+          data-test-filter-file-upload-button
           hidden={isDropZoneActive}
         >
           {uploadButtonText}
@@ -102,7 +102,7 @@ export default class FileUploader extends React.Component {
     return (
       <div
         className={css.children}
-        data-test-children
+        data-test-filter-file-children
         hidden={isDropZoneActive}
       >
         {isFunction(children) ? children(open) : children}
@@ -116,7 +116,7 @@ export default class FileUploader extends React.Component {
     (
       <div
         className={css.footer}
-        data-test-footer
+        data-test-filter-file-footer
         hidden={isDropZoneActive}
       >
         {footer}
@@ -159,7 +159,7 @@ export default class FileUploader extends React.Component {
         {({ getInputProps, getRootProps, open }) => (
           <div
             className={`${css.upload} ${className}`}
-            data-test-drop-zone
+            data-test-filter-file-drop-zone
             {...dataTest}
             {...getRootProps()}
           >

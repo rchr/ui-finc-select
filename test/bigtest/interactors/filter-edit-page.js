@@ -33,4 +33,7 @@ export default @interactor class EditFilterPage {
   deleteFilterConfirmation = new DeleteFilterConfirmation();
   clickDeleteFilter = clickable('#clickable-delete-filter');
   closePane = new ButtonInteractor('[icon=times]');
+  addFilterFileBtn = new ButtonInteractor('#add-filter-file-btn');
+  uploadFilterFileBtnIsPresent = isPresent('[data-test-filter-file-upload-button]');
+  filterFileCardIsPresent = isPresent('[data-test-filter-file-card]');
 }
