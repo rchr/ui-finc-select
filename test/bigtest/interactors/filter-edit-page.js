@@ -11,7 +11,7 @@ import {
   isButton = is('button');
 }
 
-@interactor class ImplementationTypeSelect {
+@interactor class TypeSelect {
   static defaultScope = 'select[name="type"]';
   value = value();
 }
@@ -29,7 +29,7 @@ export default @interactor class EditFilterPage {
   }
 
   title = text('[class*=paneTitleLabel---]');
-  implementationTypeSelect = new ImplementationTypeSelect();
+  typeSelect = new TypeSelect();
   deleteFilterConfirmation = new DeleteFilterConfirmation();
   clickDeleteFilter = clickable('#clickable-delete-filter');
   closePane = new ButtonInteractor('[icon=times]');

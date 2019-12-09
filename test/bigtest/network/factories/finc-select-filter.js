@@ -5,7 +5,7 @@ import Factory from './application';
 export default Factory.extend({
   id: () => faker.random.uuid(),
   label: (i) => 'FILTER ' + i,
-  type: (i) => 'type' + i,
+  type: '',
   filterFiles: [{
     label: '',
     criteria: '',
