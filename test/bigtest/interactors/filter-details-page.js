@@ -22,4 +22,8 @@ export default @interactor class FilterDetailsPage {
   editButtonPresent = isPresent('#clickable-edit-filter');
   clickEditButton = new ButtonInteractor('#clickable-edit-filter');
   downloadFileButton = new ButtonInteractor('#download-file');
+
+  whenLoaded() {
+    return this.timeout(5000).when(() => this.isLoaded);
+  }
 }

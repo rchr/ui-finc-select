@@ -1,5 +1,6 @@
 import {
   interactor,
+  is,
   isPresent,
   scoped,
   collection,
@@ -7,6 +8,10 @@ import {
 } from '@bigtest/interactor';
 
 import NavigationInteractor from './navigation';
+
+@interactor class ButtonInteractor {
+  isButton = is('button');
+}
 
 export default @interactor class FilterInteractor {
   static defaultScope = '[data-test-filters]';
@@ -19,6 +24,7 @@ export default @interactor class FilterInteractor {
   resetAllBtnIsPresent = isPresent('button[id="clickable-reset-all"]');
   submitBtnIsPresent = isPresent('button[id="filterSubmitSearch"]');
   searchFieldIsPresent = isPresent('input[id="filterSearchField"]');
+  addNewFilterBtn = new ButtonInteractor('#clickable-new-filter');
 
   isLoaded = isPresent('#pane-filterresults');
   whenLoaded() {

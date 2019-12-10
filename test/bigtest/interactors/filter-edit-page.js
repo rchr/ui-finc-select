@@ -1,6 +1,7 @@
 import {
   clickable,
   interactor,
+  Interactor,
   is,
   isPresent,
   text,
@@ -30,10 +31,13 @@ export default @interactor class EditFilterPage {
 
   title = text('[class*=paneTitleLabel---]');
   typeSelect = new TypeSelect();
+  filterName = new Interactor('input[name=label]');
   deleteFilterConfirmation = new DeleteFilterConfirmation();
   clickDeleteFilter = clickable('#clickable-delete-filter');
   closePane = new ButtonInteractor('[icon=times]');
   addFilterFileBtn = new ButtonInteractor('#add-filter-file-btn');
+  createNewFilterBtn = new ButtonInteractor('#clickable-createnewfilter');
+  closeEditPaneBtn = new ButtonInteractor('#clickable-closefilterdialog');
   uploadFilterFileBtnIsPresent = isPresent('[data-test-filter-file-upload-button]');
   filterFileCardIsPresent = isPresent('[data-test-filter-file-card]');
 }

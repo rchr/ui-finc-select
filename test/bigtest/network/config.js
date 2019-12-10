@@ -3,6 +3,7 @@
 // typical mirage config export
 // http://www.ember-cli-mirage.com/docs/v0.4.x/configuration/
 export default function config() {
+  const server = this;
   // okapi endpoints
   this.get('/_/version', () => '0.0.0');
 
@@ -99,8 +100,16 @@ export default function config() {
   this.get('/finc-select/filters', ({ fincSelectFilters }) => {
     return fincSelectFilters.all();
   });
-  this.get('/finc-select/filters/:id', (schema, request) => {
-    return schema.fincSelectFilters.find(request.params.id).attrs;
+  this.post('/finc-select/filters', (_, { requestBody }) => {
+    const filterData = JSON.parse(requestBody);
+    return server.create('finc-select-filter', filterData);
+  });
+  this.get('/finc-select/filters/:id', ({ fincSelectFilters }, { params }) => {
+    if (fincSelectFilters.find(params.id) !== null) {
+      return fincSelectFilters.find(params.id).attrs;
+    } else {
+      return {};
+    }
   });
   this.get('/finc-select/filter-files', ({ fincSelectFilterFiles }) => {
     return fincSelectFilterFiles.all();
