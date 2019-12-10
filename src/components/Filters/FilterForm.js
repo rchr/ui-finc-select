@@ -144,7 +144,7 @@ class FilterForm extends React.Component {
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-select.filter.form.createFilter" />;
     const lastMenu = initialValues.id ?
-      this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.updateFilter" />) :
+      this.getLastMenu('clickable-updatefilter', <FormattedMessage id="ui-finc-select.filter.form.updateFilter" />) :
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.createFilter" />);
 
     if (isLoading) return <Icon icon="spinner-ellipsis" width="10px" />;

@@ -23,21 +23,23 @@ import {
 
 export default @interactor class EditFilterPage {
   static defaultScope = '[data-test-filter-form-page]';
-  isLoaded = isPresent('[class*=paneTitleLabel---]');
-
-  whenLoaded() {
-    return this.when(() => this.isLoaded);
-  }
-
   title = text('[class*=paneTitleLabel---]');
   typeSelect = new TypeSelect();
   filterName = new Interactor('input[name=label]');
   deleteFilterConfirmation = new DeleteFilterConfirmation();
   clickDeleteFilter = clickable('#clickable-delete-filter');
   closePane = new ButtonInteractor('[icon=times]');
+  closeWithoutSaving = new ButtonInteractor('#clickable-cancel-editing-confirmation-cancel');
   addFilterFileBtn = new ButtonInteractor('#add-filter-file-btn');
   createNewFilterBtn = new ButtonInteractor('#clickable-createnewfilter');
+  updateFilterBtn = new ButtonInteractor('#clickable-updatefilter');
   closeEditPaneBtn = new ButtonInteractor('#clickable-closefilterdialog');
+  keepEditingBtn = new ButtonInteractor('#clickable-cancel-editing-confirmation-confirm');
   uploadFilterFileBtnIsPresent = isPresent('[data-test-filter-file-upload-button]');
   filterFileCardIsPresent = isPresent('[data-test-filter-file-card]');
+
+  isLoaded = isPresent('[class*=paneTitleLabel---]');
+  whenLoaded() {
+    return this.when(() => this.isLoaded);
+  }
 }

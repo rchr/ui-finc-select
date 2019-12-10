@@ -44,6 +44,7 @@ describe('Create Filter', () => {
         await editFilterPage.typeSelect.select(TEST_TYPE);
         await editFilterPage.createNewFilterBtn.click();
       });
+
       it('filter details view should be open and create filter form should be closed', () => {
         expect(filterDetailsPage.isPresent).to.be.true;
         expect(editFilterPage.isPresent).to.be.false;
@@ -60,51 +61,4 @@ describe('Create Filter', () => {
       });
     });
   });
-
-  // it('type select is available', () => {
-  //   expect(editFilterPage.typeSelect.value).to.be.equal('');
-  // });
-
-  // describe('type can be selected', () => {
-  //   beforeEach(async () => {
-  //     await editFilterPage.typeSelect.select('Whitelist');
-  //   });
-
-  //   it('type is changed to "Whitelist"', () => {
-  //     expect(editFilterPage.typeSelect.value).to.be.equal('Whitelist');
-  //   });
-  // });
-
-  // describe('type can be changed', () => {
-  //   beforeEach(async () => {
-  //     await editFilterPage.typeSelect.select('Whitelist');
-  //     await editFilterPage.typeSelect.select('Blacklist');
-  //   });
-
-  //   it('type is changed to Blacklist', () => {
-  //     expect(editFilterPage.typeSelect.value).to.be.equal('Blacklist');
-  //   });
-  // });
-
-  // describe('add filter file', () => {
-  //   beforeEach(async () => {
-  //     await editFilterPage.addFilterFileBtn.click();
-  //   });
-
-  //   it('filter file card and upload button are present', () => {
-  //     expect(editFilterPage.filterFileCardIsPresent).to.be.true;
-  //     expect(editFilterPage.uploadFilterFileBtnIsPresent).to.be.true;
-  //   });
-  // });
-
-  // describe('close filter form', () => {
-  //   beforeEach(async function () {
-  //     await editFilterPage.closePane.click();
-  //   });
-
-  //   it('closes filter form', () => {
-  //     expect(editFilterPage.isPresent).to.be.false;
-  //     expect(filterInteractor.isPresent).to.be.true;
-  //   });
-  // });
 });
