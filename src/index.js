@@ -14,20 +14,12 @@ import FilterViewRoute from './routes/FilterViewRoute';
 import FilterEditRoute from './routes/FilterEditRoute';
 import FilterCreateRoute from './routes/FilterCreateRoute';
 
-import Settings from './settings';
-
 class FincSelect extends React.Component {
   static propTypes = {
     match: ReactRouterPropTypes.match.isRequired,
-    showSettings: PropTypes.bool,
-    stripes: PropTypes.object.isRequired,
   }
 
   render() {
-    if (this.props.showSettings) {
-      return <Settings {...this.props} />;
-    }
-
     const { match: { path } } = this.props;
 
     return (
