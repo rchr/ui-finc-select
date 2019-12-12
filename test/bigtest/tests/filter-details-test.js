@@ -39,7 +39,7 @@ describe('FilterDetailsPage', () => {
     });
 
     it('displays filter label in the pane header', function () {
-      expect(filterDetailsPage.title).to.include(filter.label); // 'FILTER 0'
+      expect(filterDetailsPage.filterTitle).to.include(filter.label); // 'FILTER 0'
     });
 
     it('all accordions in filter-instance are present', function () {
@@ -49,7 +49,7 @@ describe('FilterDetailsPage', () => {
 
   describe('close filter details pane', () => {
     beforeEach(async function () {
-      await filterDetailsPage.closePane.click();
+      await filterDetailsPage.closeFilterDetailsBtn.click();
     });
 
     it('filter details pane is not presented', () => {
@@ -62,7 +62,7 @@ describe('FilterDetailsPage', () => {
       await filterDetailsPage.fileAccordion.click();
     });
     it('download button is present', () => {
-      expect(filterDetailsPage.downloadFileButton.isPresent).to.equal(true);
+      expect(filterDetailsPage.downloadFileBtn.isPresent).to.equal(true);
     });
   });
 });

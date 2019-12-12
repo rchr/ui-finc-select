@@ -21,7 +21,7 @@ describe('Edit Filter', () => {
 
     this.visit(`/finc-select/filters/${filter.id}?filters=type.Whitelist`);
     await filterInteractor.whenLoaded();
-    await filterDetailsPage.clickEditButton.click();
+    await filterDetailsPage.editFilterBtn.click();
     await editFilterPage.whenLoaded();
   });
 
@@ -67,7 +67,7 @@ describe('Edit Filter', () => {
 
   describe('close filter form', () => {
     beforeEach(async function () {
-      await editFilterPage.closePane.click();
+      await editFilterPage.closeFilterDetailsBtn.click();
     });
 
     it('closes filter form', () => {
@@ -90,7 +90,7 @@ describe('Edit Filter', () => {
   describe('change, close pane and cancel changes', () => {
     beforeEach(async function () {
       await editFilterPage.typeSelect.select('Blacklist');
-      await editFilterPage.closePane.click();
+      await editFilterPage.closeFilterDetailsBtn.click();
       await editFilterPage.closeWithoutSaving.click();
     });
 

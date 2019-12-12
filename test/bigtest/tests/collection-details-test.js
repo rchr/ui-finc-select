@@ -7,12 +7,12 @@ import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
 import CollectionDetailsPage from '../interactors/collection-details-page';
-import CollectionInteractor from '../interactors/collection';
+import CollectionsList from '../interactors/collections-list';
 
 describe('CollectionDetailsPage', () => {
   setupApplication();
   const collectionDetailsPage = new CollectionDetailsPage();
-  const collectionInteractor = new CollectionInteractor();
+  const collectionsList = new CollectionsList();
 
   let collection = null;
 
@@ -22,16 +22,16 @@ describe('CollectionDetailsPage', () => {
   });
 
   it('shows the list of collection items', () => {
-    expect(collectionInteractor.isVisible).to.equal(true);
+    expect(collectionsList.isVisible).to.equal(true);
   });
 
   it('renders each collection-instance', () => {
-    expect(collectionInteractor.instances().length).to.be.gte(1);
+    expect(collectionsList.instances().length).to.be.gte(1);
   });
 
   describe('clicking on the first collection', function () {
     beforeEach(async function () {
-      await collectionInteractor.instances(0).click();
+      await collectionsList.instances(0).click();
     });
 
     it('loads the collection-instance details', function () {
@@ -39,10 +39,10 @@ describe('CollectionDetailsPage', () => {
     });
 
     it('displays collection label in the pane header', function () {
-      expect(collectionDetailsPage.title).to.include(collection.label);
+      expect(collectionDetailsPage.collectionTitle).to.include(collection.label);
     });
 
-    it('all accordions in collection-instance are present', function () {
+    it('all accordions in collection-instance should be present', function () {
       expect(collectionDetailsPage.contentAccordion.isPresent).to.equal(true);
       expect(collectionDetailsPage.technicalAccordion.isPresent).to.equal(true);
     });
@@ -50,7 +50,7 @@ describe('CollectionDetailsPage', () => {
 
   describe('close collection details pane', () => {
     beforeEach(async function () {
-      await collectionDetailsPage.closePane.click();
+      await collectionDetailsPage.closeCollectionDetailsBtn.click();
     });
 
     it('collection details pane is not presented', () => {

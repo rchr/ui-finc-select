@@ -2,20 +2,18 @@ import {
   interactor,
   isPresent,
   scoped,
-  collection,
-  clickable
+  collection
 } from '@bigtest/interactor';
 
 import NavigationInteractor from './navigation';
 
-export default @interactor class CollectionInteractor {
+export default @interactor class CollectionsList {
   static defaultScope = '[data-test-collections]';
 
-  clickMetadataAvailableCOLLECTIONsCheckbox = clickable('#clickable-filter-metadata-available-yes');
+  navigation = new NavigationInteractor();
   instances = collection('[role=group] div a');
   instance = scoped('#pane-collectiondetails');
-  navigation = new NavigationInteractor();
-  sourceFilterIsPresent = isPresent('section[id="filter-accordion-mdSource"]');
+  mdSourceFilterIsPresent = isPresent('section[id="filter-accordion-mdSource"]');
   freeContentFilterIsPresent = isPresent('section[id="filter-accordion-freeContent"]');
   permittedFilterIsPresent = isPresent('section[id="filter-accordion-permitted"]');
   selectedFilterIsPresent = isPresent('section[id="filter-accordion-selected"]');

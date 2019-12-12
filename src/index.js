@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import PropTypes from 'prop-types';
 import Switch from 'react-router-dom/Switch';
 
 import { Route } from '@folio/stripes/core';

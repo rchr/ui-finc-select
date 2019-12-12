@@ -18,14 +18,14 @@ describe('Application', () => {
   });
 
   it('displays source-tab', () => {
-    expect(app.buttonSources).to.exist;
+    expect(app.navigationSourcesBtn).to.exist;
   });
 
   it('displays collection-tab', () => {
-    expect(app.buttonCollection).to.exist;
+    expect(app.navigationCollectionBtn).to.exist;
   });
 
   it('displays filter-tab', () => {
-    expect(app.buttonFilter).to.exist;
+    expect(app.navigationFilterBtn).to.exist;
   });
 });

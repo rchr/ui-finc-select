@@ -1,10 +1,8 @@
 import {
-  clickable,
   interactor,
   Interactor,
   is,
   isPresent,
-  text,
   value,
 } from '@bigtest/interactor';
 
@@ -17,18 +15,17 @@ import {
   value = value();
 }
 
-@interactor class DeleteFilterConfirmation {
-  static defaultScope = '#delete-filter-confirmation';
-}
+// @interactor class DeleteFilterConfirmation {
+//   static defaultScope = '#delete-filter-confirmation';
+// }
 
 export default @interactor class EditFilterPage {
   static defaultScope = '[data-test-filter-form-page]';
-  title = text('[class*=paneTitleLabel---]');
   typeSelect = new TypeSelect();
   filterName = new Interactor('input[name=label]');
-  deleteFilterConfirmation = new DeleteFilterConfirmation();
-  clickDeleteFilter = clickable('#clickable-delete-filter');
-  closePane = new ButtonInteractor('[icon=times]');
+  // deleteFilterConfirmation = new DeleteFilterConfirmation();
+  // clickDeleteFilter = clickable('#clickable-delete-filter');
+  closeFilterDetailsBtn = new ButtonInteractor('[icon=times]');
   closeWithoutSaving = new ButtonInteractor('#clickable-cancel-editing-confirmation-cancel');
   addFilterFileBtn = new ButtonInteractor('#add-filter-file-btn');
   createNewFilterBtn = new ButtonInteractor('#clickable-createnewfilter');

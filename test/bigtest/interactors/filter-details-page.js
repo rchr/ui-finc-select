@@ -1,7 +1,6 @@
 import {
   interactor,
   is,
-  isPresent,
   text,
 } from '@bigtest/interactor';
 
@@ -16,14 +15,9 @@ import {
 export default @interactor class FilterDetailsPage {
   static defaultScope = '#pane-filterdetails';
 
-  title = text('[data-test-filter-header-title]');
+  filterTitle = text('[data-test-filter-header-title]');
   fileAccordion = new FileAccordion();
-  closePane = new ButtonInteractor('[icon=times]');
-  editButtonPresent = isPresent('#clickable-edit-filter');
-  clickEditButton = new ButtonInteractor('#clickable-edit-filter');
-  downloadFileButton = new ButtonInteractor('#download-file');
-
-  whenLoaded() {
-    return this.timeout(5000).when(() => this.isLoaded);
-  }
+  closeFilterDetailsBtn = new ButtonInteractor('[icon=times]');
+  editFilterBtn = new ButtonInteractor('#clickable-edit-filter');
+  downloadFileBtn = new ButtonInteractor('#download-file');
 }

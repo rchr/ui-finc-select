@@ -5,7 +5,7 @@ import setupApplication from '../helpers/setup-application';
 import ApplicationInteractor from '../interactors/application';
 import SourceInteractor from '../interactors/source';
 import FilterInteractor from '../interactors/filter';
-import CollectionInteractor from '../interactors/collection';
+import CollectionsList from '../interactors/collections-list';
 
 describe('Navigation', () => {
   const app = new ApplicationInteractor();
@@ -41,15 +41,15 @@ describe('Navigation', () => {
     });
 
     describe('click on Collection Tab', () => {
-      const collectionInteractor = new CollectionInteractor();
+      const collectionsList = new CollectionsList();
 
       beforeEach(async function () {
         await app.navigation.collectionNavBtn.click();
-        await collectionInteractor.whenLoaded();
+        await collectionsList.whenLoaded();
       });
 
       it('should open the collections list', () => {
-        expect(collectionInteractor.isPresent).to.be.true;
+        expect(collectionsList.isPresent).to.be.true;
       });
 
       it('collection tab should be primary', () => {

@@ -1,23 +1,21 @@
-import {
-  interactor,
-  isPresent,
-  scoped,
-  collection,
-  clickable
-} from '@bigtest/interactor';
+// import {
+//   interactor,
+//   isPresent,
+//   scoped,
+//   collection,
+// } from '@bigtest/interactor';
 
-import NavigationInteractor from './navigation';
+// import NavigationInteractor from './navigation';
 
-export default @interactor class FilterFileInteractor {
-  static defaultScope = '[data-test-filters]';
+// export default @interactor class FilterFileInteractor {
+//   static defaultScope = '[data-test-filters]';
 
-  clickWhitelistFILTERsCheckbox = clickable('#clickable-filter-type-whitelist');
-  instances = collection('[role=group] div a');
-  instance = scoped('#pane-filterdetails');
-  navigation = new NavigationInteractor();
+//   instances = collection('[role=group] div a');
+//   instance = scoped('#pane-filterdetails');
+//   navigation = new NavigationInteractor();
 
-  isLoaded = isPresent('#pane-filterresults');
-  whenLoaded() {
-    return this.timeout(5000).when(() => this.isLoaded);
-  }
-}
+//   isLoaded = isPresent('#pane-filterresults');
+//   whenLoaded() {
+//     return this.timeout(5000).when(() => this.isLoaded);
+//   }
+// }
