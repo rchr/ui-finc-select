@@ -1,10 +1,14 @@
-import { beforeEach, describe, it } from '@bigtest/mocha';
+import {
+  beforeEach,
+  describe,
+  it,
+} from '@bigtest/mocha';
 import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
 import ApplicationInteractor from '../interactors/application';
-import SourceInteractor from '../interactors/source';
-import FilterInteractor from '../interactors/filter';
+import SourcesList from '../interactors/sources-list';
+import FiltersList from '../interactors/filters-list';
 import CollectionsList from '../interactors/collections-list';
 
 describe('Navigation', () => {
@@ -22,15 +26,15 @@ describe('Navigation', () => {
     });
 
     describe('click on Filter Tab', () => {
-      const filterInteractor = new FilterInteractor();
+      const filtersList = new FiltersList();
 
       beforeEach(async function () {
         await app.navigation.filterNavBtn.click();
-        await filterInteractor.whenLoaded();
+        await filtersList.whenLoaded();
       });
 
       it('should open the filter list', () => {
-        expect(filterInteractor.isPresent).to.be.true;
+        expect(filtersList.isPresent).to.be.true;
       });
 
       it('filter tab should be primary', () => {
@@ -60,15 +64,15 @@ describe('Navigation', () => {
     });
 
     describe('click on Source Tab', () => {
-      const sourceInteractor = new SourceInteractor();
+      const sourcesList = new SourcesList();
 
       beforeEach(async function () {
         await app.navigation.sourceNavBtn.click();
-        await sourceInteractor.whenLoaded();
+        await sourcesList.whenLoaded();
       });
 
       it('should open the sources list', () => {
-        expect(sourceInteractor.isPresent).to.be.true;
+        expect(sourcesList.isPresent).to.be.true;
       });
 
       it('source tab should be primary', () => {

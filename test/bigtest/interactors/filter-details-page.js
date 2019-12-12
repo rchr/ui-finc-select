@@ -17,7 +17,7 @@ export default @interactor class FilterDetailsPage {
 
   filterTitle = text('[data-test-filter-header-title]');
   fileAccordion = new FileAccordion();
-  closeFilterDetailsBtn = new ButtonInteractor('[icon=times]');
+  closePaneBtn = new ButtonInteractor('[icon=times]');
   editFilterBtn = new ButtonInteractor('#clickable-edit-filter');
   downloadFileBtn = new ButtonInteractor('#download-file');
 }

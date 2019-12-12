@@ -1,7 +1,7 @@
 import {
   beforeEach,
   describe,
-  it
+  it,
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 
@@ -9,7 +9,7 @@ import setupApplication from '../helpers/setup-application';
 import CollectionDetailsPage from '../interactors/collection-details-page';
 import CollectionsList from '../interactors/collections-list';
 
-describe('CollectionDetailsPage', () => {
+describe('Collection Details', () => {
   setupApplication();
   const collectionDetailsPage = new CollectionDetailsPage();
   const collectionsList = new CollectionsList();
@@ -34,7 +34,7 @@ describe('CollectionDetailsPage', () => {
       await collectionsList.instances(0).click();
     });
 
-    it('loads the collection-instance details', function () {
+    it('collection details should be visible', function () {
       expect(collectionDetailsPage.isVisible).to.equal(true);
     });
 
@@ -50,10 +50,10 @@ describe('CollectionDetailsPage', () => {
 
   describe('close collection details pane', () => {
     beforeEach(async function () {
-      await collectionDetailsPage.closeCollectionDetailsBtn.click();
+      await collectionDetailsPage.closePaneBtn.click();
     });
 
-    it('collection details pane is not presented', () => {
+    it('collection details should not be visible', () => {
       expect(collectionDetailsPage.isPresent).to.be.false;
     });
   });

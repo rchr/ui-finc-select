@@ -22,5 +22,5 @@ export default @interactor class CollectionDetailsPage {
   collectionTitle = text('[data-test-collection-header-title]');
   contentAccordion = new ContentAccordion();
   technicalAccordion = new TechnicalAccordion();
-  closeCollectionDetailsBtn = new ButtonInteractor('[icon=times]');
+  closePaneBtn = new ButtonInteractor('[icon=times]');
 }

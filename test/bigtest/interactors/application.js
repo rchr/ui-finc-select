@@ -1,6 +1,4 @@
-import {
-  interactor
-} from '@bigtest/interactor';
+import { interactor } from '@bigtest/interactor';
 
 import NavigationInteractor from './navigation';
 

@@ -1,4 +1,8 @@
-import { beforeEach, describe, it } from '@bigtest/mocha';
+import {
+  beforeEach,
+  describe,
+  it,
+} from '@bigtest/mocha';
 import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
@@ -7,7 +11,7 @@ import CollectionsList from '../interactors/collections-list';
 const COLLECTION_COUNT = 25;
 const TINY_SOURCE_COUNT = 5;
 
-describe('Metadata Collection', () => {
+describe('Collections List', () => {
   setupApplication();
 
   const collectionsList = new CollectionsList();

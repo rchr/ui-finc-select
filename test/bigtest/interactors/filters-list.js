@@ -12,12 +12,12 @@ import NavigationInteractor from './navigation';
   isButton = is('button');
 }
 
-export default @interactor class FilterInteractor {
+export default @interactor class FiltersList {
   static defaultScope = '[data-test-filters]';
 
+  navigation = new NavigationInteractor();
   instances = collection('[role=group] div a');
   instance = scoped('#pane-filterdetails');
-  navigation = new NavigationInteractor();
   typeFilterIsPresent = isPresent('section[id="filter-accordion-type"]');
   resetAllBtnIsPresent = isPresent('button[id="clickable-reset-all"]');
   submitBtnIsPresent = isPresent('button[id="filterSubmitSearch"]');

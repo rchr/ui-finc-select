@@ -3,18 +3,16 @@ import {
   isPresent,
   scoped,
   collection,
-  clickable
 } from '@bigtest/interactor';
 
 import NavigationInteractor from './navigation';
 
-export default @interactor class SourceInteractor {
+export default @interactor class SourcesList {
   static defaultScope = '[data-test-sources]';
 
-  clickActiveSOURCEsCheckbox = clickable('#clickable-filter-status-active');
+  navigation = new NavigationInteractor();
   instances = collection('[role=group] div a');
   instance = scoped('#pane-sourcedetails');
-  navigation = new NavigationInteractor();
   statusFilterIsPresent = isPresent('section[id="filter-accordion-status"]');
   resetAllBtnIsPresent = isPresent('button[id="clickable-reset-all"]');
   submitBtnIsPresent = isPresent('button[id="sourceSubmitSearch"]');

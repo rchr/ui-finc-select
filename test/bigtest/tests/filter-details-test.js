@@ -1,18 +1,18 @@
 import {
   beforeEach,
   describe,
-  it
+  it,
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
 import FilterDetailsPage from '../interactors/filter-details-page';
-import FilterInteractor from '../interactors/filter';
+import FiltersList from '../interactors/filters-list';
 
-describe('FilterDetailsPage', () => {
+describe('Filter Details', () => {
   setupApplication();
   const filterDetailsPage = new FilterDetailsPage();
-  const filterInteractor = new FilterInteractor();
+  const filtersList = new FiltersList();
 
   let filter = null;
 
@@ -22,19 +22,19 @@ describe('FilterDetailsPage', () => {
   });
 
   it('shows the list of filter items', () => {
-    expect(filterInteractor.isVisible).to.equal(true);
+    expect(filtersList.isVisible).to.equal(true);
   });
 
   it('renders each filter-instance', () => {
-    expect(filterInteractor.instances().length).to.be.gte(1);
+    expect(filtersList.instances().length).to.be.gte(1);
   });
 
   describe('clicking on the first filter', function () {
     beforeEach(async function () {
-      await filterInteractor.instances(0).click();
+      await filtersList.instances(0).click();
     });
 
-    it('loads the filter-instance details', function () {
+    it('filter details should be visible', function () {
       expect(filterDetailsPage.isVisible).to.equal(true);
     });
 
@@ -49,19 +49,19 @@ describe('FilterDetailsPage', () => {
 
   describe('close filter details pane', () => {
     beforeEach(async function () {
-      await filterDetailsPage.closeFilterDetailsBtn.click();
+      await filterDetailsPage.closePaneBtn.click();
     });
 
-    it('filter details pane is not presented', () => {
+    it('filter details should not be visible', () => {
       expect(filterDetailsPage.isPresent).to.be.false;
     });
   });
 
-  describe('can open file accordion', () => {
+  describe('open filter-file accordion', () => {
     beforeEach(async function () {
       await filterDetailsPage.fileAccordion.click();
     });
-    it('download button is present', () => {
+    it('download button should be visible', () => {
       expect(filterDetailsPage.downloadFileBtn.isPresent).to.equal(true);
     });
   });

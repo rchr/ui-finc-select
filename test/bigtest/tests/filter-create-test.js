@@ -1,37 +1,37 @@
 import {
   beforeEach,
   describe,
-  it
+  it,
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
 import EditFilterPage from '../interactors/filter-edit-page';
 import FilterDetailsPage from '../interactors/filter-details-page';
-import FilterInteractor from '../interactors/filter';
+import FiltersList from '../interactors/filters-list';
 
 describe('Create Filter', () => {
   setupApplication();
-  const filterInteractor = new FilterInteractor();
+  const filtersList = new FiltersList();
   const filterDetailsPage = new FilterDetailsPage();
   const editFilterPage = new EditFilterPage();
 
   beforeEach(async function () {
     // const filter = this.server.create('finc-select-filter', 'withFilterFile');
     this.visit('/finc-select/filters?filters=type.Whitelist');
-    await filterInteractor.whenLoaded();
+    await filtersList.whenLoaded();
   });
 
   it('shows filter details pane', () => {
-    expect(filterInteractor.isPresent).to.be.true;
+    expect(filtersList.isPresent).to.be.true;
   });
 
   describe('click on add new filter button', () => {
     beforeEach(async function () {
-      await filterInteractor.addNewFilterBtn.click();
+      await filtersList.addNewFilterBtn.click();
     });
 
-    it('open add new filter modal', () => {
+    it('add new filter modal should be visible', () => {
       expect(editFilterPage.isPresent).to.be.true;
     });
 

@@ -1,18 +1,18 @@
 import {
   beforeEach,
   describe,
-  it
+  it,
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
 import EditFilterPage from '../interactors/filter-edit-page';
-import FilterInteractor from '../interactors/filter';
+import FiltersList from '../interactors/filters-list';
 import FilterDetailsPage from '../interactors/filter-details-page';
 
 describe('Edit Filter', () => {
   setupApplication();
-  const filterInteractor = new FilterInteractor();
+  const filtersList = new FiltersList();
   const filterDetailsPage = new FilterDetailsPage();
   const editFilterPage = new EditFilterPage();
 
@@ -20,7 +20,7 @@ describe('Edit Filter', () => {
     const filter = this.server.create('finc-select-filter');
 
     this.visit(`/finc-select/filters/${filter.id}?filters=type.Whitelist`);
-    await filterInteractor.whenLoaded();
+    await filtersList.whenLoaded();
     await filterDetailsPage.editFilterBtn.click();
     await editFilterPage.whenLoaded();
   });
@@ -33,7 +33,7 @@ describe('Edit Filter', () => {
     expect(editFilterPage.typeSelect.value).to.be.equal('');
   });
 
-  describe('type can be selected', () => {
+  describe('type "Whitelist" can be selected', () => {
     beforeEach(async () => {
       await editFilterPage.typeSelect.select('Whitelist');
     });
@@ -49,7 +49,7 @@ describe('Edit Filter', () => {
       await editFilterPage.typeSelect.select('Blacklist');
     });
 
-    it('type is changed to Blacklist', () => {
+    it('type is changed to "Blacklist"', () => {
       expect(editFilterPage.typeSelect.value).to.be.equal('Blacklist');
     });
   });
@@ -67,12 +67,12 @@ describe('Edit Filter', () => {
 
   describe('close filter form', () => {
     beforeEach(async function () {
-      await editFilterPage.closeFilterDetailsBtn.click();
+      await editFilterPage.closePaneBtn.click();
     });
 
-    it('closes filter form', () => {
+    it('filters list should be visible and edit filter form should be closed', () => {
       expect(editFilterPage.isPresent).to.be.false;
-      expect(filterInteractor.isPresent).to.be.true;
+      expect(filtersList.isPresent).to.be.true;
     });
   });
 
@@ -90,7 +90,7 @@ describe('Edit Filter', () => {
   describe('change, close pane and cancel changes', () => {
     beforeEach(async function () {
       await editFilterPage.typeSelect.select('Blacklist');
-      await editFilterPage.closeFilterDetailsBtn.click();
+      await editFilterPage.closePaneBtn.click();
       await editFilterPage.closeWithoutSaving.click();
     });
 

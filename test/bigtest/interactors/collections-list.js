@@ -2,7 +2,7 @@ import {
   interactor,
   isPresent,
   scoped,
-  collection
+  collection,
 } from '@bigtest/interactor';
 
 import NavigationInteractor from './navigation';

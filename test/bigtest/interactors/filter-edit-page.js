@@ -21,11 +21,12 @@ import {
 
 export default @interactor class EditFilterPage {
   static defaultScope = '[data-test-filter-form-page]';
+
   typeSelect = new TypeSelect();
   filterName = new Interactor('input[name=label]');
   // deleteFilterConfirmation = new DeleteFilterConfirmation();
   // clickDeleteFilter = clickable('#clickable-delete-filter');
-  closeFilterDetailsBtn = new ButtonInteractor('[icon=times]');
+  closePaneBtn = new ButtonInteractor('[icon=times]');
   closeWithoutSaving = new ButtonInteractor('#clickable-cancel-editing-confirmation-cancel');
   addFilterFileBtn = new ButtonInteractor('#add-filter-file-btn');
   createNewFilterBtn = new ButtonInteractor('#clickable-createnewfilter');
