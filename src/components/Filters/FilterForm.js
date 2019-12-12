@@ -101,7 +101,7 @@ class FilterForm extends React.Component {
           <Button
             buttonStyle="danger"
             disabled={confirmDelete}
-            id="clickable-delete-udp"
+            id="clickable-delete-filter"
             marginBottom0
             onClick={this.beginDelete}
             title="delete"
@@ -144,13 +144,13 @@ class FilterForm extends React.Component {
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? initialValues.label : <FormattedMessage id="ui-finc-select.filter.form.createFilter" />;
     const lastMenu = initialValues.id ?
-      this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.updateFilter" />) :
+      this.getLastMenu('clickable-updatefilter', <FormattedMessage id="ui-finc-select.filter.form.updateFilter" />) :
       this.getLastMenu('clickable-createnewfilter', <FormattedMessage id="ui-finc-select.filter.form.createFilter" />);
 
     if (isLoading) return <Icon icon="spinner-ellipsis" width="10px" />;
 
     return (
-      <form id="form-filter">
+      <form id="form-filter" data-test-filter-form-page>
         <Paneset style={{ position: 'relative' }}>
           <Pane
             defaultWidth="100%"

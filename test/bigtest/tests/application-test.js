@@ -1,27 +1,35 @@
-// import { beforeEach, describe, it } from '@bigtest/mocha';
-// import { expect } from 'chai';
+import {
+  beforeEach,
+  describe,
+  it,
+} from '@bigtest/mocha';
+import { expect } from 'chai';
 
-// import setupApplication from '../helpers/setup-application';
-// import ApplicationInteractor from '../interactors/application';
+import setupApplication from '../helpers/setup-application';
+import ApplicationInteractor from '../interactors/application';
 
-// describe('Application', () => {
-//   const app = new ApplicationInteractor();
+describe('Application', () => {
+  const app = new ApplicationInteractor();
 
-//   setupApplication();
+  setupApplication();
 
-//   beforeEach(function () {
-//     this.visit('/fincselect');
-//   });
+  beforeEach(function () {
+    this.visit('/finc-select');
+  });
 
-//   it('shows a greeting message', () => {
-//     expect(app.greetingMessage).to.equal('Congratulations!');
-//   });
+  it('app should be present', () => {
+    expect(app.isPresent).to.be.true;
+  });
 
-//   it('has a link to examples', () => {
-//     expect(app.exampleLink).to.include('/fincselect/examples');
-//   });
+  it('source-tab should be visible', () => {
+    expect(app.navigationSourcesBtn).to.exist;
+  });
 
-//   it('has a link to the developer guides', () => {
-//     expect(app.guideLink).to.include('/dev-guide.md');
-//   });
-// });
+  it('collection-tab should be visible', () => {
+    expect(app.navigationCollectionBtn).to.exist;
+  });
+
+  it('filter-tab should be visible', () => {
+    expect(app.navigationFilterBtn).to.exist;
+  });
+});

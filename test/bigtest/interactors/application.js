@@ -1,12 +1,13 @@
-import {
-  interactor,
-  text,
-  property
-} from '@bigtest/interactor';
+import { interactor } from '@bigtest/interactor';
+
+import NavigationInteractor from './navigation';
 
 // https://bigtestjs.io/guides/interactors/introduction/
 export default @interactor class ApplicationInteractor {
-  greetingMessage = text('[data-test-application-greeting]');
-  exampleLink = property('[data-test-application-examples] a', 'href');
-  guideLink = property('[data-test-application-guide] a', 'href');
+  static defaultScope = '#ModuleContainer';
+
+  navigationSourcesBtn = 'button[id="metadata-sources"]';
+  navigationCollectionBtn = 'button[id="metadata-collections"]';
+  navigationFilterBtn = 'button[id="filters"]';
+  navigation = new NavigationInteractor();
 }

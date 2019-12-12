@@ -13,7 +13,6 @@ import {
 } from '@folio/stripes/smart-components';
 import {
   Button,
-  ButtonGroup,
   Icon,
   MultiColumnList,
   Pane,
@@ -28,6 +27,7 @@ import {
 
 import urls from '../DisplayUtils/urls';
 import FilterFilters from './FilterFilters';
+import Navigation from '../Navigation/Navigation';
 
 class Filters extends React.Component {
   static propTypes = {
@@ -170,132 +170,123 @@ class Filters extends React.Component {
     );
   }
 
+  renderNavigation = (id) => (
+    <Navigation
+      id={id}
+    />
+  );
+
   render() {
     const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, filter } = this.props;
     const count = filter ? filter.totalCount() : 0;
 
     return (
-      <SearchAndSortQuery
-        initialFilterState={{ type: ['Whitelist', 'Blacklist'] }}
-        initialSearchState={{ query: '' }}
-        initialSortState={{ sort: 'label' }}
-        queryGetter={queryGetter}
-        querySetter={querySetter}
-      >
-        {
-          ({
-            activeFilters,
-            filterChanged,
-            getFilterHandlers,
-            getSearchHandlers,
-            onSort,
-            onSubmitSearch,
-            resetAll,
-            searchChanged,
-            searchValue,
-          }) => {
-            const disableReset = () => (!filterChanged && !searchChanged);
+      <div data-test-filters>
+        <SearchAndSortQuery
+          initialFilterState={{ type: ['Whitelist', 'Blacklist'] }}
+          initialSearchState={{ query: '' }}
+          initialSortState={{ sort: 'label' }}
+          queryGetter={queryGetter}
+          querySetter={querySetter}
+        >
+          {
+            ({
+              activeFilters,
+              filterChanged,
+              getFilterHandlers,
+              getSearchHandlers,
+              onSort,
+              onSubmitSearch,
+              resetAll,
+              searchChanged,
+              searchValue,
+            }) => {
+              const disableReset = () => (!filterChanged && !searchChanged);
 
-            return (
-              <Paneset>
-                {this.state.filterPaneIsVisible &&
-                  <Pane
-                    defaultWidth="18%"
-                    onClose={this.toggleFilterPane}
-                    paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
-                  >
-                    <form onSubmit={onSubmitSearch}>
-                      <ButtonGroup tagName="nav" fullWidth>
+              return (
+                <Paneset>
+                  {this.state.filterPaneIsVisible &&
+                    <Pane
+                      defaultWidth="18%"
+                      onClose={this.toggleFilterPane}
+                      paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
+                    >
+                      <form onSubmit={onSubmitSearch}>
+                        {this.renderNavigation('filter')}
+                        <div>
+                          <SearchField
+                            autoFocus
+                            id="filterSearchField"
+                            inputRef={this.searchField}
+                            name="query"
+                            onChange={getSearchHandlers().query}
+                            onClear={getSearchHandlers().reset}
+                            value={searchValue.query}
+                          />
+                          <Button
+                            buttonStyle="primary"
+                            disabled={!searchValue.query || searchValue.query === ''}
+                            fullWidth
+                            id="filterSubmitSearch"
+                            type="submit"
+                          >
+                            <FormattedMessage id="stripes-smart-components.search" />
+                          </Button>
+                        </div>
                         <Button
-                          buttonStyle="default"
-                          id="metadata-sources"
-                          to={urls.sources()}
+                          buttonStyle="none"
+                          disabled={disableReset()}
+                          id="clickable-reset-all"
+                          onClick={resetAll}
                         >
-                          Sources
+                          <Icon icon="times-circle-solid">
+                            <FormattedMessage id="stripes-smart-components.resetAll" />
+                          </Icon>
                         </Button>
-                        <Button
-                          buttonStyle="default"
-                          id="metadata-collections"
-                          to={urls.collections()}
-                        >
-                          Collections
-                        </Button>
-                        <Button
-                          buttonStyle="primary"
-                          id="filters"
-                        >
-                          Filters
-                        </Button>
-                      </ButtonGroup>
-                      <div>
-                        <SearchField
-                          autoFocus
-                          inputRef={this.searchField}
-                          name="query"
-                          onChange={getSearchHandlers().query}
-                          onClear={getSearchHandlers().reset}
-                          value={searchValue.query}
+                        <FilterFilters
+                          activeFilters={activeFilters.state}
+                          filterHandlers={getFilterHandlers()}
                         />
-                        <Button
-                          buttonStyle="primary"
-                          disabled={!searchValue.query || searchValue.query === ''}
-                          fullWidth
-                          type="submit"
-                        >
-                          <FormattedMessage id="stripes-smart-components.search" />
-                        </Button>
-                      </div>
-                      <Button
-                        buttonStyle="none"
-                        disabled={disableReset()}
-                        id="clickable-reset-all"
-                        onClick={resetAll}
-                      >
-                        <Icon icon="times-circle-solid">
-                          <FormattedMessage id="stripes-smart-components.resetAll" />
-                        </Icon>
-                      </Button>
-                      <FilterFilters
-                        activeFilters={activeFilters.state}
-                        filterHandlers={getFilterHandlers()}
-                      />
-                    </form>
+                      </form>
+                    </Pane>
+                  }
+                  <Pane
+                    appIcon={<AppIcon app="finc-select" />}
+                    data-test-filter-pane-results
+                    defaultWidth="fill"
+                    firstMenu={this.renderResultsFirstMenu(activeFilters)}
+                    id="pane-filterresults"
+                    lastMenu={this.renderResultsLastMenu()}
+                    padContent={false}
+                    paneTitle="Finc Select"
+                    paneSub={this.renderResultsPaneSubtitle(filter)}
+                  >
+                    <MultiColumnList
+                      autosize
+                      columnMapping={{
+                        label: intl.formatMessage({ id: 'ui-finc-select.filter.label' }),
+                        type: intl.formatMessage({ id: 'ui-finc-select.filter.type' }),
+                      }}
+                      contentData={this.props.contentData}
+                      formatter={this.resultsFormatter}
+                      id="list-filters"
+                      isEmptyMessage="no results"
+                      isSelected={({ item }) => item.id === selectedRecordId}
+                      onHeaderClick={onSort}
+                      onRowClick={onSelectRow}
+                      rowFormatter={this.rowFormatter}
+                      totalCount={count}
+                      virtualize
+                      visibleColumns={['label', 'type']}
+                    />
                   </Pane>
-                }
-                <Pane
-                  appIcon={<AppIcon app="finc-select" />}
-                  defaultWidth="fill"
-                  firstMenu={this.renderResultsFirstMenu(activeFilters)}
-                  lastMenu={this.renderResultsLastMenu()}
-                  padContent={false}
-                  paneTitle="Finc Select"
-                  paneSub={this.renderResultsPaneSubtitle(filter)}
-                >
-                  <MultiColumnList
-                    autosize
-                    columnMapping={{
-                      label: intl.formatMessage({ id: 'ui-finc-select.filter.label' }),
-                      type: intl.formatMessage({ id: 'ui-finc-select.filter.type' }),
-                    }}
-                    contentData={this.props.contentData}
-                    formatter={this.resultsFormatter}
-                    id="list-filters"
-                    isEmptyMessage="no results"
-                    isSelected={({ item }) => item.id === selectedRecordId}
-                    onHeaderClick={onSort}
-                    onRowClick={onSelectRow}
-                    rowFormatter={this.rowFormatter}
-                    totalCount={count}
-                    virtualize
-                    visibleColumns={['label', 'type']}
-                  />
-                </Pane>
-                {this.props.children}
-              </Paneset>
-            );
+                  {this.props.children}
+                </Paneset>
+              );
+            }
           }
-        }
-      </SearchAndSortQuery>
+        </SearchAndSortQuery>
+      </div>
     );
   }
 }

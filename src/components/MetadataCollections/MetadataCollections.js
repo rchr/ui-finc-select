@@ -14,7 +14,6 @@ import {
 } from '@folio/stripes/smart-components';
 import {
   Button,
-  ButtonGroup,
   Icon,
   MultiColumnList,
   Pane,
@@ -26,6 +25,7 @@ import { AppIcon } from '@folio/stripes/core';
 
 import CollectionFilters from './CollectionFilters';
 import urls from '../DisplayUtils/urls';
+import Navigation from '../Navigation/Navigation';
 
 class MetadataCollections extends React.Component {
   static propTypes = {
@@ -160,136 +160,127 @@ class MetadataCollections extends React.Component {
     return <FormattedMessage id="stripes-smart-components.searchCriteria" />;
   }
 
+  renderNavigation = (id) => (
+    <Navigation
+      id={id}
+    />
+  );
+
   render() {
     const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, collection, filterData } = this.props;
     const count = collection ? collection.totalCount() : 0;
 
     return (
-      <SearchAndSortQuery
-        initialFilterState={{ permitted: ['yes'], selected: ['yes'] }}
-        initialSearchState={{ query: '' }}
-        initialSortState={{ sort: 'label' }}
-        queryGetter={queryGetter}
-        querySetter={querySetter}
-      >
-        {
-          ({
-            activeFilters,
-            filterChanged,
-            getFilterHandlers,
-            getSearchHandlers,
-            onSort,
-            onSubmitSearch,
-            resetAll,
-            searchChanged,
-            searchValue,
-          }) => {
-            const disableReset = () => (!filterChanged && !searchChanged);
+      <div data-test-collections>
+        <SearchAndSortQuery
+          initialFilterState={{ permitted: ['yes'], selected: ['yes'] }}
+          initialSearchState={{ query: '' }}
+          initialSortState={{ sort: 'label' }}
+          queryGetter={queryGetter}
+          querySetter={querySetter}
+        >
+          {
+            ({
+              activeFilters,
+              filterChanged,
+              getFilterHandlers,
+              getSearchHandlers,
+              onSort,
+              onSubmitSearch,
+              resetAll,
+              searchChanged,
+              searchValue,
+            }) => {
+              const disableReset = () => (!filterChanged && !searchChanged);
 
-            return (
-              <Paneset>
-                {this.state.filterPaneIsVisible &&
-                  <Pane
-                    defaultWidth="18%"
-                    onClose={this.toggleFilterPane}
-                    paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
-                  >
-                    <form onSubmit={onSubmitSearch}>
-                      <ButtonGroup tagName="nav" fullWidth>
+              return (
+                <Paneset>
+                  {this.state.filterPaneIsVisible &&
+                    <Pane
+                      defaultWidth="18%"
+                      onClose={this.toggleFilterPane}
+                      paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
+                    >
+                      <form onSubmit={onSubmitSearch}>
+                        {this.renderNavigation('collection')}
+                        <div>
+                          <SearchField
+                            autoFocus
+                            id="collectionSearchField"
+                            inputRef={this.searchField}
+                            name="query"
+                            onChange={getSearchHandlers().query}
+                            onClear={getSearchHandlers().reset}
+                            value={searchValue.query}
+                          />
+                          <Button
+                            buttonStyle="primary"
+                            disabled={!searchValue.query || searchValue.query === ''}
+                            fullWidth
+                            id="collectionSubmitSearch"
+                            type="submit"
+                          >
+                            <FormattedMessage id="stripes-smart-components.search" />
+                          </Button>
+                        </div>
                         <Button
-                          buttonStyle="default"
-                          id="metadata-sources"
-                          to={urls.sources()}
+                          buttonStyle="none"
+                          disabled={disableReset()}
+                          id="clickable-reset-all"
+                          onClick={resetAll}
                         >
-                          Sources
+                          <Icon icon="times-circle-solid">
+                            <FormattedMessage id="stripes-smart-components.resetAll" />
+                          </Icon>
                         </Button>
-                        <Button
-                          buttonStyle="primary"
-                          id="metadata-collections"
-                        >
-                          Collections
-                        </Button>
-                        <Button
-                          buttonStyle="default"
-                          id="filters"
-                          to={urls.filters()}
-                        >
-                          Filters
-                        </Button>
-                      </ButtonGroup>
-                      <div>
-                        <SearchField
-                          autoFocus
-                          inputRef={this.searchField}
-                          name="query"
-                          onChange={getSearchHandlers().query}
-                          onClear={getSearchHandlers().reset}
-                          value={searchValue.query}
+                        <CollectionFilters
+                          activeFilters={activeFilters.state}
+                          filterData={filterData}
+                          filterHandlers={getFilterHandlers()}
                         />
-                        <Button
-                          buttonStyle="primary"
-                          disabled={!searchValue.query || searchValue.query === ''}
-                          fullWidth
-                          type="submit"
-                        >
-                          <FormattedMessage id="stripes-smart-components.search" />
-                        </Button>
-                      </div>
-                      <Button
-                        buttonStyle="none"
-                        disabled={disableReset()}
-                        id="clickable-reset-all"
-                        onClick={resetAll}
-                      >
-                        <Icon icon="times-circle-solid">
-                          <FormattedMessage id="stripes-smart-components.resetAll" />
-                        </Icon>
-                      </Button>
-                      <CollectionFilters
-                        activeFilters={activeFilters.state}
-                        filterData={filterData}
-                        filterHandlers={getFilterHandlers()}
-                      />
-                    </form>
+                      </form>
+                    </Pane>
+                  }
+                  <Pane
+                    appIcon={<AppIcon app="finc-select" />}
+                    data-test-collection-pane-results
+                    defaultWidth="fill"
+                    firstMenu={this.renderResultsFirstMenu(activeFilters)}
+                    id="pane-collectionresults"
+                    padContent={false}
+                    paneTitle="Finc Select"
+                    paneSub={this.renderResultsPaneSubtitle(collection)}
+                  >
+                    <MultiColumnList
+                      autosize
+                      columnMapping={{
+                        label: intl.formatMessage({ id: 'ui-finc-select.collection.label' }),
+                        mdSource: intl.formatMessage({ id: 'ui-finc-select.collection.mdSource' }),
+                        permitted: intl.formatMessage({ id: 'ui-finc-select.collection.permitted' }),
+                        selected: intl.formatMessage({ id: 'ui-finc-select.collection.selected' }),
+                        filters: intl.formatMessage({ id: 'ui-finc-select.collection.filters' }),
+                        freeContent: intl.formatMessage({ id: 'ui-finc-select.collection.freeContent' })
+                      }}
+                      contentData={this.props.contentData}
+                      formatter={this.resultsFormatter}
+                      id="list-collections"
+                      isEmptyMessage="no results"
+                      isSelected={({ item }) => item.id === selectedRecordId}
+                      onHeaderClick={onSort}
+                      onRowClick={onSelectRow}
+                      rowFormatter={this.rowFormatter}
+                      totalCount={count}
+                      virtualize
+                      visibleColumns={['label', 'mdSource', 'permitted', 'filters', 'freeContent']}
+                    />
                   </Pane>
-                }
-                <Pane
-                  appIcon={<AppIcon app="finc-select" />}
-                  defaultWidth="fill"
-                  firstMenu={this.renderResultsFirstMenu(activeFilters)}
-                  padContent={false}
-                  paneTitle="Finc Select"
-                  paneSub={this.renderResultsPaneSubtitle(collection)}
-                >
-                  <MultiColumnList
-                    autosize
-                    columnMapping={{
-                      label: intl.formatMessage({ id: 'ui-finc-select.collection.label' }),
-                      mdSource: intl.formatMessage({ id: 'ui-finc-select.collection.mdSource' }),
-                      permitted: intl.formatMessage({ id: 'ui-finc-select.collection.permitted' }),
-                      selected: intl.formatMessage({ id: 'ui-finc-select.collection.selected' }),
-                      filters: intl.formatMessage({ id: 'ui-finc-select.collection.filters' }),
-                      freeContent: intl.formatMessage({ id: 'ui-finc-select.collection.freeContent' })
-                    }}
-                    contentData={this.props.contentData}
-                    formatter={this.resultsFormatter}
-                    id="list-collections"
-                    isEmptyMessage="no results"
-                    isSelected={({ item }) => item.id === selectedRecordId}
-                    onHeaderClick={onSort}
-                    onRowClick={onSelectRow}
-                    rowFormatter={this.rowFormatter}
-                    totalCount={count}
-                    virtualize
-                    visibleColumns={['label', 'mdSource', 'permitted', 'filters', 'freeContent']}
-                  />
-                </Pane>
-                {this.props.children}
-              </Paneset>
-            );
+                  {this.props.children}
+                </Paneset>
+              );
+            }
           }
-        }
-      </SearchAndSortQuery>
+        </SearchAndSortQuery>
+      </div>
     );
   }
 }
