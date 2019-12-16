@@ -36,11 +36,11 @@
     "filter.label": "Filter name",
     "filter.type": "Type",
     "filter.isil": "ISIL",
-    "filter.file.label": "Filter file",
-    "filter.file.criteria": "Filter criteria",
-    "filter.file.download": "Download",
-    "filter.file.filename": "Filename",
-    "filter.file.remove": "Remove",
+    "filter.file.label": "Fichero de filtro",
+    "filter.file.criteria": "Criterios de filtrado",
+    "filter.file.download": "Descargar",
+    "filter.file.filename": "Nombre de archivo",
+    "filter.file.remove": "Quitar",
     "filter.file.dragDrop": "Drag and drop to upload",
     "filter.file.choose": "or choose file",
     "filter.file.upload": "uploading",
@@ -51,5 +51,5 @@
     "filter.form.deleteFilter": "Delete filter",
     "filter.form.createFilter": "Create filter",
     "filter.form.updateFilter": "Update filter",
-    "filter.file.empty": "Filter has no file"
+    "filter.file.empty": "El filtro no tiene archivo"
 }
