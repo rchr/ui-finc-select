@@ -29,8 +29,8 @@ class SourcesRoute extends React.Component {
             'cql.allRecords=1',
             '(label="%{query.query}*" or sourceId="%{query.query}*")',
             {
-              'Source Name': 'label',
-              'Source ID': 'sourceId'
+              'label': 'label',
+              'sourceId': 'sourceId/number'
             },
             filterConfig,
             2,
