@@ -1,5 +1,10 @@
 # Change history for ui-finc-select
 
+## [1.3.0](https://github.com/folio-org/ui-finc-select/tree/v1.3.0) (2020-01-14)
+* Sort column "Source ID" numerically (UIFC-105)
+* Bugfix: Incorrect permission names are used (UIFC-103)
+* Use SearchAndSortQuery instead SearchAndSort (UIFC-95)
+
 ## [1.2.1](https://github.com/folio-org/ui-finc-select/tree/v1.2.1) (2019-10-14)
 * Bugfix: Permission not found when opening Metadata Collections view.
 
