@@ -30,7 +30,7 @@
     "source.button.showselectedCollections": "Afficher les collections sélectionnées",
     "source.button.selectAllCollections": "Sélectionner toutes les collections",
     "source.button.showAllCollections": "Afficher toutes les collections",
-    "source.modal.selectAllCollections.success": "The process has been started. It can take some time, until all ISILs will be added to the selected by field.",
+    "source.modal.selectAllCollections.success": "Le processus a commencé. Cela peut prendre un certain temps, jusqu'à ce que tous les ISIL soient ajoutés au champ sélectionné.",
     "source.modal.selectAllCollections.error": "Le processus n'a pas pu démarrer.",
     "collection.filter.sources": "Source de métadonnées",
     "filter.label": "Nom du filtre",
@@ -51,5 +51,5 @@
     "filter.form.deleteFilter": "Supprimer le filtre",
     "filter.form.createFilter": "Créer un filtre",
     "filter.form.updateFilter": "Mettre à jour le filtre",
-    "filter.file.empty": "Filter has no file"
+    "filter.file.empty": "Le filtre n'a pas de fichier"
 }
