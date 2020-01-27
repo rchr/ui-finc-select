@@ -11,6 +11,16 @@ const filterConfig = [
       { name: 'Deactivated', cql: 'deactivated' },
       { name: 'Terminated', cql: 'terminated' }
     ],
+  },
+  {
+    label: 'Selected',
+    name: 'selected',
+    cql: 'selected',
+    values: [
+      { name: 'All', cql: 'all' },
+      { name: 'Some', cql: 'some' },
+      { name: 'None', cql: 'none' },
+    ],
   }
 ];
 
