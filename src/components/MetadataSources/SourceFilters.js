@@ -20,11 +20,13 @@ class SourceFilters extends React.Component {
   static defaultProps = {
     activeFilters: {
       status: [],
+      selected: [],
     }
   };
 
   state = {
     status: [],
+    selected: [],
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -85,6 +87,7 @@ class SourceFilters extends React.Component {
     return (
       <AccordionSet>
         {this.renderCheckboxFilter('status', 'Implementation Status')}
+        {this.renderCheckboxFilter('selected', 'Selected')}
       </AccordionSet>
     );
   }
