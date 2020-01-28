@@ -13,7 +13,7 @@ import Filters from '../components/Filters/Filters';
 import filterConfig from '../components/Filters/filterConfigData';
 
 const INITIAL_RESULT_COUNT = 30;
-// const RESULT_COUNT_INCREMENT = 30;
+const RESULT_COUNT_INCREMENT = 30;
 
 class FiltersRoute extends React.Component {
   static manifest = Object.freeze({
@@ -107,6 +107,12 @@ class FiltersRoute extends React.Component {
   queryGetter = () => {
     return _.get(this.props.resources, 'query', {});
   }
+
+  handleNeedMoreData = () => {
+    if (this.source) {
+      this.source.fetchMore(RESULT_COUNT_INCREMENT);
+    }
+  };
 
   render() {
     const { location, match, children } = this.props;

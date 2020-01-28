@@ -13,7 +13,7 @@ import MetadataSources from '../components/MetadataSources/MetadataSources';
 import filterConfig from '../components/MetadataSources/filterConfigData';
 
 const INITIAL_RESULT_COUNT = 30;
-// const RESULT_COUNT_INCREMENT = 30;
+const RESULT_COUNT_INCREMENT = 30;
 
 class SourcesRoute extends React.Component {
   static manifest = Object.freeze({
@@ -107,6 +107,12 @@ class SourcesRoute extends React.Component {
   queryGetter = () => {
     return _.get(this.props.resources, 'query', {});
   }
+
+  handleNeedMoreData = () => {
+    if (this.source) {
+      this.source.fetchMore(RESULT_COUNT_INCREMENT);
+    }
+  };
 
   // add update if search-selectbox is changing
   onChangeIndex = (e) => {
