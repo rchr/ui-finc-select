@@ -37,6 +37,7 @@ class MetadataCollections extends React.Component {
       mdSources: PropTypes.array,
     }),
     intl: intlShape.isRequired,
+    onNeedMoreData: PropTypes.func,
     onSelectRow: PropTypes.func,
     packageInfo: PropTypes.shape({ // values pulled from the provider's package.json config object
       initialFilters: PropTypes.string, // default filters
@@ -167,7 +168,7 @@ class MetadataCollections extends React.Component {
   );
 
   render() {
-    const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, collection, filterData } = this.props;
+    const { intl, queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, collection, filterData } = this.props;
     const count = collection ? collection.totalCount() : 0;
 
     return (
@@ -267,6 +268,7 @@ class MetadataCollections extends React.Component {
                       isEmptyMessage="no results"
                       isSelected={({ item }) => item.id === selectedRecordId}
                       onHeaderClick={onSort}
+                      onNeedMoreData={onNeedMoreData}
                       onRowClick={onSelectRow}
                       rowFormatter={this.rowFormatter}
                       totalCount={count}

@@ -35,6 +35,7 @@ class Filters extends React.Component {
     contentData: PropTypes.arrayOf(PropTypes.object),
     disableRecordCreation: PropTypes.bool,
     intl: intlShape.isRequired,
+    onNeedMoreData: PropTypes.func,
     onSelectRow: PropTypes.func,
     packageInfo: PropTypes.shape({ // values pulled from the provider's package.json config object
       initialFilters: PropTypes.string, // default filters
@@ -177,7 +178,7 @@ class Filters extends React.Component {
   );
 
   render() {
-    const { intl, queryGetter, querySetter, onSelectRow, selectedRecordId, filter } = this.props;
+    const { intl, queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, filter } = this.props;
     const count = filter ? filter.totalCount() : 0;
 
     return (
@@ -273,6 +274,7 @@ class Filters extends React.Component {
                       isEmptyMessage="no results"
                       isSelected={({ item }) => item.id === selectedRecordId}
                       onHeaderClick={onSort}
+                      onNeedMoreData={onNeedMoreData}
                       onRowClick={onSelectRow}
                       rowFormatter={this.rowFormatter}
                       totalCount={count}
