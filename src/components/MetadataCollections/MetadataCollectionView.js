@@ -10,7 +10,7 @@ import {
   Icon,
   Layout,
   Pane,
-  Row
+  Row,
 } from '@folio/stripes/components';
 
 import CollectionInfoView from './CollectionInfo/CollectionInfoView';
@@ -26,7 +26,6 @@ class CollectionViewRoute extends React.Component {
     }).isRequired,
     isLoading: PropTypes.bool,
     record: PropTypes.object,
-    sources: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
     }).isRequired,
@@ -78,33 +77,11 @@ class CollectionViewRoute extends React.Component {
     );
   }
 
-  getData() {
-    const { sources } = this.props;
-
-    if (!sources || sources.length === 0) return null;
-    return sources;
-  }
-
-  getSourceElement = (id, data) => {
-    if (!data || data.length === 0 || !id) return null;
-    return data.find((element) => {
-      return element.id === id;
-    });
-  }
-
   render() {
     const { record, isLoading, stripes } = this.props;
     const label = _.get(record, 'label', '-');
 
     if (isLoading) return this.renderLoadingPane();
-
-    // const sourceLink = this.getAllInfosForSource();
-    // get all available sources
-    const sourceData = this.getData('source');
-    // get the source-ID, which is saved in the collection
-    const sourceId = _.get(record, 'mdSource.id', '-');
-    // get the one source and all its information (which has the source ID saved in the collection)
-    const sourceElement = this.getSourceElement(sourceId, sourceData);
 
     return (
       <React.Fragment>
@@ -119,7 +96,6 @@ class CollectionViewRoute extends React.Component {
           <CollectionInfoView
             id="collectionInfo"
             metadataCollection={record}
-            sourceElement={sourceElement}
             stripes={stripes}
           />
           <Row end="xs">

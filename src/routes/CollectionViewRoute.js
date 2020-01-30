@@ -14,12 +14,6 @@ class CollectionViewRoute extends React.Component {
       type: 'okapi',
       path: 'finc-select/metadata-collections/:{id}',
     },
-    sources: {
-      type: 'okapi',
-      records: 'fincSelectMetadataSources',
-      path: 'finc-select/metadata-sources',
-      resourceShouldRefresh: true
-    },
     query: {},
   });
 
@@ -34,7 +28,6 @@ class CollectionViewRoute extends React.Component {
     }).isRequired,
     resources: PropTypes.shape({
       collection: PropTypes.object,
-      sources: PropTypes.object,
     }).isRequired,
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
@@ -70,7 +63,6 @@ class CollectionViewRoute extends React.Component {
         }}
         isLoading={_.get(this.props.resources, 'collection.isPending', true)}
         record={_.get(this.props.resources, 'collection.records', []).find(i => i.id === this.props.match.params.id)}
-        sources={_.get(this.props.resources, 'sources.records', [])}
         stripes={stripes}
       />
     );
