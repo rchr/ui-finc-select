@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
@@ -78,7 +79,8 @@ class MetadataCollections extends React.Component {
 
   resultsFormatter = {
     label: collection => collection.label,
-    mdSource: collection => collection.mdSource.name,
+    // mdSource: collection => collection.mdSource.name,
+    mdSource: collection => _.get(collection, 'mdSource.name', '-'),
     permitted: collection => collection.permitted,
     selected: collection => collection.selected,
     filters: collection => this.getArrayElementsCommaSeparated(collection.filters),
