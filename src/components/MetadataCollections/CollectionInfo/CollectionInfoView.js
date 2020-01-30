@@ -8,7 +8,7 @@ import {
   Headline,
   KeyValue,
   List,
-  Row
+  Row,
 } from '@folio/stripes/components';
 
 import SelectUnselect from './SelectUnselect';
@@ -20,7 +20,6 @@ class CollectionInfoView extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     metadataCollection: PropTypes.object,
-    sourceElement: PropTypes.object,
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
     }),
@@ -53,24 +52,20 @@ class CollectionInfoView extends React.Component {
   }
 
   render() {
-    const { metadataCollection, id, sourceElement, stripes } = this.props;
+    const { metadataCollection, id, stripes } = this.props;
     const collectionId = _.get(metadataCollection, 'id', '-');
     const permitted = _.get(metadataCollection, 'permitted', '-');
     const selectedInitial = _.get(metadataCollection, 'selected');
 
-    // // get the one source and all its information (which has the source ID saved in the collection)
-    // const sourceElement = this.getSourceElement(sourceId, sourceData);
-    const sourceId = _.get(sourceElement, 'id', '-');
-    // // get the name of the source
-    const sourceName = _.get(sourceElement, 'label', '-');
-    // // get the status of the source for setting filter in url
-    const sourceStatus = _.get(sourceElement, 'status', '-');
-    // // set the complete source link with name and status
+    // get id and name of the source out of the fields, saved in the current collection
+    const sourceId = _.get(metadataCollection, 'mdSource.id', '-');
+    const sourceName = _.get(metadataCollection, 'mdSource.name', '-');
+    // set the complete source link with name and status
     const sourceLink = (
       <React.Fragment>
         <Link to={{
           pathname: `${urls.sourceView(sourceId)}`,
-          search: `?filters=status.${sourceStatus}`
+          // search: `?filters=status.${sourceStatus}`
         }}
         >
           {sourceName}
