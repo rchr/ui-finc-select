@@ -1,6 +1,10 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'react-router-dom/Link';
+import {
+  Link,
+  withRouter,
+} from 'react-router-dom';
 import {
   FormattedMessage,
   injectIntl,
@@ -29,11 +33,17 @@ import urls from '../DisplayUtils/urls';
 import FilterFilters from './FilterFilters';
 import Navigation from '../Navigation/Navigation';
 
+const defaultFilter = { state: { type: ['Whitelist', 'Blacklist'] }, string: 'type.Whitelist,type.Blacklist' };
+const defaultSearchString = { query: '' };
+
 class Filters extends React.Component {
   static propTypes = {
     children: PropTypes.object,
     contentData: PropTypes.arrayOf(PropTypes.object),
     disableRecordCreation: PropTypes.bool,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
     intl: intlShape.isRequired,
     onNeedMoreData: PropTypes.func,
     onSelectRow: PropTypes.func,
@@ -61,6 +71,8 @@ class Filters extends React.Component {
 
     this.state = {
       filterPaneIsVisible: true,
+      storedFilter: localStorage.getItem('fincSelectFilterFilters') ? JSON.parse(localStorage.getItem('fincSelectFilterFilters')) : defaultFilter,
+      storedSearchString: localStorage.getItem('fincSelectFilterSearchString') ? JSON.parse(localStorage.getItem('fincSelectFilterSearchString')) : defaultSearchString,
     };
   }
 
@@ -177,6 +189,68 @@ class Filters extends React.Component {
     />
   );
 
+  cacheFilter(activeFilters, searchValue) {
+    localStorage.setItem('fincSelectFilterFilters', JSON.stringify(activeFilters));
+    localStorage.setItem('fincSelectFilterSearchString', JSON.stringify(searchValue));
+  }
+
+  resetAll(getFilterHandlers, getSearchHandlers) {
+    localStorage.removeItem('fincSelectFilterFilters');
+    localStorage.removeItem('fincSelectFilterSearchString');
+
+    // reset the filter state to default filters
+    getFilterHandlers.state(defaultFilter.state);
+
+    // reset the search query
+    getSearchHandlers.state(defaultSearchString);
+
+    this.setState({
+      storedFilter: defaultFilter,
+      storedSearchString: defaultSearchString,
+    });
+
+    return (this.props.history.push(`${urls.filters()}?filters=${defaultFilter.string}`));
+  }
+
+  handleClearSearch(getSearchHandlers, onSubmitSearch, searchValue) {
+    localStorage.removeItem('fincSelectFilterSearchString');
+
+    searchValue.query = '';
+
+    getSearchHandlers.state({
+      query: '',
+    });
+
+    return onSubmitSearch;
+  }
+
+  handleChangeSearch(e, getSearchHandlers, onSubmitSearch, searchValue) {
+    if (e === '') {
+      localStorage.removeItem('fincSelectFilterSearchString');
+
+      searchValue.query = '';
+
+      getSearchHandlers.state({
+        query: '',
+      });
+
+      return onSubmitSearch;
+    } else {
+      getSearchHandlers.state({
+        query: e,
+      });
+      return onSubmitSearch;
+    }
+  }
+
+  getDisableReset(activeFilters, searchValue) {
+    if (_.isEqual(activeFilters.state, defaultFilter.state) && searchValue.query === defaultSearchString.query) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     const { intl, queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, filter } = this.props;
     const count = filter ? filter.totalCount() : 0;
@@ -184,8 +258,8 @@ class Filters extends React.Component {
     return (
       <div data-test-filters>
         <SearchAndSortQuery
-          initialFilterState={{ type: ['Whitelist', 'Blacklist'] }}
-          initialSearchState={{ query: '' }}
+          initialFilterState={this.state.storedFilter.state}
+          initialSearchState={this.state.storedSearchString}
           initialSortState={{ sort: 'label' }}
           queryGetter={queryGetter}
           querySetter={querySetter}
@@ -198,17 +272,22 @@ class Filters extends React.Component {
               getSearchHandlers,
               onSort,
               onSubmitSearch,
-              resetAll,
               searchChanged,
               searchValue,
             }) => {
-              const disableReset = () => (!filterChanged && !searchChanged);
+              const disableReset = this.getDisableReset(activeFilters, searchValue);
+              const disableSearch = () => (searchValue.query === defaultSearchString.query);
+              if (filterChanged || searchChanged) {
+                this.cacheFilter(activeFilters, searchValue);
+              }
 
               return (
                 <Paneset>
                   {this.state.filterPaneIsVisible &&
                     <Pane
+                      data-test-filter-pane-filter
                       defaultWidth="18%"
+                      id="pane-filterfilter"
                       onClose={this.toggleFilterPane}
                       paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
                     >
@@ -220,13 +299,13 @@ class Filters extends React.Component {
                             id="filterSearchField"
                             inputRef={this.searchField}
                             name="query"
-                            onChange={getSearchHandlers().query}
-                            onClear={getSearchHandlers().reset}
+                            onChange={(e) => this.handleChangeSearch(e.target.value, getSearchHandlers(), onSubmitSearch(), searchValue)}
+                            onClear={() => this.handleClearSearch(getSearchHandlers(), onSubmitSearch(), searchValue)}
                             value={searchValue.query}
                           />
                           <Button
                             buttonStyle="primary"
-                            disabled={!searchValue.query || searchValue.query === ''}
+                            disabled={disableSearch()}
                             fullWidth
                             id="filterSubmitSearch"
                             type="submit"
@@ -236,9 +315,9 @@ class Filters extends React.Component {
                         </div>
                         <Button
                           buttonStyle="none"
-                          disabled={disableReset()}
+                          disabled={disableReset}
                           id="clickable-reset-all"
-                          onClick={resetAll}
+                          onClick={() => this.resetAll(getFilterHandlers(), getSearchHandlers())}
                         >
                           <Icon icon="times-circle-solid">
                             <FormattedMessage id="stripes-smart-components.resetAll" />
@@ -293,4 +372,4 @@ class Filters extends React.Component {
   }
 }
 
-export default injectIntl(Filters);
+export default withRouter(injectIntl(Filters));

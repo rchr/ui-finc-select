@@ -115,8 +115,8 @@ class SourcesRoute extends React.Component {
   };
 
   // add update if search-selectbox is changing
-  onChangeIndex = (e) => {
-    const qindex = e.target.value;
+  onChangeIndex = (qindex) => {
+    // const qindex = e.target.value;
 
     this.props.mutator.query.update({ qindex });
   }

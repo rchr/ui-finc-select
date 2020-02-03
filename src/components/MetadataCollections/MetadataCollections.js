@@ -1,7 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'react-router-dom/Link';
+import {
+  Link,
+  withRouter,
+} from 'react-router-dom';
 import {
   FormattedMessage,
   injectIntl,
@@ -27,6 +30,9 @@ import CollectionFilters from './CollectionFilters';
 import urls from '../DisplayUtils/urls';
 import Navigation from '../Navigation/Navigation';
 
+const defaultFilter = { state: { permitted: ['yes'], selected: ['yes'] }, string: 'permitted.yes,selected.yes' };
+const defaultSearchString = { query: '' };
+
 class MetadataCollections extends React.Component {
   static propTypes = {
     children: PropTypes.object,
@@ -36,6 +42,9 @@ class MetadataCollections extends React.Component {
     filterData: PropTypes.shape({
       mdSources: PropTypes.array,
     }),
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
     intl: intlShape.isRequired,
     onNeedMoreData: PropTypes.func,
     onSelectRow: PropTypes.func,
@@ -63,6 +72,8 @@ class MetadataCollections extends React.Component {
 
     this.state = {
       filterPaneIsVisible: true,
+      storedFilter: localStorage.getItem('fincSelectCollectionFilters') ? JSON.parse(localStorage.getItem('fincSelectCollectionFilters')) : defaultFilter,
+      storedSearchString: localStorage.getItem('fincSelectCollectionSearchString') ? JSON.parse(localStorage.getItem('fincSelectCollectionSearchString')) : defaultSearchString,
     };
   }
 
@@ -168,6 +179,68 @@ class MetadataCollections extends React.Component {
     />
   );
 
+  cacheFilter(activeFilters, searchValue) {
+    localStorage.setItem('fincSelectCollectionFilters', JSON.stringify(activeFilters));
+    localStorage.setItem('fincSelectCollectionSearchString', JSON.stringify(searchValue));
+  }
+
+  resetAll(getFilterHandlers, getSearchHandlers) {
+    localStorage.removeItem('fincSelectCollectionFilters');
+    localStorage.removeItem('fincSelectCollectionSearchString');
+
+    // reset the filter state to default filters
+    getFilterHandlers.state(defaultFilter.state);
+
+    // reset the search query
+    getSearchHandlers.state(defaultSearchString);
+
+    this.setState({
+      storedFilter: defaultFilter,
+      storedSearchString: defaultSearchString,
+    });
+
+    return (this.props.history.push(`${urls.collections()}?filters=${defaultFilter.string}`));
+  }
+
+  handleClearSearch(getSearchHandlers, onSubmitSearch, searchValue) {
+    localStorage.removeItem('fincSelectCollectionSearchString');
+
+    searchValue.query = '';
+
+    getSearchHandlers.state({
+      query: '',
+    });
+
+    return onSubmitSearch;
+  }
+
+  handleChangeSearch(e, getSearchHandlers, onSubmitSearch, searchValue) {
+    if (e === '') {
+      localStorage.removeItem('fincSelectCollectionSearchString');
+
+      searchValue.query = '';
+
+      getSearchHandlers.state({
+        query: '',
+      });
+
+      return onSubmitSearch;
+    } else {
+      getSearchHandlers.state({
+        query: e,
+      });
+      return onSubmitSearch;
+    }
+  }
+
+  getDisableReset(activeFilters, searchValue) {
+    if (_.isEqual(activeFilters.state, defaultFilter.state) && searchValue.query === defaultSearchString.query) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     const { intl, queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, collection, filterData } = this.props;
     const count = collection ? collection.totalCount() : 0;
@@ -175,8 +248,8 @@ class MetadataCollections extends React.Component {
     return (
       <div data-test-collections>
         <SearchAndSortQuery
-          initialFilterState={{ permitted: ['yes'], selected: ['yes'] }}
-          initialSearchState={{ query: '' }}
+          initialFilterState={this.state.storedFilter.state}
+          initialSearchState={this.state.storedSearchString}
           initialSortState={{ sort: 'label' }}
           queryGetter={queryGetter}
           querySetter={querySetter}
@@ -189,17 +262,22 @@ class MetadataCollections extends React.Component {
               getSearchHandlers,
               onSort,
               onSubmitSearch,
-              resetAll,
               searchChanged,
               searchValue,
             }) => {
-              const disableReset = () => (!filterChanged && !searchChanged);
+              const disableReset = this.getDisableReset(activeFilters, searchValue);
+              const disableSearch = () => (searchValue.query === defaultSearchString.query);
+              if (filterChanged || searchChanged) {
+                this.cacheFilter(activeFilters, searchValue);
+              }
 
               return (
                 <Paneset>
                   {this.state.filterPaneIsVisible &&
                     <Pane
+                      data-test-collection-pane-filter
                       defaultWidth="18%"
+                      id="pane-collectionfilter"
                       onClose={this.toggleFilterPane}
                       paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
                     >
@@ -211,13 +289,13 @@ class MetadataCollections extends React.Component {
                             id="collectionSearchField"
                             inputRef={this.searchField}
                             name="query"
-                            onChange={getSearchHandlers().query}
-                            onClear={getSearchHandlers().reset}
+                            onChange={(e) => this.handleChangeSearch(e.target.value, getSearchHandlers(), onSubmitSearch(), searchValue)}
+                            onClear={() => this.handleClearSearch(getSearchHandlers(), onSubmitSearch(), searchValue)}
                             value={searchValue.query}
                           />
                           <Button
                             buttonStyle="primary"
-                            disabled={!searchValue.query || searchValue.query === ''}
+                            disabled={disableSearch()}
                             fullWidth
                             id="collectionSubmitSearch"
                             type="submit"
@@ -227,9 +305,9 @@ class MetadataCollections extends React.Component {
                         </div>
                         <Button
                           buttonStyle="none"
-                          disabled={disableReset()}
+                          disabled={disableReset}
                           id="clickable-reset-all"
-                          onClick={resetAll}
+                          onClick={() => this.resetAll(getFilterHandlers(), getSearchHandlers())}
                         >
                           <Icon icon="times-circle-solid">
                             <FormattedMessage id="stripes-smart-components.resetAll" />
@@ -288,4 +366,4 @@ class MetadataCollections extends React.Component {
   }
 }
 
-export default injectIntl(MetadataCollections);
+export default withRouter(injectIntl(MetadataCollections));
