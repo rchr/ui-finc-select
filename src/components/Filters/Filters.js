@@ -254,6 +254,8 @@ class Filters extends React.Component {
   render() {
     const { intl, queryGetter, querySetter, onNeedMoreData, onSelectRow, selectedRecordId, filter } = this.props;
     const count = filter ? filter.totalCount() : 0;
+    const query = queryGetter() || {};
+    const sortOrder = query.sort || '';
 
     return (
       <div data-test-filters>
@@ -356,6 +358,10 @@ class Filters extends React.Component {
                       onNeedMoreData={onNeedMoreData}
                       onRowClick={onSelectRow}
                       rowFormatter={this.rowFormatter}
+                      sortDirection={
+                        sortOrder.startsWith('-') ? 'descending' : 'ascending'
+                      }
+                      sortOrder={sortOrder.replace(/^-/, '').replace(/,.*/, '')}
                       totalCount={count}
                       virtualize
                       visibleColumns={['label', 'type']}
