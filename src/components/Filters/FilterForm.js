@@ -186,7 +186,7 @@ class FilterForm extends React.Component {
         data-test-filter-form-page
         id="form-filter"
       >
-        <Paneset style={{ position: 'relative' }}>
+        <Paneset isRoot>
           <Pane
             defaultWidth="100%"
             firstMenu={firstMenu}
