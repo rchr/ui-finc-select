@@ -42,7 +42,7 @@ describe('Create Filter', () => {
       beforeEach(async function () {
         await editFilterPage.filterName.fill(TEST_NAME);
         await editFilterPage.typeSelect.select(TEST_TYPE);
-        await editFilterPage.createNewFilterBtn.click();
+        await editFilterPage.saveFilterBtn.click();
       });
 
       it('filter details view should be open and create filter form should be closed', () => {

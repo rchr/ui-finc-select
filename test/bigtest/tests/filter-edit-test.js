@@ -79,7 +79,7 @@ describe('Edit Filter', () => {
   describe('change and save filter edit form', () => {
     beforeEach(async function () {
       await editFilterPage.typeSelect.select('Blacklist');
-      await editFilterPage.updateFilterBtn.click();
+      await editFilterPage.saveFilterBtn.click();
     });
 
     it('filter form is still presented, since validation errors', () => {
