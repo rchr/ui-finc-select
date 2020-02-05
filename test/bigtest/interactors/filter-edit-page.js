@@ -29,8 +29,7 @@ export default @interactor class EditFilterPage {
   closePaneBtn = new ButtonInteractor('[icon=times]');
   closeWithoutSaving = new ButtonInteractor('#clickable-cancel-editing-confirmation-cancel');
   addFilterFileBtn = new ButtonInteractor('#add-filter-file-btn');
-  createNewFilterBtn = new ButtonInteractor('#clickable-createnewfilter');
-  updateFilterBtn = new ButtonInteractor('#clickable-updatefilter');
+  saveFilterBtn = new ButtonInteractor('#clickable-savefilter');
   closeEditPaneBtn = new ButtonInteractor('#clickable-closefilterdialog');
   keepEditingBtn = new ButtonInteractor('#clickable-cancel-editing-confirmation-confirm');
   uploadFilterFileBtnIsPresent = isPresent('[data-test-filter-file-upload-button]');

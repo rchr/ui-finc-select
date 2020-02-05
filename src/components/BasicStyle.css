@@ -1,4 +1,14 @@
 .styleForHeadline {
-  margin-bottom: 0.2em;
-  color: #676767;
+  margin-bottom: 0;
+  margin-left: 0.1em;
+}
+
+.styleForFormRoot {
+  height: 100%;
+  overflow: auto;
+}
+
+.styleForFormContent {
+  margin: 0 auto;
+  max-width: 50em;
 }
