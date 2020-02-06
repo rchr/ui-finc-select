@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 
 import {
   Accordion,
   AccordionSet,
-  FilterAccordionHeader
+  FilterAccordionHeader,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 
@@ -68,7 +67,7 @@ class SourceFilters extends React.Component {
         displayClearButton={groupFilters.length > 0}
         header={FilterAccordionHeader}
         id={`filter-accordion-${key}`}
-        label={<FormattedMessage id={`${name}`} />}
+        label={`${name}`}
         onClearFilter={() => { this.props.filterHandlers.clearGroup(key); }}
         separator={false}
         {...props}
