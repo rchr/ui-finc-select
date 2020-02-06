@@ -22,7 +22,7 @@ class FincNavigation extends React.Component {
           buttonStyle={id === 'source' ? 'primary' : 'default'}
           data-test-navigation-source
           id="metadata-sources"
-          to={urls.sources()}
+          to={id !== 'source' ? urls.sources() : ''}
         >
           Sources
         </Button>
@@ -30,7 +30,7 @@ class FincNavigation extends React.Component {
           buttonStyle={id === 'collection' ? 'primary' : 'default'}
           data-test-navigation-collection
           id="metadata-collections"
-          to={urls.collections()}
+          to={id !== 'collection' ? urls.collections() : ''}
         >
           Collections
         </Button>
@@ -38,7 +38,7 @@ class FincNavigation extends React.Component {
           buttonStyle={id === 'filter' ? 'primary' : 'default'}
           data-test-navigation-filter
           id="filters"
-          to={urls.filters()}
+          to={id !== 'filter' ? urls.filters() : ''}
         >
           Filters
         </Button>
