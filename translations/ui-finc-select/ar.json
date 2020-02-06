@@ -50,6 +50,7 @@
     "filter.fileAccordion": "ملف التنقيح",
     "filter.form.deleteFilter": "حذف المنقح",
     "filter.form.createFilter": "إنشاء منقح",
-    "filter.form.updateFilter": "تحديث المنقح",
-    "filter.file.empty": "المنقح بلا ملف"
+    "filter.file.empty": "المنقح بلا ملف",
+    "filter.form.saveAndClose": "حفظ وإغلاق",
+    "filter.form.cancel": "إلغاء"
 }

@@ -50,6 +50,7 @@
     "filter.fileAccordion": "Arquivo de filtro",
     "filter.form.deleteFilter": "Excluir filtro",
     "filter.form.createFilter": "Criar filtro",
-    "filter.form.updateFilter": "Atualizar filtro",
-    "filter.file.empty": "O filtro não tem nenhum arquivo"
+    "filter.file.empty": "O filtro não tem nenhum arquivo",
+    "filter.form.saveAndClose": "Salvar e fechar",
+    "filter.form.cancel": "Cancelar"
 }
