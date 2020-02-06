@@ -1,5 +1,12 @@
 # Change history for ui-finc-select
 
+## [1.4.0](https://github.com/folio-org/ui-finc-select/tree/v1.4.0) (2020-02-06)
+* Bugfix: Incorrect view of mdSource name (UIFC-113)
+* Default filter behaviour when switching between apps and/or tabs (UFIC-115)
+* Add arrow icon to header in list of results (UIFC-119)
+* Centering forms and add footer with save and cancle (UIFC-120)
+* Bugfix: Set filters if clicking several times on the same navigation-tab (UFIC-123)
+
 ## [1.3.0](https://github.com/folio-org/ui-finc-select/tree/v1.3.0) (2020-01-14)
 * Sort column "Source ID" numerically (UIFC-105)
 * Bugfix: Incorrect permission names are used (UIFC-103)
