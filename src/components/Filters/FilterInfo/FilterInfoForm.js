@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -40,7 +40,7 @@ class FilterInfoForm extends React.Component {
                 </FormattedMessage>}
               name="label"
               placeholder="Enter a name to identify the filter"
-              validate={[Required]}
+              validate={Required}
             />
           </Col>
         </Row>
@@ -57,7 +57,7 @@ class FilterInfoForm extends React.Component {
                 </FormattedMessage>}
               name="type"
               placeholder="Enter a type for the filter"
-              validate={[Required]}
+              validate={Required}
             />
           </Col>
         </Row>

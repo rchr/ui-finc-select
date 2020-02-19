@@ -5,20 +5,41 @@ const getDisplayName = (WrappedComponent) => {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 };
 
+const getValues = fields => {
+  // Get the values from either react-final-form or redux-form
+  const values = fields.getAll ? fields.getAll() : fields.value;
+
+  return values || [];
+};
+
 export default function withKiwtFieldArray(WrappedComponent) {
   class WithKiwtFieldArray extends React.Component {
     static propTypes = {
       fields: PropTypes.shape({
-        getAll: PropTypes.func.isRequired,
         insert: PropTypes.func.isRequired,
         name: PropTypes.string.isRequired,
         push: PropTypes.func.isRequired,
         remove: PropTypes.func.isRequired,
+        update: PropTypes.func, // react-final-form-arrays
+        value: PropTypes.array, // react-final-form-arrays
       }).isRequired,
     }
 
-    handleAddField = (field = {}) => {
-      this.props.fields.push(field);
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        endOfList: 0, // Tracks the end of the "real" list that doesn't contain _delete entries.
+      };
+    }
+
+    static getDerivedStateFromProps(props) {
+      const items = getValues(props.fields).filter(line => !line._delete);
+      return { endOfList: items.length };
+    }
+
+    handleAddField = (field = { _delete: false }) => {
+      this.props.fields.insert(this.state.endOfList, field);
     }
 
     handleDeleteField = (index, field) => {
@@ -29,10 +50,7 @@ export default function withKiwtFieldArray(WrappedComponent) {
     }
 
     handleReplaceField = (index, field) => {
-      setTimeout(() => {
-        this.props.fields.remove(index);
-        this.props.fields.insert(index, field.fileId);
-      }, 500);
+      this.props.fields.update(index, field);
     }
 
     handleMarkForDeletion = (field) => {
@@ -48,7 +66,7 @@ export default function withKiwtFieldArray(WrappedComponent) {
       const { fields } = this.props;
 
       // Filter away items that have been marked for deletion.
-      const items = (fields.getAll() || []).filter(line => !line._delete);
+      const items = getValues(fields).slice(0, this.state.endOfList);
 
       return (
         <WrappedComponent

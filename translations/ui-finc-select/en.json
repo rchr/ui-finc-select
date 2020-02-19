@@ -63,5 +63,7 @@
   "filter.form.saveAndClose": "Save & close",
   "filter.form.deleteFilter": "Delete filter",
   "filter.form.createFilter": "Create filter",
-  "filter.form.cancel": "Cancel"
+  "filter.form.cancel": "Cancel",
+  "filter.form.close": "Close filter dialog",
+  "filter.form.missingRequiredField": "File is required!"
 }
