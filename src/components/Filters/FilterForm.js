@@ -17,7 +17,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 import { IfPermission } from '@folio/stripes/core';
-import stripesForm from '@folio/stripes/form';
+import stripesFinalForm from '@folio/stripes/final-form';
 
 import FilterInfoForm from './FilterInfo/FilterInfoForm';
 import FilterFileForm from './FilterFile/FilterFileForm';
@@ -232,8 +232,7 @@ class FilterForm extends React.Component {
   }
 }
 
-export default stripesForm({
-  form: 'form-filter',
+export default stripesFinalForm({
   // set navigationCheck true for confirming changes
   navigationCheck: true,
   // the form will reinitialize every time the initialValues prop changes

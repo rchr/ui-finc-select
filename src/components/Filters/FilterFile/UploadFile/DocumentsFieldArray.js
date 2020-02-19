@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import {
   Button,
@@ -20,7 +20,6 @@ class DocumentsFieldArray extends React.Component {
   static propTypes = {
     addDocBtnLabel: PropTypes.node,
     fields: PropTypes.shape({
-      getAll: PropTypes.func.isRequired,
       insert: PropTypes.func.isRequired,
       name: PropTypes.string.isRequired,
       push: PropTypes.func.isRequired,
@@ -40,18 +39,8 @@ class DocumentsFieldArray extends React.Component {
     isEmptyMessage: <FormattedMessage id="ui-finc-select.filter.file.empty" />,
   }
 
-  // validateDocIsSpecified = (value, allValues, props, fieldName) => {
-  //   const index = parseInt(/\[([0-9]*)\]/.exec(fieldName)[1], 10);
-  //   const { fileUpload, label, name } = get(allValues, [this.props.name, index], {});
-  //   if (name && (!fileUpload && !label)) {
-  //     return <FormattedMessage id="doc.error.docsMustHaveLocationOrURL" />;
-  //   }
-
-  //   return undefined;
-  // }
-
   validateRequired = (value) => (
-    !value ? <FormattedMessage id="missingRequiredField" /> : undefined
+    !value ? <FormattedMessage id="ui-finc-select.filter.form.missingRequiredField" /> : undefined
   )
 
   renderFileUpload = (doc, onUploadFile, onDownloadFile, name, i) => {
@@ -73,7 +62,6 @@ class DocumentsFieldArray extends React.Component {
                     onUploadFile={onUploadFile}
                     required
                     validate={this.validateRequired}
-                    // validate={this.validateDocIsSpecified}
                   />
                 </Col>
               </Row>
@@ -177,7 +165,7 @@ class DocumentsFieldArray extends React.Component {
         <Button
           data-test-filter-file-card-add-button
           id="add-filter-file-btn"
-          onClick={() => onAddField({})}
+          onClick={() => onAddField()}
         >
           { this.props.addDocBtnLabel }
         </Button>
