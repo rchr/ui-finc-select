@@ -40,7 +40,7 @@ class DocumentsFieldArray extends React.Component {
   }
 
   validateRequired = (value) => (
-    !value ? <FormattedMessage id="missingRequiredField" /> : undefined
+    !value ? <FormattedMessage id="ui-finc-select.filter.form.missingRequiredField" /> : undefined
   )
 
   renderFileUpload = (doc, onUploadFile, onDownloadFile, name, i) => {
