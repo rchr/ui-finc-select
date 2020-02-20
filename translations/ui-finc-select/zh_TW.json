@@ -52,5 +52,7 @@
     "filter.form.createFilter": "创建筛选",
     "filter.file.empty": "筛选没有文件",
     "filter.form.saveAndClose": "Save & close",
-    "filter.form.cancel": "Cancel"
+    "filter.form.cancel": "Cancel",
+    "filter.form.close": "Close filter dialog",
+    "filter.form.missingRequiredField": "File is required!"
 }

@@ -52,5 +52,7 @@
     "filter.form.createFilter": "إنشاء منقح",
     "filter.file.empty": "المنقح بلا ملف",
     "filter.form.saveAndClose": "حفظ وإغلاق",
-    "filter.form.cancel": "إلغاء"
+    "filter.form.cancel": "إلغاء",
+    "filter.form.close": "Close filter dialog",
+    "filter.form.missingRequiredField": "File is required!"
 }

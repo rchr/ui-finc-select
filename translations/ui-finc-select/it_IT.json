@@ -52,5 +52,7 @@
     "filter.form.createFilter": "Crea filtro",
     "filter.file.empty": "Il filtro non ha file",
     "filter.form.saveAndClose": "Salva e chiudi",
-    "filter.form.cancel": "Annulla"
+    "filter.form.cancel": "Annulla",
+    "filter.form.close": "Close filter dialog",
+    "filter.form.missingRequiredField": "File is required!"
 }
