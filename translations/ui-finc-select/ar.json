@@ -53,6 +53,6 @@
     "filter.file.empty": "المنقح بلا ملف",
     "filter.form.saveAndClose": "حفظ وإغلاق",
     "filter.form.cancel": "إلغاء",
-    "filter.form.close": "Close filter dialog",
-    "filter.form.missingRequiredField": "File is required!"
+    "filter.form.close": "غلق مربع حوار المنقح",
+    "filter.form.missingRequiredField": "الملف مطلوب!"
 }
