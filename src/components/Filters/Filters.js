@@ -296,15 +296,20 @@ class Filters extends React.Component {
                       <form onSubmit={onSubmitSearch}>
                         {this.renderNavigation('filter')}
                         <div>
-                          <SearchField
-                            autoFocus
-                            id="filterSearchField"
-                            inputRef={this.searchField}
-                            name="query"
-                            onChange={(e) => this.handleChangeSearch(e.target.value, getSearchHandlers(), onSubmitSearch(), searchValue)}
-                            onClear={() => this.handleClearSearch(getSearchHandlers(), onSubmitSearch(), searchValue)}
-                            value={searchValue.query}
-                          />
+                          <FormattedMessage id="ui-finc-select.filter.searchInputLabel">
+                            {ariaLabel => (
+                              <SearchField
+                                ariaLabel={ariaLabel}
+                                autoFocus
+                                id="filterSearchField"
+                                inputRef={this.searchField}
+                                name="query"
+                                onChange={(e) => this.handleChangeSearch(e.target.value, getSearchHandlers(), onSubmitSearch(), searchValue)}
+                                onClear={() => this.handleClearSearch(getSearchHandlers(), onSubmitSearch(), searchValue)}
+                                value={searchValue.query}
+                              />
+                            )}
+                          </FormattedMessage>
                           <Button
                             buttonStyle="primary"
                             disabled={disableSearch()}

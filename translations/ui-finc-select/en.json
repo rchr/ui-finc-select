@@ -1,6 +1,7 @@
 {
   "meta.title": "Finc select",
 
+  "collection.searchInputLabel": "Search collection",
   "collection.description": "Description",
   "collection.facetLabel": "Facet label",
   "collection.filters": "Active filters",
@@ -19,6 +20,7 @@
   "collection.filter.sources": "Metadata source",
   "collection.form.updateCollection": "Update collection",
 
+  "source.searchInputLabel": "Search source",
   "source.description": "Description",
   "source.generalNotes": "General notes",
   "source.id": "Source ID",
@@ -41,6 +43,8 @@
   "source.modal.selectAllCollections.success": "The process has been started. It can take some time, until all ISILs will be added to the selected by field.",
   "source.modal.selectAllCollections.error": "The process could not start.",
 
+
+  "filter.searchInputLabel": "Search filter",
   "filter.label": "Filter name",
   "filter.type": "Type",
   "filter.isil": "ISIL",
