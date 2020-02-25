@@ -21,6 +21,7 @@ class SourceManagementView extends React.Component {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
     }),
+    id: PropTypes.string,
   };
 
   constructor(props) {
@@ -30,12 +31,12 @@ class SourceManagementView extends React.Component {
   }
 
   render() {
-    const { metadataSource, stripes } = this.props;
+    const { metadataSource, stripes, id } = this.props;
     const sourceId = _.get(metadataSource, 'id', '-');
 
     return (
       <React.Fragment>
-        <div id="id">
+        <div id={id}>
           <Row>
             <Col xs={6}>
               <Button

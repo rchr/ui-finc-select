@@ -11,14 +11,15 @@ import {
 class CollectionContentView extends React.Component {
   static propTypes = {
     metadataCollection: PropTypes.object,
+    id: PropTypes.string,
   };
 
   render() {
-    const { metadataCollection } = this.props;
+    const { metadataCollection, id } = this.props;
 
     return (
       <React.Fragment>
-        <div id="id">
+        <div id={id}>
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-select.collection.description" />}
