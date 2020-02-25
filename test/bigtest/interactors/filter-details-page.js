@@ -19,5 +19,5 @@ export default @interactor class FilterDetailsPage {
   fileAccordion = new FileAccordion();
   closePaneBtn = new ButtonInteractor('[icon=times]');
   editFilterBtn = new ButtonInteractor('#clickable-edit-filter');
-  downloadFileBtn = new ButtonInteractor('#download-file');
+  downloadFileBtn = new ButtonInteractor('[data-test-filter-button-download-file]');
 }
