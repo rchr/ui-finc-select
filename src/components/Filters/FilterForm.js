@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  AccordionSet,
   Button,
   Col,
   ConfirmationModal,
@@ -195,27 +196,29 @@ class FilterForm extends React.Component {
             paneTitle={paneTitle}
           >
             <div className={BasicStyle.styleForFormContent}>
-              <Row end="xs">
-                <Col xs>
-                  <ExpandAllButton
-                    id="clickable-expand-all"
-                    accordionStatus={sections}
-                    onToggle={this.handleExpandAll}
-                  />
-                </Col>
-              </Row>
-              <FilterInfoForm
-                accordionId="editFilterInfo"
-                expanded={sections.editFilterInfo}
-                onToggle={this.handleSectionToggle}
-                {...this.props}
-              />
-              <FilterFileForm
-                accordionId="editFilterFile"
-                expanded={sections.editFilterFile}
-                onToggle={this.handleSectionToggle}
-                {...this.props}
-              />
+              <AccordionSet>
+                <Row end="xs">
+                  <Col xs>
+                    <ExpandAllButton
+                      id="clickable-expand-all"
+                      accordionStatus={sections}
+                      onToggle={this.handleExpandAll}
+                    />
+                  </Col>
+                </Row>
+                <FilterInfoForm
+                  accordionId="editFilterInfo"
+                  expanded={sections.editFilterInfo}
+                  onToggle={this.handleSectionToggle}
+                  {...this.props}
+                />
+                <FilterFileForm
+                  accordionId="editFilterFile"
+                  expanded={sections.editFilterFile}
+                  onToggle={this.handleSectionToggle}
+                  {...this.props}
+                />
+              </AccordionSet>
               <ConfirmationModal
                 heading={<FormattedMessage id="ui-finc-select.filter.form.deleteFilter" />}
                 id="delete-filter-confirmation"

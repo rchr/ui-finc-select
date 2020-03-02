@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  AccordionSet,
   Accordion,
   Col,
   ExpandAllButton,
@@ -90,43 +91,45 @@ class MetadataSourceView extends React.Component {
           onClose={this.props.handlers.onClose}
           paneTitle={<span data-test-source-header-title>{label}</span>}
         >
-          <SourceInfoView
-            id="sourceInfo"
-            metadataSource={record}
-            stripes={this.props.stripes}
-          />
-          <Row end="xs">
-            <Col xs>
-              <ExpandAllButton
-                accordionStatus={this.state.accordions}
-                onToggle={this.handleExpandAll}
+          <AccordionSet>
+            <SourceInfoView
+              id="sourceInfo"
+              metadataSource={record}
+              stripes={this.props.stripes}
+            />
+            <Row end="xs">
+              <Col xs>
+                <ExpandAllButton
+                  accordionStatus={this.state.accordions}
+                  onToggle={this.handleExpandAll}
+                />
+              </Col>
+            </Row>
+            <Accordion
+              open={this.state.accordions.managementAccordion}
+              onToggle={this.handleAccordionToggle}
+              label={<FormattedMessage id="ui-finc-select.source.accordion.management" />}
+              id="managementAccordion"
+            >
+              <SourceManagementView
+                id="sourceManagement"
+                metadataSource={record}
+                stripes={this.props.stripes}
               />
-            </Col>
-          </Row>
-          <Accordion
-            open={this.state.accordions.managementAccordion}
-            onToggle={this.handleAccordionToggle}
-            label={<FormattedMessage id="ui-finc-select.source.accordion.management" />}
-            id="managementAccordion"
-          >
-            <SourceManagementView
-              id="sourceManagement"
-              metadataSource={record}
-              stripes={this.props.stripes}
-            />
-          </Accordion>
-          <Accordion
-            open={this.state.accordions.technicalAccordion}
-            onToggle={this.handleAccordionToggle}
-            label={<FormattedMessage id="ui-finc-select.source.accordion.technical" />}
-            id="technicalAccordion"
-          >
-            <SourceTechnicalView
-              id="sourceTechnical"
-              metadataSource={record}
-              stripes={this.props.stripes}
-            />
-          </Accordion>
+            </Accordion>
+            <Accordion
+              open={this.state.accordions.technicalAccordion}
+              onToggle={this.handleAccordionToggle}
+              label={<FormattedMessage id="ui-finc-select.source.accordion.technical" />}
+              id="technicalAccordion"
+            >
+              <SourceTechnicalView
+                id="sourceTechnical"
+                metadataSource={record}
+                stripes={this.props.stripes}
+              />
+            </Accordion>
+          </AccordionSet>
         </Pane>
       </React.Fragment>
     );
