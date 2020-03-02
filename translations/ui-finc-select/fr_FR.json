@@ -54,5 +54,8 @@
     "filter.form.saveAndClose": "Sauvegarder et fermer",
     "filter.form.cancel": "Annuler",
     "filter.form.close": "Fermer la boîte de dialogue du/des filtre-s",
-    "filter.form.missingRequiredField": "Le fichier est requis!"
+    "filter.form.missingRequiredField": "Le fichier est requis!",
+    "collection.searchInputLabel": "Search collection",
+    "source.searchInputLabel": "Search source",
+    "filter.searchInputLabel": "Search filter"
 }

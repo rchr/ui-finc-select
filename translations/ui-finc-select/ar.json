@@ -54,5 +54,8 @@
     "filter.form.saveAndClose": "حفظ وإغلاق",
     "filter.form.cancel": "إلغاء",
     "filter.form.close": "غلق مربع حوار المنقح",
-    "filter.form.missingRequiredField": "الملف مطلوب!"
+    "filter.form.missingRequiredField": "الملف مطلوب!",
+    "collection.searchInputLabel": "بحث المجموعة",
+    "source.searchInputLabel": "مصدر البحث",
+    "filter.searchInputLabel": "منقح البحث"
 }

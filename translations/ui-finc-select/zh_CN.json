@@ -27,7 +27,7 @@
     "source.tickets": "票",
     "source.accordion.management": "管理",
     "source.accordion.technical": "技术",
-    "source.button.showselectedCollections": "显示所选集合",
+    "source.button.showselectedCollections": "显示已选集合",
     "source.button.selectAllCollections": "选择所有集合",
     "source.button.showAllCollections": "显示所有集合",
     "source.modal.selectAllCollections.success": "进程已经开始。可能需要一些时间，直到所有ISIL都添加到所选字段。",
@@ -51,8 +51,11 @@
     "filter.form.deleteFilter": "删除筛选",
     "filter.form.createFilter": "创建筛选",
     "filter.file.empty": "筛选没有文件",
-    "filter.form.saveAndClose": "Save & close",
-    "filter.form.cancel": "Cancel",
-    "filter.form.close": "Close filter dialog",
-    "filter.form.missingRequiredField": "File is required!"
+    "filter.form.saveAndClose": "保存并关闭",
+    "filter.form.cancel": "取消",
+    "filter.form.close": "关闭筛选对话框",
+    "filter.form.missingRequiredField": "需要文件！",
+    "collection.searchInputLabel": "搜索集合",
+    "source.searchInputLabel": "搜索源",
+    "filter.searchInputLabel": "搜索筛选"
 }
