@@ -10,6 +10,7 @@ import {
 
 export default class EditCard extends React.Component {
   static propTypes = {
+    ariaLabel: PropTypes.string,
     children: PropTypes.node.isRequired,
     deleteBtnProps: PropTypes.object,
     header: PropTypes.node.isRequired,
@@ -22,6 +23,7 @@ export default class EditCard extends React.Component {
 
   renderDeleteButton = () => (
     <Button
+      aria-label={this.props.ariaLabel}
       buttonStyle="link slim"
       onClick={this.props.onDelete}
       style={{ margin: 0, padding: 0 }}
