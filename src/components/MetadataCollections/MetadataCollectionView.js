@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  AccordionSet,
   Accordion,
   Col,
   ExpandAllButton,
@@ -93,43 +94,45 @@ class CollectionViewRoute extends React.Component {
           onClose={this.props.handlers.onClose}
           paneTitle={<span data-test-collection-header-title>{label}</span>}
         >
-          <CollectionInfoView
-            id="collectionInfo"
-            metadataCollection={record}
-            stripes={stripes}
-          />
-          <Row end="xs">
-            <Col xs>
-              <ExpandAllButton
-                accordionStatus={this.state.accordions}
-                onToggle={this.handleExpandAll}
+          <AccordionSet>
+            <CollectionInfoView
+              id="collectionInfo"
+              metadataCollection={record}
+              stripes={stripes}
+            />
+            <Row end="xs">
+              <Col xs>
+                <ExpandAllButton
+                  accordionStatus={this.state.accordions}
+                  onToggle={this.handleExpandAll}
+                />
+              </Col>
+            </Row>
+            <Accordion
+              id="contentAccordion"
+              label={<FormattedMessage id="ui-finc-select.collection.accordion.content" />}
+              onToggle={this.handleAccordionToggle}
+              open={this.state.accordions.contentAccordion}
+            >
+              <CollectionContentView
+                id="collectionContent"
+                metadataCollection={record}
+                stripes={this.props.stripes}
               />
-            </Col>
-          </Row>
-          <Accordion
-            id="contentAccordion"
-            label={<FormattedMessage id="ui-finc-select.collection.accordion.content" />}
-            onToggle={this.handleAccordionToggle}
-            open={this.state.accordions.contentAccordion}
-          >
-            <CollectionContentView
-              id="collectionContent"
-              metadataCollection={record}
-              stripes={this.props.stripes}
-            />
-          </Accordion>
-          <Accordion
-            id="technicalAccordion"
-            label={<FormattedMessage id="ui-finc-select.collection.accordion.technical" />}
-            onToggle={this.handleAccordionToggle}
-            open={this.state.accordions.technicalAccordion}
-          >
-            <CollectionTechnicalView
-              id="collectionTechnical"
-              metadataCollection={record}
-              stripes={this.props.stripes}
-            />
-          </Accordion>
+            </Accordion>
+            <Accordion
+              id="technicalAccordion"
+              label={<FormattedMessage id="ui-finc-select.collection.accordion.technical" />}
+              onToggle={this.handleAccordionToggle}
+              open={this.state.accordions.technicalAccordion}
+            >
+              <CollectionTechnicalView
+                id="collectionTechnical"
+                metadataCollection={record}
+                stripes={this.props.stripes}
+              />
+            </Accordion>
+          </AccordionSet>
         </Pane>
       </React.Fragment>
     );

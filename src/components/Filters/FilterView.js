@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  AccordionSet,
   Accordion,
   Col,
   ExpandAllButton,
@@ -127,32 +128,34 @@ class FilterView extends React.Component {
         >
           <TitleManager record={label} />
           <div id="filterDetails">
-            <FilterInfoView
-              id="filterInfo"
-              filter={record}
-              stripes={stripes}
-            />
-            <Row end="xs">
-              <Col xs>
-                <ExpandAllButton
-                  accordionStatus={this.state.accordions}
-                  onToggle={this.handleExpandAll}
-                />
-              </Col>
-            </Row>
-            <Accordion
-              id="fileAccordion"
-              label={<FormattedMessage id="ui-finc-select.filter.fileAccordion" />}
-              onToggle={this.handleAccordionToggle}
-              open={this.state.accordions.fileAccordion}
-            >
-              <FilterFileView
+            <AccordionSet>
+              <FilterInfoView
                 id="filterInfo"
                 filter={record}
                 stripes={stripes}
-                docs={docs}
               />
-            </Accordion>
+              <Row end="xs">
+                <Col xs>
+                  <ExpandAllButton
+                    accordionStatus={this.state.accordions}
+                    onToggle={this.handleExpandAll}
+                  />
+                </Col>
+              </Row>
+              <Accordion
+                id="fileAccordion"
+                label={<FormattedMessage id="ui-finc-select.filter.fileAccordion" />}
+                onToggle={this.handleAccordionToggle}
+                open={this.state.accordions.fileAccordion}
+              >
+                <FilterFileView
+                  id="filterInfo"
+                  filter={record}
+                  stripes={stripes}
+                  docs={docs}
+                />
+              </Accordion>
+            </AccordionSet>
           </div>
         </Pane>
       </React.Fragment>
