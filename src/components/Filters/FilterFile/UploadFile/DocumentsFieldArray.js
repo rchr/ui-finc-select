@@ -118,6 +118,7 @@ class DocumentsFieldArray extends React.Component {
             <Row>
               <Col xs={12}>
                 <Field
+                  autoFocus
                   component={TextField}
                   data-test-filter-file-label
                   id={`filter-file-label-${i}`}
