@@ -203,6 +203,7 @@ class FilterForm extends React.Component {
                       id="clickable-expand-all"
                       accordionStatus={sections}
                       onToggle={this.handleExpandAll}
+                      setStatus={null}
                     />
                   </Col>
                 </Row>
