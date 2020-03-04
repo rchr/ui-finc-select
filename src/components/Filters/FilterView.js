@@ -139,6 +139,7 @@ class FilterView extends React.Component {
                   <ExpandAllButton
                     accordionStatus={this.state.accordions}
                     onToggle={this.handleExpandAll}
+                    setStatus={null}
                   />
                 </Col>
               </Row>
