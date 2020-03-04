@@ -328,7 +328,7 @@ class MetadataCollections extends React.Component {
                     firstMenu={this.renderResultsFirstMenu(activeFilters)}
                     id="pane-collectionresults"
                     padContent={false}
-                    paneTitle="Finc Select"
+                    paneTitle={<FormattedMessage id="ui-finc-select.collections.title" />}
                     paneSub={this.renderResultsPaneSubtitle(collection)}
                   >
                     <MultiColumnList

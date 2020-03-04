@@ -17,7 +17,7 @@ class FincNavigation extends React.Component {
     const { id } = this.props;
 
     return (
-      <ButtonGroup tagName="nav" fullWidth data-test-navigation>
+      <ButtonGroup fullWidth data-test-navigation>
         <Button
           buttonStyle={id === 'source' ? 'primary' : 'default'}
           data-test-navigation-source

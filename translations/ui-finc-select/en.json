@@ -1,6 +1,7 @@
 {
   "meta.title": "Finc select",
 
+  "collections.title": "Metadata collections",
   "collection.searchInputLabel": "Search collection",
   "collection.description": "Description",
   "collection.facetLabel": "Facet label",
@@ -13,13 +14,14 @@
   "collection.selected": "Selected",
   "collection.tickets": "Tickets",
 
-  "collection.accordion.general": "Metadata collection general",
+  "collection.accordion.general": "General",
   "collection.accordion.content": "Content",
   "collection.accordion.technical": "Management & technical",
 
   "collection.filter.sources": "Metadata source",
   "collection.form.updateCollection": "Update collection",
 
+  "sources.title": "Metadata sources",
   "source.searchInputLabel": "Search source",
   "source.description": "Description",
   "source.generalNotes": "General notes",
@@ -33,6 +35,7 @@
   "source.status": "Impl. status",
   "source.tickets": "Tickets",
 
+  "source.generalAccordion": "General",
   "source.accordion.management": "Management",
   "source.accordion.technical": "Technical",
 
@@ -43,7 +46,7 @@
   "source.modal.selectAllCollections.success": "The process has been started. It can take some time, until all ISILs will be added to the selected by field.",
   "source.modal.selectAllCollections.error": "The process could not start.",
 
-
+  "filters.title": "Filters",
   "filter.searchInputLabel": "Search filter",
   "filter.label": "Filter name",
   "filter.type": "Type",

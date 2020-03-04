@@ -338,7 +338,7 @@ class Filters extends React.Component {
                     id="pane-filterresults"
                     lastMenu={this.renderResultsLastMenu()}
                     padContent={false}
-                    paneTitle="Finc Select"
+                    paneTitle={<FormattedMessage id="ui-finc-select.filters.title" />}
                     paneSub={this.renderResultsPaneSubtitle(filter)}
                   >
                     <MultiColumnList
