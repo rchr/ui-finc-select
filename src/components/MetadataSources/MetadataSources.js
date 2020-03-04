@@ -354,7 +354,7 @@ class MetadataSources extends React.Component {
                     firstMenu={this.renderResultsFirstMenu(activeFilters)}
                     id="pane-sourceresults"
                     padContent={false}
-                    paneTitle="Finc Select"
+                    paneTitle={<FormattedMessage id="ui-finc-select.sources.title" />}
                     paneSub={this.renderResultsPaneSubtitle(source)}
                   >
                     <MultiColumnList
