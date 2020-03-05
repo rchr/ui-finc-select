@@ -22,6 +22,7 @@ import stripesFinalForm from '@folio/stripes/final-form';
 
 import FilterInfoForm from './FilterInfo/FilterInfoForm';
 import FilterFileForm from './FilterFile/FilterFileForm';
+import CollectionsForm from './Collections/CollectionsForm';
 import BasicStyle from '../BasicStyle.css';
 
 class FilterForm extends React.Component {
@@ -54,7 +55,8 @@ class FilterForm extends React.Component {
       confirmDelete: false,
       sections: {
         editFilterInfo: true,
-        editFilterFile: true
+        editFilterFile: true,
+        editCollections: true
       },
     };
 
@@ -216,6 +218,12 @@ class FilterForm extends React.Component {
                 <FilterFileForm
                   accordionId="editFilterFile"
                   expanded={sections.editFilterFile}
+                  onToggle={this.handleSectionToggle}
+                  {...this.props}
+                />
+                <CollectionsForm
+                  accordionId="editCollections"
+                  expanded={sections.editCollections}
                   onToggle={this.handleSectionToggle}
                   {...this.props}
                 />

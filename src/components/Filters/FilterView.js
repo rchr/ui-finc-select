@@ -22,6 +22,7 @@ import {
 
 import FilterInfoView from './FilterInfo/FilterInfoView';
 import FilterFileView from './FilterFile/FilterFileView';
+import CollectionsView from './Collections/CollectionsView';
 
 class FilterView extends React.Component {
   static propTypes = {
@@ -42,7 +43,8 @@ class FilterView extends React.Component {
 
     this.state = {
       accordions: {
-        fileAccordion: false
+        fileAccordion: false,
+        collectionAccordion: false
       },
     };
   }
@@ -154,6 +156,17 @@ class FilterView extends React.Component {
                   filter={record}
                   stripes={stripes}
                   docs={docs}
+                />
+              </Accordion>
+              <Accordion
+                id="collectionAccordion"
+                label={<FormattedMessage id="ui-finc-select.filter.collectionAccordion" />}
+                onToggle={this.handleAccordionToggle}
+                open={this.state.accordions.collectionAccordion}
+              >
+                <CollectionsView
+                  id="collections"
+                  stripes={stripes}
                 />
               </Accordion>
             </AccordionSet>
