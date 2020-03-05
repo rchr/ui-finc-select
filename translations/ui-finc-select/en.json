@@ -65,6 +65,11 @@
   "filter.file.empty": "Filter has no file",
 
   "filter.collections.empty": "Filter has no collection",
+  "filter.collections.addCollection": "Add collection",
+  "filter.collections.modal.header": "Select collections",
+  "filter.collections.modal.list.pane.header": "Collections",
+  "filter.collections.modal.save": "Save",
+  "filter.collections.modal.cancel": "Cancel",
 
   "filter.generalAccordion": "Filter general",
   "filter.fileAccordion": "Filter file",
