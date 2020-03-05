@@ -66,6 +66,7 @@
 
   "filter.generalAccordion": "Filter general",
   "filter.fileAccordion": "Filter file",
+  "filter.collectionAccordion": "Metadata collections",
 
   "filter.form.saveAndClose": "Save & close",
   "filter.form.deleteFilter": "Delete filter",
