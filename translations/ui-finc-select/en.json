@@ -64,6 +64,8 @@
   "filter.file.addFile": "Add file to filter",
   "filter.file.empty": "Filter has no file",
 
+  "filter.collections.empty": "Filter has no collection",
+
   "filter.generalAccordion": "Filter general",
   "filter.fileAccordion": "Filter file",
   "filter.collectionAccordion": "Metadata collections",
