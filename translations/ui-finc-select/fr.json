@@ -10,7 +10,7 @@
     "collection.permitted": "Usage permitted",
     "collection.selected": "Selected",
     "collection.tickets": "Tickets",
-    "collection.accordion.general": "Metadata collection general",
+    "collection.accordion.general": "General",
     "collection.accordion.content": "Content",
     "collection.accordion.technical": "Management & technical",
     "collection.form.updateCollection": "Update collection",
@@ -57,5 +57,9 @@
     "filter.form.missingRequiredField": "File is required!",
     "collection.searchInputLabel": "Search collection",
     "source.searchInputLabel": "Search source",
-    "filter.searchInputLabel": "Search filter"
+    "filter.searchInputLabel": "Search filter",
+    "collections.title": "Metadata collections",
+    "sources.title": "Metadata sources",
+    "source.generalAccordion": "General",
+    "filters.title": "Filters"
 }

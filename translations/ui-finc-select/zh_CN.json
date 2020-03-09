@@ -57,5 +57,9 @@
     "filter.form.missingRequiredField": "需要文件！",
     "collection.searchInputLabel": "搜索集合",
     "source.searchInputLabel": "搜索源",
-    "filter.searchInputLabel": "搜索筛选"
+    "filter.searchInputLabel": "搜索筛选",
+    "collections.title": "Metadata collections",
+    "sources.title": "Metadata sources",
+    "source.generalAccordion": "General",
+    "filters.title": "Filters"
 }
