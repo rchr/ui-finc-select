@@ -43,6 +43,9 @@ class FilterForm extends React.Component {
     stripes: PropTypes.shape({
       okapi: PropTypes.object,
     }),
+    filterData: PropTypes.shape({
+      mdSources: PropTypes.array,
+    }),
   };
 
   static defaultProps = {
@@ -227,6 +230,7 @@ class FilterForm extends React.Component {
                   expanded={sections.editCollections}
                   onToggle={this.handleSectionToggle}
                   availableCollections={this.props.availableCollections}
+                  filterData={this.props.filterData}
                   {...this.props}
                 />
               </AccordionSet>

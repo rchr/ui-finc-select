@@ -18,7 +18,13 @@ class FilterEditRoute extends React.Component {
       type: 'okapi',
       records: 'fincSelectMetadataCollections',
       path: 'finc-select/metadata-collections',
-    }
+    },
+    mdSources: {
+      type: 'okapi',
+      records: 'tinyMetadataSources',
+      path: 'finc-config/tiny-metadata-sources',
+      resourceShouldRefresh: true
+    },
   });
 
   static propTypes = {
@@ -98,6 +104,9 @@ class FilterEditRoute extends React.Component {
         handlers={{
           ...handlers,
           onClose: this.handleClose,
+        }}
+        filterData={{
+          mdSources: _.get(this.props.resources, 'mdSources.records', []),
         }}
         initialValues={this.getInitialValues()}
         availableCollections={_.get(this.props.resources, 'availableCollections.records', [])}

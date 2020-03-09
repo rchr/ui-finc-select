@@ -19,6 +19,9 @@ class CollectionsForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
     availableCollections: PropTypes.arrayOf(PropTypes.object),
+    filterData: PropTypes.shape({
+      mdSources: PropTypes.array,
+    }),
   };
 
   constructor(props) {
@@ -79,6 +82,7 @@ class CollectionsForm extends React.Component {
             open={collectionModalOpen}
             onClose={this.closeCollectionModal}
             availableCollections={this.props.availableCollections}
+            filterData={this.props.filterData}
           />
         }
       </Accordion>

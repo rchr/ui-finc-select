@@ -8,6 +8,7 @@ import {
 } from 'react-intl';
 
 import { stripesConnect } from '@folio/stripes/core';
+
 import {
   Button,
   Modal,
@@ -16,6 +17,8 @@ import {
   Paneset,
 } from '@folio/stripes/components';
 
+import SearchForm from './SearchForm';
+// import CollectionFilters from '../../MetadataCollections/CollectionFilters';
 import css from './CollectionsModal.css';
 
 class CollectionsModal extends React.Component {
@@ -24,9 +27,13 @@ class CollectionsModal extends React.Component {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     availableCollections: PropTypes.arrayOf(PropTypes.object),
+    filterData: PropTypes.shape({
+      mdSources: PropTypes.array,
+    }),
   };
 
   static defaultProps = {
+    filterData: {},
     availableCollections:  {},
   };
 
@@ -51,7 +58,8 @@ class CollectionsModal extends React.Component {
   };
 
   render() {
-    const { intl, open, onClose, availableCollections } = this.props;
+    const { intl, open, onClose, availableCollections, filterData } = this.props;
+    const FilterGroupsConfig = [];
 
     return (
       <Modal
@@ -88,7 +96,26 @@ class CollectionsModal extends React.Component {
         <div>
           <Paneset>
             <Pane
+              defaultWidth="30%"
+              paneTitle={<FormattedMessage id="ui-finc-select.filter.collections.modal.search.header" />}
+            >
+              <SearchForm
+                config={FilterGroupsConfig}
+                filterData={filterData}
+                onClearFilter={this.onClearFilter}
+                onSubmitSearch={this.onSubmitSearch}
+                onChangeFilter={this.onChangeFilter}
+                resetSearchForm={this.resetSearchForm}
+              />
+            </Pane>
+            <Pane
               paneTitle={<FormattedMessage id="ui-finc-select.filter.collections.modal.list.pane.header" />}
+              paneSub={
+                <FormattedMessage
+                  id="ui-finc-select.filter.collections.modal.list.pane.subheader"
+                  values={{ amount: availableCollections.length }}
+                />
+              }
               defaultWidth="fill"
             >
               <div>
