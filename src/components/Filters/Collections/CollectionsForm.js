@@ -18,6 +18,7 @@ import CollectionsModal from './CollectionsModal';
 class CollectionsForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
+    availableCollections: PropTypes.arrayOf(PropTypes.object),
   };
 
   constructor(props) {
@@ -77,6 +78,7 @@ class CollectionsForm extends React.Component {
           <CollectionsModal
             open={collectionModalOpen}
             onClose={this.closeCollectionModal}
+            availableCollections={this.props.availableCollections}
           />
         }
       </Accordion>
