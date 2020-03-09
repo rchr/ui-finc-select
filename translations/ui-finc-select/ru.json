@@ -10,7 +10,7 @@
     "collection.permitted": "Usage permitted",
     "collection.selected": "выбранный",
     "collection.tickets": "Билеты",
-    "collection.accordion.general": "Metadata collection general",
+    "collection.accordion.general": "Общий",
     "collection.accordion.content": "Content",
     "collection.accordion.technical": "Management & technical",
     "collection.form.updateCollection": "Обновить коллекцию",
@@ -57,5 +57,9 @@
     "filter.form.missingRequiredField": "File is required!",
     "collection.searchInputLabel": "Search collection",
     "source.searchInputLabel": "Search source",
-    "filter.searchInputLabel": "Search filter"
+    "filter.searchInputLabel": "Search filter",
+    "collections.title": "Metadata collections",
+    "sources.title": "Metadata sources",
+    "source.generalAccordion": "General",
+    "filters.title": "Filters"
 }

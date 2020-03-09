@@ -57,5 +57,9 @@
     "filter.form.missingRequiredField": "O arquivo é obrigatório!",
     "collection.searchInputLabel": "Coleção de pesquisa",
     "source.searchInputLabel": "Fonte de pesquisa",
-    "filter.searchInputLabel": "Filtro de pesquisa"
+    "filter.searchInputLabel": "Filtro de pesquisa",
+    "collections.title": "Coleções de metadados",
+    "sources.title": "Fontes de metadados",
+    "source.generalAccordion": "Geral",
+    "filters.title": "Filtros"
 }

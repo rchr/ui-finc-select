@@ -57,5 +57,9 @@
     "filter.form.missingRequiredField": "الملف مطلوب!",
     "collection.searchInputLabel": "بحث المجموعة",
     "source.searchInputLabel": "مصدر البحث",
-    "filter.searchInputLabel": "منقح البحث"
+    "filter.searchInputLabel": "منقح البحث",
+    "collections.title": "مجموعات الميتاداتا",
+    "sources.title": "مصادر الميتاداتا",
+    "source.generalAccordion": "عام",
+    "filters.title": "منقحات"
 }

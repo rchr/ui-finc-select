@@ -10,7 +10,7 @@
     "collection.permitted": "Utilisation autorisée",
     "collection.selected": "Sélectionné",
     "collection.tickets": "Tickets",
-    "collection.accordion.general": "Collecte des métadonnées - général",
+    "collection.accordion.general": "Général",
     "collection.accordion.content": "Contenu",
     "collection.accordion.technical": "Management & technique",
     "collection.form.updateCollection": "Mettre à jour la collection",
@@ -55,7 +55,11 @@
     "filter.form.cancel": "Annuler",
     "filter.form.close": "Fermer la boîte de dialogue du/des filtre-s",
     "filter.form.missingRequiredField": "Le fichier est requis!",
-    "collection.searchInputLabel": "Search collection",
-    "source.searchInputLabel": "Search source",
-    "filter.searchInputLabel": "Search filter"
+    "collection.searchInputLabel": "Rechercher dans la collection",
+    "source.searchInputLabel": "Rechercher la source",
+    "filter.searchInputLabel": "Filtre de recherche",
+    "collections.title": "Collections de métadonnées",
+    "sources.title": "Sources de métadonnées",
+    "source.generalAccordion": "Général",
+    "filters.title": "Filtres"
 }
