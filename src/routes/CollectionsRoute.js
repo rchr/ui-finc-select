@@ -122,8 +122,8 @@ class CollectionsRoute extends React.Component {
   }
 
   handleNeedMoreData = () => {
-    if (this.source) {
-      this.source.fetchMore(RESULT_COUNT_INCREMENT);
+    if (this.collection) {
+      this.collection.fetchMore(RESULT_COUNT_INCREMENT);
     }
   };
 
