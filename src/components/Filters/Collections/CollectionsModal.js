@@ -37,6 +37,14 @@ class CollectionsModal extends React.Component {
     availableCollections:  {},
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      filters: '',
+    };
+  }
+
   getArrayElementsCommaSeparated = (array) => {
     let formatted = '';
 
@@ -58,6 +66,9 @@ class CollectionsModal extends React.Component {
   };
 
   render() {
+    const {
+      filters,
+    } = this.state;
     const { intl, open, onClose, availableCollections, filterData } = this.props;
     const FilterGroupsConfig = [];
 
@@ -101,6 +112,7 @@ class CollectionsModal extends React.Component {
             >
               <SearchForm
                 config={FilterGroupsConfig}
+                filters={filters}
                 filterData={filterData}
                 onClearFilter={this.onClearFilter}
                 onSubmitSearch={this.onSubmitSearch}

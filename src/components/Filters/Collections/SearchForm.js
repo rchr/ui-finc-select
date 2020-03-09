@@ -17,7 +17,7 @@ const SearchForm = (props) => {
   const {
     onSubmitSearch,
     onChangeFilter,
-    // config,
+    config,
     filters,
     resetSearchForm,
     onClearFilter,
@@ -80,20 +80,20 @@ const SearchForm = (props) => {
 };
 
 SearchForm.propTypes = {
-  // config: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     label: PropTypes.node.isRequired,
-  //     name: PropTypes.string.isRequired,
-  //     cql: PropTypes.string.isRequired,
-  //     values: PropTypes.arrayOf(
-  //       PropTypes.shape({
-  //         name: PropTypes.string.isRequired,
-  //         displayName: PropTypes.element.isRequired,
-  //         value: PropTypes.bool.isRequired,
-  //       }).isRequired,
-  //     ).isRequired,
-  //   })
-  // ).isRequired,
+  config: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.node.isRequired,
+      name: PropTypes.string.isRequired,
+      cql: PropTypes.string.isRequired,
+      values: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          displayName: PropTypes.element.isRequired,
+          value: PropTypes.bool.isRequired,
+        }).isRequired,
+      ).isRequired,
+    })
+  ).isRequired,
   filters: PropTypes.object.isRequired,
   onSubmitSearch: PropTypes.func.isRequired,
   onChangeFilter: PropTypes.func.isRequired,
