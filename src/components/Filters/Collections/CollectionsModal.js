@@ -11,37 +11,46 @@ import { stripesConnect } from '@folio/stripes/core';
 
 import {
   Button,
+  Icon,
   Modal,
   MultiColumnList,
   Pane,
   Paneset,
+  SearchField,
 } from '@folio/stripes/components';
 
-import SearchForm from './SearchForm';
-// import CollectionFilters from '../../MetadataCollections/CollectionFilters';
+import {
+  SearchAndSortQuery,
+  SearchAndSortSearchButton as FilterPaneToggle,
+} from '@folio/stripes/smart-components';
+// import SearchForm from './SearchForm';
+import CollectionFilters from '../../MetadataCollections/CollectionFilters';
 import css from './CollectionsModal.css';
 
 class CollectionsModal extends React.Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-    open: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    availableCollections: PropTypes.arrayOf(PropTypes.object),
-    filterData: PropTypes.shape({
-      mdSources: PropTypes.array,
-    }),
-  };
+  // static propTypes = {
+  //   intl: intlShape.isRequired,
+  //   open: PropTypes.bool.isRequired,
+  //   onClose: PropTypes.func.isRequired,
+  //   availableCollections: PropTypes.arrayOf(PropTypes.object),
+  //   filterData: PropTypes.shape({
+  //     mdSources: PropTypes.array,
+  //   }),
+  //   queryGetter: PropTypes.func,
+  //   querySetter: PropTypes.func,
+  // };
 
-  static defaultProps = {
-    filterData: {},
-    availableCollections:  {},
-  };
+  // static defaultProps = {
+  //   filterData: {},
+  //   availableCollections:  {},
+  // };
 
   constructor(props) {
     super(props);
 
     this.state = {
       filters: '',
+      filterPaneIsVisible: true,
     };
   }
 
@@ -69,8 +78,9 @@ class CollectionsModal extends React.Component {
     const {
       filters,
     } = this.state;
-    const { intl, open, onClose, availableCollections, filterData } = this.props;
-    const FilterGroupsConfig = [];
+    const { intl, open, onClose, availableCollections, filterData, queryGetter, querySetter } = this.props;
+    // const FilterGroupsConfig = [];
+    // const count = availableCollections ? availableCollections.totalCount() : 0;
 
     return (
       <Modal
@@ -106,20 +116,63 @@ class CollectionsModal extends React.Component {
       >
         <div>
           <Paneset>
-            <Pane
-              defaultWidth="30%"
-              paneTitle={<FormattedMessage id="ui-finc-select.filter.collections.modal.search.header" />}
-            >
-              <SearchForm
-                config={FilterGroupsConfig}
-                filters={filters}
-                filterData={filterData}
-                onClearFilter={this.onClearFilter}
-                onSubmitSearch={this.onSubmitSearch}
-                onChangeFilter={this.onChangeFilter}
-                resetSearchForm={this.resetSearchForm}
-              />
-            </Pane>
+            {
+              this.state.filterPaneIsVisible &&
+              <Pane
+                defaultWidth="30%"
+                paneTitle={<FormattedMessage id="ui-finc-select.filter.collections.modal.search.header" />}
+              >
+                {/* <form onSubmit={onSubmitSearch}> */}
+                <form>
+                  <div>
+                    <FormattedMessage id="ui-finc-select.collection.searchInputLabel">
+                      {ariaLabel => (
+                        <SearchField
+                          ariaLabel={ariaLabel}
+                          autoFocus
+                          id="collectionSearchField"
+                          inputRef={this.searchField}
+                          name="query"
+                          // onChange={(e) => {
+                          //   if (e.target.value) {
+                          //     this.handleChangeSearch(e.target.value, getSearchHandlers());
+                          //   } else {
+                          //     this.handleClearSearch(getSearchHandlers(), onSubmitSearch(), searchValue);
+                          //   }
+                          // }}
+                          // onClear={() => this.handleClearSearch(getSearchHandlers(), onSubmitSearch(), searchValue)}
+                          // value={searchValue.query}
+                        />
+                      )}
+                    </FormattedMessage>
+                    <Button
+                      buttonStyle="primary"
+                      // disabled={disableSearch()}
+                      fullWidth
+                      id="collectionSubmitSearch"
+                      type="submit"
+                    >
+                      <FormattedMessage id="stripes-smart-components.search" />
+                    </Button>
+                  </div>
+                  <Button
+                    buttonStyle="none"
+                    // disabled={disableReset}
+                    id="clickable-reset-all"
+                    // onClick={() => this.resetAll(getFilterHandlers(), getSearchHandlers())}
+                  >
+                    <Icon icon="times-circle-solid">
+                      <FormattedMessage id="stripes-smart-components.resetAll" />
+                    </Icon>
+                  </Button>
+                  <CollectionFilters
+                    // activeFilters={activeFilters.state}
+                    filterData={filterData}
+                    // filterHandlers={getFilterHandlers()}
+                  />
+                </form>
+              </Pane>
+            }
             <Pane
               paneTitle={<FormattedMessage id="ui-finc-select.filter.collections.modal.list.pane.header" />}
               paneSub={
@@ -164,4 +217,22 @@ class CollectionsModal extends React.Component {
   }
 }
 
-export default stripesConnect(injectIntl(CollectionsModal));
+CollectionsModal.propTypes = {
+  intl: intlShape.isRequired,
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  availableCollections: PropTypes.arrayOf(PropTypes.object),
+  filterData: PropTypes.shape({
+    mdSources: PropTypes.array,
+  }),
+  queryGetter: PropTypes.func,
+  querySetter: PropTypes.func,
+};
+
+CollectionsModal.defaultProps = {
+  filterData: {},
+  availableCollections:  {},
+  searchString: '',
+};
+
+export default injectIntl(CollectionsModal);
