@@ -14,6 +14,17 @@ class FilterEditRoute extends React.Component {
       path: 'finc-select/filters/:{id}',
       shouldRefresh: () => false,
     },
+    availableCollections: {
+      type: 'okapi',
+      records: 'fincSelectMetadataCollections',
+      path: 'finc-select/metadata-collections',
+    },
+    mdSources: {
+      type: 'okapi',
+      records: 'tinyMetadataSources',
+      path: 'finc-config/tiny-metadata-sources',
+      resourceShouldRefresh: true
+    },
   });
 
   static propTypes = {
@@ -35,6 +46,7 @@ class FilterEditRoute extends React.Component {
     }).isRequired,
     resources: PropTypes.shape({
       filter: PropTypes.object,
+      availableCollections: PropTypes.arrayOf(PropTypes.object),
     }).isRequired,
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
@@ -93,7 +105,11 @@ class FilterEditRoute extends React.Component {
           ...handlers,
           onClose: this.handleClose,
         }}
+        filterData={{
+          mdSources: _.get(this.props.resources, 'mdSources.records', []),
+        }}
         initialValues={this.getInitialValues()}
+        availableCollections={_.get(this.props.resources, 'availableCollections.records', [])}
         isLoading={this.fetchIsPending()}
         onDelete={this.deleteFilter}
         onSubmit={this.handleSubmit}

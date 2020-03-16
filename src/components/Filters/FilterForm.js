@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+// import { FieldArray } from 'react-final-form';
 
 import {
   AccordionSet,
@@ -22,10 +23,12 @@ import stripesFinalForm from '@folio/stripes/final-form';
 
 import FilterInfoForm from './FilterInfo/FilterInfoForm';
 import FilterFileForm from './FilterFile/FilterFileForm';
+import CollectionsForm from './Collections/CollectionsForm';
 import BasicStyle from '../BasicStyle.css';
 
 class FilterForm extends React.Component {
   static propTypes = {
+    availableCollections: PropTypes.arrayOf(PropTypes.object),
     handlers: PropTypes.PropTypes.shape({
       onClose: PropTypes.func.isRequired,
     }),
@@ -41,6 +44,9 @@ class FilterForm extends React.Component {
     stripes: PropTypes.shape({
       okapi: PropTypes.object,
     }),
+    filterData: PropTypes.shape({
+      mdSources: PropTypes.array,
+    }),
   };
 
   static defaultProps = {
@@ -54,7 +60,8 @@ class FilterForm extends React.Component {
       confirmDelete: false,
       sections: {
         editFilterInfo: true,
-        editFilterFile: true
+        editFilterFile: true,
+        editCollections: true
       },
     };
 
@@ -217,6 +224,15 @@ class FilterForm extends React.Component {
                   accordionId="editFilterFile"
                   expanded={sections.editFilterFile}
                   onToggle={this.handleSectionToggle}
+                  {...this.props}
+                />
+                {/* with MODAL: try like ui-users / try with SASQ */}
+                <CollectionsForm
+                  accordionId="editCollections"
+                  expanded={sections.editCollections}
+                  onToggle={this.handleSectionToggle}
+                  availableCollections={this.props.availableCollections}
+                  filterData={this.props.filterData}
                   {...this.props}
                 />
               </AccordionSet>

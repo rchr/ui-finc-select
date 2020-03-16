@@ -29,6 +29,7 @@
     "@folio/stripes-final-form": "^2.0.0",
     "@folio/stripes-logger": "^1.0.0",
     "@folio/stripes-smart-components": "^3.0.0",
+    "@folio/plugin-find-finc-metadata-collection": "^1.0.0",
     "babel-eslint": "^9.0.0",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
