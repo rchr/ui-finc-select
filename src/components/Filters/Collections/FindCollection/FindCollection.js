@@ -24,10 +24,9 @@ class FindCollection extends React.Component {
   }
 
   selectCollection = (c) => {
-    this.props.form.mutators.setCollection({
-      id: c.id,
-      name: c.label,
-    });
+    this.props.form.mutators.setCollection([
+      c.id
+    ]);
 
     this.setState(() => {
       return { collection: {
