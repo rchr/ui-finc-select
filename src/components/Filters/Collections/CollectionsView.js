@@ -16,6 +16,7 @@ class CollectionsView extends React.Component {
         listInvisiblePerms: PropTypes.bool,
       }).isRequired,
     }).isRequired,
+    filter: PropTypes.object,
   };
 
   renderList() {
@@ -52,9 +53,13 @@ class CollectionsView extends React.Component {
   }
 
   render() {
+    const collectionIds = _.get(this.props.filter, 'collectionIds', '-');
+
+    // console.log(collectionIds);
     return (
       <React.Fragment>
-        {this.renderList()}
+        {/* {this.renderList()} */}
+        {collectionIds}
       </React.Fragment>
     );
   }

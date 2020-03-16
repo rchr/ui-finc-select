@@ -166,6 +166,7 @@ class FilterView extends React.Component {
               >
                 <CollectionsView
                   id="collections"
+                  filter={record}
                   stripes={stripes}
                 />
               </Accordion>

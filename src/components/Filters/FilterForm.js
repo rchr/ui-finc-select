@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+// import { FieldArray } from 'react-final-form';
 
 import {
   AccordionSet,
@@ -225,6 +226,7 @@ class FilterForm extends React.Component {
                   onToggle={this.handleSectionToggle}
                   {...this.props}
                 />
+                {/* with MODAL: try like ui-users / try with SASQ */}
                 <CollectionsForm
                   accordionId="editCollections"
                   expanded={sections.editCollections}
