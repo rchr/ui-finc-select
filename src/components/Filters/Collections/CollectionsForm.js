@@ -51,7 +51,7 @@ class CollectionsForm extends React.Component {
           {/* Plugin has to be inside of Field, otherwise pristine is not working */}
           <Field
             component={FindCollection}
-            name="mdSource"
+            name="collectionIds"
             // intialSource={this.state.source}
             stripes={this.props.stripes}
             {...this.props}
