@@ -257,4 +257,9 @@ export default stripesFinalForm({
   navigationCheck: true,
   // the form will reinitialize every time the initialValues prop changes
   enableReinitialize: true,
+  mutators: {
+    setCollection: (args, state, tools) => {
+      tools.changeValue(state, 'collectionIds', () => args[0]);
+    },
+  },
 })(FilterForm);

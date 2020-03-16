@@ -58,7 +58,7 @@ class FindCollection extends React.Component {
         }}
         searchButtonStyle="default"
         searchLabel="Metadata collection"
-        selectSource={this.selectCollection}
+        selectCollection={this.selectCollection}
         type="find-finc-metadata-collection"
         visibleColumns={['label']}
         {...this.props}
