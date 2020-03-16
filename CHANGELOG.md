@@ -1,5 +1,14 @@
 # Change history for ui-finc-select
 
+## [1.5.1](https://github.com/folio-org/ui-finc-select/tree/v1.5.1) (2020-03-13)
+* Bugfix: Update version of required okapiInterface "finc-select/filters" to v1.1
+
+## [1.5.0](https://github.com/folio-org/ui-finc-select/tree/v1.5.0) (2020-03-13)
+* Migrate to final-form / react-final-form (UIFC-118)
+* Fix several accessibility issues (UIFC-132)
+* Upgrade to Stripes v3 (UIFC-146)
+* Bugfix: Fetch more when scrolling down
+
 ## [1.4.0](https://github.com/folio-org/ui-finc-select/tree/v1.4.0) (2020-02-06)
 * Bugfix: Incorrect view of mdSource name (UIFC-113)
 * Default filter behaviour when switching between apps and/or tabs (UFIC-115)
