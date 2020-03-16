@@ -1,4 +1,4 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -7,7 +7,7 @@ import { Field } from 'react-final-form';
 
 import {
   Accordion,
-  List,
+  // List,
 } from '@folio/stripes/components';
 import {
   stripesShape,
@@ -24,18 +24,18 @@ class CollectionsForm extends React.Component {
     }),
   };
 
-  renderList = ({ fields }) => {
-    const showPerms = _.get(this.props.stripes, ['config', 'showPerms']);
-    const listFormatter = (fieldName, index) => (this.renderItem(fields.get(index), index, showPerms));
+  // renderList = ({ fields }) => {
+  //   const showPerms = _.get(this.props.stripes, ['config', 'showPerms']);
+  //   const listFormatter = (fieldName, index) => (this.renderItem(fields.get(index), index, showPerms));
 
-    return (
-      <List
-        items={fields}
-        itemFormatter={listFormatter}
-        isEmptyMessage={<FormattedMessage id="ui-users.permissions.empty" />}
-      />
-    );
-  };
+  //   return (
+  //     <List
+  //       items={fields}
+  //       itemFormatter={listFormatter}
+  //       isEmptyMessage={<FormattedMessage id="ui-finc-select.filter.collections.empty" />}
+  //     />
+  //   );
+  // };
 
   render() {
     const { expanded, onToggle, accordionId } = this.props;

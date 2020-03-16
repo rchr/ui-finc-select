@@ -70,7 +70,7 @@ class FindCollection extends React.Component {
       <React.Fragment>
         <Row>
           <Label className={BasicCss.styleForFormLabel}>
-            <FormattedMessage id="ui-finc-select.filter.collection">
+            <FormattedMessage id="ui-finc-select.filter.collections.addCollection">
               {(msg) => msg + ' *'}
             </FormattedMessage>
           </Label>
