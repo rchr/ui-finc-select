@@ -14,11 +14,11 @@ class FilterEditRoute extends React.Component {
       path: 'finc-select/filters/:{id}',
       shouldRefresh: () => false,
     },
-    availableCollections: {
-      type: 'okapi',
-      records: 'fincSelectMetadataCollections',
-      path: 'finc-select/metadata-collections',
-    },
+    // availableCollections: {
+    //   type: 'okapi',
+    //   records: 'fincSelectMetadataCollections',
+    //   path: 'finc-select/metadata-collections',
+    // },
     mdSources: {
       type: 'okapi',
       records: 'tinyMetadataSources',
@@ -46,7 +46,7 @@ class FilterEditRoute extends React.Component {
     }).isRequired,
     resources: PropTypes.shape({
       filter: PropTypes.object,
-      availableCollections: PropTypes.arrayOf(PropTypes.object),
+      // availableCollections: PropTypes.arrayOf(PropTypes.object),
     }).isRequired,
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
