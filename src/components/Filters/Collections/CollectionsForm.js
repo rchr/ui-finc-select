@@ -13,7 +13,7 @@ import {
   stripesShape,
 } from '@folio/stripes-core';
 
-import FindCollection from './FindCollection/FindCollection';
+import FindCollections from './FindCollections/FindCollections';
 
 class CollectionsForm extends React.Component {
   static propTypes = {
@@ -50,7 +50,7 @@ class CollectionsForm extends React.Component {
         <div>
           {/* Plugin has to be inside of Field, otherwise pristine is not working */}
           <Field
-            component={FindCollection}
+            component={FindCollections}
             name="collectionIds"
             // intialSource={this.state.source}
             stripes={this.props.stripes}

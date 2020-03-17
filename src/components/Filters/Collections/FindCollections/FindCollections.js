@@ -13,7 +13,7 @@ import { Pluggable } from '@folio/stripes/core';
 
 import BasicCss from '../../../BasicStyle.css';
 
-class FindCollection extends React.Component {
+class FindCollections extends React.Component {
   constructor(props) {
     super(props);
 
@@ -95,7 +95,7 @@ class FindCollection extends React.Component {
   }
 }
 
-FindCollection.propTypes = {
+FindCollections.propTypes = {
   intialCollectionId: PropTypes.string,
   intialCollection: PropTypes.object,
   stripes: PropTypes.object,
@@ -106,4 +106,4 @@ FindCollection.propTypes = {
   }),
 };
 
-export default FindCollection;
+export default FindCollections;
