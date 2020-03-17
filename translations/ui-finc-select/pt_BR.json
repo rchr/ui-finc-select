@@ -62,13 +62,13 @@
     "sources.title": "Fontes de metadados",
     "source.generalAccordion": "Geral",
     "filters.title": "Filtros",
-    "filter.collections.empty": "Filter has no collection",
-    "filter.collections.addCollection": "Add collection",
-    "filter.collections.modal.header": "Select collections",
-    "filter.collections.modal.search.header": "Search & filter",
-    "filter.collections.modal.list.pane.header": "Collections",
-    "filter.collections.modal.list.pane.subheader": "{amount} collections found",
-    "filter.collections.modal.save": "Save",
-    "filter.collections.modal.cancel": "Cancel",
-    "filter.collectionAccordion": "Metadata collections"
+    "filter.collections.empty": "O filtro não tem coleção",
+    "filter.collections.addCollection": "Adicionar coleção",
+    "filter.collections.modal.header": "Selecionar coleções",
+    "filter.collections.modal.search.header": "Pesquisar & filtrar",
+    "filter.collections.modal.list.pane.header": "Coleções",
+    "filter.collections.modal.list.pane.subheader": "{amount} coleções encontradas",
+    "filter.collections.modal.save": "Salvar",
+    "filter.collections.modal.cancel": "Cancelar",
+    "filter.collectionAccordion": "Coleções de metadados"
 }

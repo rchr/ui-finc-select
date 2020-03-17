@@ -62,13 +62,13 @@
     "sources.title": "مصادر الميتاداتا",
     "source.generalAccordion": "عام",
     "filters.title": "منقحات",
-    "filter.collections.empty": "Filter has no collection",
-    "filter.collections.addCollection": "Add collection",
-    "filter.collections.modal.header": "Select collections",
-    "filter.collections.modal.search.header": "Search & filter",
-    "filter.collections.modal.list.pane.header": "Collections",
-    "filter.collections.modal.list.pane.subheader": "{amount} collections found",
-    "filter.collections.modal.save": "Save",
-    "filter.collections.modal.cancel": "Cancel",
-    "filter.collectionAccordion": "Metadata collections"
+    "filter.collections.empty": "المنقح بلا مجموعة",
+    "filter.collections.addCollection": "إضافة مجموعة",
+    "filter.collections.modal.header": "اختر مجموعات",
+    "filter.collections.modal.search.header": "بحث وتنقيح",
+    "filter.collections.modal.list.pane.header": "مجموعات",
+    "filter.collections.modal.list.pane.subheader": "تم العثور على {amount} مجموعة",
+    "filter.collections.modal.save": "حفظ",
+    "filter.collections.modal.cancel": "إلغاء",
+    "filter.collectionAccordion": "مجموعات الميتاداتا"
 }
