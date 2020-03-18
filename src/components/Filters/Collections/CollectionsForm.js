@@ -2,8 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-// import { FieldArray } from 'react-final-form-arrays';
-import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
+// import { Field } from 'react-final-form';
 
 import {
   Accordion,
@@ -49,7 +49,7 @@ class CollectionsForm extends React.Component {
       >
         <div>
           {/* Plugin has to be inside of Field, otherwise pristine is not working */}
-          <Field
+          <FieldArray
             component={FindCollections}
             name="collectionIds"
             // intialSource={this.state.source}
