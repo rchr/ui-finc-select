@@ -62,13 +62,13 @@
     "sources.title": "Metadata sources",
     "source.generalAccordion": "General",
     "filters.title": "Filters",
-    "filter.collections.empty": "Filter has no collection",
-    "filter.collections.addCollection": "Add collection",
-    "filter.collections.modal.header": "Select collections",
-    "filter.collections.modal.search.header": "Search & filter",
-    "filter.collections.modal.list.pane.header": "Collections",
-    "filter.collections.modal.list.pane.subheader": "{amount} collections found",
-    "filter.collections.modal.save": "Save",
-    "filter.collections.modal.cancel": "Cancel",
-    "filter.collectionAccordion": "Metadata collections"
+    "filter.collections.empty": "В фильтре отсутствует коллекция",
+    "filter.collections.addCollection": "Добавить коллекцию",
+    "filter.collections.modal.header": "Выбрать коллекции",
+    "filter.collections.modal.search.header": "Поиск и фильтр",
+    "filter.collections.modal.list.pane.header": "Коллекции",
+    "filter.collections.modal.list.pane.subheader": "{сумма} коллекций найдено",
+    "filter.collections.modal.save": "Сохранить",
+    "filter.collections.modal.cancel": "Отменить",
+    "filter.collectionAccordion": "Коллекции метаданных"
 }

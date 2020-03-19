@@ -62,13 +62,13 @@
     "sources.title": "Sources de métadonnées",
     "source.generalAccordion": "Général",
     "filters.title": "Filtres",
-    "filter.collections.empty": "Filter has no collection",
-    "filter.collections.addCollection": "Add collection",
-    "filter.collections.modal.header": "Select collections",
-    "filter.collections.modal.search.header": "Search & filter",
+    "filter.collections.empty": "Le filtre n'a pas de collection",
+    "filter.collections.addCollection": "Ajouter une collection",
+    "filter.collections.modal.header": "Sélectionnez les collections",
+    "filter.collections.modal.search.header": "Rechercher et filtrer",
     "filter.collections.modal.list.pane.header": "Collections",
-    "filter.collections.modal.list.pane.subheader": "{amount} collections found",
-    "filter.collections.modal.save": "Save",
-    "filter.collections.modal.cancel": "Cancel",
-    "filter.collectionAccordion": "Metadata collections"
+    "filter.collections.modal.list.pane.subheader": "{amount} collections trouvées",
+    "filter.collections.modal.save": "Sauvegarder",
+    "filter.collections.modal.cancel": "Annuler",
+    "filter.collectionAccordion": "Collections de métadonnées"
 }
