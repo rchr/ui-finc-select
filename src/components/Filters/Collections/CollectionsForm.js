@@ -22,6 +22,7 @@ class CollectionsForm extends React.Component {
     filterData: PropTypes.shape({
       mdSources: PropTypes.array,
     }),
+    filterId: PropTypes.string,
   };
 
   // renderList = ({ fields }) => {
@@ -52,6 +53,8 @@ class CollectionsForm extends React.Component {
           <FieldArray
             component={FindCollections}
             name="collectionIds"
+            filterId={this.props.filterId}
+            isEditable
             // intialSource={this.state.source}
             stripes={this.props.stripes}
             {...this.props}

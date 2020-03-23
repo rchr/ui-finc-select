@@ -233,6 +233,7 @@ class FilterForm extends React.Component {
                   onToggle={this.handleSectionToggle}
                   availableCollections={this.props.availableCollections}
                   filterData={this.props.filterData}
+                  filterId={initialValues.id}
                   {...this.props}
                 />
               </AccordionSet>
