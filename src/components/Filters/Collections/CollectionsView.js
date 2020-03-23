@@ -57,6 +57,7 @@ class CollectionsView extends React.Component {
 
   render() {
     const collectionIds = _.get(this.props.filter, 'collectionIds', '-');
+    const filterId = _.get(this.props.filter, 'id', '-');
 
     // console.log(collectionIds);
     return (
@@ -66,6 +67,8 @@ class CollectionsView extends React.Component {
         <div>
           <ViewCollections
             name="collectionIds"
+            filterId={filterId}
+            isEditable={false}
             // intialSource={this.state.source}
             stripes={this.props.stripes}
             {...this.props}

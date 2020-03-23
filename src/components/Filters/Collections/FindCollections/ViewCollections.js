@@ -95,6 +95,8 @@ class ViewCollections extends React.Component {
 }
 
 ViewCollections.propTypes = {
+  filterId: PropTypes.string,
+  isEditable: PropTypes.bool,
   intialCollectionId: PropTypes.string,
   intialCollection: PropTypes.object,
   stripes: PropTypes.object,

@@ -96,6 +96,8 @@ class FindCollections extends React.Component {
 }
 
 FindCollections.propTypes = {
+  filterId: PropTypes.string,
+  isEditable: PropTypes.bool,
   intialCollectionId: PropTypes.string,
   intialCollection: PropTypes.object,
   stripes: PropTypes.object,
