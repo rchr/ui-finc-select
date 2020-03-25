@@ -60,6 +60,8 @@ class FindCollections extends React.Component {
         selectCollection={this.selectCollection}
         type="find-finc-metadata-collection"
         visibleColumns={['label']}
+        filterId={this.props.filterId}
+        isEditable={this.props.isEditable}
         {...this.props}
       >
         <div style={{ background: 'red' }}>Plugin not found</div>

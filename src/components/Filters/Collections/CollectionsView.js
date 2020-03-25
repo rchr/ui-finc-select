@@ -20,6 +20,7 @@ class CollectionsView extends React.Component {
       }).isRequired,
     }).isRequired,
     filter: PropTypes.object,
+    collectionIds: PropTypes.arrayOf(PropTypes.object),
   };
 
   renderList() {
@@ -59,7 +60,6 @@ class CollectionsView extends React.Component {
     const collectionIds = _.get(this.props.filter, 'collectionIds', '-');
     const filterId = _.get(this.props.filter, 'id', '-');
 
-    // console.log(collectionIds);
     return (
       <React.Fragment>
         {/* {this.renderList()} */}
@@ -68,6 +68,7 @@ class CollectionsView extends React.Component {
           <ViewCollections
             name="collectionIds"
             filterId={filterId}
+            collectionIds={this.props.collectionIds}
             isEditable={false}
             // intialSource={this.state.source}
             stripes={this.props.stripes}
