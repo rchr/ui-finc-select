@@ -14,6 +14,10 @@ class FilterViewRoute extends React.Component {
       type: 'okapi',
       path: 'finc-select/filters/:{id}',
     },
+    collectionsTest: {
+      type: 'okapi',
+      path: 'finc-select/filters/:{id}/collections',
+    },
     query: {},
   });
 
@@ -28,6 +32,7 @@ class FilterViewRoute extends React.Component {
     }).isRequired,
     resources: PropTypes.shape({
       filter: PropTypes.object,
+      collectionsTest: PropTypes.object,
     }).isRequired,
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
@@ -52,6 +57,7 @@ class FilterViewRoute extends React.Component {
 
   render() {
     const { handlers, stripes } = this.props;
+    const collectionIds = _.get(this.props.resources, 'collectionsTest.records', []);
 
     return (
       <FilterView
@@ -62,6 +68,7 @@ class FilterViewRoute extends React.Component {
         }}
         isLoading={_.get(this.props.resources, 'filter.isPending', true)}
         record={_.get(this.props.resources, 'filter.records', []).find(i => i.id === this.props.match.params.id)}
+        collectionIds={collectionIds}
         stripes={stripes}
       />
     );

@@ -58,6 +58,9 @@ class ViewCollections extends React.Component {
         selectCollection={this.selectCollection}
         type="find-finc-metadata-collection"
         visibleColumns={['label']}
+        filterId={this.props.filterId}
+        collectionIds={this.props.collectionIds}
+        isEditable={this.props.isEditable}
         {...this.props}
       >
         <div style={{ background: 'red' }}>Plugin not found</div>
@@ -96,6 +99,7 @@ class ViewCollections extends React.Component {
 
 ViewCollections.propTypes = {
   filterId: PropTypes.string,
+  collectionIds: PropTypes.arrayOf(PropTypes.object),
   isEditable: PropTypes.bool,
   intialCollectionId: PropTypes.string,
   intialCollection: PropTypes.object,
