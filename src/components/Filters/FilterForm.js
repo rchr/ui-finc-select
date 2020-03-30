@@ -28,7 +28,7 @@ import BasicStyle from '../BasicStyle.css';
 
 class FilterForm extends React.Component {
   static propTypes = {
-    availableCollections: PropTypes.arrayOf(PropTypes.object),
+    collectionIds: PropTypes.arrayOf(PropTypes.object),
     handlers: PropTypes.PropTypes.shape({
       onClose: PropTypes.func.isRequired,
     }),
@@ -231,7 +231,7 @@ class FilterForm extends React.Component {
                   accordionId="editCollections"
                   expanded={sections.editCollections}
                   onToggle={this.handleSectionToggle}
-                  availableCollections={this.props.availableCollections}
+                  collectionIds={this.props.collectionIds}
                   filterData={this.props.filterData}
                   filterId={initialValues.id}
                   {...this.props}

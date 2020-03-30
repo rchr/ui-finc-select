@@ -57,13 +57,11 @@ class CollectionsView extends React.Component {
   }
 
   render() {
-    const collectionIds = _.get(this.props.filter, 'collectionIds', '-');
     const filterId = _.get(this.props.filter, 'id', '-');
 
     return (
       <React.Fragment>
         {/* {this.renderList()} */}
-        {collectionIds}
         <div>
           <ViewCollections
             name="collectionIds"

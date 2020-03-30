@@ -14,11 +14,10 @@ class FilterEditRoute extends React.Component {
       path: 'finc-select/filters/:{id}',
       shouldRefresh: () => false,
     },
-    // availableCollections: {
-    //   type: 'okapi',
-    //   records: 'fincSelectMetadataCollections',
-    //   path: 'finc-select/metadata-collections',
-    // },
+    collectionsIds: {
+      type: 'okapi',
+      path: 'finc-select/filters/:{id}/collections',
+    },
     mdSources: {
       type: 'okapi',
       records: 'tinyMetadataSources',
@@ -95,6 +94,7 @@ class FilterEditRoute extends React.Component {
 
   render() {
     const { handlers, resources, stripes } = this.props;
+    const collectionIds = _.get(this.props.resources, 'collectionsIds.records', []);
 
     if (this.fetchIsPending()) return 'loading';
 
@@ -109,7 +109,7 @@ class FilterEditRoute extends React.Component {
           mdSources: _.get(this.props.resources, 'mdSources.records', []),
         }}
         initialValues={this.getInitialValues()}
-        availableCollections={_.get(this.props.resources, 'availableCollections.records', [])}
+        collectionIds={collectionIds}
         isLoading={this.fetchIsPending()}
         onDelete={this.deleteFilter}
         onSubmit={this.handleSubmit}
