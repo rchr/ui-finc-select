@@ -61,6 +61,7 @@ class FindCollections extends React.Component {
         type="find-finc-metadata-collection"
         visibleColumns={['label']}
         filterId={this.props.filterId}
+        collectionIds={this.props.collectionIds}
         isEditable={this.props.isEditable}
         {...this.props}
       >
@@ -102,6 +103,7 @@ FindCollections.propTypes = {
   isEditable: PropTypes.bool,
   intialCollectionId: PropTypes.string,
   intialCollection: PropTypes.object,
+  collectionIds: PropTypes.arrayOf(PropTypes.object),
   stripes: PropTypes.object,
   form: PropTypes.shape({
     mutators: PropTypes.shape({

@@ -18,7 +18,7 @@ import FindCollections from './FindCollections/FindCollections';
 class CollectionsForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    availableCollections: PropTypes.arrayOf(PropTypes.object),
+    collectionIds: PropTypes.arrayOf(PropTypes.object),
     filterData: PropTypes.shape({
       mdSources: PropTypes.array,
     }),
@@ -55,7 +55,7 @@ class CollectionsForm extends React.Component {
             name="collectionIds"
             filterId={this.props.filterId}
             isEditable
-            // intialSource={this.state.source}
+            collectionIds={this.props.collectionIds}
             stripes={this.props.stripes}
             {...this.props}
           />

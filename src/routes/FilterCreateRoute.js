@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -13,6 +14,10 @@ class FilterCreateRoute extends React.Component {
       path: 'finc-select/filters',
       fetch: false,
       shouldRefresh: () => false,
+    },
+    collectionsIds: {
+      type: 'okapi',
+      path: 'finc-select/filters/:{id}/collections',
     },
   });
 
@@ -58,10 +63,12 @@ class FilterCreateRoute extends React.Component {
 
   render() {
     const { handlers, resources, stripes } = this.props;
+    const collectionIds = _.get(this.props.resources, 'collectionsIds.records', []);
 
     return (
       <FilterForm
         contentData={resources}
+        collectionIds={collectionIds}
         handlers={{
           onClose: this.handleClose,
           ...handlers,

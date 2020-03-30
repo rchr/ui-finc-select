@@ -14,7 +14,7 @@ class FilterViewRoute extends React.Component {
       type: 'okapi',
       path: 'finc-select/filters/:{id}',
     },
-    collectionsTest: {
+    collectionsIds: {
       type: 'okapi',
       path: 'finc-select/filters/:{id}/collections',
     },
@@ -57,7 +57,7 @@ class FilterViewRoute extends React.Component {
 
   render() {
     const { handlers, stripes } = this.props;
-    const collectionIds = _.get(this.props.resources, 'collectionsTest.records', []);
+    const collectionIds = _.get(this.props.resources, 'collectionsIds.records', []);
 
     return (
       <FilterView
