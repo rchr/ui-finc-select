@@ -1,17 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { Field } from 'react-final-form';
 
 import {
   Col,
-  Label,
   Row,
-  TextField,
 } from '@folio/stripes/components';
 import { Pluggable } from '@folio/stripes/core';
-
-import BasicCss from '../../../BasicStyle.css';
 
 class FindCollections extends React.Component {
   constructor(props) {
@@ -56,7 +50,7 @@ class FindCollections extends React.Component {
           });
         }}
         searchButtonStyle="default"
-        searchLabel="Metadata collection"
+        searchLabel="Add metadata collection"
         selectCollection={this.selectCollection}
         type="find-finc-metadata-collection"
         visibleColumns={['label']}
@@ -70,27 +64,16 @@ class FindCollections extends React.Component {
 
     return (
       <React.Fragment>
-        <Row>
+        {/* <Row>
           <Label className={BasicCss.styleForFormLabel}>
             <FormattedMessage id="ui-finc-select.filter.collections.addCollection">
-              {(msg) => msg + ' *'}
+              {(msg) => msg}
             </FormattedMessage>
           </Label>
-        </Row>
+        </Row> */}
         <Row>
-          <Col xs={4}>
+          <Col xs={6}>
             { pluggable }
-          </Col>
-          <Col xs={4}>
-            <Field
-              ariaLabel="Add metadata collection"
-              component={TextField}
-              fullWidth
-              id="addfilter_collection"
-              name="collectionIds"
-              placeholder="Please add a metadata collection"
-              readOnly
-            />
           </Col>
         </Row>
       </React.Fragment>
