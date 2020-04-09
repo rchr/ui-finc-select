@@ -30,9 +30,17 @@ class FindCollections extends React.Component {
     });
   }
 
+  getSelectedCollections = (records) => {
+    console.log('finc select findcollections');
+    console.log(records);
+  }
+
   render() {
     const disableRecordCreation = true;
     const buttonProps = { 'marginBottom0': true };
+    // const addCollections = (collections) => {
+
+    // };
     const pluggable =
       <Pluggable
         aria-haspopup="true"
@@ -57,6 +65,8 @@ class FindCollections extends React.Component {
         filterId={this.props.filterId}
         collectionIds={this.props.collectionIds}
         isEditable={this.props.isEditable}
+        // addCollections={addCollections}
+        selectRecordsModal={this.getSelectedCollections}
         {...this.props}
       >
         <div style={{ background: 'red' }}>Plugin not found</div>
