@@ -32,9 +32,12 @@ class FilterCreateRoute extends React.Component {
     mutator: PropTypes.shape({
       filters: PropTypes.shape({
       }).isRequired,
+      collectionsIds: PropTypes.shape({
+      }).isRequired,
     }).isRequired,
     resources: PropTypes.shape({
       filter: PropTypes.object,
+      collectionsIds: PropTypes.object,
     }).isRequired,
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,

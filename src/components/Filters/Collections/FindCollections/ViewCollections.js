@@ -11,21 +11,19 @@ class ViewCollections extends React.Component {
   constructor(props) {
     super(props);
 
-    const s = props.intialCollection || {};
+    const c = props.intialCollection || {};
 
-    this.inputCollectionId = s.id;
-    this.inputCollectionName = s.name;
+    this.inputCollections = c;
   }
 
   selectCollection = (c) => {
     this.props.form.mutators.setCollection([
-      c.id
+      c
     ]);
 
     this.setState(() => {
-      return { collection: {
-        id: c.id,
-        name: c.label
+      return { collectionIds: {
+        c
       } };
     });
   }
