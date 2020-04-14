@@ -42,10 +42,12 @@ class FilterEditRoute extends React.Component {
     mutator: PropTypes.shape({
       filters: PropTypes.shape({
       }).isRequired,
+      collectionsIds: PropTypes.shape({
+      }).isRequired,
     }).isRequired,
     resources: PropTypes.shape({
       filter: PropTypes.object,
-      // availableCollections: PropTypes.arrayOf(PropTypes.object),
+      collectionsIds: PropTypes.object,
     }).isRequired,
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
@@ -68,14 +70,27 @@ class FilterEditRoute extends React.Component {
     this.props.history.push(`${urls.filterView(match.params.id)}${location.search}`);
   }
 
-  handleSubmit = (filter) => {
+  handleSubmit = (filter, collectionIds) => {
     const { history, location, mutator } = this.props;
+
+    console.log('kioiojo');
+    console.log(collectionIds);
 
     mutator.filters
       .PUT(filter)
       .then(({ id }) => {
         history.push(`${urls.filterView(id)}${location.search}`);
       });
+
+    // mutator.filters
+    //   .PUT(filter)
+    //   .then(() => {
+    //     mutator.collectionIds
+    //       .PUT(collectionsIds)
+    //       .then(({ id }) => {
+    //         history.push(`${urls.filterView(id)}${location.search}`);
+    //       });
+    //   });
   }
 
   deleteFilter = (filter) => {

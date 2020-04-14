@@ -17,30 +17,25 @@ class FindCollections extends React.Component {
     this.inputCollectionName = s.name;
   }
 
-  selectCollection = (c) => {
+  getSelectedCollections = (records) => {
+    // console.log('finc select findcollections');
+    // console.log(records);
+
     this.props.form.mutators.setCollection([
-      c.id
+      records
     ]);
 
     this.setState(() => {
-      return { collection: {
-        id: c.id,
-        name: c.label
+      return { collectionIds: {
+        records
       } };
     });
-  }
-
-  getSelectedCollections = (records) => {
-    console.log('finc select findcollections');
-    console.log(records);
   }
 
   render() {
     const disableRecordCreation = true;
     const buttonProps = { 'marginBottom0': true };
-    // const addCollections = (collections) => {
 
-    // };
     const pluggable =
       <Pluggable
         aria-haspopup="true"
@@ -98,6 +93,7 @@ FindCollections.propTypes = {
   intialCollection: PropTypes.object,
   collectionIds: PropTypes.arrayOf(PropTypes.object),
   stripes: PropTypes.object,
+  getSelectedCollections: PropTypes.func,
   form: PropTypes.shape({
     mutators: PropTypes.shape({
       setCollection: PropTypes.func,

@@ -32,7 +32,7 @@ class FilterViewRoute extends React.Component {
     }).isRequired,
     resources: PropTypes.shape({
       filter: PropTypes.object,
-      collectionsTest: PropTypes.object,
+      collectionsIds: PropTypes.object,
     }).isRequired,
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
