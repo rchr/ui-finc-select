@@ -7,6 +7,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import FilterForm from '../components/Filters/FilterForm';
 import urls from '../components/DisplayUtils/urls';
 
+let xxx = [];
 class FilterEditRoute extends React.Component {
   static manifest = Object.freeze({
     filters: {
@@ -70,14 +71,19 @@ class FilterEditRoute extends React.Component {
     this.props.history.push(`${urls.filterView(match.params.id)}${location.search}`);
   }
 
-  handleSubmit = (filter, collectionIds) => {
+  handleSubmit = (filter) => {
     const { history, location, mutator } = this.props;
 
-    console.log('kioiojo');
-    console.log(collectionIds);
+    // console.log('collectionids:');
+    // console.log(xxx);
+    // console.log('filter id:');
+    // console.log(filter.id);
 
     mutator.filters
       .PUT(filter)
+      // .then(() => {
+      //   return mutator.collectionsIds.PUT({ collectionIds: xxx });
+      // })
       .then(({ id }) => {
         history.push(`${urls.filterView(id)}${location.search}`);
       });
@@ -91,6 +97,13 @@ class FilterEditRoute extends React.Component {
     //         history.push(`${urls.filterView(id)}${location.search}`);
     //       });
     //   });
+  }
+
+  getSelectedCollections = records => {
+    // this.props.selectRecords(records);
+    xxx = records;
+    console.log('finc select filter edit route');
+    console.log(xxx);
   }
 
   deleteFilter = (filter) => {
@@ -129,6 +142,7 @@ class FilterEditRoute extends React.Component {
         onDelete={this.deleteFilter}
         onSubmit={this.handleSubmit}
         stripes={stripes}
+        selectRecords={this.getSelectedCollections}
       />
     );
   }

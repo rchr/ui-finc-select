@@ -1,4 +1,4 @@
-// import _ from 'lodash';
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -23,7 +23,12 @@ class CollectionsForm extends React.Component {
       mdSources: PropTypes.array,
     }),
     filterId: PropTypes.string,
+    selectRecords: PropTypes.func,
   };
+
+  static defaultProps = {
+    selectRecords: _.noop,
+  }
 
   // renderList = ({ fields }) => {
   //   const showPerms = _.get(this.props.stripes, ['config', 'showPerms']);
@@ -37,6 +42,13 @@ class CollectionsForm extends React.Component {
   //     />
   //   );
   // };
+
+  getSelectedCollections = records => {
+    this.props.selectRecords(records);
+
+    // console.log('finc select collectionsform');
+    // console.log(records);
+  }
 
   render() {
     const { expanded, onToggle, accordionId } = this.props;
@@ -57,6 +69,7 @@ class CollectionsForm extends React.Component {
             isEditable
             collectionIds={this.props.collectionIds}
             stripes={this.props.stripes}
+            selectRecords={this.getSelectedCollections}
             {...this.props}
           />
         </div>

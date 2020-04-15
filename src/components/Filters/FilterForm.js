@@ -47,10 +47,12 @@ class FilterForm extends React.Component {
     filterData: PropTypes.shape({
       mdSources: PropTypes.array,
     }),
+    selectRecords: PropTypes.func,
   };
 
   static defaultProps = {
     initialValues: {},
+    selectRecords: _.noop,
   }
 
   constructor(props) {
@@ -177,6 +179,13 @@ class FilterForm extends React.Component {
     });
   }
 
+  getSelectedCollections = records => {
+    this.props.selectRecords(records);
+
+    // console.log('finc select filterform');
+    // console.log(records);
+  }
+
   render() {
     const { initialValues, isLoading, onDelete } = this.props;
     const { confirmDelete, sections } = this.state;
@@ -234,6 +243,7 @@ class FilterForm extends React.Component {
                   collectionIds={this.props.collectionIds}
                   filterData={this.props.filterData}
                   filterId={initialValues.id}
+                  selectRecords={this.getSelectedCollections}
                   {...this.props}
                 />
               </AccordionSet>
