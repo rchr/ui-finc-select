@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,6 +9,10 @@ import {
 import { Pluggable } from '@folio/stripes/core';
 
 class FindCollections extends React.Component {
+  static defaultProps = {
+    selectRecords: _.noop,
+  }
+
   constructor(props) {
     super(props);
 
@@ -18,18 +23,19 @@ class FindCollections extends React.Component {
   }
 
   getSelectedCollections = (records) => {
-    // console.log('finc select findcollections');
-    // console.log(records);
+    this.props.selectRecords(records);
+    console.log('finc select findcollections');
+    console.log(records);
 
-    this.props.form.mutators.setCollection([
-      records
-    ]);
+    // this.props.form.mutators.setCollection([
+    //   records
+    // ]);
 
-    this.setState(() => {
-      return { collectionIds: {
-        records
-      } };
-    });
+    // this.setState(() => {
+    //   return { collectionIds: {
+    //     records
+    //   } };
+    // });
   }
 
   render() {
@@ -99,6 +105,7 @@ FindCollections.propTypes = {
       setCollection: PropTypes.func,
     }),
   }),
+  selectRecords: PropTypes.func,
 };
 
 export default FindCollections;
