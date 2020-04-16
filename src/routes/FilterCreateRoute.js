@@ -1,4 +1,4 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -89,13 +89,11 @@ class FilterCreateRoute extends React.Component {
   getSelectedCollections = records => {
     // this.props.selectRecords(records);
     collections = records;
-    // console.log('finc select filter create route');
-    // console.log(collections);
   }
 
   render() {
     const { handlers, resources, stripes } = this.props;
-    const collectionIds = _.get(this.props.resources, 'collectionsIds.records', []);
+    const collectionIds = [];
 
     return (
       <FilterForm
