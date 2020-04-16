@@ -7,6 +7,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import FilterForm from '../components/Filters/FilterForm';
 import urls from '../components/DisplayUtils/urls';
 
+let collections = [];
 class FilterCreateRoute extends React.Component {
   static manifest = Object.freeze({
     filters: {
@@ -54,14 +55,42 @@ class FilterCreateRoute extends React.Component {
     this.props.history.push(`${urls.filters()}${location.search}`);
   }
 
+  saveCollectionIds = (filterId) => {
+    const { stripes: { okapi } } = this.props;
+
+    let keys = [];
+    // keys = _.keys(collections);
+    keys = collections;
+
+    return fetch(`${okapi.url}/finc-select/filters/${filterId}/collections`, {
+      method: 'PUT',
+      headers: {
+        'X-Okapi-Tenant': okapi.tenant,
+        'X-Okapi-Token': okapi.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'collectionIds': keys
+      })
+    });
+  }
+
   handleSubmit = (filter) => {
     const { history, location, mutator } = this.props;
 
     mutator.filters
       .POST(filter)
       .then(({ id }) => {
+        this.saveCollectionIds(id);
         history.push(`${urls.filterView(id)}${location.search}`);
       });
+  }
+
+  getSelectedCollections = records => {
+    // this.props.selectRecords(records);
+    collections = records;
+    // console.log('finc select filter create route');
+    // console.log(collections);
   }
 
   render() {
@@ -78,6 +107,7 @@ class FilterCreateRoute extends React.Component {
         }}
         onSubmit={this.handleSubmit}
         stripes={stripes}
+        selectRecords={this.getSelectedCollections}
       />
     );
   }

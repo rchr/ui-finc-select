@@ -7,7 +7,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import FilterForm from '../components/Filters/FilterForm';
 import urls from '../components/DisplayUtils/urls';
 
-let xxx = [];
+let collections = [];
 class FilterEditRoute extends React.Component {
   static manifest = Object.freeze({
     filters: {
@@ -71,39 +71,48 @@ class FilterEditRoute extends React.Component {
     this.props.history.push(`${urls.filterView(match.params.id)}${location.search}`);
   }
 
+  saveCollectionIds = (filterId) => {
+    const { stripes: { okapi } } = this.props;
+
+    let keys = [];
+    // keys = _.keys(collections);
+    keys = collections;
+    // console.log('save multiple');
+    // console.log(keys);
+
+    return fetch(`${okapi.url}/finc-select/filters/${filterId}/collections`, {
+      method: 'PUT',
+      headers: {
+        'X-Okapi-Tenant': okapi.tenant,
+        'X-Okapi-Token': okapi.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'collectionIds': keys
+      })
+    });
+  }
+
   handleSubmit = (filter) => {
     const { history, location, mutator } = this.props;
 
-    // console.log('collectionids:');
-    // console.log(xxx);
     // console.log('filter id:');
     // console.log(filter.id);
 
     mutator.filters
       .PUT(filter)
       // .then(() => {
-      //   return mutator.collectionsIds.PUT({ collectionIds: xxx });
+      //   return mutator.collectionsIds.PUT({ collectionIds: collections });
       // })
       .then(({ id }) => {
+        this.saveCollectionIds(id);
         history.push(`${urls.filterView(id)}${location.search}`);
       });
-
-    // mutator.filters
-    //   .PUT(filter)
-    //   .then(() => {
-    //     mutator.collectionIds
-    //       .PUT(collectionsIds)
-    //       .then(({ id }) => {
-    //         history.push(`${urls.filterView(id)}${location.search}`);
-    //       });
-    //   });
   }
 
   getSelectedCollections = records => {
     // this.props.selectRecords(records);
-    xxx = records;
-    console.log('finc select filter edit route');
-    console.log(xxx);
+    collections = records;
   }
 
   deleteFilter = (filter) => {
