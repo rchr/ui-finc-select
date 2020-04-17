@@ -78,8 +78,9 @@ class MetadataSourceView extends React.Component {
   render() {
     const { record, isLoading } = this.props;
     const label = _.get(record, 'label', '-');
+    const organizationId = _.get(record, 'organization.id', '-');
 
-    if (isLoading) return this.renderLoadingPane();
+    if (isLoading || organizationId === '-') return this.renderLoadingPane();
 
     return (
       <React.Fragment>
@@ -116,6 +117,7 @@ class MetadataSourceView extends React.Component {
                 id="sourceManagement"
                 metadataSource={record}
                 stripes={this.props.stripes}
+                organizationId={organizationId}
               />
             </Accordion>
             <Accordion
