@@ -89,6 +89,7 @@ class FilterEditRoute extends React.Component {
   handleSubmit = (filter) => {
     const { history, location, mutator } = this.props;
     const collectionIdsForSave = filter.collectionIds;
+    // remove collectionIds for saving filter
     const filterForSave = _.omit(filter, ['collectionIds']);
 
     mutator.filters

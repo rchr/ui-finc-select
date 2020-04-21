@@ -46,12 +46,10 @@ class FilterForm extends React.Component {
     filterData: PropTypes.shape({
       mdSources: PropTypes.array,
     }),
-    // selectRecords: PropTypes.func,
   };
 
   static defaultProps = {
     initialValues: {},
-    // selectRecords: _.noop,
   }
 
   constructor(props) {
@@ -178,13 +176,6 @@ class FilterForm extends React.Component {
     });
   }
 
-  // getSelectedCollections = records => {
-  //   this.props.selectRecords(records);
-
-  //   // console.log('finc select filterform');
-  //   // console.log(records);
-  // }
-
   render() {
     const { initialValues, isLoading, onDelete } = this.props;
     const { confirmDelete, sections } = this.state;
@@ -234,7 +225,6 @@ class FilterForm extends React.Component {
                   onToggle={this.handleSectionToggle}
                   {...this.props}
                 />
-                {/* with MODAL: try like ui-users / try with SASQ */}
                 <CollectionsForm
                   accordionId="editCollections"
                   expanded={sections.editCollections}
@@ -242,7 +232,6 @@ class FilterForm extends React.Component {
                   collectionIds={this.props.collectionIds}
                   filterData={this.props.filterData}
                   filterId={initialValues.id}
-                  // selectRecords={this.getSelectedCollections}
                   {...this.props}
                 />
               </AccordionSet>
@@ -262,17 +251,6 @@ class FilterForm extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   // collectionIds: getFormValues('collectionIds')(state),
-//   collectionIds: getFormValues('folio_finc_select_collections_ids')(state),
-// });
-
-// // const mapDispatchToProps = (dispatch) => ({
-// //   collections: (collectionIds) => dispatch(change('FilterForm', 'collectionIds', collectionIds)),
-// // });
-
-// const connectedFilterForm = connect(mapStateToProps)(FilterForm);
-
 export default stripesFinalForm({
   // set navigationCheck true for confirming changes
   navigationCheck: true,
@@ -283,5 +261,4 @@ export default stripesFinalForm({
       tools.changeValue(state, 'collectionIds', () => args[1]);
     },
   },
-// })(connectedFilterForm);
 })(FilterForm);

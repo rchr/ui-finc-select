@@ -4,9 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { FieldArray } from 'react-final-form-arrays';
 
 import { Accordion } from '@folio/stripes/components';
-import {
-  stripesShape,
-} from '@folio/stripes-core';
+import { stripesShape } from '@folio/stripes-core';
 
 import FindCollections from './FindCollections/FindCollections';
 
@@ -18,37 +16,12 @@ class CollectionsForm extends React.Component {
       mdSources: PropTypes.array,
     }),
     filterId: PropTypes.string,
-    // selectRecords: PropTypes.func,
     form: PropTypes.shape({
       mutators: PropTypes.shape({
         setCollection: PropTypes.func,
       })
     }),
   };
-
-  // static defaultProps = {
-  //   selectRecords: _.noop,
-  // }
-
-  // renderList = ({ fields }) => {
-  //   const showPerms = _.get(this.props.stripes, ['config', 'showPerms']);
-  //   const listFormatter = (fieldName, index) => (this.renderItem(fields.get(index), index, showPerms));
-
-  //   return (
-  //     <List
-  //       items={fields}
-  //       itemFormatter={listFormatter}
-  //       isEmptyMessage={<FormattedMessage id="ui-finc-select.filter.collections.empty" />}
-  //     />
-  //   );
-  // };
-
-  // getSelectedCollections = records => {
-  //   this.props.selectRecords(records);
-
-  //   // console.log('finc select collectionsform');
-  //   // console.log(records);
-  // }
 
   setCollection = records => {
     this.props.form.mutators.setCollection({}, records);
@@ -73,7 +46,6 @@ class CollectionsForm extends React.Component {
             isEditable
             collectionIds={this.props.collectionIds}
             stripes={this.props.stripes}
-            // selectRecords={this.setCollection}
             {...this.props}
           />
         </div>
@@ -81,17 +53,6 @@ class CollectionsForm extends React.Component {
     );
   }
 }
-
-// const mapStateToProps = (state) => ({
-//   // collectionIds: getFormValues('collectionIds')(state),
-//   addCollections: getFormValues('folio_finc_select_collections_ids')(state),
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   addCollections: (collectionIds) => dispatch(change('FilterForm', 'collectionIds', collectionIds)),
-// });
-
-// const connectedCollectionsForm = connect(mapStateToProps, mapDispatchToProps)(CollectionsForm);
 
 CollectionsForm.propTypes = {
   accordionId: PropTypes.string.isRequired,

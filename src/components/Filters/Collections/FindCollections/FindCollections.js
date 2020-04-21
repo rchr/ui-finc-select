@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,35 +8,8 @@ import {
 import { Pluggable } from '@folio/stripes/core';
 
 class FindCollections extends React.Component {
-  static defaultProps = {
-    selectRecords: _.noop,
-  }
-
-  constructor(props) {
-    super(props);
-
-    const s = props.intialCollection || {};
-
-    this.inputCollectionId = s.id;
-    this.inputCollectionName = s.name;
-  }
-
   getSelectedCollections = (records) => {
-    // this.props.selectRecords(records);
     this.props.form.mutators.setCollection({}, records);
-    // console.log('finc select findcollections');
-    // console.log(records);
-    // this.props.addCollections(records);
-
-    // this.props.form.mutators.setCollection([
-    //   records
-    // ]);
-
-    // this.setState(() => {
-    //   return { collectionIds: {
-    //     records
-    //   } };
-    // });
   }
 
   render() {
@@ -68,7 +40,6 @@ class FindCollections extends React.Component {
         filterId={this.props.filterId}
         collectionIds={this.props.collectionIds}
         isEditable={this.props.isEditable}
-        // addCollections={addCollections}
         selectRecordsModal={this.getSelectedCollections}
         {...this.props}
       >
@@ -77,13 +48,6 @@ class FindCollections extends React.Component {
 
     return (
       <React.Fragment>
-        {/* <Row>
-          <Label className={BasicCss.styleForFormLabel}>
-            <FormattedMessage id="ui-finc-select.filter.collections.addCollection">
-              {(msg) => msg}
-            </FormattedMessage>
-          </Label>
-        </Row> */}
         <Row>
           <Col xs={6}>
             { pluggable }
@@ -108,7 +72,6 @@ FindCollections.propTypes = {
     }).isRequired,
   }),
   selectRecords: PropTypes.func,
-  addCollections: PropTypes.func,
 };
 
 export default FindCollections;
