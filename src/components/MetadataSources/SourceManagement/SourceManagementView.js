@@ -1,7 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import {
+  withRouter,
+  Link,
+} from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -10,18 +13,32 @@ import {
   KeyValue,
   Row
 } from '@folio/stripes/components';
+import { stripesConnect } from '@folio/stripes/core';
 
 import urls from '../../DisplayUtils/urls';
 
 import SelectAllCollections from './SelectAllCollections';
 
 class SourceManagementView extends React.Component {
+  static manifest = Object.freeze({
+    org: {
+      type: 'okapi',
+      path: 'organizations-storage/organizations/!{organizationId}',
+      throwErrors: false
+    },
+    query: {},
+  });
+
   static propTypes = {
     metadataSource: PropTypes.object,
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
     }),
     id: PropTypes.string,
+    resources: PropTypes.shape({
+      org: PropTypes.object,
+      failed: PropTypes.object,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -33,6 +50,23 @@ class SourceManagementView extends React.Component {
   render() {
     const { metadataSource, stripes, id } = this.props;
     const sourceId = _.get(metadataSource, 'id', '-');
+    const organization = _.get(this.props.metadataSource, 'organization', '-');
+
+    let orgValue;
+    if (this.props.resources.org && this.props.resources.org.failed) {
+      orgValue = organization.name;
+    } else {
+      orgValue = (
+        <React.Fragment>
+          <Link to={{
+            pathname: `${urls.organizationView(organization.id)}`,
+          }}
+          >
+            {organization.name}
+          </Link>
+        </React.Fragment>
+      );
+    }
 
     return (
       <React.Fragment>
@@ -83,7 +117,8 @@ class SourceManagementView extends React.Component {
           <Row>
             <KeyValue
               label={<FormattedMessage id="ui-finc-select.source.organization" />}
-              value={_.get(metadataSource, 'organization.name', '-')}
+              // value={_.get(metadataSource, 'organization.name', '-')}
+              value={orgValue}
             />
           </Row>
           <Row>
@@ -104,4 +139,4 @@ class SourceManagementView extends React.Component {
   }
 }
 
-export default withRouter(SourceManagementView);
+export default withRouter(stripesConnect(SourceManagementView));

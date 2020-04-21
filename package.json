@@ -73,7 +73,8 @@
       "finc-select/metadata-sources": "1.0",
       "finc-select/metadata-collections": "1.0",
       "finc-select/filters": "1.1",
-      "finc-select/files": "1.0"
+      "finc-select/files": "1.0",
+      "organizations-storage.organizations": "3.0"
     },
     "permissionSets": [
       {
@@ -87,7 +88,9 @@
         "description": "Can view metadatasources, metadatacollections and filters",
         "subPermissions": [
           "module.finc-select.enabled",
-          "fincSelect.view"
+          "fincSelect.view",
+          "organizations-storage.organizations.collection.get",
+          "organizations-storage.organizations.item.get"
         ],
         "visible": true
       }
