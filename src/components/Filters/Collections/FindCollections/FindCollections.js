@@ -23,10 +23,11 @@ class FindCollections extends React.Component {
   }
 
   getSelectedCollections = (records) => {
-    this.props.selectRecords(records);
+    // this.props.selectRecords(records);
+    this.props.form.mutators.setCollection({}, records);
     // console.log('finc select findcollections');
     // console.log(records);
-    this.props.addCollections(records);
+    // this.props.addCollections(records);
 
     // this.props.form.mutators.setCollection([
     //   records

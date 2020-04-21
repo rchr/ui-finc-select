@@ -26,6 +26,11 @@ class CollectionsForm extends React.Component {
     }),
     filterId: PropTypes.string,
     selectRecords: PropTypes.func,
+    form: PropTypes.shape({
+      mutators: PropTypes.shape({
+        setCollection: PropTypes.func,
+      })
+    }),
   };
 
   static defaultProps = {
@@ -52,8 +57,12 @@ class CollectionsForm extends React.Component {
     // console.log(records);
   }
 
+  setCollection = records => {
+    this.props.form.mutators.setCollection({}, records);
+  }
+
   render() {
-    const { expanded, onToggle, accordionId } = this.props;
+    const { expanded, onToggle, accordionId, addPermissions } = this.props;
 
     return (
       <Accordion
@@ -71,7 +80,7 @@ class CollectionsForm extends React.Component {
             isEditable
             collectionIds={this.props.collectionIds}
             stripes={this.props.stripes}
-            selectRecords={this.getSelectedCollections}
+            selectRecords={this.setCollection}
             {...this.props}
           />
         </div>
@@ -80,16 +89,16 @@ class CollectionsForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  // collectionIds: getFormValues('collectionIds')(state),
-  addCollections: getFormValues('folio_finc_select_collections_ids')(state),
-});
+// const mapStateToProps = (state) => ({
+//   // collectionIds: getFormValues('collectionIds')(state),
+//   addCollections: getFormValues('folio_finc_select_collections_ids')(state),
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  addCollections: (collectionIds) => dispatch(change('FilterForm', 'collectionIds', collectionIds)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   addCollections: (collectionIds) => dispatch(change('FilterForm', 'collectionIds', collectionIds)),
+// });
 
-const connectedCollectionsForm = connect(mapStateToProps, mapDispatchToProps)(CollectionsForm);
+// const connectedCollectionsForm = connect(mapStateToProps, mapDispatchToProps)(CollectionsForm);
 
 CollectionsForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
@@ -97,4 +106,4 @@ CollectionsForm.propTypes = {
   onToggle: PropTypes.func,
 };
 
-export default connectedCollectionsForm;
+export default CollectionsForm;
