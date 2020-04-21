@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+// import { getFormValues, change } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 // import { FieldArray } from 'react-final-form';
 
@@ -263,14 +265,26 @@ class FilterForm extends React.Component {
   }
 }
 
+// const mapStateToProps = (state) => ({
+//   // collectionIds: getFormValues('collectionIds')(state),
+//   collectionIds: getFormValues('folio_finc_select_collections_ids')(state),
+// });
+
+// // const mapDispatchToProps = (dispatch) => ({
+// //   collections: (collectionIds) => dispatch(change('FilterForm', 'collectionIds', collectionIds)),
+// // });
+
+// const connectedFilterForm = connect(mapStateToProps)(FilterForm);
+
 export default stripesFinalForm({
   // set navigationCheck true for confirming changes
   navigationCheck: true,
   // the form will reinitialize every time the initialValues prop changes
   enableReinitialize: true,
-  mutators: {
-    setCollection: (args, state, tools) => {
-      tools.changeValue(state, 'collectionIds', () => args[0]);
-    },
-  },
+  // mutators: {
+  //   setCollection: (args, state, tools) => {
+  //     tools.changeValue(state, 'collectionIds', () => args[0]);
+  //   },
+  // },
+// })(connectedFilterForm);
 })(FilterForm);

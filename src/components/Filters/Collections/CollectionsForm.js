@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
+import { connect } from 'react-redux';
+import { getFormValues, change } from 'redux-form';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { FieldArray } from 'react-final-form-arrays';
@@ -78,10 +80,21 @@ class CollectionsForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  // collectionIds: getFormValues('collectionIds')(state),
+  addCollections: getFormValues('folio_finc_select_collections_ids')(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addCollections: (collectionIds) => dispatch(change('FilterForm', 'collectionIds', collectionIds)),
+});
+
+const connectedCollectionsForm = connect(mapStateToProps, mapDispatchToProps)(CollectionsForm);
+
 CollectionsForm.propTypes = {
   accordionId: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
   onToggle: PropTypes.func,
 };
 
-export default CollectionsForm;
+export default connectedCollectionsForm;

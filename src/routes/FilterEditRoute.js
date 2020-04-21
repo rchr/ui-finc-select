@@ -61,7 +61,19 @@ class FilterEditRoute extends React.Component {
   }
 
   getInitialValues = () => {
+    // const collectionIds = _.get(this.props.resources, 'collectionsIds.records', []);
     const initialValues = _.get(this.props.resources, 'filters.records', []).find(i => i.id === this.props.match.params.id);
+
+    // const collectionIds = _.get(this.props.resources.collectionsIds.records[0], 'collectionsIds', []);
+    // console.log(collectionIds);
+
+    // initialValues = {
+    //   ...initialValues,
+    //   collectionIds,
+    // };
+
+    // console.log('initialValues new');
+    // console.log(initialValues);
 
     return initialValues;
   }

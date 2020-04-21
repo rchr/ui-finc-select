@@ -26,6 +26,7 @@ class FindCollections extends React.Component {
     this.props.selectRecords(records);
     // console.log('finc select findcollections');
     // console.log(records);
+    this.props.addCollections(records);
 
     // this.props.form.mutators.setCollection([
     //   records
@@ -106,6 +107,7 @@ FindCollections.propTypes = {
     }).isRequired,
   }),
   selectRecords: PropTypes.func,
+  addCollections: PropTypes.func,
 };
 
 export default FindCollections;
