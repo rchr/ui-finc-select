@@ -1,10 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { getFormValues, change } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-// import { FieldArray } from 'react-final-form';
 
 import {
   AccordionSet,
@@ -49,12 +46,12 @@ class FilterForm extends React.Component {
     filterData: PropTypes.shape({
       mdSources: PropTypes.array,
     }),
-    selectRecords: PropTypes.func,
+    // selectRecords: PropTypes.func,
   };
 
   static defaultProps = {
     initialValues: {},
-    selectRecords: _.noop,
+    // selectRecords: _.noop,
   }
 
   constructor(props) {
@@ -181,12 +178,12 @@ class FilterForm extends React.Component {
     });
   }
 
-  getSelectedCollections = records => {
-    this.props.selectRecords(records);
+  // getSelectedCollections = records => {
+  //   this.props.selectRecords(records);
 
-    // console.log('finc select filterform');
-    // console.log(records);
-  }
+  //   // console.log('finc select filterform');
+  //   // console.log(records);
+  // }
 
   render() {
     const { initialValues, isLoading, onDelete } = this.props;
@@ -245,7 +242,7 @@ class FilterForm extends React.Component {
                   collectionIds={this.props.collectionIds}
                   filterData={this.props.filterData}
                   filterId={initialValues.id}
-                  selectRecords={this.getSelectedCollections}
+                  // selectRecords={this.getSelectedCollections}
                   {...this.props}
                 />
               </AccordionSet>

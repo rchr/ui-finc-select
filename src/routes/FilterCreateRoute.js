@@ -1,4 +1,4 @@
-// import _ from 'lodash';
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,7 +7,6 @@ import { stripesConnect } from '@folio/stripes/core';
 import FilterForm from '../components/Filters/FilterForm';
 import urls from '../components/DisplayUtils/urls';
 
-let collections = [];
 class FilterCreateRoute extends React.Component {
   static manifest = Object.freeze({
     filters: {
@@ -55,12 +54,8 @@ class FilterCreateRoute extends React.Component {
     this.props.history.push(`${urls.filters()}${location.search}`);
   }
 
-  saveCollectionIds = (filterId) => {
+  saveCollectionIds = (filterId, collectionIds) => {
     const { stripes: { okapi } } = this.props;
-
-    let keys = [];
-    // keys = _.keys(collections);
-    keys = collections;
 
     return fetch(`${okapi.url}/finc-select/filters/${filterId}/collections`, {
       method: 'PUT',
@@ -70,25 +65,22 @@ class FilterCreateRoute extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'collectionIds': keys
+        'collectionIds': collectionIds
       })
     });
   }
 
   handleSubmit = (filter) => {
     const { history, location, mutator } = this.props;
+    const collectionIdsForSave = filter.collectionIds;
+    const filterForSave = _.omit(filter, ['collectionIds']);
 
     mutator.filters
-      .POST(filter)
+      .POST(filterForSave)
       .then(({ id }) => {
-        this.saveCollectionIds(id);
+        this.saveCollectionIds(id, collectionIdsForSave);
         history.push(`${urls.filterView(id)}${location.search}`);
       });
-  }
-
-  getSelectedCollections = records => {
-    // this.props.selectRecords(records);
-    collections = records;
   }
 
   render() {

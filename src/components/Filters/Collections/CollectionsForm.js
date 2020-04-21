@@ -1,16 +1,9 @@
-import _ from 'lodash';
 import React from 'react';
-import { connect } from 'react-redux';
-import { getFormValues, change } from 'redux-form';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { FieldArray } from 'react-final-form-arrays';
-// import { Field } from 'react-final-form';
 
-import {
-  Accordion,
-  // List,
-} from '@folio/stripes/components';
+import { Accordion } from '@folio/stripes/components';
 import {
   stripesShape,
 } from '@folio/stripes-core';
@@ -25,7 +18,7 @@ class CollectionsForm extends React.Component {
       mdSources: PropTypes.array,
     }),
     filterId: PropTypes.string,
-    selectRecords: PropTypes.func,
+    // selectRecords: PropTypes.func,
     form: PropTypes.shape({
       mutators: PropTypes.shape({
         setCollection: PropTypes.func,
@@ -33,9 +26,9 @@ class CollectionsForm extends React.Component {
     }),
   };
 
-  static defaultProps = {
-    selectRecords: _.noop,
-  }
+  // static defaultProps = {
+  //   selectRecords: _.noop,
+  // }
 
   // renderList = ({ fields }) => {
   //   const showPerms = _.get(this.props.stripes, ['config', 'showPerms']);
@@ -50,19 +43,19 @@ class CollectionsForm extends React.Component {
   //   );
   // };
 
-  getSelectedCollections = records => {
-    this.props.selectRecords(records);
+  // getSelectedCollections = records => {
+  //   this.props.selectRecords(records);
 
-    // console.log('finc select collectionsform');
-    // console.log(records);
-  }
+  //   // console.log('finc select collectionsform');
+  //   // console.log(records);
+  // }
 
   setCollection = records => {
     this.props.form.mutators.setCollection({}, records);
   }
 
   render() {
-    const { expanded, onToggle, accordionId, addPermissions } = this.props;
+    const { expanded, onToggle, accordionId } = this.props;
 
     return (
       <Accordion
@@ -80,7 +73,7 @@ class CollectionsForm extends React.Component {
             isEditable
             collectionIds={this.props.collectionIds}
             stripes={this.props.stripes}
-            selectRecords={this.setCollection}
+            // selectRecords={this.setCollection}
             {...this.props}
           />
         </div>

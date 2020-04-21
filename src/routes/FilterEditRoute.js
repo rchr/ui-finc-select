@@ -7,7 +7,6 @@ import { stripesConnect } from '@folio/stripes/core';
 import FilterForm from '../components/Filters/FilterForm';
 import urls from '../components/DisplayUtils/urls';
 
-let collections = [];
 class FilterEditRoute extends React.Component {
   static manifest = Object.freeze({
     filters: {
@@ -61,19 +60,7 @@ class FilterEditRoute extends React.Component {
   }
 
   getInitialValues = () => {
-    // const collectionIds = _.get(this.props.resources, 'collectionsIds.records', []);
     const initialValues = _.get(this.props.resources, 'filters.records', []).find(i => i.id === this.props.match.params.id);
-
-    // const collectionIds = _.get(this.props.resources.collectionsIds.records[0], 'collectionsIds', []);
-    // console.log(collectionIds);
-
-    // initialValues = {
-    //   ...initialValues,
-    //   collectionIds,
-    // };
-
-    // console.log('initialValues new');
-    // console.log(initialValues);
 
     return initialValues;
   }
@@ -83,14 +70,8 @@ class FilterEditRoute extends React.Component {
     this.props.history.push(`${urls.filterView(match.params.id)}${location.search}`);
   }
 
-  saveCollectionIds = (filterId) => {
+  saveCollectionIds = (filterId, collectionIds) => {
     const { stripes: { okapi } } = this.props;
-
-    let keys = [];
-    // keys = _.keys(collections);
-    keys = collections;
-    // console.log('save multiple');
-    // console.log(keys);
 
     return fetch(`${okapi.url}/finc-select/filters/${filterId}/collections`, {
       method: 'PUT',
@@ -100,31 +81,25 @@ class FilterEditRoute extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'collectionIds': keys
+        'collectionIds': collectionIds
       })
     });
   }
 
   handleSubmit = (filter) => {
     const { history, location, mutator } = this.props;
-
-    // console.log('filter id:');
-    // console.log(filter.id);
+    const collectionIdsForSave = filter.collectionIds;
+    const filterForSave = _.omit(filter, ['collectionIds']);
 
     mutator.filters
-      .PUT(filter)
+      .PUT(filterForSave)
       // .then(() => {
       //   return mutator.collectionsIds.PUT({ collectionIds: collections });
       // })
       .then(({ id }) => {
-        this.saveCollectionIds(id);
+        this.saveCollectionIds(id, collectionIdsForSave);
         history.push(`${urls.filterView(id)}${location.search}`);
       });
-  }
-
-  getSelectedCollections = records => {
-    // this.props.selectRecords(records);
-    collections = records;
   }
 
   deleteFilter = (filter) => {
