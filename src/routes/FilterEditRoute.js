@@ -98,7 +98,9 @@ class FilterEditRoute extends React.Component {
       //   return mutator.collectionsIds.PUT({ collectionIds: collections });
       // })
       .then(({ id }) => {
-        this.saveCollectionIds(id, collectionIdsForSave);
+        if (collectionIdsForSave) {
+          this.saveCollectionIds(id, collectionIdsForSave);
+        }
         history.push(`${urls.filterView(id)}${location.search}`);
       });
   }
