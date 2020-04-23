@@ -1,38 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { Field } from 'react-final-form';
 
 import {
   Col,
-  Label,
   Row,
-  TextField,
 } from '@folio/stripes/components';
 import { Pluggable } from '@folio/stripes/core';
 
-import BasicCss from '../../../BasicStyle.css';
-
-class FindCollection extends React.Component {
+class ViewCollections extends React.Component {
   constructor(props) {
     super(props);
 
-    const s = props.intialCollection || {};
+    const c = props.intialCollection || {};
 
-    this.inputCollectionId = s.id;
-    this.inputCollectionName = s.name;
+    this.inputCollections = c;
   }
 
   selectCollection = (c) => {
-    this.props.form.mutators.setCollection({
-      id: c.id,
-      name: c.label,
-    });
+    this.props.form.mutators.setCollection([
+      c
+    ]);
 
     this.setState(() => {
-      return { collection: {
-        id: c.id,
-        name: c.label
+      return { collectionIds: {
+        c
       } };
     });
   }
@@ -57,10 +48,13 @@ class FindCollection extends React.Component {
           });
         }}
         searchButtonStyle="default"
-        searchLabel="Metadata collection"
-        selectSource={this.selectCollection}
+        searchLabel="View metadata collection"
+        selectCollection={this.selectCollection}
         type="find-finc-metadata-collection"
         visibleColumns={['label']}
+        filterId={this.props.filterId}
+        collectionIds={this.props.collectionIds}
+        isEditable={this.props.isEditable}
         {...this.props}
       >
         <div style={{ background: 'red' }}>Plugin not found</div>
@@ -68,35 +62,37 @@ class FindCollection extends React.Component {
 
     return (
       <React.Fragment>
-        <Row>
+        {/* <Row>
           <Label className={BasicCss.styleForFormLabel}>
-            <FormattedMessage id="ui-finc-select.filter.collection">
-              {(msg) => msg + ' *'}
+            <FormattedMessage id="ui-finc-select.filter.collections.viewCollection">
+              {(msg) => msg}
             </FormattedMessage>
           </Label>
-        </Row>
+        </Row> */}
         <Row>
-          <Col xs={4}>
+          <Col xs={6}>
             { pluggable }
           </Col>
-          <Col xs={4}>
-            <Field
-              ariaLabel="Add metadata collection"
-              component={TextField}
-              fullWidth
-              id="addfilter_collection"
-              name="collectionIds"
-              placeholder="Please add a metadata collection"
-              readOnly
-            />
-          </Col>
+          {/* Field has to be removed for Show Collections */}
+          {/* <Field
+            ariaLabel="Add metadata collection"
+            component={TextField}
+            fullWidth
+            id="addfilter_collection"
+            name="collectionIds"
+            placeholder="Please add a metadata collection"
+            readOnly
+          /> */}
         </Row>
       </React.Fragment>
     );
   }
 }
 
-FindCollection.propTypes = {
+ViewCollections.propTypes = {
+  filterId: PropTypes.string,
+  collectionIds: PropTypes.arrayOf(PropTypes.object),
+  isEditable: PropTypes.bool,
   intialCollectionId: PropTypes.string,
   intialCollection: PropTypes.object,
   stripes: PropTypes.object,
@@ -107,4 +103,4 @@ FindCollection.propTypes = {
   }),
 };
 
-export default FindCollection;
+export default ViewCollections;

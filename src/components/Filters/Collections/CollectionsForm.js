@@ -1,41 +1,31 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-// import { FieldArray } from 'react-final-form-arrays';
-import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 
-import {
-  Accordion,
-  List,
-} from '@folio/stripes/components';
-import {
-  stripesShape,
-} from '@folio/stripes-core';
+import { Accordion } from '@folio/stripes/components';
+import { stripesShape } from '@folio/stripes-core';
 
-import FindCollection from './FindCollection/FindCollection';
+import FindCollections from './FindCollections/FindCollections';
 
 class CollectionsForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    availableCollections: PropTypes.arrayOf(PropTypes.object),
+    collectionIds: PropTypes.arrayOf(PropTypes.object),
     filterData: PropTypes.shape({
       mdSources: PropTypes.array,
     }),
+    filterId: PropTypes.string,
+    form: PropTypes.shape({
+      mutators: PropTypes.shape({
+        setCollection: PropTypes.func,
+      })
+    }),
   };
 
-  renderList = ({ fields }) => {
-    const showPerms = _.get(this.props.stripes, ['config', 'showPerms']);
-    const listFormatter = (fieldName, index) => (this.renderItem(fields.get(index), index, showPerms));
-
-    return (
-      <List
-        items={fields}
-        itemFormatter={listFormatter}
-        isEmptyMessage={<FormattedMessage id="ui-users.permissions.empty" />}
-      />
-    );
-  };
+  setCollection = records => {
+    this.props.form.mutators.setCollection({}, records);
+  }
 
   render() {
     const { expanded, onToggle, accordionId } = this.props;
@@ -49,10 +39,12 @@ class CollectionsForm extends React.Component {
       >
         <div>
           {/* Plugin has to be inside of Field, otherwise pristine is not working */}
-          <Field
-            component={FindCollection}
-            name="mdSource"
-            // intialSource={this.state.source}
+          <FieldArray
+            component={FindCollections}
+            name="collectionIds"
+            filterId={this.props.filterId}
+            isEditable
+            collectionIds={this.props.collectionIds}
             stripes={this.props.stripes}
             {...this.props}
           />

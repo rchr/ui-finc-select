@@ -65,7 +65,8 @@
   "filter.file.empty": "Filter has no file",
 
   "filter.collections.empty": "Filter has no collection",
-  "filter.collections.addCollection": "Add collection",
+  "filter.collections.addCollection": "Add collections",
+  "filter.collections.viewCollection": "View collections",
   "filter.collections.modal.header": "Select collections",
   "filter.collections.modal.search.header": "Search & filter",
   "filter.collections.modal.list.pane.header": "Collections",

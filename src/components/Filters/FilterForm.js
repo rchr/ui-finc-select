@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-// import { FieldArray } from 'react-final-form';
 
 import {
   AccordionSet,
@@ -28,7 +27,7 @@ import BasicStyle from '../BasicStyle.css';
 
 class FilterForm extends React.Component {
   static propTypes = {
-    availableCollections: PropTypes.arrayOf(PropTypes.object),
+    collectionIds: PropTypes.arrayOf(PropTypes.object),
     handlers: PropTypes.PropTypes.shape({
       onClose: PropTypes.func.isRequired,
     }),
@@ -226,13 +225,13 @@ class FilterForm extends React.Component {
                   onToggle={this.handleSectionToggle}
                   {...this.props}
                 />
-                {/* with MODAL: try like ui-users / try with SASQ */}
                 <CollectionsForm
                   accordionId="editCollections"
                   expanded={sections.editCollections}
                   onToggle={this.handleSectionToggle}
-                  availableCollections={this.props.availableCollections}
+                  collectionIds={this.props.collectionIds}
                   filterData={this.props.filterData}
+                  filterId={initialValues.id}
                   {...this.props}
                 />
               </AccordionSet>
@@ -257,4 +256,9 @@ export default stripesFinalForm({
   navigationCheck: true,
   // the form will reinitialize every time the initialValues prop changes
   enableReinitialize: true,
+  mutators: {
+    setCollection: (args, state, tools) => {
+      tools.changeValue(state, 'collectionIds', () => args[1]);
+    },
+  },
 })(FilterForm);

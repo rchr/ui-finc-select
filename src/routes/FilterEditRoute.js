@@ -14,10 +14,9 @@ class FilterEditRoute extends React.Component {
       path: 'finc-select/filters/:{id}',
       shouldRefresh: () => false,
     },
-    availableCollections: {
+    collectionsIds: {
       type: 'okapi',
-      records: 'fincSelectMetadataCollections',
-      path: 'finc-select/metadata-collections',
+      path: 'finc-select/filters/:{id}/collections',
     },
     mdSources: {
       type: 'okapi',
@@ -43,10 +42,12 @@ class FilterEditRoute extends React.Component {
     mutator: PropTypes.shape({
       filters: PropTypes.shape({
       }).isRequired,
+      collectionsIds: PropTypes.shape({
+      }).isRequired,
     }).isRequired,
     resources: PropTypes.shape({
       filter: PropTypes.object,
-      availableCollections: PropTypes.arrayOf(PropTypes.object),
+      collectionsIds: PropTypes.object,
     }).isRequired,
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
@@ -69,12 +70,37 @@ class FilterEditRoute extends React.Component {
     this.props.history.push(`${urls.filterView(match.params.id)}${location.search}`);
   }
 
+  saveCollectionIds = (filterId, collectionIds) => {
+    const { stripes: { okapi } } = this.props;
+
+    return fetch(`${okapi.url}/finc-select/filters/${filterId}/collections`, {
+      method: 'PUT',
+      headers: {
+        'X-Okapi-Tenant': okapi.tenant,
+        'X-Okapi-Token': okapi.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'collectionIds': collectionIds
+      })
+    });
+  }
+
   handleSubmit = (filter) => {
     const { history, location, mutator } = this.props;
+    const collectionIdsForSave = filter.collectionIds;
+    // remove collectionIds for saving filter
+    const filterForSave = _.omit(filter, ['collectionIds']);
 
     mutator.filters
-      .PUT(filter)
+      .PUT(filterForSave)
+      // .then(() => {
+      //   return mutator.collectionsIds.PUT({ collectionIds: collections });
+      // })
       .then(({ id }) => {
+        if (collectionIdsForSave) {
+          this.saveCollectionIds(id, collectionIdsForSave);
+        }
         history.push(`${urls.filterView(id)}${location.search}`);
       });
   }
@@ -95,6 +121,7 @@ class FilterEditRoute extends React.Component {
 
   render() {
     const { handlers, resources, stripes } = this.props;
+    const collectionIds = _.get(this.props.resources, 'collectionsIds.records', []);
 
     if (this.fetchIsPending()) return 'loading';
 
@@ -109,11 +136,12 @@ class FilterEditRoute extends React.Component {
           mdSources: _.get(this.props.resources, 'mdSources.records', []),
         }}
         initialValues={this.getInitialValues()}
-        availableCollections={_.get(this.props.resources, 'availableCollections.records', [])}
+        collectionIds={collectionIds}
         isLoading={this.fetchIsPending()}
         onDelete={this.deleteFilter}
         onSubmit={this.handleSubmit}
         stripes={stripes}
+        selectRecords={this.getSelectedCollections}
       />
     );
   }

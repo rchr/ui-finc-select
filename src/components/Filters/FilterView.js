@@ -32,6 +32,7 @@ class FilterView extends React.Component {
     }).isRequired,
     isLoading: PropTypes.bool,
     record: PropTypes.object,
+    collectionIds: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
       connect: PropTypes.func,
       okapi: PropTypes.object.isRequired,
@@ -167,6 +168,7 @@ class FilterView extends React.Component {
                 <CollectionsView
                   id="collections"
                   filter={record}
+                  collectionIds={this.props.collectionIds}
                   stripes={stripes}
                 />
               </Accordion>
