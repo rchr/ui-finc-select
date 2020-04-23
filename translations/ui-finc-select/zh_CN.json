@@ -70,5 +70,6 @@
     "filter.collections.modal.list.pane.subheader": "找到{amount}集合",
     "filter.collections.modal.save": "保存",
     "filter.collections.modal.cancel": "取消",
-    "filter.collectionAccordion": "元数据集合"
+    "filter.collectionAccordion": "元数据集合",
+    "filter.collections.viewCollection": "View collections"
 }
