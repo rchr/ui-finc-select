@@ -63,12 +63,13 @@
     "source.generalAccordion": "General",
     "filters.title": "Filters",
     "filter.collections.empty": "Filter has no collection",
-    "filter.collections.addCollection": "Add collection",
+    "filter.collections.addCollection": "Add collections",
     "filter.collections.modal.header": "Select collections",
     "filter.collections.modal.search.header": "検索と絞り込み",
     "filter.collections.modal.list.pane.header": "コレクション",
     "filter.collections.modal.list.pane.subheader": "{amount} collections found",
     "filter.collections.modal.save": "Save",
     "filter.collections.modal.cancel": "キャンセル",
-    "filter.collectionAccordion": "Metadata collections"
+    "filter.collectionAccordion": "Metadata collections",
+    "filter.collections.viewCollection": "View collections"
 }
