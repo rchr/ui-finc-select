@@ -63,7 +63,7 @@
     "source.generalAccordion": "Geral",
     "filters.title": "Filtros",
     "filter.collections.empty": "O filtro não tem coleção",
-    "filter.collections.addCollection": "Adicionar coleção",
+    "filter.collections.addCollection": "Adicionar coleções",
     "filter.collections.modal.header": "Selecionar coleções",
     "filter.collections.modal.search.header": "Pesquisar & filtrar",
     "filter.collections.modal.list.pane.header": "Coleções",
@@ -71,5 +71,5 @@
     "filter.collections.modal.save": "Salvar",
     "filter.collections.modal.cancel": "Cancelar",
     "filter.collectionAccordion": "Coleções de metadados",
-    "filter.collections.viewCollection": "View collections"
+    "filter.collections.viewCollection": "Ver coleções"
 }
