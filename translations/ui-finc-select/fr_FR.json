@@ -63,7 +63,7 @@
     "source.generalAccordion": "Général",
     "filters.title": "Filtres",
     "filter.collections.empty": "Le filtre n'a pas de collection",
-    "filter.collections.addCollection": "Ajouter une collection",
+    "filter.collections.addCollection": "Ajouter des collections",
     "filter.collections.modal.header": "Sélectionnez les collections",
     "filter.collections.modal.search.header": "Rechercher et filtrer",
     "filter.collections.modal.list.pane.header": "Collections",
