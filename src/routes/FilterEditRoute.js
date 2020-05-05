@@ -6,6 +6,7 @@ import { stripesConnect } from '@folio/stripes/core';
 
 import FilterForm from '../components/Filters/FilterForm';
 import urls from '../components/DisplayUtils/urls';
+import saveCollectionIds from './utilities/saveCollectionIds';
 
 class FilterEditRoute extends React.Component {
   static manifest = Object.freeze({
@@ -70,22 +71,6 @@ class FilterEditRoute extends React.Component {
     this.props.history.push(`${urls.filterView(match.params.id)}${location.search}`);
   }
 
-  saveCollectionIds = (filterId, collectionIds) => {
-    const { stripes: { okapi } } = this.props;
-
-    return fetch(`${okapi.url}/finc-select/filters/${filterId}/collections`, {
-      method: 'PUT',
-      headers: {
-        'X-Okapi-Tenant': okapi.tenant,
-        'X-Okapi-Token': okapi.token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'collectionIds': collectionIds
-      })
-    });
-  }
-
   handleSubmit = (filter) => {
     const { history, location, mutator } = this.props;
     const collectionIdsForSave = filter.collectionIds;
@@ -94,12 +79,9 @@ class FilterEditRoute extends React.Component {
 
     mutator.filters
       .PUT(filterForSave)
-      // .then(() => {
-      //   return mutator.collectionsIds.PUT({ collectionIds: collections });
-      // })
       .then(({ id }) => {
         if (collectionIdsForSave) {
-          this.saveCollectionIds(id, collectionIdsForSave);
+          saveCollectionIds(id, collectionIdsForSave, this.props.stripes.okapi);
         }
         history.push(`${urls.filterView(id)}${location.search}`);
       });
