@@ -17,6 +17,7 @@ import {
   Paneset,
   Row,
 } from '@folio/stripes/components';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 import { IfPermission } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 
@@ -213,6 +214,10 @@ class FilterForm extends React.Component {
                     />
                   </Col>
                 </Row>
+                {initialValues.metadata &&
+                  initialValues.metadata.createdDate && (
+                    <ViewMetaData metadata={initialValues.metadata} />
+                )}
                 <FilterInfoForm
                   accordionId="editFilterInfo"
                   expanded={sections.editFilterInfo}
