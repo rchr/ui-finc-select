@@ -54,7 +54,11 @@ class SourceManagementView extends React.Component {
 
     let orgValue;
     if (this.props.resources.org && this.props.resources.org.failed) {
-      orgValue = organization.name;
+      if (organization.name) {
+        orgValue = organization.name;
+      } else {
+        orgValue = '-';
+      }
     } else {
       orgValue = (
         <React.Fragment>
