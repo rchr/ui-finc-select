@@ -15,6 +15,7 @@ import {
   PaneMenu,
   Row
 } from '@folio/stripes/components';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 import {
   IfPermission,
   TitleManager
@@ -48,6 +49,8 @@ class FilterView extends React.Component {
         collectionAccordion: false
       },
     };
+
+    this.connectedViewMetaData = this.props.stripes.connect(ViewMetaData);
   }
 
   handleExpandAll = (obj) => {
@@ -132,6 +135,10 @@ class FilterView extends React.Component {
           <TitleManager record={label} />
           <div id="filterDetails">
             <AccordionSet>
+              <this.connectedViewMetaData
+                metadata={_.get(record, 'metadata', {})}
+                stripes={this.props.stripes}
+              />
               <FilterInfoView
                 id="filterInfo"
                 filter={record}
