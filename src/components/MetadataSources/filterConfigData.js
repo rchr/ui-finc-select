@@ -6,9 +6,10 @@ const filterConfig = [
     values: [
       { name: 'Active', cql: 'active' },
       { name: 'Wish', cql: 'wish' },
+      { name: 'Impossible', cql: 'impossible' },
       { name: 'Negotiation', cql: 'negotiation' },
       { name: 'Technical implementation', cql: 'technical implementation' },
-      { name: 'Deactivated', cql: 'deactivated' },
+      { name: 'Trial', cql: 'trial' },
       { name: 'Terminated', cql: 'terminated' }
     ],
   },

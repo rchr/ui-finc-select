@@ -13,6 +13,7 @@ import {
   Pane,
   Row,
 } from '@folio/stripes/components';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import SourceInfoView from './SourceInfo/SourceInfoView';
 import SourceManagementView from './SourceManagement/SourceManagementView';
@@ -37,6 +38,8 @@ class MetadataSourceView extends React.Component {
         technicalAccordion: false
       },
     };
+
+    this.connectedViewMetaData = this.props.stripes.connect(ViewMetaData);
   }
 
   handleExpandAll = (obj) => {
@@ -90,6 +93,10 @@ class MetadataSourceView extends React.Component {
           paneTitle={<span data-test-source-header-title>{label}</span>}
         >
           <AccordionSet>
+            <this.connectedViewMetaData
+              metadata={_.get(record, 'metadata', {})}
+              stripes={this.props.stripes}
+            />
             <SourceInfoView
               id="sourceInfo"
               metadataSource={record}
