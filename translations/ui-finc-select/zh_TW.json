@@ -32,7 +32,7 @@
     "source.button.showAllCollections": "显示所有集合",
     "source.modal.selectAllCollections.success": "进程已经开始。可能需要一些时间，直到所有ISIL都添加到所选字段。",
     "source.modal.selectAllCollections.error": "进程无法启动。",
-    "collection.filter.sources": "元数据来源",
+    "collection.filter.sources": "詮釋資料來源",
     "filter.label": "篩選器名稱",
     "filter.type": "類型",
     "filter.isil": "ISIL",
