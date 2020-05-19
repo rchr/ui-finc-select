@@ -8,7 +8,6 @@ import {
 import {
   FormattedMessage,
   injectIntl,
-  intlShape
 } from 'react-intl';
 
 import {
@@ -44,7 +43,7 @@ class Filters extends React.Component {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     onNeedMoreData: PropTypes.func,
     onSelectRow: PropTypes.func,
     packageInfo: PropTypes.shape({ // values pulled from the provider's package.json config object
