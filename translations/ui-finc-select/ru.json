@@ -67,7 +67,7 @@
     "filter.collections.modal.header": "Выбрать коллекции",
     "filter.collections.modal.search.header": "Поиск и фильтр",
     "filter.collections.modal.list.pane.header": "Коллекции",
-    "filter.collections.modal.list.pane.subheader": "{сумма} коллекций найдено",
+    "filter.collections.modal.list.pane.subheader": "{amount} коллекций найдено",
     "filter.collections.modal.save": "Сохранить",
     "filter.collections.modal.cancel": "Отменить",
     "filter.collectionAccordion": "Коллекции метаданных",
