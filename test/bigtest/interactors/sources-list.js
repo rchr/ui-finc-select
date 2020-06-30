@@ -11,7 +11,7 @@ export default @interactor class SourcesList {
   static defaultScope = '[data-test-sources]';
 
   navigation = new NavigationInteractor();
-  instances = collection('[role=group] div a');
+  instances = collection('[role="rowgroup"] div[role="row"]');
   instance = scoped('#pane-sourcedetails');
   statusFilterIsPresent = isPresent('section[id="filter-accordion-status"]');
   resetAllBtnIsPresent = isPresent('button[id="clickable-reset-all"]');

@@ -11,7 +11,7 @@ export default @interactor class CollectionsList {
   static defaultScope = '[data-test-collections]';
 
   navigation = new NavigationInteractor();
-  instances = collection('[role=group] div a');
+  instances = collection('[role="rowgroup"] div[role="row"]');
   instance = scoped('#pane-collectiondetails');
   mdSourceFilterIsPresent = isPresent('section[id="filter-accordion-mdSource"]');
   freeContentFilterIsPresent = isPresent('section[id="filter-accordion-freeContent"]');
