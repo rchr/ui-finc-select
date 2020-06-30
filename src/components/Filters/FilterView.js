@@ -6,10 +6,10 @@ import { FormattedMessage } from 'react-intl';
 import {
   AccordionSet,
   Accordion,
+  Button,
   Col,
   ExpandAllButton,
   Icon,
-  IconButton,
   Layout,
   Pane,
   PaneMenu,
@@ -50,6 +50,8 @@ class FilterView extends React.Component {
       },
     };
 
+    this.editButton = React.createRef();
+
     this.connectedViewMetaData = this.props.stripes.connect(ViewMetaData);
   }
 
@@ -71,22 +73,21 @@ class FilterView extends React.Component {
   }
 
   renderEditPaneMenu = () => {
-    const { record, handlers } = this.props;
+    const { handlers } = this.props;
 
     return (
       <IfPermission perm="finc-select.filters.item.put">
         <PaneMenu>
-          <IconButton
-            icon="edit"
+          <Button
             id="clickable-edit-filter"
+            buttonStyle="primary"
             onClick={handlers.onEdit}
-            style={{
-              visibility: !record
-                ? 'hidden'
-                : 'visible'
-            }}
-            title="Edit Filter"
-          />
+            aria-label="Edit Filter"
+            buttonRef={this.editButton}
+            marginBottom0
+          >
+            <FormattedMessage id="ui-finc-select.filter.edit" />
+          </Button>
         </PaneMenu>
       </IfPermission>
     );

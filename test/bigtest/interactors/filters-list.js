@@ -16,7 +16,7 @@ export default @interactor class FiltersList {
   static defaultScope = '[data-test-filters]';
 
   navigation = new NavigationInteractor();
-  instances = collection('[role=group] div a');
+  instances = collection('[role="rowgroup"] div[role="row"]');
   instance = scoped('#pane-filterdetails');
   typeFilterIsPresent = isPresent('section[id="filter-accordion-type"]');
   resetAllBtnIsPresent = isPresent('button[id="clickable-reset-all"]');
