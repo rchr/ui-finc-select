@@ -78,17 +78,6 @@ class FilterView extends React.Component {
     return (
       <IfPermission perm="finc-select.filters.item.put">
         <PaneMenu>
-          {/* <IconButton
-            icon="edit"
-            id="clickable-edit-filter"
-            onClick={handlers.onEdit}
-            style={{
-              visibility: !record
-                ? 'hidden'
-                : 'visible'
-            }}
-            title="Edit Filter"
-          /> */}
           <Button
             id="clickable-edit-filter"
             buttonStyle="primary"
@@ -99,16 +88,6 @@ class FilterView extends React.Component {
           >
             <FormattedMessage id="ui-finc-select.filter.edit" />
           </Button>
-          {/* <Button
-                id="clickable-editfilter"
-                buttonStyle="primary"
-                to={this.getEditLink()}
-                buttonRef={this.editButton}
-                aria-label={ariaLabel}
-                marginBottom0
-              >
-                <FormattedMessage id="ui-users.edit" />
-              </Button> */}
         </PaneMenu>
       </IfPermission>
     );
