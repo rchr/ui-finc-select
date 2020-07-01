@@ -85,7 +85,7 @@ class SourceFilters extends React.Component {
   render() {
     return (
       <AccordionSet>
-        {this.renderCheckboxFilter('status', 'Implementation Status')}
+        {this.renderCheckboxFilter('status', 'Implementation status')}
         {this.renderCheckboxFilter('selected', 'Selected')}
       </AccordionSet>
     );
