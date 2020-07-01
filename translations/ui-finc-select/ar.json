@@ -71,5 +71,6 @@
     "filter.collections.modal.save": "حفظ",
     "filter.collections.modal.cancel": "إلغاء",
     "filter.collectionAccordion": "مجموعات الميتاداتا",
-    "filter.collections.viewCollection": "عرض المجموعات"
+    "filter.collections.viewCollection": "عرض المجموعات",
+    "filter.edit": "تحرير"
 }

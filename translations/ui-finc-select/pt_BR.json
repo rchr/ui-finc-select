@@ -71,5 +71,6 @@
     "filter.collections.modal.save": "Salvar",
     "filter.collections.modal.cancel": "Cancelar",
     "filter.collectionAccordion": "Coleções de metadados",
-    "filter.collections.viewCollection": "Ver coleções"
+    "filter.collections.viewCollection": "Ver coleções",
+    "filter.edit": "Editar"
 }
