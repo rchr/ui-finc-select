@@ -6,11 +6,9 @@ const filterConfig = [
     values: [
       { name: 'Active', cql: 'active' },
       { name: 'Wish', cql: 'wish' },
-      { name: 'Impossible', cql: 'impossible' },
-      { name: 'Negotiation', cql: 'negotiation' },
-      { name: 'Technical implementation', cql: 'technical implementation' },
-      { name: 'Trial', cql: 'trial' },
-      { name: 'Terminated', cql: 'terminated' }
+      { name: 'Implementation', cql: 'implementation' },
+      { name: 'Closed', cql: 'closed' },
+      { name: 'Impossible', cql: 'impossible' }
     ],
   },
   {
