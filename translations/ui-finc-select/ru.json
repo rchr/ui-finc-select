@@ -71,5 +71,6 @@
     "filter.collections.modal.save": "Сохранить",
     "filter.collections.modal.cancel": "Отменить",
     "filter.collectionAccordion": "Коллекции метаданных",
-    "filter.collections.viewCollection": "Посмотреть коллекции"
+    "filter.collections.viewCollection": "Посмотреть коллекции",
+    "filter.edit": "Редактировать"
 }
