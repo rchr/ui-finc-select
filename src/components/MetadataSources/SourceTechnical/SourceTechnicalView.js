@@ -18,7 +18,7 @@ class SourceTechnicalView extends React.Component {
     id: PropTypes.string,
   };
 
-  renderTicketList = (values) => {
+  renderUrlList = (values) => {
     const { metadataSource } = this.props;
 
     if (!metadataSource) {
@@ -60,7 +60,7 @@ class SourceTechnicalView extends React.Component {
             </Headline>
           </Row>
           <Row>
-            { this.renderTicketList('tickets') }
+            { this.renderUrlList('tickets') }
           </Row>
           <Row>
             <KeyValue
