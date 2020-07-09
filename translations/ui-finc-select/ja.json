@@ -23,7 +23,7 @@
     "source.organization": "Organization",
     "source.selectedCollections": "選択したコレクション",
     "source.sourceId": "ソースID",
-    "source.status": "Impl. status",
+    "source.status": "Implementation status",
     "source.tickets": "Tickets",
     "source.accordion.management": "Management",
     "source.accordion.technical": "Technical",
