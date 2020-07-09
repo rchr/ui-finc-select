@@ -1,6 +1,6 @@
 {
   "name": "@folio/finc-select",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "description for finc-select-app",
   "main": "src/index.js",
   "repository": "folio-org/ui-finc-select",
@@ -71,7 +71,6 @@
     "displayName": "ui-finc-select.meta.title",
     "route": "/finc-select",
     "home": "/finc-select/metadata-sources",
-    "hasSettings": true,
     "queryResource": "query",
     "okapiInterfaces": {
       "finc-select/metadata-sources": "1.0",
