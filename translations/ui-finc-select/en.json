@@ -84,5 +84,12 @@
   "filter.form.createFilter": "Create filter",
   "filter.form.cancel": "Cancel",
   "filter.form.close": "Close filter dialog",
-  "filter.form.missingRequiredField": "File is required!"
+  "filter.form.missingRequiredField": "File is required!",
+
+  "settings.credentials.label": "EZB credentials",
+  "settings.credentials.labelSingular": "EZB credential",
+  "settings.credentials.user": "user",
+  "settings.credentials.password": "password",
+  "settings.credentials.libId": "libId",
+  "settings.credentials.isil": "isil"
 }
