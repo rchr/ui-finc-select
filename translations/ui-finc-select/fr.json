@@ -23,7 +23,7 @@
     "source.organization": "Organization",
     "source.selectedCollections": "Selected collections",
     "source.sourceId": "Source ID",
-    "source.status": "Impl. status",
+    "source.status": "Implementation status",
     "source.tickets": "Tickets",
     "source.accordion.management": "Management",
     "source.accordion.technical": "Technical",
