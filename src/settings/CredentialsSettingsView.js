@@ -15,9 +15,6 @@ import {
   Col,
 } from '@folio/stripes/components';
 
-// import { ControlledVocab } from '@folio/stripes/smart-components';
-// import { IntlConsumer } from '@folio/stripes/core';
-
 class CredentialsSettingsView extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
@@ -27,15 +24,13 @@ class CredentialsSettingsView extends React.Component {
   };
 
   render() {
-    const { ezbCredentials, stripes } = this.props;
+    const { ezbCredentials } = this.props;
 
-    // const test = _.get(this.props.resources, 'ezbCredentials', []);
-    console.log(ezbCredentials);
     return (
       <div>
         <Row>
           <Col xs={6}>
-            <div data-test-ezbCredentials-libId>
+            <div data-test-ezbcredentials-libId>
               <Row>
                 <KeyValue
                   label={<FormattedMessage id="ui-finc-select.ezbCredentials.libId" />}
