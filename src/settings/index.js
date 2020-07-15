@@ -9,7 +9,7 @@ export default class FincConfigSettings extends React.Component {
   pages = [
     {
       component: CredentialsSettings,
-      label: <FormattedMessage id="ui-finc-select.settings.credentials.label" />,
+      label: <FormattedMessage id="ui-finc-select.settings.ezbCredentials.label" />,
       route: 'credentials',
     }
   ];

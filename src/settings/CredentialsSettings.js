@@ -53,6 +53,24 @@ class CredentialsSettings extends React.Component {
     handlers: {},
   }
 
+  constructor(props) {
+    super(props);
+
+    this.styles = {
+      credentialsFormWrapper: {
+        width: '100%',
+      },
+      // toggleMaskButtonWrapper: {
+      //   marginTop: '20px',
+      //   marginLeft: '1rem',
+      // },
+      // passwordStrengthMeter: {
+      //   marginLeft: '1rem',
+      // },
+    };
+  }
+
+
   getInitialValues = () => {
     const initialValues = _.get(this.props.resources, 'ezbCredentials.records[0]');
 
@@ -79,12 +97,16 @@ class CredentialsSettings extends React.Component {
     const { resources, stripes } = this.props;
 
     return (
-      <CredentialsSettingsForm
-        ezbCredentials={_.get(resources, 'ezbCredentials.records[0]')}
-        initialValues={this.getInitialValues()}
-        onSubmit={this.handleSubmit}
-        stripes={stripes}
-      />
+      <div
+        style={this.styles.credentialsFormWrapper}
+      >
+        <CredentialsSettingsForm
+          ezbCredentials={_.get(resources, 'ezbCredentials.records[0]')}
+          initialValues={this.getInitialValues()}
+          onSubmit={this.handleSubmit}
+          stripes={stripes}
+        />
+      </div>
     );
   }
 }

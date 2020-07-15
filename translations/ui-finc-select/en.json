@@ -86,10 +86,10 @@
   "filter.form.close": "Close filter dialog",
   "filter.form.missingRequiredField": "File is required!",
 
-  "settings.credentials.label": "EZB credentials",
-  "settings.credentials.labelSingular": "EZB credential",
-  "settings.credentials.user": "user",
-  "settings.credentials.password": "password",
-  "settings.credentials.libId": "libId",
-  "settings.credentials.isil": "isil"
+  "settings.ezbCredentials.label": "EZB credentials",
+  "settings.ezbCredentials.user": "user",
+  "settings.ezbCredentials.password": "password",
+  "settings.ezbCredentials.libId": "libId",
+  "settings.ezbCredentials.isil": "isil",
+  "settings.ezbCredentials.save": "Save"
 }

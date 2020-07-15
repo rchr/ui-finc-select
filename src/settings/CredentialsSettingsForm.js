@@ -10,7 +10,6 @@ import {
   Button,
   Col,
   ConfirmationModal,
-  ExpandAllButton,
   Icon,
   IconButton,
   Pane,
@@ -22,10 +21,14 @@ import {
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 
+import { Required } from '../components/DisplayUtils/Validate';
+import BasicStyle from '../components/BasicStyle.css';
+
 class CredentialsSettingsForm extends React.Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     initialValues: PropTypes.object,
+    invalid: PropTypes.bool,
     onCancel: PropTypes.func,
     onDelete: PropTypes.func,
     onSubmit: PropTypes.func,
@@ -51,43 +54,30 @@ class CredentialsSettingsForm extends React.Component {
 
     const disabled = pristine || submitting || invalid;
 
-    const startButton = (
-      <Button
-        data-test-filter-form-cancel-button
-        marginBottom0
-        id="clickable-close-filter-form"
-        buttonStyle="default mega"
-      >
-        <FormattedMessage id="ui-finc-select.filter.form.cancel" />
-      </Button>
-    );
-
     const endButton = (
       <Button
-        data-test-filter-form-submit-button
+        data-test-ezbcredentials-form-submit-button
         marginBottom0
-        id="clickable-savefilter"
-        buttonStyle="primary mega"
+        id="clickable-saveezbcredentials"
+        buttonStyle="primary"
         type="submit"
         onClick={handleSubmit}
         disabled={disabled}
       >
-        <FormattedMessage id="ui-finc-select.filter.form.saveAndClose" />
+        <FormattedMessage id="ui-finc-select.settings.ezbCredentials.save" />
       </Button>
     );
 
-    return <PaneFooter renderStart={startButton} renderEnd={endButton} />;
+    return <PaneFooter renderEnd={endButton} />;
   }
 
   render() {
     const { ezbCredentials, initialValues } = this.props;
-    const paneTitle = initialValues ? initialValues.user : <FormattedMessage id="ui-finc-select.filter.form.createFilter" />;
-
     const footer = this.getPaneFooter();
 
     return (
       <form
-        // className={BasicStyle.styleForFormRoot}
+        className={BasicStyle.styleForFormRoot}
         data-test-filter-form-page
         id="ezb-credentials"
       >
@@ -95,40 +85,75 @@ class CredentialsSettingsForm extends React.Component {
           <Pane
             defaultWidth="100%"
             footer={footer}
-            paneTitle={paneTitle}
+            paneTitle={'EZB credentials of ' + initialValues.user}
           >
             <Row>
               <Col xs={8}>
                 <Field
                   component={TextField}
                   fullWidth
-                  id="addfilter_label"
+                  id="addezbcredentials_user"
                   label={
-                    <FormattedMessage id="ui-finc-select.ezbCredentials.libId">
+                    <FormattedMessage id="ui-finc-select.settings.ezbCredentials.user">
                       {(msg) => msg + ' *'}
                     </FormattedMessage>}
+                  name="user"
+                  placeholder="Enter a user"
+                  validate={Required}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={8}>
+                <Field
+                  component={TextField}
+                  fullWidth
+                  id="addezbcredentials_password"
+                  label={
+                    <FormattedMessage id="ui-finc-select.settings.ezbCredentials.password">
+                      {(msg) => msg + ' *'}
+                    </FormattedMessage>}
+                  name="password"
+                  placeholder="Enter a password"
+                  validate={Required}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={8}>
+                <Field
+                  component={TextField}
+                  fullWidth
+                  id="addezbcredentials_libId"
+                  label={
+                    <FormattedMessage id="ui-finc-select.settings.ezbCredentials.libId">
+                      {(msg) => msg + ' *'}
+                    </FormattedMessage>}
+                  // name={initialValues.libId}
                   name="libId"
                   placeholder="Enter a libId"
+                  validate={Required}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={8}>
+                <Field
+                  component={TextField}
+                  fullWidth
+                  id="addezbcredentials_isil"
+                  label={
+                    <FormattedMessage id="ui-finc-select.settings.ezbCredentials.isil">
+                      {(msg) => msg}
+                    </FormattedMessage>}
+                  name="isil"
+                  placeholder="Enter a isil"
                 />
               </Col>
             </Row>
           </Pane>
         </Paneset>
       </form>
-      // <div>
-      //   <Row>
-      //     <Col xs={6}>
-      //       <div data-test-ezbcredentials-libId>
-      //         <Row>
-      //           <KeyValue
-      //             label={<FormattedMessage id="ui-finc-select.ezbCredentials.libId" />}
-      //             value={_.get(ezbCredentials, 'libId', '-')}
-      //           />
-      //         </Row>
-      //       </div>
-      //     </Col>
-      //   </Row>
-      // </div>
     );
   }
 }
