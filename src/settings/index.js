@@ -5,12 +5,12 @@ import { Settings } from '@folio/stripes/smart-components';
 
 import CredentialsSettings from './CredentialsSettings';
 
-export default class FincConfigSettings extends React.Component {
+class FincConfigSettings extends React.Component {
   pages = [
     {
       component: CredentialsSettings,
       label: <FormattedMessage id="ui-finc-select.settings.ezbCredentials.label" />,
-      route: 'credentials',
+      route: 'ezb-credentials',
     }
   ];
 
@@ -25,3 +25,5 @@ export default class FincConfigSettings extends React.Component {
     );
   }
 }
+
+export default FincConfigSettings;
