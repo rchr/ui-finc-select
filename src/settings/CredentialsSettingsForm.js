@@ -9,6 +9,7 @@ import {
   ConfirmationModal,
   Icon,
   IconButton,
+  KeyValue,
   Pane,
   PaneFooter,
   PaneMenu,
@@ -41,6 +42,27 @@ class CredentialsSettingsForm extends React.Component {
     ezbCredentials: PropTypes.object,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      passwordMasked: true,
+    };
+
+    this.styles = {
+      changePasswordFormWrapper: {
+        width: '100%',
+      },
+      toggleMaskButtonWrapper: {
+        marginTop: '20px',
+        marginLeft: '1rem',
+      },
+      passwordStrengthMeter: {
+        marginLeft: '1rem',
+      },
+    };
+  }
+
   getPaneFooter() {
     const {
       handleSubmit,
@@ -68,9 +90,18 @@ class CredentialsSettingsForm extends React.Component {
     return <PaneFooter renderEnd={endButton} />;
   }
 
+  togglePasswordMask = () => {
+    this.setState(({ passwordMasked }) => ({
+      passwordMasked: !passwordMasked,
+    }));
+  };
+
   render() {
-    // const { ezbCredentials, initialValues } = this.props;
+    const { passwordMasked } = this.state;
+    const passwordType = passwordMasked ? 'password' : 'text';
+    const { ezbCredentials, initialValues } = this.props;
     const footer = this.getPaneFooter();
+    const passwordToggleLabelId = `ui-finc-select.settings.changePassword.${passwordMasked ? 'show' : 'hide'}Password`;
 
     return (
       <form
@@ -85,7 +116,7 @@ class CredentialsSettingsForm extends React.Component {
             paneTitle="EZB credentials"
           >
             <Row>
-              <Col xs={8}>
+              <Col xs={6}>
                 <Field
                   component={TextField}
                   fullWidth
@@ -101,9 +132,10 @@ class CredentialsSettingsForm extends React.Component {
               </Col>
             </Row>
             <Row>
-              <Col xs={8}>
+              <Col xs={6}>
                 <Field
                   component={TextField}
+                  type={passwordType}
                   fullWidth
                   id="addezbcredentials_password"
                   label={
@@ -115,9 +147,20 @@ class CredentialsSettingsForm extends React.Component {
                   validate={Required}
                 />
               </Col>
+              <Col>
+                <div style={this.styles.toggleMaskButtonWrapper}>
+                  <Button
+                    type="button"
+                    buttonStyle="link"
+                    onClick={this.togglePasswordMask}
+                  >
+                    <FormattedMessage id={passwordToggleLabelId} />
+                  </Button>
+                </div>
+              </Col>
             </Row>
             <Row>
-              <Col xs={8}>
+              <Col xs={6}>
                 <Field
                   component={TextField}
                   fullWidth
@@ -133,20 +176,11 @@ class CredentialsSettingsForm extends React.Component {
                 />
               </Col>
             </Row>
-            <Row>
-              <Col xs={8}>
-                <Field
-                  component={TextField}
-                  fullWidth
-                  id="addezbcredentials_isil"
-                  label={
-                    <FormattedMessage id="ui-finc-select.settings.ezbCredentials.isil">
-                      {(msg) => msg}
-                    </FormattedMessage>}
-                  name="isil"
-                  placeholder="Enter a isil"
-                />
-              </Col>
+            <Row style={{ marginLeft: '0.1em' }}>
+              <KeyValue
+                label={<FormattedMessage id="ui-finc-select.settings.ezbCredentials.isil" />}
+                value={_.get(initialValues, 'isil', '-')}
+              />
             </Row>
           </Pane>
         </Paneset>

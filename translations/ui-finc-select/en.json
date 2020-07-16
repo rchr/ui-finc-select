@@ -91,5 +91,7 @@
   "settings.ezbCredentials.password": "password",
   "settings.ezbCredentials.libId": "libId",
   "settings.ezbCredentials.isil": "isil",
-  "settings.ezbCredentials.save": "Save"
+  "settings.ezbCredentials.save": "Save",
+  "settings.changePassword.hidePassword": "Hide password",
+  "settings.changePassword.showPassword": "Show password"
 }
