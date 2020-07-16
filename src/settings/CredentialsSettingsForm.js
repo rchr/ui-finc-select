@@ -1,18 +1,15 @@
 import _ from 'lodash';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { autofill, change, getFormValues, Field } from 'redux-form';
+import { Field } from 'redux-form';
+
 import {
   Button,
   Col,
-  ConfirmationModal,
-  Icon,
-  IconButton,
   KeyValue,
   Pane,
   PaneFooter,
-  PaneMenu,
   Paneset,
   Row,
   TextField,
@@ -27,9 +24,6 @@ class CredentialsSettingsForm extends React.Component {
     handleSubmit: PropTypes.func.isRequired,
     initialValues: PropTypes.object,
     invalid: PropTypes.bool,
-    onCancel: PropTypes.func,
-    onDelete: PropTypes.func,
-    onSubmit: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     stripes: PropTypes.shape({
@@ -39,7 +33,6 @@ class CredentialsSettingsForm extends React.Component {
         dispatch: PropTypes.func.isRequired
       })
     }).isRequired,
-    ezbCredentials: PropTypes.object,
   };
 
   constructor(props) {
@@ -50,14 +43,8 @@ class CredentialsSettingsForm extends React.Component {
     };
 
     this.styles = {
-      changePasswordFormWrapper: {
-        width: '100%',
-      },
       toggleMaskButtonWrapper: {
         marginTop: '20px',
-        marginLeft: '1rem',
-      },
-      passwordStrengthMeter: {
         marginLeft: '1rem',
       },
     };
@@ -77,7 +64,7 @@ class CredentialsSettingsForm extends React.Component {
       <Button
         data-test-ezbcredentials-form-submit-button
         marginBottom0
-        id="clickable-saveezbcredentials"
+        id="clickable-save-ezbcredentials"
         buttonStyle="primary"
         type="submit"
         onClick={handleSubmit}
@@ -99,14 +86,14 @@ class CredentialsSettingsForm extends React.Component {
   render() {
     const { passwordMasked } = this.state;
     const passwordType = passwordMasked ? 'password' : 'text';
-    const { ezbCredentials, initialValues } = this.props;
+    const { initialValues } = this.props;
     const footer = this.getPaneFooter();
     const passwordToggleLabelId = `ui-finc-select.settings.changePassword.${passwordMasked ? 'show' : 'hide'}Password`;
 
     return (
       <form
         className={BasicStyle.styleForFormRoot}
-        data-test-filter-form-page
+        data-test-ezb-credentials-form-page
         id="ezb-credentials"
       >
         <Paneset isRoot>
@@ -120,7 +107,7 @@ class CredentialsSettingsForm extends React.Component {
                 <Field
                   component={TextField}
                   fullWidth
-                  id="addezbcredentials_user"
+                  id="add_ezbcredentials_user"
                   label={
                     <FormattedMessage id="ui-finc-select.settings.ezbCredentials.user">
                       {(msg) => msg + ' *'}
@@ -137,7 +124,7 @@ class CredentialsSettingsForm extends React.Component {
                   component={TextField}
                   type={passwordType}
                   fullWidth
-                  id="addezbcredentials_password"
+                  id="add_ezbcredentials_password"
                   label={
                     <FormattedMessage id="ui-finc-select.settings.ezbCredentials.password">
                       {(msg) => msg + ' *'}
@@ -164,12 +151,11 @@ class CredentialsSettingsForm extends React.Component {
                 <Field
                   component={TextField}
                   fullWidth
-                  id="addezbcredentials_libId"
+                  id="add_ezbcredentials_libId"
                   label={
                     <FormattedMessage id="ui-finc-select.settings.ezbCredentials.libId">
                       {(msg) => msg + ' *'}
                     </FormattedMessage>}
-                  // name={initialValues.libId}
                   name="libId"
                   placeholder="Enter a libId"
                   validate={Required}

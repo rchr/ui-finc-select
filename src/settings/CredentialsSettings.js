@@ -7,18 +7,6 @@ import CredentialsSettingsForm from './CredentialsSettingsForm';
 class CredentialsSettings extends React.Component {
   static propTypes = {
     stripes: PropTypes.object.isRequired,
-    handlers: PropTypes.object,
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
     resources: PropTypes.object,
     mutator: PropTypes.shape({
       ezbCredentials: PropTypes.shape({
@@ -26,12 +14,6 @@ class CredentialsSettings extends React.Component {
       }).isRequired,
     }).isRequired,
   };
-  // static propTypes = {
-  //   stripes: PropTypes.shape({
-  //     hasPerm: PropTypes.func.isRequired,
-  //     okapi: PropTypes.object.isRequired,
-  //   }).isRequired,
-  // };
 
   static manifest = Object.freeze({
     ezbCredentials: {
@@ -40,19 +22,12 @@ class CredentialsSettings extends React.Component {
     },
   });
 
-  static defaultProps = {
-    handlers: {},
-  }
-
   constructor(props) {
     super(props);
 
     this.styles = {
       credentialsFormWrapper: {
         width: '100%',
-      },
-      credentialsFormHeight: {
-        height: '100%',
       },
     };
   }
@@ -63,24 +38,15 @@ class CredentialsSettings extends React.Component {
     return initialValues;
   }
 
-  handleSubmit = (filter) => {
-    const { history, location, mutator } = this.props;
-    const collectionIdsForSave = filter.collectionIds;
-    // remove collectionIds for saving filter
-    const filterForSave = _.omit(filter, ['collectionIds']);
+  handleSubmit = (values) => {
+    const { mutator } = this.props;
 
     mutator.ezbCredentials
-      .PUT(filterForSave)
-      .then(({ id }) => {
-        if (collectionIdsForSave) {
-          saveCollectionIds(id, collectionIdsForSave, this.props.stripes.okapi);
-        }
-        history.push(`${urls.filterView(id)}${location.search}`);
-      });
+      .PUT(values);
   }
 
   render() {
-    const { resources, stripes, initialValues } = this.props;
+    const { stripes } = this.props;
 
     return (
       <div
@@ -88,9 +54,7 @@ class CredentialsSettings extends React.Component {
         style={this.styles.credentialsFormWrapper}
       >
         <CredentialsSettingsForm
-          ezbCredentials={_.get(resources, 'ezbCredentials.records[0]')}
           initialValues={this.getInitialValues()}
-          // initialValues={_.get(resources, 'ezbCredentials.records[0]')}
           onSubmit={this.handleSubmit}
           stripes={stripes}
         />
