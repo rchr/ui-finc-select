@@ -2,9 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Field } from 'redux-form';
+import { autofill, change, getFormValues, Field } from 'redux-form';
 import {
-  AccordionSet,
   Button,
   Col,
   ConfirmationModal,
@@ -33,14 +32,14 @@ class CredentialsSettingsForm extends React.Component {
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     stripes: PropTypes.shape({
-      okapi: PropTypes.object,
-    }),
+      hasPerm: PropTypes.func.isRequired,
+      connect: PropTypes.func.isRequired,
+      store: PropTypes.shape({
+        dispatch: PropTypes.func.isRequired
+      })
+    }).isRequired,
     ezbCredentials: PropTypes.object,
   };
-
-  static defaultProps = {
-    initialValues: {},
-  }
 
   getPaneFooter() {
     const {
@@ -70,7 +69,7 @@ class CredentialsSettingsForm extends React.Component {
   }
 
   render() {
-    const { ezbCredentials, initialValues } = this.props;
+    // const { ezbCredentials, initialValues } = this.props;
     const footer = this.getPaneFooter();
 
     return (
@@ -83,7 +82,7 @@ class CredentialsSettingsForm extends React.Component {
           <Pane
             defaultWidth="100%"
             footer={footer}
-            paneTitle={'EZB credentials of ' + initialValues.user}
+            paneTitle="EZB credentials"
           >
             <Row>
               <Col xs={8}>
@@ -157,6 +156,7 @@ class CredentialsSettingsForm extends React.Component {
 }
 
 export default stripesForm({
+  form: 'ezbCredentialsForm',
   // set navigationCheck true for confirming changes
   navigationCheck: true,
   // the form will reinitialize every time the initialValues prop changes

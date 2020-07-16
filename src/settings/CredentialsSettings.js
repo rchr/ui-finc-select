@@ -80,7 +80,7 @@ class CredentialsSettings extends React.Component {
   }
 
   render() {
-    const { resources, stripes } = this.props;
+    const { resources, stripes, initialValues } = this.props;
 
     return (
       <div
@@ -89,8 +89,8 @@ class CredentialsSettings extends React.Component {
       >
         <CredentialsSettingsForm
           ezbCredentials={_.get(resources, 'ezbCredentials.records[0]')}
-          // initialValues={this.getInitialValues()}
-          initialValues={_.get(resources, 'ezbCredentials.records[0]')}
+          initialValues={this.getInitialValues()}
+          // initialValues={_.get(resources, 'ezbCredentials.records[0]')}
           onSubmit={this.handleSubmit}
           stripes={stripes}
         />
