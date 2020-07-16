@@ -19,6 +19,7 @@ class CredentialsSettings extends React.Component {
     ezbCredentials: {
       type: 'okapi',
       path: 'finc-select/ezb-credentials',
+      throwErrors: false,
     },
   });
 
