@@ -26,13 +26,6 @@ class CredentialsSettingsForm extends React.Component {
     invalid: PropTypes.bool,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
-    stripes: PropTypes.shape({
-      hasPerm: PropTypes.func.isRequired,
-      connect: PropTypes.func.isRequired,
-      store: PropTypes.shape({
-        dispatch: PropTypes.func.isRequired
-      })
-    }).isRequired,
   };
 
   constructor(props) {

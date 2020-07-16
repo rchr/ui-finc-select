@@ -6,7 +6,6 @@ import CredentialsSettingsForm from './CredentialsSettingsForm';
 
 class CredentialsSettings extends React.Component {
   static propTypes = {
-    stripes: PropTypes.object.isRequired,
     resources: PropTypes.object,
     mutator: PropTypes.shape({
       ezbCredentials: PropTypes.shape({
@@ -47,8 +46,6 @@ class CredentialsSettings extends React.Component {
   }
 
   render() {
-    const { stripes } = this.props;
-
     return (
       <div
         data-test-settings-ezb-credentials
@@ -57,7 +54,6 @@ class CredentialsSettings extends React.Component {
         <CredentialsSettingsForm
           initialValues={this.getInitialValues()}
           onSubmit={this.handleSubmit}
-          stripes={stripes}
         />
       </div>
     );
