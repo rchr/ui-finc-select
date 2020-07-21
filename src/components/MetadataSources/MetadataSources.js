@@ -30,9 +30,10 @@ import SourceFilters from './SourceFilters';
 import Navigation from '../Navigation/Navigation';
 
 const searchableIndexes = [
-  { label: 'All', value: '', makeQuery: term => `(label="${term}*" or sourceId="${term}*")` },
+  { label: 'All', value: '', makeQuery: term => `(label="${term}*" or description="${term}*" or sourceId="${term}*")` },
   { label: 'Source Name', value: 'label', makeQuery: term => `(label="${term}*")` },
-  { label: 'Source ID', value: 'sourceId', makeQuery: term => `(sourceId="${term}*")` }
+  { label: 'Description', value: 'description', makeQuery: term => `(description="${term}*")` },
+  { label: 'Source ID', value: 'sourceId', makeQuery: term => `(sourceId="${term}*")` },
 ];
 
 const defaultFilter = { state: { status: ['active', 'implementation'] }, string: 'status.active,status.implementation' };
