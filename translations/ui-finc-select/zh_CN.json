@@ -80,5 +80,6 @@
     "settings.ezbCredentials.isil": "ISIL",
     "settings.ezbCredentials.save": "保存",
     "settings.changePassword.hidePassword": "隐藏密码",
-    "settings.changePassword.showPassword": "显示密码"
+    "settings.changePassword.showPassword": "显示密码",
+    "collection.collectionId": "Collection ID"
 }
