@@ -81,5 +81,5 @@
     "settings.ezbCredentials.save": "Sauvegarder",
     "settings.changePassword.hidePassword": "Masquer le mot de passe",
     "settings.changePassword.showPassword": "Afficher le mot de passe",
-    "collection.collectionId": "Collection ID"
+    "collection.collectionId": "ID de la collection"
 }
