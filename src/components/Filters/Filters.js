@@ -332,13 +332,15 @@ class Filters extends React.Component {
                   <Pane
                     appIcon={<AppIcon app="finc-select" />}
                     data-test-filter-pane-results
-                    defaultWidth="42%"
+                    // defaultWidth="42%"
+                    defaultWidth="fill"
                     firstMenu={this.renderResultsFirstMenu(activeFilters)}
                     id="pane-filterresults"
                     lastMenu={this.renderResultsLastMenu()}
                     padContent={false}
                     paneTitle={<FormattedMessage id="ui-finc-select.filters.title" />}
                     paneSub={this.renderResultsPaneSubtitle(filter)}
+                    style={{ minWidth: '42%' }}
                   >
                     <MultiColumnList
                       autosize
