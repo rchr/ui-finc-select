@@ -11,8 +11,9 @@ import {
 } from 'react-intl';
 
 import {
+  CollapseFilterPaneButton,
+  ExpandFilterPaneButton,
   SearchAndSortQuery,
-  SearchAndSortSearchButton as FilterPaneToggle,
 } from '@folio/stripes/smart-components';
 import {
   Button,
@@ -123,24 +124,16 @@ class Filters extends React.Component {
   renderResultsFirstMenu = (filters) => {
     const { filterPaneIsVisible } = this.state;
     const filterCount = filters.string !== '' ? filters.string.split(',').length : 0;
-    const hideOrShowMessageId = filterPaneIsVisible ?
-      'stripes-smart-components.hideSearchPane' : 'stripes-smart-components.showSearchPane';
+    if (filterPaneIsVisible) {
+      return null;
+    }
 
     return (
       <PaneMenu>
-        <FormattedMessage id="stripes-smart-components.numberOfFilters" values={{ count: filterCount }}>
-          {appliedFiltersMessage => (
-            <FormattedMessage id={hideOrShowMessageId}>
-              {hideOrShowMessage => (
-                <FilterPaneToggle
-                  aria-label={`${hideOrShowMessage}...${appliedFiltersMessage}`}
-                  onClick={this.toggleFilterPane}
-                  visible={filterPaneIsVisible}
-                />
-              )}
-            </FormattedMessage>
-          )}
-        </FormattedMessage>
+        <ExpandFilterPaneButton
+          filterCount={filterCount}
+          onClick={this.toggleFilterPane}
+        />
       </PaneMenu>
     );
   }
@@ -276,7 +269,13 @@ class Filters extends React.Component {
                       data-test-filter-pane-filter
                       defaultWidth="18%"
                       id="pane-filterfilter"
-                      onClose={this.toggleFilterPane}
+                      lastMenu={
+                        <PaneMenu>
+                          <CollapseFilterPaneButton
+                            onClick={this.toggleFilterPane}
+                          />
+                        </PaneMenu>
+                      }
                       paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
                     >
                       <form onSubmit={onSubmitSearch}>
