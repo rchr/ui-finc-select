@@ -332,7 +332,6 @@ class Filters extends React.Component {
                   <Pane
                     appIcon={<AppIcon app="finc-select" />}
                     data-test-filter-pane-results
-                    // defaultWidth="42%"
                     defaultWidth="fill"
                     firstMenu={this.renderResultsFirstMenu(activeFilters)}
                     id="pane-filterresults"
