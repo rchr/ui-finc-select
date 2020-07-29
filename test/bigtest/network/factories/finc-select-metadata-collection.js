@@ -24,5 +24,4 @@ export default Factory.extend({
   contentFiles: [],
   solrMegaCollections: [],
   selected: '',
-  filters: [],
 });
