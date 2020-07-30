@@ -110,7 +110,7 @@ class CollectionFilters extends React.Component {
         displayClearButton={mdSourceFilters.length > 0}
         header={FilterAccordionHeader}
         id="filter-accordion-mdSource"
-        label={<FormattedMessage id="ui-finc-config.collection.mdSource" />}
+        label={<FormattedMessage id="ui-finc-select.collection.mdSource" />}
         onClearFilter={() => { this.props.filterHandlers.clearGroup('mdSource'); }}
         separator={false}
       >
