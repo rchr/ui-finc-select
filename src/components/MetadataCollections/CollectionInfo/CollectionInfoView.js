@@ -102,9 +102,9 @@ class CollectionInfoView extends React.Component {
               <FormattedMessage id="ui-finc-select.collection.filters" />
             </Headline>
           </Row>
-          <Row>
+          {/* <Row>
             { this.renderList('filters') }
-          </Row>
+          </Row> */}
           <Row>
             <this.connectedSelectUnselect
               stripes={stripes}
